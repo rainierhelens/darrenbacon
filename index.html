@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/favicon.ico" href="favicon.ico">
+    <title>Darren Bacon | Art Director (Game Dev) / Concept Artist</title>
+
+    <!-- Meta Description and SEO Tags -->
+    <meta name="description" content="Darren Bacon, Art Director, Game Developer, and Concept Artist. Explore my work in game development, Unreal Engine, and digital art.">
+    <meta name="keywords" content="Darren Bacon, Art Director, Game Developer, Concept Artist, Unreal Engine, Digital Art, Art, Game Dev, Concept Art, Halo, Destiny, 343 Industries, Bungie">
+    <meta name="author" content="Darren Bacon">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Darren Bacon | Art Director (Game Dev) / Concept Artist">
+    <meta property="og:description" content="Explore my work in game development, Unreal Engine, and digital art.">
+    <meta property="og:image" content="https://darrenbacon.com/images/profile.jpg">
+    <meta property="og:url" content="https://darrebacon.com">
+    <meta property="og:type" content="website">
+
+<style>
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            overflow-x: hidden;
+	}
+
+
+        .background-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: url('images/banner/banner.jpg') no-repeat center top;
+            background-size: cover;
+            z-index: -1;
+        }
+
+.header {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center everything horizontally */
+    padding: 20px;
+    background: url('images/darren bacon banner.jpg') no-repeat center center; /* Set the background image */
+    background-size: cover; /* Make sure the image covers the entire header area */
+    color: #4db6ac;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+    box-shadow: 0 0 10px rgba(3, 3, 3, 0.9);
+    height: 175px; /* Fixed height (you can adjust this value) */
+    box-sizing: border-box;
+
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Top part of the header (Darren Bacon Title) */
+.header-top {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: left; /* Center everything horizontally */
+    
+margin-top: 75px;
+
+    position: fixed;
+    top: 100px;
+    width: 90%;
+    background-color: black; 
+    color: #4db6ac;
+    width: 90%;
+    font-size: 24px;
+    text-align: left; /* Center the title */
+    color: #4db6ac;
+    padding: 5px;
+    padding-left: 250px;
+    padding-right: 250px;
+    padding-bottom: 18px;
+
+}
+
+/* Bottom part of the header (Subtitle) */
+.header-bottom {
+    background: #000; /* Black background */
+            color: #4db6ac;
+    width: 100%;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 40%;
+            color: #4db6ac;
+    margin-top: 0px;
+    position: fixed;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 15px;
+
+    margin-top: 100px; /* Adds space between the title and buttons */
+    justify-content: center; /* Center the buttons horizontally */
+
+}
+
+.header-buttons a {
+    background: #4ec9b0;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background 0.3s;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Horizontal, Vertical, Blur radius, Color */
+
+}
+
+.header-buttons a:hover {
+    background: #266356;
+    box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.7); /* More prominent shadow on hover */
+
+}
+
+
+        .links-container {
+            position: relative;
+            top: 7.0vh; /* Adjusted to make "My Links" appear higher */
+            text-align: center;
+            padding: 20px;
+            width: 50%;
+            margin: 0 auto;
+	    padding-top: 175px;
+        }
+
+        .links-container h1 {
+            font-size: 20px;
+            color: #4db6ac;
+        }
+
+        .link-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .link-list li {
+            margin: 10px 0;
+        }
+
+        .link-list a {
+            display: block;
+            text-decoration: none;
+            background: transparent;
+            color: white;
+            padding: 10px;
+            border: 2px solid white;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .link-list a:hover {
+            background: white;
+            color: #007BFF;
+        }
+
+/* Resume Section Starts Below Links & Banner */
+#resume {
+    margin-top: 10vh; /* Ensures it starts below both the banner and the links section */
+    width: 90%;
+    background: #1e1e1e;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 2;
+    font-size: 14px;
+
+        .links-container h1 {
+            font-size: 24px;
+            color: #4db6ac;
+        }
+        .link-list {
+            list-style: none;
+            padding: 0;
+        }
+        .link-list li {
+            margin: 10px 0;
+        }
+        .link-list a {
+            display: block;
+            text-decoration: none;
+            background: transparent;
+            color: white;
+            padding: 10px;
+            border: 2px solid white;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+        .link-list a:hover {
+            background: white;
+            color: #007BFF;
+        }
+          .resume-container {
+            width: 80%;
+            background: #1e1e1e;
+            color: white;
+            padding: 20px;
+            margin: 40px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: flex-start;
+        }
+        .resume-container h2 {
+            text-align: center;
+            color: #4db6ac;
+            font-size: 24px;
+        }
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+        .resume-content {
+            flex-grow: 1;
+        }
+        .resume-section h3 {
+            color: #4db6ac;
+            font-size: 20px;
+        }
+        .resume-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .resume-entry strong {
+            flex-grow: 1;
+        }
+        .resume-entry span {
+            text-align: right;
+            white-space: nowrap;
+            color: #bbb;
+        }
+        .shipped {
+	padding-left: 250px;
+	margin-top: -220px;
+        padding-bottom: 25px;
+        }
+        .shipped h3 {
+            color: #4db6ac;
+            font-size: 20px;
+            padding-left: 25px;
+	    margin-top: -20px;
+        }
+
+        a {
+	    color: #6ca0ef;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #37a392;
+        }
+
+
+.footer-buttons {
+    display: flex;
+    gap: 15px;
+
+    margin-top: 50px; /* Adds space between the title and buttons */
+    margin-bottom: 10px; /* Adds space between the title and buttons */
+
+    justify-content: center; /* Center the buttons horizontally */
+
+}
+
+.footer-buttons a {
+    background: #4ec9b0;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background 0.3s;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Horizontal, Vertical, Blur radius, Color */
+}
+
+.footer-buttons a:hover {
+    background: #266356;
+    box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.7); /* More prominent shadow on hover */
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="header">
+    
+
+    <div class="header-buttons">
+        <a href="#top" class="nav-button">Links</a>
+        <a href="#resume" class="nav-button">About</a>
+        <a href="mailto:darren@darrenbacon.com" class="nav-button">Contact</a>
+    </div>
+         <div class="header-top">
+             <span>Darren Bacon<p class="subtitle">Art Director (Game Dev) / Concept Artist</p></span>
+	 </div>
+
+
+</div>
+
+    <div class="background-banner"></div>
+
+    <div class="links-container">
+        <h1>My Links:</h1>
+        <ul class="link-list">
+            <li><a href="https://www.instagram.com/artofbacon/" target="_blank">Instagram</a></li>
+            <li><a href="https://www.artstation.com/darrenbacon" target="_blank">ArtStation</a></li>
+            <li><a href="https://x.com/artofbacon" target="_blank">X</a></li>
+            <li><a href="https://www.linkedin.com/in/darrenbacon/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://www.youtube.com/c/ConceptDepartment" target="_blank">YouTube</a></li>
+            <li><a href="https://www.tiktok.com/@artofbacon" target="_blank">TikTok</a></li>
+            <li><a href="https://bsky.app/profile/artofbacon.bsky.social" target="_blank">BlueSky</a></li>
+            <li><a href="https://www.threads.net/@artofbacon" target="_blank">Threads</a></li>
+        </ul>
+    </div>
+
+<div id="resume">
+
+<div class="resume-section">
+        <h3>About:</h3>
+        <p>Innovative Concept Art veteran and Art Director with over a decade of experience in game development, managing art teams and creating results for real-time rendering applications, including Unreal Engine 5. Proven ability to lead multidisciplinary teams in creating cutting-edge digital experiences by blending artistic excellence with technical expertise.</p>
+</div>
+
+<div class="resume-section">
+
+            <h3>Shipped Games:</h3>
+            <table style="width:100%; border-collapse: collapse;">
+
+            <tr style="background-color: #333; color: white;">   
+            <th style="padding: 10px; border: 1px solid #555;">Title</th>
+            <th style="padding: 10px; border: 1px solid #555;">Platform</th>
+            <th style="padding: 10px; border: 1px solid #555;">Year</th>
+            <th style="padding: 10px; border: 1px solid #555;">Credit</th>
+            <th style="padding: 10px; border: 1px solid #555;">Company</th>
+                </tr>           
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/175521/halo-infinite-multiplayer/" target="_blank">Halo Infinite - Multiplayer</a></td>
+            <td style="padding: 10px; border: 1px solid #555;">Xbox Series / Windows</td>
+            <td style="padding: 10px; border: 1px solid #555;">2021</td>
+            <td style="padding: 10px; border: 1px solid #555;">Associate Art Director</td>
+            <td style="padding: 10px; border: 1px solid #555;">343 Industries / Microsoft</td>
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/176543/halo-infinite-campaign/" target="_blank">Halo Infinite - Campaign</a></td>
+            <td style="padding: 10px; border: 1px solid #555;">343 Industries</td>
+            <td style="padding: 10px; border: 1px solid #555;">2021</td>
+            <td style="padding: 10px; border: 1px solid #555;">Associate Art Director</td>
+            <td style="padding: 10px; border: 1px solid #555;">343 Industries / Microsoft</td>
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/112604/halo-fireteam-raven/" target="_blank">Halo: Fireteam Raven</a></td>
+            <td style="padding: 10px; border: 1px solid #555;">Arcade</td>
+            <td style="padding: 10px; border: 1px solid #555;">2018</td>
+            <td style="padding: 10px; border: 1px solid #555;">Special Thanks</td>
+            <th style="padding: 10px; border: 1px solid #555;">343 Industries / Microsoft</th>
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/80652/halo-5-forge/" target="_blank">Halo 5: Forge</a></td>
+            <td style="padding: 10px; border: 1px solid #555;">Windows</td>
+            <td style="padding: 10px; border: 1px solid #555;">2016</td>
+            <td style="padding: 10px; border: 1px solid #555;">Concept Art Lead</td>
+            <th style="padding: 10px; border: 1px solid #555;">343 Industries / Microsoft</th>
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/75503/halo-5-guardians/" target="_blank">Halo 5: Guardians</a></td>
+            <td style="padding: 10px; border: 1px solid #555;">Xbox One</td>
+            <td style="padding: 10px; border: 1px solid #555;">2015</td>
+            <td style="padding: 10px; border: 1px solid #555;">Concept Art Lead</td>
+            <th style="padding: 10px; border: 1px solid #555;">343 Industries / Microsoft</th>
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/68327/destiny/" target="_blank">Destiny</a></td>
+            <td style="padding: 10px; border: 1px solid #555;">Xbox One</td>
+            <td style="padding: 10px; border: 1px solid #555;">2015</td>
+            <td style="padding: 10px; border: 1px solid #555;">Senior Concept Artist</td>
+            <th style="padding: 10px; border: 1px solid #555;">Bungie</th>
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/37216/command-conquer-red-alert-3//" target="_blank">Command & Conquer: Red Alert 3</a></td>
+            <td style="padding: 10px; border: 1px solid #555;">Windows</td>
+            <td style="padding: 10px; border: 1px solid #555;">2008</td>
+            <td style="padding: 10px; border: 1px solid #555;">Concept Artist</td>
+            <th style="padding: 10px; border: 1px solid #555;">Electronic Arts</th>
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/33390/command-conquer-3-kanes-wrath/" target="_blank">Command & Conquer: Kane's Wrarth</a></td>
+            <td style="padding: 10px; border: 1px solid #555;">Windows</td>
+            <td style="padding: 10px; border: 1px solid #555;">2008</td>
+            <td style="padding: 10px; border: 1px solid #555;">Concept Artist</td>
+            <th style="padding: 10px; border: 1px solid #555;">Electronic Arts</th>
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/33182/close-quarters-conflict/" target="_blank">Close Quarters Conflict</a></td>
+            <td style="padding: 10px; border: 1px solid #555;">Windows</td>
+            <td style="padding: 10px; border: 1px solid #555;">2006</td>
+            <td style="padding: 10px; border: 1px solid #555;">Artist</td>
+            <th style="padding: 10px; border: 1px solid #555;">Zombie Studios</th>
+</tr>
+</table>
+
+
+</div>                
+
+
+<div class="resume-section">
+<table>
+            <h3>Book Publications:</h3>
+            <table style="width:100%; border-collapse: collapse;">
+
+            <tr style="background-color: #333; color: white;">
+            <th style="padding: 10px; border: 1px solid #555;">Title</th>
+            <th style="padding: 10px; border: 1px solid #555;">Publication</th>
+            <th style="padding: 10px; border: 1px solid #555;">Date</th>
+            <th style="padding: 10px; border: 1px solid #555;">Credit</th>
+            </tr>
+
+<tr>
+<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/Art-Star-Wars-Galaxys-Edge/dp/1419750127" target="_blank">The Art of STAR WARS GALAXY'S EDGE</a></td>
+<td style="padding: 10px; border: 1px solid #555;">Abrams Books</td>
+<td style="padding: 10px; border: 1px solid #555;">2021</td>
+<td style="padding: 10px; border: 1px solid #555;">Contributing Artist</td>
+</tr>
+<tr>
+<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/Art-Halo-Infinite-343-Industries/dp/1506720080" target="_blank">The Art of Halo Infinite</a></td>
+<td style="padding: 10px; border: 1px solid #555;">343 Industries</td>
+<td style="padding: 10px; border: 1px solid #555;">2021</td>
+<td style="padding: 10px; border: 1px solid #555;">Featured Artist</td>
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://designstudiopress.com/products/nuthin-but-mech-4" target="_blank">Nuthin’ But Mech 4</a></td>
+            <td style="padding: 10px; border: 1px solid #555;">Design Studio Press</td>
+            <td style="padding: 10px; border: 1px solid #555;">2018</td>
+            <td style="padding: 10px; border: 1px solid #555;">Contributing Artist</td>
+
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/Halo-Warfleet-343-Industries/dp/1681196638" target="_blank">Halo Warfleet</a></td>
+            <td style="padding: 10px; border: 1px solid #555;">343 Industries</td>
+            <td style="padding: 10px; border: 1px solid #555;">2017</td>
+            <td style="padding: 10px; border: 1px solid #555;">Contributing Artist / Special Thanks</td>
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/Halo-Mythos-Guide-Story/dp/1681193566" target="_blank">Halo Mythos: A Guide to 
+the Story of Halo</a></td>
+            <td style="padding: 10px; border: 1px solid #555;">343 Industries</td>
+            <td style="padding: 10px; border: 1px solid #555;">2016</td>
+            <td style="padding: 10px; border: 1px solid #555;">Contributing Artist / Special Thanks</td>
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/Robota-Chiang-2016-11-16-Orson-Scott/dp/B01N9LKDUM" target="_blank">Robota</a></td>
+            <td style="padding: 10px; border: 1px solid #555;">Dover Publications Inc.</td>
+            <td style="padding: 10px; border: 1px solid #555;">2016</td>
+            <td style="padding: 10px; border: 1px solid #555;">Contributing Artist</td>
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://designstudiopress.com/products/nuthin-but-mech-3" target="_blank">Nuthin’ But Mech 3</a></td>
+            <td style="padding: 10px; border: 1px solid #555;">Design Studio Press</td>
+            <td style="padding: 10px; border: 1px solid #555;">2015</td>
+            <td style="padding: 10px; border: 1px solid #555;">Contributing Artist</td>
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/Art-Halo-5-Guardians/dp/1608876497" target="_blank">The Art of Halo 5: Guardians</a></td>
+            <td style="padding: 10px; border: 1px solid #555;">Insight Editions</td>
+            <td style="padding: 10px; border: 1px solid #555;">2015</td>
+            <td style="padding: 10px; border: 1px solid #555;">Contributing Artist / Interviewee</td>
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/Art-Destiny-Bungie/dp/1608874206" target="_blank">The Art of Destiny<a/></td>
+            <td style="padding: 10px; border: 1px solid #555;">Insight Editions</td>
+            <td style="padding: 10px; border: 1px solid #555;">2014</td>
+            <td style="padding: 10px; border: 1px solid #555;">Contributing Artist</td>
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/BLAST-spaceship-renderings-Scott-Robertson/dp/1933492546" target="_blank">Blast: Spaceship Sketches and 
+Renderings</a>
+</td>
+            <td style="padding: 10px; border: 1px solid #555;">Design Studio Press</td>
+            <td style="padding: 10px; border: 1px solid #555;">2012</td>
+            <td style="padding: 10px; border: 1px solid #555;">Guest Artist</td>
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/Art-Disneyss-Christmas-Carol/dp/142312104X" target="_blank">The Art of Disney’s A Christmas Carol</a></td>
+            <td style="padding: 10px; border: 1px solid #555;">Disney Editions</td>
+            <td style="padding: 10px; border: 1px solid #555;">2009</td>
+            <td style="padding: 10px; border: 1px solid #555;">Contributing Artist</td>
+</tr>
+<tr>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://designstudiopress.com/products/in-the-future?variant=40796257517764" target="_blank">In the Future…</a></td>
+            <td style="padding: 10px; border: 1px solid #555;">Design Studio Press</td>
+            <td style="padding: 10px; border: 1px solid #555;">2006</td>
+            <td style="padding: 10px; border: 1px solid #555;">Co-Author</td>
+</tr>
+</table>
+</div>
+
+
+<div class="resume-section">
+    <h3>Magazine / Online Publications:</h3>
+    <table style="width:100%; border-collapse: collapse;">
+        <tr style="background-color: #333; color: white;">
+            <th style="padding: 10px; border: 1px solid #555;">Title</th>
+            <th style="padding: 10px; border: 1px solid #555;">Publication</th>
+            <th style="padding: 10px; border: 1px solid #555;">Date</th>
+            <th style="padding: 10px; border: 1px solid #555;">Source</th>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #555;">Interview: Darren Bacon </td>
+            <td style="padding: 10px; border: 1px solid #555;">ImagineFX Magazine</td>
+            <td style="padding: 10px; border: 1px solid #555;">January 2019</td>
+            <td style="padding: 10px; border: 1px solid #555;">Pages 34-41</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #555;">Tilting Reality </td>
+            <td style="padding: 10px; border: 1px solid #555;">ImagineFX Magazine</td>
+            <td style="padding: 10px; border: 1px solid #555;">August 12, 2016</td>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.pressreader.com/australia/imagine-fx/20160812/281487865732140?srsltid=AfmBOoounAtsyGh0QQdYQzo_Oxnq8qTQZFKNGBE41Hu9W6WQ85luCV_Z" target="_blank">Featured Artist</a></td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #555;">The Best Video Game Concept Art of 2015</td>
+            <td style="padding: 10px; border: 1px solid #555;">Kotaku</td>
+            <td style="padding: 10px; border: 1px solid #555;">January, 2016</td>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://kotaku.com/the-best-video-game-concept-art-of-2015-1749190177" target="_blank">Featured Artist</a></td>
+        </tr>
+
+        <tr>
+            <td style="padding: 10px; border: 1px solid #555;">This ‘Halo 5’ Concept Art is Downright Gorgeous</td>
+            <td style="padding: 10px; border: 1px solid #555;">Business Insider </td>
+            <td style="padding: 10px; border: 1px solid #555;">November, 2015</td>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://www.businessinsider.com/halo-5-concept-art-2015-11#and-this-looks-almost-exactly-like-one-of-the-games-story-mission-levels-5" target="_blank">Featured Artist</a></td>
+        </tr>
+
+        <tr>
+            <td style="padding: 10px; border: 1px solid #555;">It's Late. Let This Computer Buy You A Drink.</td>
+            <td style="padding: 10px; border: 1px solid #555;">Kotaku</td>
+            <td style="padding: 10px; border: 1px solid #555;">January, 2016</td>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://kotaku.com/its-late-let-this-computer-buy-you-a-drink-918503447" target="_blank">Featured Artist</a></td>
+        </tr>
+
+        <tr>
+            <td style="padding: 10px; border: 1px solid #555;">The Best Video Game Concept Art of 2015</td>
+            <td style="padding: 10px; border: 1px solid #555;">Kotaku</td>
+            <td style="padding: 10px; border: 1px solid #555;">January, 2016</td>
+            <td style="padding: 10px; border: 1px solid #555;"><a href="https://kotaku.com/the-best-video-game-concept-art-of-2015-1749190177" target="_blank">Featured Artist</a></td>
+        </tr>
+
+
+  </table> 
+</div>
+
+
+<div class="resume-section">
+            <h3>Experience:</h3>
+            <div class="resume-entry">
+                <strong>Midnight Society - Art Director</strong>
+                <span>(2022-2025)</span>
+            </div>
+            <p>Staffed and led an art team of 15 artists and technical artists, as well as 3 external partners/co-developers, driving key strategic initiatives to ship 7 pre-alpha game releases.</p>
+            <ul>
+                <li>Led DEADROP from conception to multiple pre-alpha launches.</li>
+                <li>Managed and mentored a team of 3D artists, concept artists, and technical artists.</li>
+                <li>Defined and implemented robust art pipelines for real-time rendering in Unreal Engine 5.</li>
+                <li>Collaborated with product managers, designers, and engineers to establish strategic goals.</li>
+            </ul>
+</div>
+
+
+ <div class="resume-section">
+            <div class="resume-entry">
+                <strong>Microsoft (Halo) – Art Director (Mulitplayer/Live Team) / Associate Art Director</strong>
+                <span>(2019-2022)</span>
+            </div>
+            <p>Orchestrated art content for a team of ~400 video game artists, driving creative vision while shepherding a $5B franchise.</p>
+            <ul>
+                <li>Developed and launched Halo Infinite, leveraging the proprietary real-time rendering Engine, Slipspace.</li>
+                <li>Led art direction for branding and marketing initiatives, aligning creative output with overarching product and marketing strategies.</li>
+                <li>Spearheaded visual development of Halo Infinite, ensuring consistency and high-quality execution across multiple projects within the program</li>
+                <li>Art Direction support for Shooter Live, Multiplayer, Sandbox, UI, FX, Character teams</li>
+
+
+                <li>Consumer Products oversight, providing strategic guidance, critique, and approvals for franchise materials and consumer products. Oversaw internal and external publishing projects, Mattel toys (Mega Bloks, BoomCo.), McFarlane collectibles, apparel, and brand style guides to ensure alignment with brand vision and quality standards.</li>
+            </ul>
+</div>
+
+<div class="resume-section">
+            <div class="resume-entry">
+                <strong>Microsoft (Halo) – Lead Concept Artist</strong>
+                <span>(2014-2019)</span>
+            </div>
+            <p>Led the concept art team, driving project development, ensuring high-quality standards, while managing team performance and growth.</p>
+            <ul>
+                <li>Team Career Manager, overseeing the full talent lifecycle—including sourcing, interviewing, hiring, career planning and perfromance reviews.</li>
+                <li>Led and mentored a team of top-tier artists, fostering professional growth and ensuring high creative standards.</li>
+                <li>Managed task distribution, provided artistic feedback, and conducted review evaluations, leading to improved quality and efficiency.</li>
+                <li>Defined and evolved the artistic vision for projects, collaborating closely with creative, technical, and production leads to maintain a high-quality standard.</li>
+                <liPartnered with production teams to develop resource planning and staffing strategies, optimizing workflow and efficiency.</li>
+                <li>Ensured art quality across all disciplines, including character design, environmental art, VFX, UI, lighting, and rendering targets.</li>
+            </ul>
+
+</div>
+<div class="resume-section">
+            <div class="resume-entry">
+                <strong>Bungie – Senior Concept Artist</strong>
+                <span>(2011-2014)</span>
+            </div>
+            <p>Helped define the vision for the universe of DESTINY.</p>
+            <ul>
+                <li>Senior Concept Artist working closely with Art and Creative Direction to bring to life the Destiny franchise via artwork created to define envrionments, weapons, vehicles, vfx and characters.</li>
+
+            </ul>
+</div>
+
+
+<div class="resume-section">
+            <div class="resume-entry">
+                <strong>Disney (Walt Disney Television Animation) – Background Layout & Paint</strong>
+                <span>(2010-2011)</span>
+            </div>
+            <p>Background painter and concept artist, working under the Annie Award-winning Production Designer Alberto Meilgo.</p>
+            <ul>
+                <li>TRON: UPRISING (2012, Disney XD)</li>
+
+            </ul>
+</div>
+
+<div class="resume-section">
+            <div class="resume-entry">
+                <strong>Disney (ImageMovers Digital) – Concept Artist</strong>
+                <span>(2008-2010)</span>
+            </div>
+            <p>Concept artist, developing multiple film projects under the Production Design of Academy Award-winning Production Deisgner, Doug Chiang.</p>
+            <ul>
+                <li>Mars Needs Moms! (2012, Disney Feature Animation)</li>
+		<li>Disney's A Christmas Carol (2009, Disney Feature Animation)</li>
+
+            </ul>
+ </div>
+
+ <div class="resume-section">
+            <div class="resume-entry">
+                <strong>Electronic Arts – Concept Artist</strong>
+                <span>(2007-2008)</span>
+            </div>
+
+            <ul>
+                <li>Command and Conquer: Red Alert 3 (2008)</li>
+		<li>Command and Conquer 3: Kane’s Wrath (2008)</li>
+
+            </ul>
+</div>
+
+<div class="resume-section">
+            <div class="resume-entry">
+                <strong>Zombie Studios – Concept Artist</strong>
+                <span>(2006)</span>
+            </div>
+
+            <ul>
+                <li>Close Quarters Conflict (2006)</li>
+
+
+            </ul>
+</div>
+
+
+<div class="resume-section">
+            <h3>Training:</h3>
+            <ul>
+                <li>Managing at Microsoft I (2014)</li>
+                <li>Managing at Microsoft II: Deliver Results Through Teams (2014)</li>
+                <li>Organizational Behavior and Leadership (2015)</li>
+
+            </ul>
+</div>
+
+<div class="resume-section">
+            <h3>Certification:</h3>
+            <ul>
+                <li><a href="https://www.certmetrics.com/comptia/public/verification.aspx?code=K9R4XM8GJLRQQ1RN" target="_blank">ComptTIA Project+ </a> - Project Management (2015)</li>
+
+
+            </ul>
+</div>
+
+
+<div class="resume-section">
+            <h3>Education:</h3>
+	    <p><strong>Art Center College of Design</strong> - Entertainment Design </p>
+            <p><strong>Art Institute of Seattle</strong> - Associates of Applied Arts in Industrial Design Technology </p>
+</div>
+
+ <div class="footer-buttons">
+        <a href="#top" class="nav-button">Links</a>
+        <a href="#resume" class="nav-button">About</a>
+        <a href="mailto:darren@darrenbacon.com" class="nav-button">Contact</a>
+ </div>
+
+</div>
+
+<p> Darren Bacon | darren@darrenbacon.com | 2025 </p>
+
+
+</div>
+
+<script>
+    let lastScrollTop = 0;
+    const header = document.querySelector('.header');
+
+    window.addEventListener("scroll", function () {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop) {
+            // Scrolling down - Hide the header
+            header.style.transform = "translateY(-100%)";
+        } else {
+            // Scrolling up - Show the header
+            header.style.transform = "translateY(0)";
+        }
+
+        lastScrollTop = scrollTop;
+    });
+</script>
+
+
+
+
+</body>
+</html>
