@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/favicon.ico" href="favicon.ico">
+    <meta name="description" content="Darren Bacon, Art Director (Game Dev) and Concept Artist. Explore my digital artwork for game development.">
+     <!-- Meta Description and SEO Tags -->
+    <meta name="description" content="Darren Bacon, Art Director (Game Dev) and Concept Artist. Explore my digital artwork for game development.">
+    <meta name="keywords" content="Darren Bacon, Art Director, Game Developer, Concept Artist, Unreal Engine, Digital Art, Art, Game Dev, Concept Art, Halo, Destiny, 343 Industries, Bungie">
+    <meta name="author" content="Darren Bacon">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Darren Bacon | Art Director (Game Dev) / Concept Artist">
+    <meta property="og:description" content="Explore my work in game development, Unreal Engine, and digital art.">
+    <meta property="og:image" content="https://darrenbacon.com/images/profile.jpg">
+    <meta property="og:url" content="https://darrebacon.com">
+    <meta property="og:type" content="website">
+  
+  
+
+<!-- Lightbox2 CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+
+<!-- Lightbox2 JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+ <!-- Lightbox2 CSS -->
+ 
+<style>
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: white;
+    margin: 0;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center all elements */
+    width: 100%; /* Ensure it spans full width */
+	opacity: 0;
+    animation: fadeIn 1s forwards;
+    font-size: 1em;
+}
+
+    @keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+.section-title {
+    font-size: 2em;
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.wrapper {
+    width: 100%; /* Ensure everything is full width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: transform 0.4s ease-in-out;
+	
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center everything horizontally */
+    padding: 20px;
+    background: url('images/darren bacon banner.jpg') no-repeat center center; /* Set the background image */
+    background-size: cover; /* Make sure the image covers the entire header area */
+    color: #fff;
+    font-weight: bold;
+
+    box-shadow: 0 0 10px rgba(3, 3, 3, 0.9);
+    height: 175px; /* Fixed height (you can adjust this value) */
+    box-sizing: border-box;
+
+}
+.header-top {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: left; /* Center everything horizontally */
+    margin-top: 75px;
+    position: fixed;
+    top: 100px;
+    width: 90%;
+    background-color: black; 
+    width: 90%;
+    font-size: 1.9em;
+    text-align: left; /* Center the title */
+    padding: 5px;
+    padding-left: 250px;
+    padding-right: 250px;
+    padding-bottom: 18px;
+}
+.header-bottom {
+    background: #000; /* Black background */
+    color: #4db6ac;
+    width: 100%;
+    text-align: center;
+}
+
+.header-email {
+	height: 50px;
+}
+
+.subtitle {
+    font-size: .4em;
+    color: #4db6ac;
+    margin-top: 0px;
+    position: fixed;
+}
+
+.links-container {
+    position: relative; /* Needed for absolute positioning of ::before */
+    width: 100%;
+    min-height: 250px; /* Ensures it spans the viewport */
+    padding: 50px;
+    text-align: center;
+    z-index: 2;
+    overflow: hidden;
+	font-size: 1em;
+}
+
+/* Ensure the background image is above the overlay */
+    .links-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+    min-height: 100vh;
+    background: url('images/halo/HALO3.jpg') no-repeat center center;
+	margin-top: -250px;
+    background-size: cover;
+    background-attachment: fixed !important;
+    will-change: transform;
+    z-index: -1; /* Keep it below content */
+    transform: translateY(0);
+    transition: transform 0.3s ease-out;
+    opacity: .5; /* Adjust darkness if needed */
+}
+
+
+.links-container h1 {
+    padding-bottom: 10px;
+	padding-top: 50px;
+	z-index: 2; /* Puts text above the overlay */
+
+}
+
+.link-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+    z-index: 2; /* Puts text above the overlay */
+    color: white; /* Ensures readability */
+
+}
+
+.link-list li {
+    display: inline-block;
+}
+
+.link-list a {
+    display: inline-block;
+    text-decoration: none;
+    background: transparent;
+    color: white;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s, transform 0.3s ease-in-out;
+	backdrop-filter: blur(5px); /* Optional: Adds a blur effect */
+}
+
+.link-list a:hover {
+    background: white;
+    color: #000;
+    transform: scale(1.1); /* Adds the hover scaling effect */
+
+}
+
+.email-link {
+    list-style: none;
+    display: inline; /* Ensure it doesn’t take up block space */
+    padding: 0;
+    display: inline-block;
+	float: right;
+    text-decoration: none;
+    background: transparent;
+    color: white;
+	font-size: .7em;
+	margin-top: -10px;
+	margin-bottom: 2px;
+}
+
+        /* Gallery Section */
+
+.gallery-container {
+    position: relative;
+    width: 100%;
+    min-height: 3100px;
+    background: url('images/dbacon_GIcover_paint-001l.jpg') no-repeat center 30%; /* Move image down */
+	background-size: cover;
+    background-attachment: fixed;
+	background-position: center top;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Moves content higher */
+    padding-top: 50px; /* Adjusts spacing */
+    z-index: 1;
+    transition: background-position 0.1s ease-out; /* Smooth scrolling effect */
+    text-align: center;
+}
+
+
+/* Dark Overlay */
+    .gallery-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Adjust the opacity (0.5 = 50% darkness) */
+    z-index: -1; /* Ensures it stays behind content */
+}
+.portfolio-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    padding-top: 0px; /* Moves title higher */
+    position: relative;
+}
+
+.portfolio-title {
+    color: white;
+    margin-bottom: 25px; /* Reduces gap */
+    text-align: center;
+
+}
+
+}
+
+.gallery-header {
+    position: sticky;
+    top: 0;
+    padding: 15px;
+    text-align: center;
+    z-index: 1000;
+}
+
+.gallery-header .section-title {
+    margin: 0;
+    font-size: 1.8em;
+    color: white;
+}
+
+.gallery-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px 0;
+    position: sticky;
+    top: 50px; /* Sticks below "Samples" */
+    z-index: 999;
+
+}
+
+.gallery-tabs button {
+    background: transparent;
+    color: white;
+    padding: 10px 20px;
+    border: 2px solid white;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, transform 0.2s;
+	backdrop-filter: blur(5px); /* Optional: Adds a blur effect */
+
+}
+
+.gallery-tabs button:hover,
+.gallery-tabs button.active {
+    background: white;
+    color: black;
+    font-weight: bold;
+}
+
+
+/* Sticky Gallery Wrapper */
+.gallery-wrapper {
+    position: sticky;
+    top: 100px; /* Starts below tabs */
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    z-index: 998;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    justify-content: center;
+    width: 60%;
+    max-width: 1200px;
+    margin: auto;
+    min-height: 400px;
+}
+
+.gallery-item {
+    width: 100%;
+    height: auto;
+    max-height: 250px; /* Avoids too tall images */
+    cursor: pointer;
+    border-radius: 5px;
+    transition: transform 0.2s;
+    object-fit: cover;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+
+
+/* Lightbox Overlay */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Lightbox Image */
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+/* Close Button */
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+/* Navigation Arrows */
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.lightbox-nav.left { left: 20px; }
+.lightbox-nav.right { right: 20px; }
+
+.lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.5);
+    color: black;
+}
+
+/* Gallery Layout */ /* Gallery Layout */ /* Gallery Layout */
+
+	.about-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: 100px; /* Adjust this value as needed */
+	font-family: "Arial", sans-serif; 
+	font-weight: normal; 
+	font-style: normal; 
+}
+
+	#about-section {
+    position: relative;
+	display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Aligns items at the top */
+    align-items: center;
+    width: 100vw;
+    min-height: 40vh;
+    background: url('images/halo/halo5.jpg') no-repeat center center;
+    background-size: cover;
+    background-position: center top; /* ✅ Default Start Position */
+    color: white;
+    padding: 20px;
+    z-index: 2;
+    justify-content: center;
+    align-items: center;
+    font-family: "Georgia", "Times New Roman", serif; /* Serif font */
+    font-style: italic; /* Italic text */	
+	font-weight: normal; /* Ensure text is NOT bold */
+	min-height: 550px; /* Ensures background does not shift */
+	}
+	
+	/* Dark Overlay */
+    #about-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Adjust the opacity (0.5 = 50% darkness) */
+    z-index: -1; /* Ensures it stays behind content */
+}
+	
+	#shipped-games {
+    position: relative;
+    width: 150vw;
+    min-height: 750px;
+    background: url('images/halo/halo1.jpg') no-repeat center center;
+	background-color: #fff;
+    background-size: cover;
+    background-position: center; /* Moves it down 100 pixels */
+    background-attachment: scroll; /* Changed from fixed */
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+	
+	min-height: 500px; /* Ensures background does not shift */
+ }
+	
+	}
+	#shipped-games .resume-container {
+    position: relative;
+    top: 50px; /* Moves it up */
+    margin-top: -50px; /* Adjust for fine-tuning */
+	}
+	
+		/* Dark Overlay */
+    #shipped-games::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Adjust the opacity (0.5 = 50% darkness) */
+    z-index: 0; /* Ensures it stays behind content */
+}
+	#book-publications {
+    position: relative; /* Ensure it applies to this section */
+    width: 100vw;
+    min-height: 500px;
+    background: url('images/halo/halo2.jpg') no-repeat center center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Enables parallax */
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 2; /* Ensure it stays above other sections */
+	}
+			/* Dark Overlay */
+    #book-publications::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Adjust the opacity (0.5 = 50% darkness) */
+    z-index: 0; /* Ensures it stays behind content */
+}
+	
+	#magazine-other {
+	position: relative;
+	width: 100vw; /* Full viewport width */
+    min-height: 100vh; /* Full viewport height */
+    background: url('images/halo/halo4.jpg') no-repeat center center;
+    background-size: 125%, cover;
+    background-attachment: fixed;
+    min-height: 600px;
+    color: white;
+    padding: 0px;
+    display: flex;
+    z-index: 2;
+	justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+				/* Dark Overlay */
+    #magazine-other::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Adjust the opacity (0.5 = 50% darkness) */
+    z-index: -1; /* Ensures it stays behind content */
+}
+	#resume {
+    position: relative;
+    width: 100vw;
+    min-height: 500px;
+    background: url('images/dbacon_reach_glass_exploration-01c.jpg') no-repeat center center;
+    background-size: 300%, cover;
+    background-attachment: fixed;
+    min-height: 600px;
+    color: white;
+    padding: 20px;
+    display: flex;
+    z-index: 2;
+    justify-content: center;
+    align-items: center;
+	}
+	/* Dark Overlay */
+    #resume::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Adjust the opacity (0.5 = 50% darkness) */
+    z-index: -1; /* Ensures it stays behind content */
+}
+    .resume-container {
+    width: 90%;
+    max-width: 800px;
+    background: rgba(30, 30, 30, 0.7); /* Dark background with transparency */
+    backdrop-filter: blur(10px); /* Applies a blur effect */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    color: white;
+    padding: 20px;
+	padding-top: 0px;
+    margin: 40px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+
+
+}
+    .resume-container h2 {
+         text-align: center;
+         color: #4db6ac;
+}
+    .resume-content {
+        flex-grow: 1;	
+}
+    .resume-section h3 {
+        color: #4db6ac;
+        font-size: 20px;
+}
+    .resume-entry {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 10px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+    .resume-entry strong {
+            flex-grow: 1;
+}
+    .resume-entry span {
+        text-align: right;
+        white-space: nowrap;
+        color: #bbb;
+}
+    .shipped {
+	    padding-left: 250px;
+	    margin-top: -220px;
+        padding-bottom: 25px;
+}
+    .shipped h3 {
+        color: #4db6ac;
+        font-size: 20px;
+        padding-left: 25px;
+	    margin-top: -20px;
+}
+    a {
+	color: #6ca0ef;
+        text-decoration: none;
+        transition: color 0.3s;
+}
+    a:hover {
+        color: #37a392;
+}
+	.resume-section table {
+         width: 100%;
+         border-collapse: collapse;
+         table-layout: fixed; /* Prevents overcrowding */
+}
+    .resume-section th, .resume-section td {
+         padding: 12px;
+         text-align: left;
+         border: 1px solid rgba(255, 255, 255, 0.2);
+         word-wrap: break-word;
+}
+	.resume-section {
+    text-align: left;
+    width: 100%; /* Ensure full width */
+}
+	.resume-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%; /* Ensure full width */
+}
+    .video-background {
+    position: relative;
+	overflow: hidden; /* Ensure the video is not hidden */
+	aspect-ratio: 16 / 9; /* Keeps correct aspect ratio */
+    height: 250px; /* Increase height */
+	max-height: 500px;	
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 500px;
+	margin-top: 100px;
+	padding-right: 200px;
+}
+	.video-background iframe {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+	object-fit: cover;
+    top: 0;
+    left: 0;
+}
+    
+	#backToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+	
+	background: transparent;
+    color: white;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 5px;
+
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+    transition: opacity 0.3s;
+	z-index: 2;
+}
+	#backToTop:hover {
+    background: #fff;
+	border: 2px solid white;
+    border-radius: 5px;
+	color: Black;
+}
+	body::-webkit-scrollbar {
+    width: 10px;
+}
+	body::-webkit-scrollbar-track {
+    background: #121212;
+}
+	body::-webkit-scrollbar-thumb {
+    background: #4db6ac;
+    border-radius: 5px;
+}
+
+</style>
+
+
+<script>
+
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function lazyLoadImages() {
+    const images = document.querySelectorAll(".gallery-item");
+    
+    if ("IntersectionObserver" in window) {
+        let observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    let img = entry.target;
+                    img.src = img.dataset.src; // Replace placeholder with actual image
+                    img.removeAttribute("data-src"); // Remove data attribute after loading
+                    observer.unobserve(img); // Stop observing once loaded
+                }
+            });
+        });
+
+        images.forEach(img => {
+            observer.observe(img);
+        });
+    } else {
+        // Fallback for older browsers (load all images at once)
+        images.forEach(img => {
+            img.src = img.dataset.src;
+        });
+    }
+}
+
+    window.addEventListener("scroll", function() {
+        let scrollValue = window.scrollY;
+        let linksBg = document.querySelector(".links-background");
+
+        let parallaxSpeed = 0.3; // Adjust this value to control the intensity
+        linksBg.style.transform = `translateY(${scrollValue * parallaxSpeed}px)`;
+    });
+	
+
+
+ function loadGallery(type) {
+    currentGallery = type;
+    const galleryContainer = document.querySelector(".gallery");
+    galleryContainer.innerHTML = ""; // Clear previous images
+
+    document.querySelectorAll('.gallery-tabs button').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.gallery-tabs button[data-type="${type}"]`).classList.add('active');
+
+    galleries[type].forEach((imgSrc, index) => {
+        const link = document.createElement("a");
+        link.href = "#";
+        link.onclick = (event) => {
+            event.preventDefault();
+            openLightbox(index);
+        };
+
+        const img = document.createElement("img");
+        img.src = imgSrc;
+        img.classList.add("gallery-item");
+        img.setAttribute("loading", "lazy");
+
+        link.appendChild(img);
+        galleryContainer.appendChild(link);
+    });
+}
+
+// Ensure DEADROP is set as active on page load
+document.addEventListener("DOMContentLoaded", () => {
+    loadGallery('DEADROP');
+});
+
+
+ window.onscroll = function() {
+    let btn = document.getElementById("backToTop");
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        btn.style.display = "block";
+    } else {
+        btn.style.display = "none";
+    }
+};
+
+
+// scroll // scroll // scroll // scroll // scroll // scroll // scroll // scroll 
+
+window.addEventListener("scroll", function () {
+    let scrollY = window.scrollY;
+    
+    let sections = [
+        { id: "about-section", offset: 300, speed: 0.10 },
+        { id: "shipped-games", offset: 325, speed: 0.10 },
+        { id: "book-publications", offset: 1000, speed: 0.2 },
+        { id: "magazine-other", offset: 5750, speed: 0.9 },
+        { id: "resume", offset: 2000, speed: 0.3 }
+    ];
+
+    sections.forEach(section => {
+        let el = document.getElementById(section.id);
+        if (el) {
+            let parallaxOffset = section.offset - scrollY * section.speed;
+            el.style.backgroundPosition = `center ${parallaxOffset}px`;
+        }
+    });
+
+    // Back to Top Button Visibility
+    let btn = document.getElementById("backToTop");
+    btn.style.display = scrollY > 300 ? "block" : "none";
+});
+
+window.addEventListener("scroll", function () {
+    let scrollY = window.scrollY;
+    let gallery = document.querySelector(".gallery-container");
+    let speed = 0.2; // Adjust speed (higher values move slower)
+
+    gallery.style.backgroundPositionY = `${100 - scrollY * speed}px`; /* Moves image up instead */
+});
+
+// scroll // scroll // scroll // scroll // scroll // scroll // scroll // scroll 
+// scroll // scroll // scroll // scroll // scroll // scroll // scroll // scroll 
+
+document.addEventListener("DOMContentLoaded", () => {
+    const images = document.querySelectorAll(".gallery-item");
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                observer.unobserve(img);
+            }
+        });
+    });
+
+    images.forEach(img => {
+        observer.observe(img);
+    });
+});
+
+</script>
+
+</head>
+
+<body>
+
+    <header>
+        <div class="header">
+            <div class="header-top">
+                <span>Darren Bacon<p class="subtitle">Art Director (Game Dev) / Concept Artist</p></span>
+					<div class="email-link">
+						<li><a href="mailto:darren@darrenbacon.com" target="_blank" class="email-link">📩 Email Me: darren@darrenbacon.com</a></li>
+
+	
+					</div>
+			</div>
+			
+        </div>
+    </header>
+
+<main class="wrapper">
+
+<!-- video --><!-- video --><!-- video --><!-- video -->
+
+<script>
+function restartVideo() {
+    var iframe = document.getElementById('video-iframe');
+    if (iframe) {
+        let src = iframe.src;
+        iframe.src = "";  // Temporarily remove the source
+        setTimeout(() => {
+            iframe.src = src;  // Restore source after short delay
+        }, 100);  // Delay to force a proper reload
+    }
+}
+
+setInterval(restartVideo, 25000);
+</script>
+
+<div class="video-background">
+    <iframe 
+        id="video-iframe"
+        class="video-iframe"	
+        width="100%" 
+        height="100%" 
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;"
+        src="https://www.youtube.com/embed/uGbOGASS-QU?autoplay=1&mute=1&loop=1&playlist=uGbOGASS-QU&controls=0&showinfo=0&modestbranding=1&playsinline=1&disablekb=1&fs=0&rel=0"
+        frameborder="0"
+        allowfullscreen>
+    </iframe>
+</div>
+
+<!-- video -- uGbOGASS-QU  -->
+
+<!-- video --><!-- video --><!-- video --><!-- video -->
+
+<!-- links --><!-- links --><!-- links --><!-- links --><!-- links --><!-- links -->
+
+<div class="links-container">
+    <div class="links-background"></div> <!-- Background Image -->
+    <h1 class="section-title">My Links:</h1>
+    <ul class="link-list">
+        <li><a href="https://www.instagram.com/artofbacon/" target="_blank">Instagram</a></li>
+        <li><a href="https://www.artstation.com/darrenbacon" target="_blank">ArtStation</a></li>
+        <li><a href="https://x.com/artofbacon" target="_blank">X</a></li>
+        <li><a href="https://www.linkedin.com/in/darrenbacon/" target="_blank">LinkedIn</a></li>
+        <li><a href="https://www.youtube.com/c/ConceptDepartment" target="_blank">YouTube</a></li>
+        <li><a href="https://www.tiktok.com/@artofbacon" target="_blank">TikTok</a></li>
+        <li><a href="https://bsky.app/profile/artofbacon.bsky.social" target="_blank">BlueSky</a></li>
+        <li><a href="https://www.threads.net/@artofbacon" target="_blank">Threads</a></li>
+		<li><a href="https://baconsbytes.tumblr.com/" target="_blank">tumblr</a></li>
+    </ul>
+</div>
+
+<!-- links --><!-- links --><!-- links --><!-- links --><!-- links --><!-- links -->
+
+<!-- gallery --><!-- gallery --><!-- gallery --><!-- gallery --><!-- gallery --><!-- gallery --><!-- gallery -->
+
+
+
+<div class="gallery-container">
+	<div class="gallery-header">
+		<h2 class="section-title">Samples:</h2>
+
+    <!-- Gallery Category Buttons -->
+	<div class="gallery-tabs">
+			<button data-type="DEADROP" onclick="loadGallery('DEADROP')" title="View DEADROP concept art">DEADROP</button>
+			<button data-type="HALO" onclick="loadGallery('HALO')" title="View Halo concept art">HALO</button>
+			<button data-type="DESTINY" onclick="loadGallery('DESTINY')" title="View Destiny concept art">DESTINY</button>
+			<button data-type="OTHER" onclick="loadGallery('OTHER')" title="View other concept art">OTHER</button>
+	</div>
+</div>
+
+
+
+        <!-- Sticky Gallery Wrapper -->
+    <div class="gallery-wrapper">
+        <div class="gallery"></div>
+    </div>
+</div>
+
+<!-- gallery --><!-- gallery --><!-- gallery --><!-- gallery --><!-- gallery --><!-- gallery --><!-- gallery -->
+
+<!-- resume --><!-- resume --><!-- resume --><!-- resume --><!-- resume --><!-- resume --><!-- resume --><!-- resume -->
+
+<div id="about-section">
+		<div class="about-title">
+		 <h2 class="section-title">About:</h2>
+		</div>
+	<div class="resume-container">
+			<div class="resume-section">
+			   
+
+					<p>Concept Art veteran and Art Director with over a decade of experience in game development, managing art teams and creating results for real-time rendering applications, including Unreal Engine 5. Proven ability to lead multidisciplinary teams in creating cutting-edge digital experiences by blending artistic excellence with technical expertise.</p>
+			</div>
+	</div>
+</div>
+
+<div id="shipped-games">
+	<div class="resume-container">
+			<div class="resume-section">
+					<h3>Shipped Games:</h3>
+					<table style="width:100%; border-collapse: collapse;">
+						<tr style="background-color: #333; color: white;">   
+							<th style="padding: 10px; border: 1px solid #555;">Title</th>
+							<th style="padding: 10px; border: 1px solid #555;">Platform</th>
+							<th style="padding: 10px; border: 1px solid #555;">Year</th>
+							<th style="padding: 10px; border: 1px solid #555;">Credit</th>
+							<th style="padding: 10px; border: 1px solid #555;">Company</th>
+						</tr>           
+						<tr>
+							<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/175521/halo-infinite-multiplayer/" target="_blank">Halo Infinite - Multiplayer</a></td>
+							<td style="padding: 10px; border: 1px solid #555;">Xbox Series / Windows</td>
+							<td style="padding: 10px; border: 1px solid #555;">2021</td>
+							<td style="padding: 10px; border: 1px solid #555;">Associate Art Director</td>
+							<td style="padding: 10px; border: 1px solid #555;">343 Industries / Microsoft</td>
+						</tr>
+						<tr>
+							<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/176543/halo-infinite-campaign/" target="_blank">Halo Infinite - Campaign</a></td>
+							<td style="padding: 10px; border: 1px solid #555;">343 Industries</td>
+							<td style="padding: 10px; border: 1px solid #555;">2021</td>
+							<td style="padding: 10px; border: 1px solid #555;">Associate Art Director</td>
+							<td style="padding: 10px; border: 1px solid #555;">343 Industries / Microsoft</td>
+						</tr>
+						<tr>
+							<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/112604/halo-fireteam-raven/" target="_blank">Halo: Fireteam Raven</a></td>
+							<td style="padding: 10px; border: 1px solid #555;">Arcade</td>
+							<td style="padding: 10px; border: 1px solid #555;">2018</td>
+							<td style="padding: 10px; border: 1px solid #555;">Special Thanks</td>
+							<th style="padding: 10px; border: 1px solid #555;">343 Industries / Microsoft</th>
+						</tr>
+						<tr>
+							<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/80652/halo-5-forge/" target="_blank">Halo 5: Forge</a></td>
+							<td style="padding: 10px; border: 1px solid #555;">Windows</td>
+							<td style="padding: 10px; border: 1px solid #555;">2016</td>
+							<td style="padding: 10px; border: 1px solid #555;">Concept Art Lead</td>
+							<th style="padding: 10px; border: 1px solid #555;">343 Industries / Microsoft</th>
+						</tr>
+						<tr>
+							<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/75503/halo-5-guardians/" target="_blank">Halo 5: Guardians</a></td>
+							<td style="padding: 10px; border: 1px solid #555;">Xbox One</td>
+							<td style="padding: 10px; border: 1px solid #555;">2015</td>
+							<td style="padding: 10px; border: 1px solid #555;">Concept Art Lead</td>
+							<th style="padding: 10px; border: 1px solid #555;">343 Industries / Microsoft</th>
+						</tr>
+						<tr>
+							<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/68327/destiny/" target="_blank">Destiny</a></td>
+							<td style="padding: 10px; border: 1px solid #555;">Xbox One</td>
+							<td style="padding: 10px; border: 1px solid #555;">2015</td>
+							<td style="padding: 10px; border: 1px solid #555;">Senior Concept Artist</td>
+							<th style="padding: 10px; border: 1px solid #555;">Bungie</th>
+						</tr>
+						<tr>
+							<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/37216/command-conquer-red-alert-3//" target="_blank">Command & Conquer: Red Alert 3</a></td>
+							<td style="padding: 10px; border: 1px solid #555;">Windows</td>
+							<td style="padding: 10px; border: 1px solid #555;">2008</td>
+							<td style="padding: 10px; border: 1px solid #555;">Concept Artist</td>
+							<th style="padding: 10px; border: 1px solid #555;">Electronic Arts</th>
+						</tr>
+						<tr>
+							<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/33390/command-conquer-3-kanes-wrath/" target="_blank">Command & Conquer: Kane's Wrarth</a></td>
+							<td style="padding: 10px; border: 1px solid #555;">Windows</td>
+							<td style="padding: 10px; border: 1px solid #555;">2008</td>
+							<td style="padding: 10px; border: 1px solid #555;">Concept Artist</td>
+							<th style="padding: 10px; border: 1px solid #555;">Electronic Arts</th>
+						</tr>
+						<tr>
+							<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.mobygames.com/game/33182/close-quarters-conflict/" target="_blank">Close Quarters Conflict</a></td>
+							<td style="padding: 10px; border: 1px solid #555;">Windows</td>
+							<td style="padding: 10px; border: 1px solid #555;">2006</td>
+							<td style="padding: 10px; border: 1px solid #555;">Artist</td>
+							<th style="padding: 10px; border: 1px solid #555;">Zombie Studios</th>
+						</tr>
+					</table>
+			</div>
+	</div>
+</div> 
+<div id="book-publications">
+	<div class="resume-container">
+			<div class="resume-section">
+					<h3>Book Publications:</h3>
+				<table style="width:100%; border-collapse: collapse;">
+					<tr style="background-color: #333; color: white;">
+						<th style="padding: 10px; border: 1px solid #555;">Title</th>
+						<th style="padding: 10px; border: 1px solid #555;">Publication</th>
+						<th style="padding: 10px; border: 1px solid #555;">Date</th>
+						<th style="padding: 10px; border: 1px solid #555;">Credit</th>
+					</tr>
+					<tr>
+						<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/Art-Star-Wars-Galaxys-Edge/dp/1419750127" target="_blank">The Art of STAR WARS GALAXY'S EDGE</a></td>
+						<td style="padding: 10px; border: 1px solid #555;">Abrams Books</td>
+						<td style="padding: 10px; border: 1px solid #555;">2021</td>
+						<td style="padding: 10px; border: 1px solid #555;">Contributing Artist</td>
+					</tr>
+					<tr>
+						<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/Art-Halo-Infinite-343-Industries/dp/1506720080" target="_blank">The Art of Halo Infinite</a></td>
+						<td style="padding: 10px; border: 1px solid #555;">343 Industries</td>
+						<td style="padding: 10px; border: 1px solid #555;">2021</td>
+						<td style="padding: 10px; border: 1px solid #555;">Featured Artist</td>
+					</tr>
+					<tr>
+						<td style="padding: 10px; border: 1px solid #555;"><a href="https://designstudiopress.com/products/nuthin-but-mech-4" target="_blank">Nuthin’ But Mech 4</a></td>
+						<td style="padding: 10px; border: 1px solid #555;">Design Studio Press</td>
+						<td style="padding: 10px; border: 1px solid #555;">2018</td>
+						<td style="padding: 10px; border: 1px solid #555;">Contributing Artist</td>
+					</tr>
+					<tr>
+						<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/Halo-Warfleet-343-Industries/dp/1681196638" target="_blank">Halo Warfleet</a></td>
+						<td style="padding: 10px; border: 1px solid #555;">343 Industries</td>
+						<td style="padding: 10px; border: 1px solid #555;">2017</td>
+						<td style="padding: 10px; border: 1px solid #555;">Contributing Artist / Special Thanks</td>
+					</tr>
+					<tr>
+					<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/Halo-Mythos-Guide-Story/dp/1681193566" target="_blank">Halo Mythos: A Guide to 
+					the Story of Halo</a></td>
+						<td style="padding: 10px; border: 1px solid #555;">343 Industries</td>
+						<td style="padding: 10px; border: 1px solid #555;">2016</td>
+						<td style="padding: 10px; border: 1px solid #555;">Contributing Artist / Special Thanks</td>
+					</tr>
+					<tr>
+						<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/Robota-Chiang-2016-11-16-Orson-Scott/dp/B01N9LKDUM" target="_blank">Robota</a></td>
+						<td style="padding: 10px; border: 1px solid #555;">Dover Publications Inc.</td>
+						<td style="padding: 10px; border: 1px solid #555;">2016</td>
+						<td style="padding: 10px; border: 1px solid #555;">Contributing Artist</td>
+					</tr>
+					<tr>
+						<td style="padding: 10px; border: 1px solid #555;"><a href="https://designstudiopress.com/products/nuthin-but-mech-3" target="_blank">Nuthin’ But Mech 3</a></td>
+						<td style="padding: 10px; border: 1px solid #555;">Design Studio Press</td>
+						<td style="padding: 10px; border: 1px solid #555;">2015</td>
+						<td style="padding: 10px; border: 1px solid #555;">Contributing Artist</td>
+					</tr>
+					<tr>
+						<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/Art-Halo-5-Guardians/dp/1608876497" target="_blank">The Art of Halo 5: Guardians</a></td>
+						<td style="padding: 10px; border: 1px solid #555;">Insight Editions</td>
+						<td style="padding: 10px; border: 1px solid #555;">2015</td>
+						<td style="padding: 10px; border: 1px solid #555;">Contributing Artist / Interviewee</td>
+					</tr>
+					<tr>
+						<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/Art-Destiny-Bungie/dp/1608874206" target="_blank">The Art of Destiny<a/></td>
+						<td style="padding: 10px; border: 1px solid #555;">Insight Editions</td>
+						<td style="padding: 10px; border: 1px solid #555;">2014</td>
+						<td style="padding: 10px; border: 1px solid #555;">Contributing Artist</td>
+					</tr>
+					<tr>
+					<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/BLAST-spaceship-renderings-Scott-Robertson/dp/1933492546" target="_blank">Blast: Spaceship Sketches and 
+					Renderings</a>
+					</td>
+						<td style="padding: 10px; border: 1px solid #555;">Design Studio Press</td>
+						<td style="padding: 10px; border: 1px solid #555;">2012</td>
+						<td style="padding: 10px; border: 1px solid #555;">Guest Artist</td>
+					</tr>
+					<tr>
+						<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.amazon.com/Art-Disneyss-Christmas-Carol/dp/142312104X" target="_blank">The Art of Disney’s A Christmas Carol</a></td>
+						<td style="padding: 10px; border: 1px solid #555;">Disney Editions</td>
+						<td style="padding: 10px; border: 1px solid #555;">2009</td>
+						<td style="padding: 10px; border: 1px solid #555;">Contributing Artist</td>
+					</tr>
+					<tr>
+						<td style="padding: 10px; border: 1px solid #555;"><a href="https://designstudiopress.com/products/in-the-future?variant=40796257517764" target="_blank">In the Future…</a></td>
+						<td style="padding: 10px; border: 1px solid #555;">Design Studio Press</td>
+						<td style="padding: 10px; border: 1px solid #555;">2006</td>
+						<td style="padding: 10px; border: 1px solid #555;">Co-Author</td>
+					</tr>
+				</table>
+			</div>
+	</div>		
+</div>
+<div id="magazine-other">
+	<div class="resume-container">
+			<div class="resume-section">
+						<h3>Magazine / Online Publications:</h3>
+				<table style="width:100%; border-collapse: collapse;">
+							<tr style="background-color: #333; color: white;">
+								<th style="padding: 10px; border: 1px solid #555;">Title</th>
+								<th style="padding: 10px; border: 1px solid #555;">Publication</th>
+								<th style="padding: 10px; border: 1px solid #555;">Date</th>
+								<th style="padding: 10px; border: 1px solid #555;">Source</th>
+							</tr>
+							<tr>
+								<td style="padding: 10px; border: 1px solid #555;">Interview: Darren Bacon </td>
+								<td style="padding: 10px; border: 1px solid #555;">ImagineFX Magazine</td>
+								<td style="padding: 10px; border: 1px solid #555;">January 2019</td>
+								<td style="padding: 10px; border: 1px solid #555;">Pages 34-41</td>
+							</tr>
+							<tr>
+								<td style="padding: 10px; border: 1px solid #555;">Tilting Reality </td>
+								<td style="padding: 10px; border: 1px solid #555;">ImagineFX Magazine</td>
+								<td style="padding: 10px; border: 1px solid #555;">August 12, 2016</td>
+								<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.pressreader.com/australia/imagine-fx/20160812/281487865732140?srsltid=AfmBOoounAtsyGh0QQdYQzo_Oxnq8qTQZFKNGBE41Hu9W6WQ85luCV_Z" target="_blank">Featured Artist</a></td>
+							</tr>
+							<tr>
+								<td style="padding: 10px; border: 1px solid #555;">The Best Video Game Concept Art of 2015</td>
+								<td style="padding: 10px; border: 1px solid #555;">Kotaku</td>
+								<td style="padding: 10px; border: 1px solid #555;">January, 2016</td>
+								<td style="padding: 10px; border: 1px solid #555;"><a href="https://kotaku.com/the-best-video-game-concept-art-of-2015-1749190177" target="_blank">Featured Artist</a></td>
+							</tr>
+							<tr>
+								<td style="padding: 10px; border: 1px solid #555;">This ‘Halo 5’ Concept Art is Downright Gorgeous</td>
+								<td style="padding: 10px; border: 1px solid #555;">Business Insider </td>
+								<td style="padding: 10px; border: 1px solid #555;">November, 2015</td>
+								<td style="padding: 10px; border: 1px solid #555;"><a href="https://www.businessinsider.com/halo-5-concept-art-2015-11#and-this-looks-almost-exactly-like-one-of-the-games-story-mission-levels-5" target="_blank">Featured Artist</a></td>
+							</tr>
+							<tr>
+								<td style="padding: 10px; border: 1px solid #555;">It's Late. Let This Computer Buy You A Drink.</td>
+								<td style="padding: 10px; border: 1px solid #555;">Kotaku</td>
+								<td style="padding: 10px; border: 1px solid #555;">January, 2016</td>
+								<td style="padding: 10px; border: 1px solid #555;"><a href="https://kotaku.com/its-late-let-this-computer-buy-you-a-drink-918503447" target="_blank">Featured Artist</a></td>
+							</tr>
+							
+				</table> 
+			</div>
+	</div>		
+</div> 
+<div id="resume">
+	<div class="resume-container">
+		<div class="resume-section">
+            <h3>Experience:</h3>
+            <div class="resume-entry">
+                <strong>Midnight Society - Art Director</strong>
+                <span>(2022-2025)</span>
+            </div>
+            <p>Built and led a high-performing team of artists, technical artists, and external co-developers, driving strategic initiatives that resulted in the successful delivery of seven pre-alpha game releases.</p>
+            <ul>
+                <li>Spearheaded the art production for DEADROP, guiding the project from initial concept through multiple pre-alpha launches utilizing Unreal Engine 5.</li>
+                <li>Managed and mentored a multidisciplinary team of 3D artists, concept artists, and technical artists, fostering a culture of creativity, collaboration, and growth.</li>
+                <li>Partnered closely with product managers, designers, and engineers to align artistic vision with strategic goals, ensuring a cohesive and impactful game development process.</li>
+                
+            </ul>
+		</div>
+		<div class="resume-section">
+            <div class="resume-entry">
+                <strong>Microsoft (Halo) – Art Director (Mulitplayer/Live Team) / Associate Art Director</strong>
+                <span>(2019-2022)</span>
+            </div>
+            <p>Directed the artistic vision for a team of ~400 video game artists, driving the creative direction of a $5B franchise while ensuring a unified and high-quality visual identity across multiple projects.</p>
+            <ul>
+                <li>Led the art development and launch of Halo Infinite, leveraging the proprietary Slipspace Engine to push the boundaries of real-time rendering.</li>
+                <li>Defined and aligned art direction across branding, marketing, and game development, ensuring a cohesive visual strategy that supported both product and marketing goals.</li>
+                <li>Spearheaded the visual development of Halo Infinite, maintaining artistic consistency and quality across the program’s multiple initiatives.</li>
+                <li>Provided art direction support for key teams, including Shooter Live, Multiplayer, Sandbox, UI, FX, and Character teams, driving excellence in visual execution.</li>
+                <li>Oversaw consumer products strategy, guiding the development, critique, and approval of franchise materials and merchandise, including Mattel’s Mega Bloks, BoomCo., McFarlane collectibles, apparel, and publishing projects, ensuring brand integrity and quality.</li>
+            </ul>
+		</div>
+		<div class="resume-section">
+            <div class="resume-entry">
+                <strong>Microsoft (Halo) – Lead Concept Artist</strong>
+                <span>(2014-2019)</span>
+            </div>
+            <p>Led the concept art team, driving project development, elevating artistic quality, and fostering team growth through strategic leadership and mentorship.</p>
+            <ul>
+                <li>Career Manager overseeing the full talent lifecycle, including sourcing, interviewing, hiring, career development, and performance reviews to build and retain top-tier talent.</li>
+                <li>Mentored and guided a team of elite artists, fostering professional development while upholding exceptional creative standards.</li>
+                <li>Optimized workflows and task distribution, providing clear artistic direction, feedback, and performance evaluations to enhance quality and efficiency.</li>
+                <li>Defined and refined the artistic vision for multiple projects, collaborating closely with creative, technical, and production leads to maintain a consistent and high-quality visual standard.</li>
+                <li>Ensured excellence across all art disciplines, including character design, environment art, VFX, UI, lighting, and rendering, ensuring alignment with project goals, game design and technical constraints.</li>
+            </ul>
+		</div>
+		<div class="resume-section">
+            <div class="resume-entry">
+                <strong>Bungie – Senior Concept Artist</strong>
+                <span>(2011-2014)</span>
+            </div>
+            <p>Played a key role in defining the artistic vision and world-building for Bungie and Activision’s groundbreaking sci-fi universe, Destiny.</p>
+            <ul>
+                <li>Developed iconic environments, weapons, vehicles and characters that shaped the game’s distinct aesthetic and lore.</li>
+				<li>Collaborated with design and narrative teams to create immersive concept art that informed world-building and gameplay direction.</li>
+            </ul>
+		</div>
+		<div class="resume-section">
+            <div class="resume-entry">
+                <strong>Disney (Walt Disney Television Animation) – Background Layout & Paint</strong>
+                <span>(2010-2011)</span>
+            </div>
+            <p>Background Painter and Concept Artist, contributing to award-winning visual storytelling under Annie Award-winning Production Designer Alberto Mielgo.</p>
+            <ul>
+                <li>Crafted highly stylized backgrounds and concept art that shaped the distinctive aesthetic of TRON: Uprising.</li>
+				<li>Collaborated closely with the art and production teams to develop immersive environments that enhanced the show’s cinematic quality.</li>
+            </ul>
+		</div>
+		<div class="resume-section">
+            <div class="resume-entry">
+                <strong>Disney (ImageMovers Digital) – Concept Artist</strong>
+                <span>(2008-2010)</span>
+            </div>
+            <p>Concept Artist, contributing to the visual development of multiple film projects under Academy Award-winning Production Designer Doug Chiang.</p>
+            <ul>
+                <li>Designed key vehicles, environments, characters, and props, helping to shape the artistic direction and storytelling of Disney feature films.</li>
+				<li>Collaborated with production teams to develop cinematic visuals that enhanced narrative and world-building.</li>
+            </ul>
+		</div>
+		<div class="resume-section">
+            <div class="resume-entry">
+                <strong>Electronic Arts – Concept Artist</strong>
+                <span>(2007-2008)</span>
+            </div>
+			<p>Concept Artist, collaborating closely with the Art Director, Designers, and Production teams to develop compelling visual designs for the Command & Conquer franchise.</p>
+            <ul>
+                <li>Created environment, character, and asset concepts that helped define the game’s distinctive sci-fi and military aesthetic.</li>
+				<li>Partnered with key stakeholders to ensure artistic consistency and alignment with gameplay and narrative goals.</li>
+				</ul>
+		</div>
+		<div class="resume-section">
+            <div class="resume-entry">
+                <strong>Zombie Studios – Concept Artist</strong>
+                <span>(2006)</span>
+            </div>
+            <ul>
+                <li>Close Quarters Conflict (2006)</li>
+			</ul>
+		</div>
+		<div class="resume-section">
+            <h3>Training:</h3>
+            <ul>
+                <li>Managing at Microsoft I (2014)</li>
+                <li>Managing at Microsoft II: Deliver Results Through Teams (2014)</li>
+                <li>Organizational Behavior and Leadership (2015)</li>
+            </ul>
+		</div>
+		<div class="resume-section">
+            <h3>Certification:</h3>
+            <ul>
+                <li><a href="https://www.certmetrics.com/comptia/public/verification.aspx?code=K9R4XM8GJLRQQ1RN" target="_blank">ComptTIA Project+ </a> - Project Management (2015)</li>
+            </ul>
+		</div>
+		<div class="resume-section">
+            <h3>Education:</h3>
+	    <p><strong>Art Center College of Design</strong> - Entertainment Design </p>
+            <p><strong>Art Institute of Seattle</strong> - Associates of Applied Arts in Industrial Design Technology </p>
+		</div>
+	</div>
+</div>
+
+<button id="backToTop" onclick="scrollToTop()">↑ Top</button>
+
+<p> © Darren Bacon | darren@darrenbacon.com | 2025 </p>
+
+<script>
+    let lastScrollTop = 0;
+    const header = document.querySelector('.header');
+
+    window.addEventListener("scroll", function () {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop) {
+            // Scrolling down - Hide the header
+            header.style.transform = "translateY(-100%)";
+        } else {
+            // Scrolling up - Show the header
+            header.style.transform = "translateY(0)";
+        }
+
+        lastScrollTop = scrollTop;
+    });
+</script>
+
+<script>
+const galleries = {
+    'DEADROP': [
+        "images/deadrop/deadrop1.jpg",
+        "images/deadrop/deadrop2.jpg",
+        "images/deadrop/deadrop3.jpg",
+        "images/deadrop/deadrop4.jpg",
+        "images/deadrop/deadrop5.jpg",
+        "images/deadrop/deadrop6.jpg",
+        "images/deadrop/deadrop7.jpg",
+        "images/deadrop/deadrop8.gif",
+        "images/deadrop/deadrop9.jpg",
+        "images/deadrop/deadrop10.jpg",
+        "images/deadrop/deadrop11.jpg",
+        "images/deadrop/deadrop12.gif",
+		"images/deadrop/deadrop13.jpg",
+		"images/deadrop/deadrop14.jpg",
+		"images/deadrop/deadrop15.jpg",
+		"images/deadrop/deadrop16.jpg",
+		"images/deadrop/deadrop17.jpg",
+
+		"images/deadrop/maker_art_style_guide_3k.jpg",
+
+		"images/deadrop/deadrop18.jpg",
+        "images/deadrop/deadrop19.jpg",
+        "images/deadrop/deadrop20.jpg",
+        "images/deadrop/deadrop21.jpg",
+
+
+		"images/deadrop/deadrop24.jpg",
+		"images/deadrop/deadrop25.jpg",
+		"images/deadrop/deadrop26.jpg",
+		"images/deadrop/deadrop27.jpg",
+        "images/deadrop/deadrop28.jpg",
+        "images/deadrop/deadrop29.jpg",
+
+
+		"images/deadrop/deadrop33.jpg",
+		"images/deadrop/deadrop34.jpg",
+		"images/deadrop/deadrop35.jpg",
+		"images/deadrop/deadrop36.jpg",
+		"images/deadrop/deadrop37.gif",
+		"images/deadrop/deadrop38.gif",
+		"images/deadrop/deadrop39.gif",
+        "images/deadrop/deadrop40.jpg",
+		"images/deadrop/deadrop41.gif",
+		"images/deadrop/deadrop42.jpg",
+		"images/deadrop/deadrop43.jpg",
+		"images/deadrop/deadrop44.jpg",
+		"images/deadrop/deadrop45.jpg",
+		"images/deadrop/deadrop46.jpg",
+		"images/deadrop/deadrop47.jpg",
+		"images/deadrop/deadrop48.jpg"
+
+	
+    ],
+    'HALO': [
+        "images/halo/halo1.jpg",
+        "images/halo/halo2.jpg",
+        "images/halo/halo3.jpg",
+		"images/halo/halo3-2.jpg",
+        "images/halo/halo4.jpg",
+        "images/halo/halo5.jpg",
+        "images/halo/halo6.jpg",
+		"images/halo/halo20.jpg",
+        "images/halo/halo7.jpg",
+        "images/halo/halo8.jpg",
+        "images/halo/halo9.jpg",
+        "images/halo/halo10.jpg",
+        "images/halo/halo11.jpg",
+		 "images/halo/halo12.jpg",
+        "images/halo/halo13.jpg",
+        "images/halo/halo14.jpg",
+        "images/halo/halo15.jpg",
+        "images/halo/halo16.jpg",
+        "images/halo/halo17.jpg",
+        "images/halo/halo18.jpg",
+        "images/halo/halo19.jpg",
+
+        "images/halo/halo21.jpg",
+		"images/halo/halo22.jpg",
+        "images/halo/halo26.jpg",
+        "images/halo/halo27.jpg",
+        "images/halo/halo28.jpg",
+        "images/halo/halo29.jpg",
+        "images/halo/halo30.jpg",
+        "images/halo/halo31.jpg",
+        "images/halo/halo32.jpg",
+        "images/halo/halo33.jpg",
+        "images/halo/halo34.jpg",
+		"images/halo/halo35.jpg",
+        "images/halo/halo36.jpg",
+        "images/halo/halo37.jpg",
+        "images/halo/halo39.jpg",
+        "images/halo/halo40.jpg",
+        "images/halo/halo41.jpg",
+        "images/halo/halo42.jpg",
+        "images/halo/halo43.jpg",
+        "images/halo/halo44.jpg",
+        "images/halo/halo45.jpg"
+
+		
+    ],
+    'DESTINY': [
+        "images/destiny/destiny1.jpg",
+        "images/destiny/destiny2.jpg",
+        "images/destiny/destiny3.jpg",
+        "images/destiny/destiny4.jpg",
+        "images/destiny/destiny5.jpg",
+        "images/destiny/destiny6.jpg",
+        "images/destiny/destiny7.jpg",
+        "images/destiny/destiny8.jpg",
+        "images/destiny/destiny9.jpg",
+        "images/destiny/destiny10.jpg",
+        "images/destiny/destiny11.jpg",
+		        "images/destiny/destiny12.jpg",
+        "images/destiny/destiny13.jpg",
+        "images/destiny/destiny14.jpg",
+        "images/destiny/destiny15.jpg",
+        "images/destiny/destiny16.jpg",
+        "images/destiny/destiny17.jpg",
+        "images/destiny/destiny18.jpg",
+        "images/destiny/destiny19.jpg",
+        "images/destiny/destiny20.jpg",        
+        "images/destiny/destiny21.jpg",
+        "images/destiny/destiny22.jpg",
+        "images/destiny/destiny23.jpg",
+        "images/destiny/destiny24.jpg",
+        "images/destiny/destiny25.jpg",
+        "images/destiny/destiny26.jpg",
+        "images/destiny/destiny27.jpg",
+        "images/destiny/destiny28.jpg",
+        "images/destiny/destiny29.jpg",
+		"images/destiny/destiny30.jpg",
+        "images/destiny/tumblr_p2gd6iTRSc1rqvckio1_1280.jpg"
+
+],
+    'OTHER': [
+
+        "images/OTHER/dbacon_BEM_mad_max-1E_onesheet4k.jpg",
+        "images/OTHER/dbacon_BE_jamesbond_4k-2.jpg",
+        "images/OTHER/unnamed.jpg",
+		"images/OTHER/Kovalai_Vector_Refinery.jpg",
+        "images/OTHER/rover_1_sketch.jpg",
+        "images/OTHER/space_soldier.jpg",
+		
+		"images/OTHER/tumblr_ojw22b2srD1rqvckio1_1280.jpg",
+        "images/OTHER/tumblr_ol72kzhins1rqvckio1_1280.jpg",
+        "images/OTHER/tumblr_oqkhthIkGe1rqvckio1_1280.jpg",
+        "images/OTHER/tumblr_pg31ymAguW1rqvckio1_1280.jpg",
+        "images/OTHER/tumblr_pg31ymAguW1rqvckio2_1280.jpg",
+        "images/OTHER/tumblr_ppiupnrqV51qeldhr_1280.jpg",
+		"images/OTHER/tumblr_oi8ohlz61a1rqvckio1_1280.jpg",
+        "images/OTHER/tumblr_phqbbfCIkK1rqvckio2_1280.jpg",
+        "images/OTHER/tumblr_phqbbfCIkK1rqvckio3_1280.jpg",
+        "images/OTHER/tumblr_nm35a3jtgU1rqvckio1_1280.jpg",
+        "images/OTHER/tumblr_phqbbfCIkK1rqvckio5_1280.jpg",
+        "images/OTHER/tumblr_phqbbfCIkK1rqvckio6_1280.jpg",
+		"images/OTHER/tumblr_o96p6sJm1x1rqvckio3_400.webp",
+        "images/OTHER/tumblr_o9e6qtdMUT1rqvckio1_400.webp",
+        "images/OTHER/tumblr_o7wchuENY51rqvckio1_1280.jpg",
+        "images/OTHER/tumblr_o5fxmaFRTy1rqvckio1_1280.jpg",
+        "images/OTHER/tumblr_o03op1khMs1rqvckio1_1280.jpg",
+        "images/OTHER/tumblr_o2juektf2p1rqvckio1_1280.jpg",
+		"images/OTHER/tumblr_o0inwz4HTr1rqvckio1_1280.jpg",
+        "images/OTHER/tumblr_ozxs8hwdFT1rqvckio2_1280.jpg",
+
+        "images/OTHER/SW_001h.jpg",
+        "images/OTHER/tumblr_mczc97HF9b1rqvckio1_1280.jpg",
+		"images/OTHER/tumblr_m64yq9mFni1rqvckio1_1280.jpg",
+        "images/OTHER/tumblr_m64yq9mFni1rqvckio2_1280.jpg",
+        "images/OTHER/tumblr_m5m8fyahp81rqvckio1_1280.jpg",
+        "images/OTHER/tumblr_m64yv4V1SM1rqvckio1_1280.jpg",
+        "images/OTHER/tumblr_n24wv065mF1rqvckio1_1280.jpg",
+        "images/OTHER/tumblr_n24xuorOLl1rqvckio1_1280.jpg",
+		"images/OTHER/tumblr_n24xuorOLl1rqvckio5_1280.jpg",
+        "images/OTHER/tumblr_n24xuorOLl1rqvckio7_1280.jpg"
+
+    ]
+	
+};
+
+let currentGallery = 'DEADROP';
+let currentImageIndex = 0;
+
+function loadGallery(type) {
+    currentGallery = type;
+    const galleryContainer = document.querySelector(".gallery");
+    galleryContainer.innerHTML = "";
+    galleryContainer.style.display = "grid";
+    galleryContainer.style.gridTemplateColumns = "repeat(4, 1fr)";
+    galleryContainer.style.gap = "10px";
+    galleryContainer.style.justifyContent = "center";
+
+    // Remove active class from all buttons
+    document.querySelectorAll('.gallery-tabs button').forEach(btn => btn.classList.remove('active'));
+
+    // Add active class to the clicked button
+    const activeButton = document.querySelector(`.gallery-tabs button[data-type="${type}"]`);
+    if (activeButton) {
+        activeButton.classList.add('active');
+    }
+
+    galleries[type].forEach((imgSrc, index) => {
+        const link = document.createElement("a");
+        link.href = "#";
+        link.onclick = (event) => {
+            event.preventDefault();
+            openLightbox(index);
+        };
+        
+        const img = document.createElement("img");
+        img.src = imgSrc;
+        img.classList.add("gallery-item");
+        img.style.width = "200px";
+        img.style.height = "200px";
+        img.style.objectFit = "cover";
+        img.style.cursor = "pointer";
+        
+        link.appendChild(img);
+        galleryContainer.appendChild(link);
+    });
+}
+
+// Ensure DEADROP is set as active on page load
+document.addEventListener("DOMContentLoaded", () => {
+    loadGallery('DEADROP'); // Loads 'DEADROP' as default
+    const defaultButton = document.querySelector(`.gallery-tabs button[data-type="DEADROP"]`);
+    if (defaultButton) {
+        defaultButton.classList.add("active");
+    }
+});
+
+function openLightbox(index) {
+    currentImageIndex = index;
+    document.getElementById("lightbox").style.display = "flex";
+    document.getElementById("lightbox-image").src = galleries[currentGallery][index];
+}
+
+function closeLightbox() {
+    document.getElementById("lightbox").style.display = "none";
+}
+
+function navigateLightbox(direction) {
+    currentImageIndex = (currentImageIndex + direction + galleries[currentGallery].length) % galleries[currentGallery].length;
+    document.getElementById("lightbox-image").src = galleries[currentGallery][currentImageIndex];
+}
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeLightbox();
+    } else if (event.key === "ArrowRight") {
+        navigateLightbox(1);
+    } else if (event.key === "ArrowLeft") {
+        navigateLightbox(-1);
+    }
+});
+
+document.addEventListener("click", function(event) {
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-image");
+
+    if (event.target === lightbox && event.target !== lightboxImg) {
+        closeLightbox();
+    }
+});
+
+</script>
+
+
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="lightbox" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; z-index: 1000; cursor: pointer;">
+    <img id="lightbox-image" class="lightbox-content" style="max-width: 90%; max-height: 90vh; object-fit: contain;">
+    <button class="lightbox-nav left" onclick="navigateLightbox(-1)" style="position: absolute; top: 50%; left: 20px; transform: translateY(-50%); font-size: 40px; color: white; cursor: pointer; background: rgba(0, 0, 0, 0.5); border-radius: 5px; padding: 10px;">&#10094;</button>
+    <button class="lightbox-nav right" onclick="navigateLightbox(1)" style="position: absolute; top: 50%; right: 20px; transform: translateY(-50%); font-size: 40px; color: white; cursor: pointer; background: rgba(0, 0, 0, 0.5); border-radius: 5px; padding: 10px;">&#10095;</button>
+</div>
+
+<div class="gallery" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; justify-content: center;"></div>
+
+<style>
+    .gallery-tabs button {
+        background: transparent;
+        color: white;
+        padding: 10px 15px;
+        border: 2px solid white;
+        cursor: pointer;
+        transition: background 0.3s, color 0.3s;
+    }
+
+    .gallery-tabs button.active {
+        background: white;
+        color: black;
+        font-weight: bold;
+    }
+</style>
+
+
+
+</body>
+</html>
