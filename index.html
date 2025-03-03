@@ -79,19 +79,20 @@
             text-align: left;
         }
 
-        .title-name {
-            font-size: 2em;
-            font-weight: bold;
-            margin: 0;
-            color: white;
-        }
+		.title-name {
+			font-size: clamp(1.5em, 4vw, 2em); /* Ensures it doesn't shrink below 1.5em */
+			font-weight: bold;
+			margin: 0;
+			color: white;
+			white-space: nowrap; /* Prevents text from wrapping */
+		}
 
-        .subtitle {
-            font-size: 0.9em;
-            color: #4db6ac;
-            margin: 0px;
-        }
-
+		.subtitle {
+			font-size: clamp(1em, 3vw, 1.2em); /* Keeps it readable on mobile */
+			color: #4db6ac;
+			margin: 2px 0 0;
+			white-space: nowrap;
+		}
         .email-block {
             text-align: right;
         }
@@ -255,13 +256,11 @@
 .gallery-header {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* Ensures everything is centered */
     text-align: center;
     width: 100%;
-    max-width: 900px; /* Adjust this to match the gallery width */
-    margin: 0 auto; /* Ensures proper centering */
-    padding: 15px;
-    box-sizing: border-box;
+    max-width: 800px; /* Keeps it aligned with other content */
+    margin: 0 auto; /* Centers it */
 }
 
         .gallery-header .section-title {
@@ -358,6 +357,53 @@
                  font-size: 12px;
 		}
         }
+		
+		
+		/* Ensure gallery sections are hidden until selected */
+		
+		.gallery-section {
+			display: none;
+		}
+
+		.gallery-section.active {
+			display: block;
+		}
+
+.gallery-category {
+    display: flex;
+    justify-content: center; /* Center aligns buttons */
+    gap: 10px;
+    width: 100%;
+    max-width: 800px;
+    margin: 10px auto;
+}
+
+
+.gallery-category button {
+    flex: 1;
+    max-width: 180px;
+    background: #222; /* Dark mode background */
+    color: white;
+    padding: 10px 20px;
+    border: 2px solid #444;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, transform 0.2s;
+    text-align: center;
+    backdrop-filter: blur(5px); /* Subtle blur for modern effect */
+
+}
+
+.gallery-category button:hover,
+.gallery-category button.active {
+    background: #444; /* Slightly lighter dark gray for hover/active */
+    color: #fff;
+    font-weight: bold;
+    border-color: #666;
+}
+
+		
 
         .lightbox {
             display: none;
@@ -833,6 +879,35 @@
                 mobileNav.classList.remove('active');
             }
         });
+		
+				function switchGallery(type) {
+			// Hide all gallery sections
+			document.getElementById("concept-gallery-section").classList.remove("active");
+			document.getElementById("art-direction-gallery-section").classList.remove("active");
+
+			// Remove active state from buttons
+			document.getElementById("concept-samples-btn").classList.remove("active");
+			document.getElementById("art-direction-samples-btn").classList.remove("active");
+
+			// Show selected gallery section & activate button
+			if (type === "concept") {
+				document.getElementById("concept-gallery-section").classList.add("active");
+				document.getElementById("concept-samples-btn").classList.add("active");
+				loadGallery('DEADROP'); // Load default Concept Sample gallery
+			} else {
+				document.getElementById("art-direction-gallery-section").classList.add("active");
+				document.getElementById("art-direction-samples-btn").classList.add("active");
+				loadGallery('PROJECT_X'); // Load default Art Direction Sample gallery
+			}
+		}
+
+		// Load Concept Samples by default on page load
+		document.addEventListener("DOMContentLoaded", function() {
+			switchGallery('concept');
+		});
+
+		
+		
     </script>
 </head>
 
@@ -876,20 +951,43 @@
             </ul>
         </div>
 
-        <div id="gallery-container">
-            <div class="gallery-header">
-                <h2 class="section-title">Samples:</h2>
-                <div class="gallery-tabs">
-                    <button data-type="DEADROP" onclick="loadGallery('DEADROP')" title="View DEADROP concept art">DEADROP</button>
-                    <button data-type="HALO" onclick="loadGallery('HALO')" title="View Halo concept art">HALO</button>
-                    <button data-type="DESTINY" onclick="loadGallery('DESTINY')" title="View Destiny concept art">DESTINY</button>
-                    <button data-type="OTHER" onclick="loadGallery('OTHER')" title="View other concept art">OTHER</button>
-                </div>
-            </div>
-            <div class="gallery-wrapper">
-                <div class="gallery"></div>
-            </div>
-        </div>
+		<div id="gallery-container">
+			<div class="gallery-header">
+				<h2 class="section-title">Gallery</h2>
+
+				<!-- Category switcher: Concept Samples | Art Direction Samples -->
+				<div class="gallery-category">
+					<button id="concept-samples-btn" class="active" onclick="switchGallery('concept')">Concept Samples</button>
+					<button id="art-direction-samples-btn" onclick="switchGallery('art-direction')">Art Direction Samples</button>
+				</div>
+			</div>
+
+			<!-- Concept Samples Section -->
+			<div id="concept-gallery-section" class="gallery-section active">
+				<div class="gallery-tabs">
+					<button data-type="DEADROP" onclick="loadGallery('DEADROP')" title="View DEADROP concept art">DEADROP</button>
+					<button data-type="HALO" onclick="loadGallery('HALO')" title="View Halo concept art">HALO</button>
+					<button data-type="DESTINY" onclick="loadGallery('DESTINY')" title="View Destiny concept art">DESTINY</button>
+					<button data-type="OTHER" onclick="loadGallery('OTHER')" title="View other concept art">OTHER</button>
+				</div>
+				<div class="gallery-wrapper">
+					<div class="gallery"></div>
+				</div>
+			</div>
+
+			<!-- Art Direction Samples Section -->
+			<div id="art-direction-gallery-section" class="gallery-section">
+				<div class="gallery-tabs">
+					<button data-type="PROJECT_X" onclick="loadGallery('PROJECT_X')" title="View Project X">Project X</button>
+					<button data-type="PROJECT_Y" onclick="loadGallery('PROJECT_Y')" title="View Project Y">Project Y</button>
+					<button data-type="PROJECT_Z" onclick="loadGallery('PROJECT_Z')" title="View Project Z">Project Z</button>
+				</div>
+				<div class="gallery-wrapper">
+					<div class="gallery"></div>
+				</div>
+			</div>
+		</div>
+
 
         <div id="lightbox" class="lightbox">
             <img id="lightbox-image" class="lightbox-content">
