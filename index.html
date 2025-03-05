@@ -49,74 +49,32 @@
             align-items: center;
         }
 
-#header-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-        transition: transform 0.3s ease-in-out;
-        background: #000;
-        color: #FFF;
-        font-weight: bold;
-        height: 50px; /* Default height */
-        display: flex;
-        justify-content: center;
-        box-sizing: border-box;
-    }
+		#header-container {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			z-index: 1000;
+			transition: transform 0.3s ease-in-out;
+			background: #000;
+			color: #FFF;
+			font-weight: bold;
+			height: 50px; /* Consistent height */
+			display: flex;
+			justify-content: center;
+			box-sizing: border-box;
+		}
 
-    .header {
-        max-width: 990px;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        padding: 10px 20px;
-        box-sizing: border-box;
-        align-items: center;
-    }
-
-    /* Mobile adjustments */
-    @media (max-width: 600px) {
-        #header-container {
-            max-height: 65px; /* Reduced from 80px */
-            transform: translateY(0) !important;
-			overflow: hidden; /* Prevents content from expanding height */
-        }
-        .header {
-            flex-direction: column;
-            text-align: center;
-            align-items: center;
-            padding: 25px 0px; /* Reduced padding to fit smaller height */
-        }
-        .title-block, .email-block {
-            text-align: center;
-            width: 100%;
-        }
-        .title-name {
-            font-size: 1.2em;
-        }
-        .subtitle {
-            font-size: 0.8em;
-        }
-        .email-block {
-            display: none;
-        }
-        .menu-toggle {
-            display: block;
-            position: absolute;
-            right: 10px; /* Adjusted for tighter spacing */
-            top: 18px;  /* Centered vertically in 60px height */
-        }
-        .mobile-nav.active {
-            display: flex;
-        }
-        body {
-            font-size: 0.9em;
-        }
-        .section-title {
-            font-size: 1.5em;
-        }
-    }
+		.header {
+			max-width: 990px;
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			padding: 10px 20px;
+			box-sizing: border-box;
+			align-items: center;
+			position: relative; /* Ensure toggle positions relative to header */
+		}
 
         .title-block {
             display: flex;
@@ -141,6 +99,7 @@
 
         .email-block {
             text-align: right;
+			padding-right: 50px;
         }
 
 		.email-link {
@@ -159,79 +118,98 @@
 			opacity: 0.7; /* Subtle hover effect for the image */
 		}
 
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5em;
-            cursor: pointer;
-        }
+.menu-toggle {
+    display: block; /* Always visible */
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    position: absolute;
+    right: 20px; /* Adjusted for consistency */
+    top: 15px; /* Centered in 50px header height */
+    z-index: 1001;
+	margin-top: -8px;
+}
 
-        .mobile-nav {
-            position: fixed;
-            top: 60px;
-            left: 0;
-            width: 100%;
-            background: #000;
-            flex-direction: column;
-            z-index: 999;
-            display: none;
-        }
+.mobile-nav {
+    position: fixed;
+    top: 50px; /* Matches #header-container height */
+    right: 0;
+    width: 200px; /* Constrained width from previous request */
+    background: #000;
+    flex-direction: column;
+    z-index: 999;
+    display: none; /* Hidden by default */
+    text-align: left;
+    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.5);
+}
 
-        .mobile-nav a {
-            padding: 10px;
-            display: block;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            transition: background 0.3s;
-        }
+.mobile-nav.active {
+    display: flex; /* Shown when active */
+}
 
-        .mobile-nav a:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
+.mobile-nav a {
+    padding: 10px 15px;
+    display: block;
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+}
 
-        @media (max-width: 600px) {
-            #header-container {
-                height: 80px;
-                transform: translateY(0) !important;
-            }
-            .header {
-                flex-direction: column;
-                text-align: center;
-                align-items: center;
-            }
-            .title-block,
-            .email-block {
-                text-align: center;
-                width: 100%;
-            }
-            .title-name {
-                font-size: 1.2em;
-            }
-            .subtitle {
-                font-size: 0.8em;
-            }
-            .email-block {
-                display: none;
-            }
-            .menu-toggle {
-                display: block;
-                position: absolute;
-                right: 20px;
-                top: 20px;
-            }
-            .mobile-nav.active {
-                display: flex;
-            }
-            body {
-                font-size: 0.9em;
-            }
-            .section-title {
-                font-size: 1.5em;
-            }
-        }
+.mobile-nav a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+		@media (max-width: 600px) {
+			#header-container {
+				max-height: 65px;
+				overflow: hidden;
+				transform: translateY(0) !important;
+			}
+			.header {
+				flex-direction: column;
+				text-align: center;
+				align-items: center;
+				padding: 25px 0px;
+			}
+			.title-block, .email-block {
+				text-align: center;
+				width: 100%;
+			}
+			.title-name {
+				font-size: 1.2em;
+			}
+			.subtitle {
+				font-size: 0.8em;
+			}
+			.email-block {
+				display: none;
+			}
+			.menu-toggle {
+				display: block;
+				position: absolute;
+				right: 10px;
+				top: 18px;
+				background: none;
+				border: none;
+				color: white;
+				font-size: 1.5em;
+				cursor: pointer;
+				z-index: 1001; /* Ensure it’s above the dropdown */
+			}
+			.mobile-nav {
+				top: 65px; /* Position below header */
+				right: 0; /* Align with toggle button */
+				width: 200px; /* Constrain width */
+				left: auto; /* Override any left positioning */
+			}
+			.mobile-nav.active {
+				display: flex;
+			}
+		}
 
         #links-container, #gallery-container, #about-section, #shipped-games, #book-publications, #magazine-other, #resume {
             position: relative;
@@ -248,6 +226,7 @@
 			width: 100%;
 			padding: 0 10px; /* Removed top padding, kept side padding */
 			padding-top: 15px;
+			padding-bottom: 15px;
 			text-align: center;
 			z-index: 2;
 			overflow: hidden;
@@ -447,16 +426,16 @@
 
 /* Media Query Adjustments */
 @media (max-width: 600px) {
-    .gallery {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
-    .gallery-item {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-}
+		.gallery {
+			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		}
+		.gallery-item {
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+						 }
 
 
         .project-y-viewer {
@@ -1391,20 +1370,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    document.addEventListener('click', function(event) {
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-image');
-        if (event.target === lightbox && event.target !== lightboxImg) {
-            closeLightbox();
-        }
-        const menuToggle = document.querySelector('.menu-toggle');
-        const mobileNav = document.querySelector('.mobile-nav');
-        if (event.target === menuToggle) {
-            mobileNav.classList.toggle('active');
-        } else if (!mobileNav.contains(event.target) && mobileNav.classList.contains('active')) {
-            mobileNav.classList.remove('active');
-        }
-    });
+		document.addEventListener('DOMContentLoaded', function() {
+			const menuToggle = document.querySelector('.menu-toggle');
+			const mobileNav = document.querySelector('.mobile-nav');
+
+			if (!menuToggle || !mobileNav) {
+				console.error('Menu toggle or mobile nav not found!');
+				return;
+			}
+
+			document.addEventListener('click', function(event) {
+				console.log('Clicked element:', event.target); // Debug which element is clicked
+				if (event.target === menuToggle) {
+					console.log('Toggling mobile nav');
+					mobileNav.classList.toggle('active');
+				} else if (!mobileNav.contains(event.target) && mobileNav.classList.contains('active')) {
+					console.log('Closing mobile nav');
+					mobileNav.classList.remove('active');
+				}
+			});
+		});
 	
 	// Hide spinner when page is fully loaded
         window.onload = () => {
@@ -1422,30 +1407,29 @@ document.addEventListener('DOMContentLoaded', function() {
 			</div>
 
     <main class="wrapper">
-        <div id="header-container">
-            <div class="header">
-                <div class="title-block">
-                    <p class="title-name">DARREN BACON</p>
-                  
-                </div>
+		<div id="header-container">
+			<div class="header">
+				<div class="title-block">
+					<p class="title-name">DARREN BACON</p>
+				</div>
 				<div class="email-block">
 					<a href="mailto:darren@darrenbacon.com" target="_blank" class="email-link">
 						<img src="images/email-icon.png" alt="Email Me" class="email-icon">
 					</a>
 				</div>
-                <button class="menu-toggle" aria-label="Toggle navigation menu">☰</button>
-            </div>
-            <nav class="mobile-nav">
-                <a href="#links-container">Links</a>
-                <a href="#gallery-container">Samples</a>
-                <a href="#about-section">About</a>
-                <a href="#shipped-games">Shipped Games</a>
-                <a href="#book-publications">Book Publications</a>
-                <a href="#magazine-other">Magazine / Online</a>
-                <a href="#resume">Experience</a>
-                <a href="mailto:darren@darrenbacon.com" target="_blank">📩 Email Me</a>
-            </nav>
-        </div>
+				<button class="menu-toggle" aria-label="Toggle navigation menu">☰</button>
+			</div>
+		</div>
+		<nav class="mobile-nav">
+			<a href="#links-container">Links</a>
+			<a href="#gallery-container">Samples</a>
+			<a href="#about-section">About</a>
+			<a href="#shipped-games">Shipped Games</a>
+			<a href="#book-publications">Book Publications</a>
+			<a href="#magazine-other">Magazine / Online</a>
+			<a href="#resume">Experience</a>
+			<a href="mailto:darren@darrenbacon.com" target="_blank">📩 Email Me</a>
+		</nav>
 
 
 
