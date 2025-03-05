@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta name="description" content="Darren Bacon, Art Director (Game Dev) and Concept Artist. Explore my digital artwork for game development.">
     <meta name="keywords" content="Darren Bacon, Art Director, Game Developer, Concept Artist, Unreal Engine, Digital Art, Art, Game Dev, Concept Art, Halo, Destiny, 343 Industries, Bungie">
     <meta name="author" content="Darren Bacon">
@@ -13,9 +13,10 @@
     <meta property="og:image" content="https://darrenbacon.com/images/profile.jpg">
     <meta property="og:url" content="https://darrebacon.com">
     <meta property="og:type" content="website">
-    <title>Darren Bacon | Art Director & Concept Artist</title>
-     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
-
+    <title>Darren Bacon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.js"></script>
+</head>
 
     <style>
         html {
@@ -48,31 +49,74 @@
             align-items: center;
         }
 
-        #header-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            transition: transform 0.3s ease-in-out;
-            background: #000;
-            color: #FFF;
-            font-weight: bold;
-            height: 75px;
-            display: flex;
-            justify-content: center;
-            box-sizing: border-box;
-        }
+#header-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        transition: transform 0.3s ease-in-out;
+        background: #000;
+        color: #FFF;
+        font-weight: bold;
+        height: 50px; /* Default height */
+        display: flex;
+        justify-content: center;
+        box-sizing: border-box;
+    }
 
-        .header {
-            max-width: 990px;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 20px;
-            box-sizing: border-box;
-            align-items: center;
+    .header {
+        max-width: 990px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 20px;
+        box-sizing: border-box;
+        align-items: center;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 600px) {
+        #header-container {
+            max-height: 65px; /* Reduced from 80px */
+            transform: translateY(0) !important;
+			overflow: hidden; /* Prevents content from expanding height */
         }
+        .header {
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            padding: 25px 0px; /* Reduced padding to fit smaller height */
+        }
+        .title-block, .email-block {
+            text-align: center;
+            width: 100%;
+        }
+        .title-name {
+            font-size: 1.2em;
+        }
+        .subtitle {
+            font-size: 0.8em;
+        }
+        .email-block {
+            display: none;
+        }
+        .menu-toggle {
+            display: block;
+            position: absolute;
+            right: 10px; /* Adjusted for tighter spacing */
+            top: 18px;  /* Centered vertically in 60px height */
+        }
+        .mobile-nav.active {
+            display: flex;
+        }
+        body {
+            font-size: 0.9em;
+        }
+        .section-title {
+            font-size: 1.5em;
+        }
+    }
 
         .title-block {
             display: flex;
@@ -81,7 +125,7 @@
         }
 
         .title-name {
-            font-size: clamp(1.5em, 4vw, 1.5em);
+            font-size: clamp(2em, 5vw, 2em);
             font-weight: bold;
             margin: 0;
             color: white;
@@ -99,16 +143,21 @@
             text-align: right;
         }
 
-        .email-link {
-            text-decoration: none;
-            color: white;
-            font-size: 0.9em;
-            transition: color 0.3s ease-in-out;
-        }
+		.email-link {
+			text-decoration: none;
+			transition: opacity 0.3s ease-in-out; /* Changed from color to opacity for image */
+			display: inline-block; /* Ensures the link wraps the image properly */
+		}
 
-        .email-link:hover {
-            color: #4db6ac;
-        }
+		.email-icon {
+			width: 40px; /* Adjust size as needed */
+			height: 40px; /* Maintain aspect ratio or set explicitly */
+			vertical-align: middle; /* Aligns with surrounding elements */
+		}
+
+		.email-link:hover .email-icon {
+			opacity: 0.7; /* Subtle hover effect for the image */
+		}
 
         .menu-toggle {
             display: none;
@@ -234,6 +283,7 @@
             margin: 0 auto;
             list-style: none;
             max-width: 800px;
+			padding-bottom: 25px;
         }
 
         .link-list li {
@@ -265,7 +315,7 @@
             align-items: center;
             text-align: center;
             width: 100%;
-            max-width: 800px;
+            max-width: 990px;
             margin: 0 auto;
         }
 
@@ -289,27 +339,6 @@
 		}
 
 
-		.gallery-tabs button {
-			background: #222;
-			color: #fff;
-			padding: 10px 20px;
-			border: 2px solid #444;
-			border-radius: 5px;
-			font-size: 16px;
-			cursor: pointer;
-			transition: background 0.3s, color 0.3s, transform 0.2s;
-			backdrop-filter: blur(5px);
-			width: 120px;
-			text-align: center;
-		}
-
-		.gallery-tabs button:hover,
-		.gallery-tabs button.active {
-			background: #444; /* Keep background change */
-			color: #fff;      /* Keep color change */
-			border-color: #666; /* Keep border change */
-			/* Removed font-weight: bold */
-		}
 
 
 /* Parent Containers */
@@ -497,7 +526,7 @@
     justify-content: center;
     gap: 10px;
     width: 100%;
-    max-width: 800px;
+    max-width: 990px;
 }
 
 .gallery-category button {
@@ -505,25 +534,28 @@
     max-width: 180px;
     background: #222;
     color: white;
-    padding: 10px 20px;
+    padding: 0px 20px;
     border: 2px solid #444;
-    border-radius: 5px;
     font-size: 16px;
-	font-family: 'Abel', sans-serif; /* Add this line */
+    font-family: 'Abel', sans-serif;
     cursor: pointer;
     transition: background 0.3s, color 0.3s, transform 0.2s;
     text-align: center;
     backdrop-filter: blur(5px);
-    margin: 0 40px; /* Adds 15px spacing on both sides */
+    margin: 0 40px;
+
 }
 
+.gallery-category button:hover {
+    background: #357f78; /* Dark teal for hover */
+    color: #fff;
+    border-color: #4db6ac; /* Matches your subtitle teal */
+}
 
-.gallery-category button:hover,
 .gallery-category button.active {
-    background: #444; /* Keep background change */
-    color: #fff;      /* Keep color */
-    border-color: #666; /* Keep border change */
-    /* Removed font-weight: bold */
+    background: #555; /* Medium gray for active */
+    color: #fff;
+    border-color: #777; /* Slightly lighter gray border */
 }
 
 .gallery-tabs {
@@ -541,23 +573,26 @@
 .gallery-tabs button {
     background: #222;
     color: #fff;
-    padding: 10px 20px;
+    padding: 0px 20px;
     border: 2px solid #444;
-    border-radius: 5px;
     font-size: 16px;
     font-family: 'Abel', sans-serif;
     cursor: pointer;
     transition: background 0.3s, color 0.3s, transform 0.2s;
     backdrop-filter: blur(5px);
-    width: 120px;
+    min-width: 120px;
     text-align: center;
 }
 
-
-.gallery-tabs button:hover,
+.gallery-tabs button:hover {
+    background: #357f78; /* Dark teal for hover */
+    color: #fff;
+    border-color: #4db6ac; /* Matches your subtitle teal */
+}
 .gallery-tabs button.active {
-    background: #444; /* Keep background change */
-    color: #fff;      /* Keep color */
+    background: #fff; /* Keep background change */
+    color: #000;      /* Keep color */
+	font-weight: bold;
     border-color: #666; /* Keep border change */
     /* Removed font-weight: bold */
 }
@@ -773,6 +808,40 @@
             background: #4db6ac;
             border-radius: 5px;
         }
+		
+			/* Add loading spinner styles */
+		.loading-spinner {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(18, 18, 18, 0.9); /* Matches #121212 with opacity */
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			z-index: 2000; /* Above everything else */
+		}
+
+		.spinner {
+			width: 50px;
+			height: 50px;
+			border: 5px solid #4db6ac; /* Your teal accent */
+			border-top: 5px solid transparent; /* Creates the spinning effect */
+			border-radius: 50%;
+			animation: spin 1s linear infinite;
+		}
+
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+
+		/* Hide spinner when loaded */
+		.loading-spinner.hidden {
+			display: none;
+		}
+		
     </style>
 
     <!-- Add PDF.js via CDN -->
@@ -1336,22 +1405,35 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileNav.classList.remove('active');
         }
     });
+	
+	// Hide spinner when page is fully loaded
+        window.onload = () => {
+            document.getElementById('loading-spinner').classList.add('hidden');
+        };
+		
 </script>
 
 </head>
 
 <body>
+
+		<div id="loading-spinner" class="loading-spinner">
+				<div class="spinner"></div>
+			</div>
+
     <main class="wrapper">
         <div id="header-container">
             <div class="header">
                 <div class="title-block">
                     <p class="title-name">DARREN BACON</p>
-                    <p class="subtitle">Art Director (Game Dev) / Concept Artist</p>
+                  
                 </div>
-                <div class="email-block">
-                    <a href="mailto:darren@darrenbacon.com" target="_blank" class="email-link">Email Me: darren@darrenbacon.com</a>
-                </div>
-                <button class="menu-toggle">☰</button>
+				<div class="email-block">
+					<a href="mailto:darren@darrenbacon.com" target="_blank" class="email-link">
+						<img src="images/email-icon.png" alt="Email Me" class="email-icon">
+					</a>
+				</div>
+                <button class="menu-toggle" aria-label="Toggle navigation menu">☰</button>
             </div>
             <nav class="mobile-nav">
                 <a href="#links-container">Links</a>
@@ -1369,7 +1451,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		<div id="gallery-container">
 			<div class="gallery-header">
-				<h2 class="section-title">Work:</h2>
+				
 				<div class="gallery-category">
 					<button id="concept-samples-btn" class="active" onclick="switchGallery('concept')">Concept Samples</button>
 					<button id="art-direction-samples-btn" onclick="switchGallery('art-direction')">Art Direction Samples</button>
