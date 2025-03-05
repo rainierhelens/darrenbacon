@@ -288,18 +288,7 @@
 			z-index: 1; /* Ensure tabs stay above the gradient */
 		}
 
-		.gallery-tabs::before {
-			content: '';
-			position: absolute;
-			top: 0%;
-			left: 50%;
-			margin-top: -110px;
-			transform: translate(-50%, -50%);
-			width: 100vw; /* Full viewport width */
-			height: 30px; /* Adjust height to cover tabs */
-			background: radial-gradient(circle at center, rgba(77, 182, 172, 0.2) 0%, rgba(18, 18, 18, 0.5) 60%, transparent 100%);
-			z-index: -1; /* Place behind the tabs */
-		}
+
 		.gallery-tabs button {
 			background: #222;
 			color: #fff;
@@ -333,6 +322,10 @@
     z-index: 2;
     overflow: hidden;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#gallery-container .section-title {
+    margin-top: 15px; /* Adjust this value to move "Work:" down */
 }
 
 .gallery-wrapper {
@@ -498,12 +491,13 @@
         }
 
 .gallery-category {
+    position: relative;
+    top: 0px; /* Moves buttons up 20px */
     display: flex;
     justify-content: center;
     gap: 10px;
     width: 100%;
     max-width: 800px;
-    margin: 10px auto;
 }
 
 .gallery-category button {
@@ -515,6 +509,7 @@
     border: 2px solid #444;
     border-radius: 5px;
     font-size: 16px;
+	font-family: 'Abel', sans-serif; /* Add this line */
     cursor: pointer;
     transition: background 0.3s, color 0.3s, transform 0.2s;
     text-align: center;
