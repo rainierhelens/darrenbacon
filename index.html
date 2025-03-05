@@ -14,7 +14,8 @@
     <meta property="og:url" content="https://darrebacon.com">
     <meta property="og:type" content="website">
     <title>Darren Bacon | Art Director & Concept Artist</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+
 
     <style>
         html {
@@ -22,7 +23,7 @@
         }
 
         body {
-            font-family: "Roboto", "Arial", "Helvetica", sans-serif;
+            font-family: 'Abel', sans-serif;
             background-color: #121212;
             color: white;
             margin: 0;
@@ -57,14 +58,14 @@
             background: #000;
             color: #FFF;
             font-weight: bold;
-            height: 60px;
+            height: 75px;
             display: flex;
             justify-content: center;
             box-sizing: border-box;
         }
 
         .header {
-            max-width: 800px;
+            max-width: 990px;
             width: 100%;
             display: flex;
             justify-content: space-between;
@@ -193,10 +194,17 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        #links-container {
-            min-height: 225px;
-            padding-top: 100px;
-        }
+		#links-container {
+			position: relative;
+			width: 100%;
+			padding: 0 10px; /* Removed top padding, kept side padding */
+			padding-top: 15px;
+			text-align: center;
+			z-index: 2;
+			overflow: hidden;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+			min-height: 225px;
+		}
 
         #gallery-container {
             min-height: auto;
@@ -276,8 +284,22 @@
 			max-width: 900px;
 			margin: 0 auto;
 			box-sizing: border-box;
+			position: relative;
+			z-index: 1; /* Ensure tabs stay above the gradient */
 		}
 
+		.gallery-tabs::before {
+			content: '';
+			position: absolute;
+			top: 0%;
+			left: 50%;
+			margin-top: -110px;
+			transform: translate(-50%, -50%);
+			width: 100vw; /* Full viewport width */
+			height: 30px; /* Adjust height to cover tabs */
+			background: radial-gradient(circle at center, rgba(77, 182, 172, 0.2) 0%, rgba(18, 18, 18, 0.5) 60%, transparent 100%);
+			z-index: -1; /* Place behind the tabs */
+		}
 		.gallery-tabs button {
 			background: #222;
 			color: #fff;
@@ -300,64 +322,120 @@
 			/* Removed font-weight: bold */
 		}
 
-        .gallery-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            width: 100%;
-            padding: 20px 0;
-            box-sizing: border-box;
-        }
 
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 5px;
-            width: 100%;
-            max-width: 990px;
-            justify-items: center;
-            align-content: center;
-            box-sizing: border-box;
-        }
+/* Parent Containers */
+#gallery-container {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    margin-top: 75px; /* Added 100px top margin */
+    text-align: center;
+    z-index: 2;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
 
-        .gallery-item {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            border-radius: 5px;
-            transition: transform 0.2s;
-        }
+.gallery-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 0;
+	margin-top: 15px; /* Added 20px top margin */
+    box-sizing: border-box;
+}
 
-        .gallery-item.loaded {
-            opacity: 1;
-        }
+/* Standard Gallery (Concept Samples) */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 0;
+    width: 100%;
+    justify-items: center;
+    align-content: start;
+    box-sizing: border-box;
+    margin: 0;
+}
 
-        .gallery-item:hover {
-            transform: scale(1.05);
-        }
+.gallery a {
+    display: block;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+    overflow: hidden; /* Clip zoomed image */
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1; /* Enforce square shape */
+}
 
-        .project-x-gallery {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 990px;
-            gap: 20px;
-            padding: 20px 0;
-        }
+.gallery-item {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    transition: width 0.2s ease-in-out, height 0.2s ease-in-out, filter 0.2s ease-in-out; /* Added filter transition */
+    margin: 0;
+    padding: 0;
+    display: block;
+}
 
-        .project-x-gallery img {
-            width: 990px;
-            height: auto;
-            object-fit: cover;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
+.gallery-item.loaded {
+    opacity: 1;
+}
 
-        .project-x-gallery img:hover {
-            transform: scale(1.02);
-        }
+.gallery-item:hover {
+    width: 125%; /* Zoom in by 10% */
+    height: 125%;
+    filter: brightness(0.5); /* Darken by reducing brightness to 80% */
+}
+
+/* Project X Gallery (Halo Infinite) */
+.project-x-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+	gap: 5px; /* Add slight spacing between images (adjust as needed) */
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    max-width: 990px; /* Constrain container to 990px */
+    margin-left: auto; /* Center the container */
+    margin-right: auto; /* Center the container */
+}
+
+.project-x-gallery img {
+    width: 100%;
+    max-width: 990px; /* Limit image width to 990px */
+    height: auto;
+    object-fit: cover;
+    border-radius: 0;
+    cursor: pointer;
+    transition: width 0.2s ease-in-out, height 0.2s ease-in-out, filter 0.2s ease-in-out;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+.project-x-gallery img:hover {
+    width: 125%;
+    height: 125%;
+
+}
+
+/* Media Query Adjustments */
+@media (max-width: 600px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    .gallery-item {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+}
+
 
         .project-y-viewer {
             width: 100%;
@@ -409,22 +487,7 @@
             }
         }
 
-        @media (max-width: 600px) {
-            .gallery {
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            }
-            .gallery-item {
-                width: 100px;
-                height: 100px;
-            }
-            .gallery-tabs {
-                gap: 5px;
-            }
-            .gallery-tabs button {
-                padding: 8px 10px;
-                font-size: 12px;
-            }
-        }
+
 
         .gallery-section {
             display: none;
@@ -456,7 +519,9 @@
     transition: background 0.3s, color 0.3s, transform 0.2s;
     text-align: center;
     backdrop-filter: blur(5px);
+    margin: 0 40px; /* Adds 15px spacing on both sides */
 }
+
 
 .gallery-category button:hover,
 .gallery-category button.active {
@@ -485,12 +550,14 @@
     border: 2px solid #444;
     border-radius: 5px;
     font-size: 16px;
+    font-family: 'Abel', sans-serif;
     cursor: pointer;
     transition: background 0.3s, color 0.3s, transform 0.2s;
     backdrop-filter: blur(5px);
     width: 120px;
     text-align: center;
 }
+
 
 .gallery-tabs button:hover,
 .gallery-tabs button.active {
@@ -1209,13 +1276,21 @@
 		if (type === 'concept') {
 			document.getElementById('concept-gallery-section').classList.add('active');
 			document.getElementById('concept-samples-btn').classList.add('active');
-			loadGallery('DISNEY'); // Default to DISNEY under Concept Samples
+			loadGallery('HALO'); // Default to HALO
 		} else {
 			document.getElementById('art-direction-gallery-section').classList.add('active');
 			document.getElementById('art-direction-samples-btn').classList.add('active');
 			loadProjectXGallery(); // Default to Halo Infinite under Art Direction
 		}
 	}
+
+	document.addEventListener('DOMContentLoaded', function() {
+		switchGallery('concept'); // Loads HALO by default
+	});
+
+document.addEventListener('DOMContentLoaded', function() {
+    switchGallery('concept'); // This will now load HALO by default
+});
 
     document.addEventListener('DOMContentLoaded', function() {
         switchGallery('concept');
@@ -1275,11 +1350,11 @@
         <div id="header-container">
             <div class="header">
                 <div class="title-block">
-                    <p class="title-name">Darren Bacon</p>
+                    <p class="title-name">DARREN BACON</p>
                     <p class="subtitle">Art Director (Game Dev) / Concept Artist</p>
                 </div>
                 <div class="email-block">
-                    <a href="mailto:darren@darrenbacon.com" target="_blank" class="email-link">📩 Email Me: darren@darrenbacon.com</a>
+                    <a href="mailto:darren@darrenbacon.com" target="_blank" class="email-link">Email Me: darren@darrenbacon.com</a>
                 </div>
                 <button class="menu-toggle">☰</button>
             </div>
@@ -1295,35 +1370,23 @@
             </nav>
         </div>
 
-        <div id="links-container">
-            <h1 class="section-title">My Links:</h1>
-            <ul class="link-list">
-                <li><a href="https://www.instagram.com/artofbacon/" target="_blank">Instagram</a></li>
-                <li><a href="https://www.artstation.com/darrenbacon" target="_blank">ArtStation</a></li>
-                <li><a href="https://x.com/artofbacon" target="_blank">X</a></li>
-                <li><a href="https://www.linkedin.com/in/darrenbacon/" target="_blank">LinkedIn</a></li>
-                <li><a href="https://www.youtube.com/c/ConceptDepartment" target="_blank">YouTube</a></li>
-                <li><a href="https://www.tiktok.com/@artofbacon" target="_blank">TikTok</a></li>
-                <li><a href="https://baconsbytes.tumblr.com/" target="_blank">Tumblr</a></li>
-                <li><a href="https://www.threads.net/@artofbacon" target="_blank">Threads</a></li>
-            </ul>
-        </div>
 
-        <div id="gallery-container">
-            <div class="gallery-header">
-                <h2 class="section-title">Gallery:</h2>
-                <div class="gallery-category">
-                    <button id="concept-samples-btn" class="active" onclick="switchGallery('concept')">Concept Samples</button>
-                    <button id="art-direction-samples-btn" onclick="switchGallery('art-direction')">Art Direction Samples</button>
-                </div>
-            </div>
+
+		<div id="gallery-container">
+			<div class="gallery-header">
+				<h2 class="section-title">Work:</h2>
+				<div class="gallery-category">
+					<button id="concept-samples-btn" class="active" onclick="switchGallery('concept')">Concept Samples</button>
+					<button id="art-direction-samples-btn" onclick="switchGallery('art-direction')">Art Direction Samples</button>
+				</div>
+			</div>
 
 			<div id="concept-gallery-section" class="gallery-section active">
 				<div class="gallery-tabs">
-					<button data-type="DISNEY" onclick="loadGallery('DISNEY')" title="View Disney concept art">DISNEY</button>
-					<button data-type="DEADROP" onclick="loadGallery('DEADROP')" title="View DEADROP concept art">DEADROP</button>
 					<button data-type="HALO" onclick="loadGallery('HALO')" title="View Halo concept art">HALO</button>
+					<button data-type="DEADROP" onclick="loadGallery('DEADROP')" title="View DEADROP concept art">DEADROP</button>
 					<button data-type="DESTINY" onclick="loadGallery('DESTINY')" title="View Destiny concept art">DESTINY</button>
+					<button data-type="DISNEY" onclick="loadGallery('DISNEY')" title="View Disney concept art">DISNEY</button>
 					<button data-type="OTHER" onclick="loadGallery('OTHER')" title="View other concept art">OTHER</button>
 				</div>
 				<div class="gallery-wrapper">
@@ -1331,6 +1394,7 @@
 				</div>
 			</div>
 
+			<!-- Rest of the gallery section remains unchanged -->
 			<div id="art-direction-gallery-section" class="gallery-section">
 				<div class="gallery-tabs">
 					<button data-type="HALO_INFINITE" onclick="loadProjectXGallery()" title="View Halo Infinite">Halo Infinite</button>
@@ -1343,7 +1407,7 @@
 					<div class="gallery" id="standard-gallery"></div>
 				</div>
 			</div>
-        </div>
+		</div>
 
         <div id="lightbox" class="lightbox">
             <img id="lightbox-image" class="lightbox-content">
@@ -1691,6 +1755,20 @@
                     <p><strong>Art Institute of Seattle</strong> - Associates of Applied Arts in Industrial Design Technology</p>
                 </div>
             </div>
+        </div>
+
+        <div id="links-container">
+            <h1 class="section-title">My Links:</h1>
+            <ul class="link-list">
+                <li><a href="https://www.instagram.com/artofbacon/" target="_blank">Instagram</a></li>
+                <li><a href="https://www.artstation.com/darrenbacon" target="_blank">ArtStation</a></li>
+                <li><a href="https://x.com/artofbacon" target="_blank">X</a></li>
+                <li><a href="https://www.linkedin.com/in/darrenbacon/" target="_blank">LinkedIn</a></li>
+                <li><a href="https://www.youtube.com/c/ConceptDepartment" target="_blank">YouTube</a></li>
+                <li><a href="https://www.tiktok.com/@artofbacon" target="_blank">TikTok</a></li>
+                <li><a href="https://baconsbytes.tumblr.com/" target="_blank">Tumblr</a></li>
+                <li><a href="https://www.threads.net/@artofbacon" target="_blank">Threads</a></li>
+            </ul>
         </div>
 
         <button id="backToTop" onclick="scrollToTop()">↑ Top</button>
