@@ -1,0 +1,203 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Abel', sans-serif;
+    background-color: #121212;
+    color: white;
+    margin: 0;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    font-size: 1em;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+.wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#links-container, #gallery-container, #about-section, #shipped-games, #book-publications, #magazine-other, #resume {
+    position: relative;
+    width: 100%;
+    padding: 20px 10px;
+    text-align: center;
+    z-index: 2;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#links-container {
+    position: relative;
+    width: 100%;
+    padding: 0 10px; /* Removed top padding, kept side padding */
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    z-index: 2;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: 225px;
+}
+
+#gallery-container {
+    min-height: auto;
+}
+
+#about-section, #shipped-games, #book-publications, #magazine-other {
+    min-height: 250px;
+}
+
+#resume {
+    min-height: 350px;
+}
+
+.section-title {
+    font-size: 1.4em;
+    color: white;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.link-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 0;
+    margin: 0 auto;
+    list-style: none;
+    max-width: 800px;
+    padding-bottom: 25px;
+}
+
+.link-list li {
+    display: inline-block;
+}
+
+.link-list a {
+    display: inline-block;
+    text-decoration: none;
+    background: #222;
+    color: white;
+    padding: 10px 20px;
+    border: 2px solid #444;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s, transform 0.3s ease-in-out;
+    backdrop-filter: blur(5px);
+    width: 120px;
+    text-align: center;
+    flex: 1 1 auto;
+}
+
+.link-list a:hover {
+    background: #444;
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    #header-container {
+        max-height: 65px;
+        overflow: hidden;
+        transform: translateY(0) !important;
+    }
+    .header {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        padding: 25px 0px;
+    }
+    .title-block, .email-block {
+        text-align: center;
+        width: 100%;
+    }
+    .title-name {
+        font-size: 1.2rem;
+    }
+    .subtitle {
+        font-size: 0.8rem;
+    }
+    .email-block {
+        display: none;
+    }
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        right: 10px;
+        top: 18px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5em;
+        cursor: pointer;
+        z-index: 1001; /* Ensure it’s above the dropdown */
+    }
+    .mobile-nav {
+        top: 65px; /* Position below header */
+        right: 0; /* Align with toggle button */
+        width: 200px; /* Constrain width */
+        left: auto; /* Override any left positioning */
+    }
+    .mobile-nav.active {
+        display: flex;
+    }
+}
+/* Password Modal */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 500px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
