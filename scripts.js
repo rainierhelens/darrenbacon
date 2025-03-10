@@ -48,7 +48,7 @@ const galleries = {
     "images/disney/MNM_rocket_crash1f.jpg",
 
     "images/disney/FILE58981.jpg",
-    "images/disney/FILE58958.jpg"
+    "images/disney/FILE58958.jpg",
     ],
     'DEADROP': [
         "images/deadrop/deadrop1.jpg",
@@ -138,7 +138,7 @@ const galleries = {
         "images/halo/halo42.jpg",
         "images/halo/halo43.jpg",
         "images/halo/halo44.jpg",
-        "images/halo/halo45.jpg"
+        "images/halo/halo45.jpg",
     ],
     'DESTINY': [
         "images/destiny/destiny1.jpg",
@@ -171,7 +171,7 @@ const galleries = {
         "images/destiny/destiny28.jpg",
         "images/destiny/destiny29.jpg",
         "images/destiny/destiny30.jpg",
-        "images/destiny/tumblr_p2gd6iTRSc1rqvckio1_1280.jpg"
+        "images/destiny/tumblr_p2gd6iTRSc1rqvckio1_1280.jpg",
     ],
     'OTHER': [
         "images/other/dbacon_BEM_mad_max-1E_onesheet4k.jpg",
@@ -209,7 +209,7 @@ const galleries = {
         "images/other/RR_mWARDproj_sketches01-a-sm.jpg",
         "images/other/RR_mWARDproj_sketches02-c.jpg",
         "images/other/RR_reapers_05a.jpg",
-        "images/other/RR_dbacon_Reaping_Angel_paint1a.jpg"
+        "images/other/RR_dbacon_Reaping_Angel_paint1a.jpg",
       
     ],
     'HALO_INFINITE': [
@@ -244,33 +244,35 @@ const galleries = {
         "images/ad-halo/halo-ad-23.jpg",
         "images/ad-halo/halo-ad-24.jpg",
         "images/ad-halo/halo-ad-25.jpg",
-        "images/ad-halo/halo-ad-26.jpg"
+        "images/ad-halo/halo-ad-26.jpg",
     ],
     'HALO_STYLE_GUIDE': [
-        "images/halo-styleguide/Infinite_Art_Index_v0.6b.pdf"
+        "images/halo-styleguide/Infinite_Art_Index_v0.6b.pdf",
     ],
     'SEASONAL_VISION': [
-        "images/seasonal-vision/seasonal_theme_deck-1g.pdf"
+        "images/seasonal-vision/seasonal_theme_deck-1g.pdf",
     ]
 };
 
-let currentGallery = 'DEADROP';
+let currentGallery = 'HALO';
 let currentImageIndex = 0;
 let lastScrollY = 0;
 let pdfDoc = null; // PDF document object
-let currentPageNum = 1; // Current page for Halo Style Guide
+let haloStyleGuidePageNum = 1; // Current page for Halo Style Guide
+let seasonalVisionPageNum = 1; // Current page for Seasonal Vision
 let currentScale = 2.0; // Fixed scale for PDF view
 
-function scrollToTop() {
+const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+};
 
-function loadGallery(type) {
+const loadGallery = (type) => {
     currentGallery = type;
     const projectXGallery = document.getElementById('project-x-gallery');
     const projectYViewer = document.getElementById('project-y-viewer');
     const standardGallery = document.getElementById('standard-gallery');
     const conceptGallery = document.getElementById('concept-gallery');
+    const gameplaySection = document.getElementById('gameplay-section');
 
     const isConceptActive = document.getElementById('concept-gallery-section').classList.contains('active');
     const targetGallery = isConceptActive ? conceptGallery : standardGallery;
@@ -279,6 +281,7 @@ function loadGallery(type) {
         projectXGallery.style.display = 'none';
         projectYViewer.style.display = 'none';
         standardGallery.style.display = 'grid';
+        gameplaySection.style.display = 'none';
         if (type === 'SEASONAL_VISION') {
             loadSeasonalVisionViewer();
             return;
@@ -288,6 +291,7 @@ function loadGallery(type) {
         projectYViewer.style.display = 'none';
         standardGallery.style.display = 'none';
         conceptGallery.style.display = 'grid';
+        gameplaySection.style.display = 'none';
     }
 
     targetGallery.innerHTML = '';
@@ -311,17 +315,22 @@ function loadGallery(type) {
         link.appendChild(img);
         targetGallery.appendChild(link);
     });
+
+    // Update the active state of the main gallery buttons
+    updateMainGalleryButtonState();
 }
 
-function loadProjectXGallery() {
+const loadProjectXGallery = () => {
     currentGallery = 'HALO_INFINITE';
     const projectXGallery = document.getElementById('project-x-gallery');
     const projectYViewer = document.getElementById('project-y-viewer');
     const standardGallery = document.getElementById('standard-gallery');
+    const gameplaySection = document.getElementById('gameplay-section');
     
     projectXGallery.style.display = 'flex';
     projectYViewer.style.display = 'none';
     standardGallery.style.display = 'none';
+    gameplaySection.style.display = 'none';
     
     projectXGallery.innerHTML = '';
     
@@ -336,17 +345,22 @@ function loadProjectXGallery() {
         img.onclick = () => openLightbox(index);
         projectXGallery.appendChild(img);
     });
+
+    // Update the active state of the main gallery buttons
+    updateMainGalleryButtonState();
 }
 
-function loadProjectYViewer(type) {
+const loadProjectYViewer = (type) => {
     currentGallery = type;
     const projectXGallery = document.getElementById('project-x-gallery');
     const projectYViewer = document.getElementById('project-y-viewer');
     const standardGallery = document.getElementById('standard-gallery');
+    const gameplaySection = document.getElementById('gameplay-section');
     
     projectXGallery.style.display = 'none';
     projectYViewer.style.display = 'block';
     standardGallery.style.display = 'none';
+    gameplaySection.style.display = 'none';
     
     projectYViewer.innerHTML = `
         <div class="pdf-controls">
@@ -364,7 +378,7 @@ function loadProjectYViewer(type) {
     pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
         pdfDoc = pdf;
         document.getElementById('page-count').textContent = pdf.numPages;
-        renderPage(currentPageNum);
+        renderPage(type === 'HALO_STYLE_GUIDE' ? haloStyleGuidePageNum : seasonalVisionPageNum);
 
         const pdfControls = document.querySelector('.pdf-controls');
         if (pdfControls) {
@@ -383,17 +397,22 @@ function loadProjectYViewer(type) {
         console.error('Error loading PDF:', error);
         projectYViewer.innerHTML = '<p>Failed to load PDF.</p>';
     });
+
+    // Update the active state of the main gallery buttons
+    updateMainGalleryButtonState();
 }
 
-function loadSeasonalVisionViewer() {
+const loadSeasonalVisionViewer = () => {
     currentGallery = 'SEASONAL_VISION';
     const projectXGallery = document.getElementById('project-x-gallery');
     const projectYViewer = document.getElementById('project-y-viewer');
     const standardGallery = document.getElementById('standard-gallery');
+    const gameplaySection = document.getElementById('gameplay-section');
     
     projectXGallery.style.display = 'none';
     projectYViewer.style.display = 'block';
     standardGallery.style.display = 'none';
+    gameplaySection.style.display = 'none';
     
     projectYViewer.innerHTML = `
         <div class="pdf-controls">
@@ -411,7 +430,7 @@ function loadSeasonalVisionViewer() {
     pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
         pdfDoc = pdf;
         document.getElementById('page-count').textContent = pdf.numPages;
-        renderPage(currentPageNum);
+        renderPage(seasonalVisionPageNum);
 
         const pdfControls = document.querySelector('.pdf-controls');
         if (pdfControls) {
@@ -430,14 +449,23 @@ function loadSeasonalVisionViewer() {
         console.error('Error loading PDF:', error);
         projectYViewer.innerHTML = '<p>Failed to load PDF.</p>';
     });
+
+    // Update the active state of the main gallery buttons
+    updateMainGalleryButtonState();
 }
 
-function renderPage(pageNum) {
+const renderPage = (pageNum) => {
     if (!pdfDoc) return;
-    currentPageNum = Math.min(Math.max(1, pageNum), pdfDoc.numPages);
-    document.getElementById('page-num').textContent = `Page ${currentPageNum}`;
+    const currentPageNum = currentGallery === 'HALO_STYLE_GUIDE' ? haloStyleGuidePageNum : seasonalVisionPageNum;
+    const newPageNum = Math.min(Math.max(1, pageNum), pdfDoc.numPages);
+    if (currentGallery === 'HALO_STYLE_GUIDE') {
+        haloStyleGuidePageNum = newPageNum;
+    } else {
+        seasonalVisionPageNum = newPageNum;
+    }
+    document.getElementById('page-num').textContent = `Page ${newPageNum}`;
     
-    pdfDoc.getPage(currentPageNum).then(function(page) {
+    pdfDoc.getPage(newPageNum).then((page) => {
         const canvas = document.getElementById('pdf-canvas');
         const context = canvas.getContext('2d');
         const viewport = page.getViewport({ scale: currentScale });
@@ -450,20 +478,21 @@ function renderPage(pageNum) {
             viewport: viewport
         };
         page.render(renderContext);
-    }).catch(function(error) {
+    }).catch((error) => {
         console.error('Error rendering page:', error);
     });
 }
 
-function changePage(direction) {
+const changePage = (direction) => {
     if (!pdfDoc) return;
+    const currentPageNum = currentGallery === 'HALO_STYLE_GUIDE' ? haloStyleGuidePageNum : seasonalVisionPageNum;
     const newPageNum = currentPageNum + direction;
     if (newPageNum >= 1 && newPageNum <= pdfDoc.numPages) {
         renderPage(newPageNum);
     }
 }
 
-function openLightbox(index) {
+const openLightbox = (index) => {
     if (currentGallery === 'HALO_STYLE_GUIDE' || currentGallery === 'SEASONAL_VISION') return;
     currentImageIndex = index;
     const lightbox = document.getElementById('lightbox');
@@ -471,37 +500,87 @@ function openLightbox(index) {
     document.getElementById('lightbox-image').src = galleries[currentGallery][index];
 }
 
-function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
+const closeLightbox = () => {
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+        lightbox.style.display = 'none';
+    } else {
+        console.error('Lightbox not found!');
+    }
 }
 
-function navigateLightbox(direction) {
+const navigateLightbox = (direction) => {
     if (currentGallery === 'HALO_STYLE_GUIDE' || currentGallery === 'SEASONAL_VISION') return;
     currentImageIndex = (currentImageIndex + direction + galleries[currentGallery].length) % galleries[currentGallery].length;
-    document.getElementById('lightbox-image').src = galleries[currentGallery][currentImageIndex];
+    const lightboxImage = document.getElementById('lightbox-image');
+    if (lightboxImage) {
+        lightboxImage.src = galleries[currentGallery][currentImageIndex];
+    } else {
+        console.error('Lightbox image not found!');
+    }
 }
 
-function switchGallery(type) {
-    document.getElementById('concept-gallery-section').classList.remove('active');
-    document.getElementById('art-direction-gallery-section').classList.remove('active');
-    document.getElementById('concept-samples-btn').classList.remove('active');
-    document.getElementById('art-direction-samples-btn').classList.remove('active');
+function switchGallery(galleryType) {
+    // Hide all gallery sections
+    document.querySelectorAll('.gallery-section').forEach(section => {
+        section.classList.remove('active');
+    });
 
-    if (type === 'concept') {
-        document.getElementById('concept-gallery-section').classList.add('active');
-        document.getElementById('concept-samples-btn').classList.add('active');
-        loadGallery('HALO'); // Default to HALO
+    // Show the selected gallery section
+    document.getElementById(`${galleryType}-gallery-section`).classList.add('active');
+
+    // Remove active class from all buttons
+    document.querySelectorAll('.gallery-category button').forEach(button => {
+        button.classList.remove('active');
+    });
+
+    // Add active class to the selected button
+    document.querySelector(`button[data-type="${galleryType.toUpperCase()}"]`).classList.add('active');
+
+    // Hide gameplay section
+    document.getElementById('gameplay-section').style.display = 'none';
+
+    // Load Halo Infinite gallery if Art Direction Samples is selected
+    if (galleryType === 'art-direction') {
+        loadProjectXGallery();
     } else {
-        document.getElementById('art-direction-gallery-section').classList.add('active');
-        document.getElementById('art-direction-samples-btn').classList.add('active');
-        loadProjectXGallery(); // Default to Halo Infinite under Art Direction
+        // Load the first gallery in the Concept Samples by default
+        loadGallery('HALO');
+    }
+}
+
+function loadGameplay() {
+    // Hide other sections
+    document.getElementById('project-x-gallery').style.display = 'none';
+    document.getElementById('project-y-viewer').style.display = 'none';
+    document.getElementById('gameplay-section').style.display = 'block';
+
+    // Remove active class from other buttons
+    document.querySelectorAll('.gallery-tabs button').forEach(button => {
+        button.classList.remove('active');
+    });
+
+    // Add active class to the Gameplay button
+    document.querySelector('button[data-type="GAMEPLAY"]').classList.add('active');
+}
+
+function updateMainGalleryButtonState() {
+    const conceptSamplesBtn = document.getElementById('concept-samples-btn');
+    const artDirectionSamplesBtn = document.getElementById('art-direction-samples-btn');
+
+    if (document.getElementById('concept-gallery-section').classList.contains('active')) {
+        conceptSamplesBtn.classList.add('active');
+        artDirectionSamplesBtn.classList.remove('active');
+    } else if (document.getElementById('art-direction-gallery-section').classList.contains('active')) {
+        conceptSamplesBtn.classList.remove('active');
+        artDirectionSamplesBtn.classList.add('active');
     }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.querySelector('.menu-toggle');
     const mobileNav = document.querySelector('.mobile-nav');
-    const loadingSpinner = document.getElementById('loading-spinner');
+    const backToTopButton = document.getElementById('backToTop');
 
     if (!menuToggle || !mobileNav) {
         console.error('Menu toggle or mobile nav not found!');
@@ -509,8 +588,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     menuToggle.addEventListener('click', function() {
-        console.log('Toggling mobile nav');
+        console.log('Menu toggle clicked');
         mobileNav.classList.toggle('active');
+        console.log('Mobile nav class list:', mobileNav.classList);
+        console.log('Mobile nav style:', window.getComputedStyle(mobileNav).display);
     });
 
     document.addEventListener('click', function(event) {
@@ -520,68 +601,50 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Hide the loading spinner
-    if (loadingSpinner) {
-        loadingSpinner.classList.add('hidden');
-    }
+    // Show or hide the "Back to Top" button based on scroll position
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            backToTopButton.style.display = 'block';
+        } else {
+            backToTopButton.style.display = 'none';
+        }
+    });
 
-    // Initial gallery load
-    switchGallery('concept');
+    // Load HALO gallery by default
+    loadGallery('HALO');
+    updateMainGalleryButtonState();
 });
 
-window.addEventListener('scroll', function() {
-    const scrollY = window.scrollY;
-    const header = document.querySelector('header');
-    const btn = document.querySelector('.scroll-to-top-btn');
+// Close lightbox when clicking outside the image
+const lightbox = document.getElementById('lightbox');
+if (lightbox) {
+    lightbox.addEventListener('click', function(event) {
+        if (event.target === this) {
+            closeLightbox();
+        }
+    });
+} else {
+    console.error('Lightbox not found!');
+}
 
-    if (scrollY > lastScrollY && scrollY > 50) {
-        header.style.transform = 'translateY(-100%)';
-    } else {
-        header.style.transform = 'translateY(0)';
-    }
-    lastScrollY = scrollY;
-    btn.style.display = scrollY > 300 ? 'block' : 'none';
-});
+function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
         closeLightbox();
     } else if (event.key === 'ArrowRight' && currentGallery !== 'HALO_STYLE_GUIDE' && currentGallery !== 'SEASONAL_VISION') {
         navigateLightbox(1);
     } else if (event.key === 'ArrowLeft' && currentGallery !== 'HALO_STYLE_GUIDE' && currentGallery !== 'SEASONAL_VISION') {
         navigateLightbox(-1);
-    }
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mobileNav = document.querySelector('.mobile-nav');
-
-    if (!menuToggle || !mobileNav) {
-        console.error('Menu toggle or mobile nav not found!');
-        return;
-    }
-
-    document.addEventListener('click', function(event) {
-        console.log('Clicked element:', event.target); // Debug which element is clicked
-        if (event.target === menuToggle) {
-            console.log('Toggling mobile nav');
-            mobileNav.classList.toggle('active');
-        } else if (!mobileNav.contains(event.target) && mobileNav.classList.contains('active')) {
-            console.log('Closing mobile nav');
-            mobileNav.classList.remove('active');
-        }
-    });
-});
-
-// Hide spinner when page is fully loaded
-window.onload = () => {
-    document.getElementById('loading-spinner').classList.add('hidden');
-};
-
-// Close lightbox when clicking outside the image
-document.getElementById('lightbox').addEventListener('click', function(event) {
-    if (event.target === this) {
-        closeLightbox();
     }
 });
