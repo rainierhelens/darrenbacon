@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="description" content="Darren Bacon, Art Director (Game Dev) and Concept Artist. Explore my digital artwork for game development.">
+    <meta name="keywords" content="Darren Bacon, Art Director, Game Developer, Concept Artist, Unreal Engine, Digital Art, Art, Game Dev, Concept Art, Halo, Destiny, 343 Industries, Bungie">
+    <meta name="author" content="Darren Bacon">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Darren Bacon | Art Director (Game Dev) / Concept Artist">
+    <meta property="og:description" content="Explore my work in game development and digital art.">
+    <meta property="og:image" content="https://darrenbacon.com/images/profile.jpg">
+    <meta property="og:url" content="https://darrenbacon.com">
+    <meta property="og:type" content="website">
+    <title>Darren Bacon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js"></script>
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <header id="header-container">
+        <div class="header">
+            <div class="title-block">
+                <a href="#">DARREN BACON</a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation menu">☰</button>
+        </div>
+        <nav class="mobile-nav">
+            <a href="#gallery-container">Gallery</a>
+            <a href="#about-section">About</a>
+            <a href="#shipped-games">Shipped Games</a>
+            <a href="#book-publications">Book Publications</a>
+            <a href="#resume">Experience</a>
+            <a href="#links-container">Links</a>
+        </nav>
+    </header>
+    <main class="wrapper">
+        <div id="loading-spinner" class="loading-spinner">
+            <div class="spinner"></div>
+        </div>
+        <div id="gallery-container">
+            <h2 class="section-title">Gallery</h2>
+            <div class="gallery-tabs">
+                <button class="main-gallery-tab" data-type="concept-samples" onclick="switchGallery('concept-samples')">Concept Samples</button>
+                <button class="main-gallery-tab" data-type="art-direction-samples" onclick="switchGallery('art-direction-samples')">Art Direction Samples</button>
+            </div>
+
+            <div id="concept-samples-gallery" class="gallery-section">
+                <div class="gallery-tabs">
+                    <button data-type="HALO" onclick="loadGallery('HALO')">HALO</button>
+                    <button data-type="DEADROP" onclick="loadGallery('DEADROP')">DEADROP</button>
+                    <button data-type="DESTINY" onclick="loadGallery('DESTINY')">DESTINY</button>
+                    <button data-type="DISNEY" onclick="loadGallery('DISNEY')">DISNEY</button>
+                    <button data-type="OTHER" onclick="loadGallery('OTHER')">OTHER</button>
+                </div>
+                <div class="gallery-wrapper">
+                    <div class="gallery" id="concept-gallery"></div>
+                </div>
+            </div>
+
+            <div id="art-direction-samples-gallery" class="gallery-section" style="display: none;">
+                <div class="gallery-tabs">
+                    <button data-type="HALO-INFINITE" onclick="loadHaloInfiniteImages()">Halo Infinite</button>
+                    <button data-type="HALO-STYLE-GUIDE" onclick="loadPDF('images/halo-styleguide/Infinite_Art_Index_v0.6b.pdf', this)">Halo Style Guide</button>
+                    <button data-type="SEASONAL-VISION" onclick="loadPDF('images/seasonal-vision/seasonal_theme_deck-1g.pdf', this)">Seasonal Vision</button>
+                    <button data-type="GAMEPLAY" onclick="loadGameplay()">Gameplay</button>
+                </div>
+                <div class="gallery-wrapper">
+                    <div class="gallery" id="art-direction-gallery"></div>
+                    <div id="halo-infinite-images" class="image-column" style="display: none;">
+                        <!-- Images will be dynamically loaded here -->
+                    </div>
+                    <div id="pdf-viewer" style="display: none;">
+                        <div id="pdf-controls">
+                            <button id="prev-page" class="nav-button">&#10094;</button>
+                            <span class="page-info">Page: <span id="page-num"></span> / <span id="page-count"></span></span>
+                            <button id="next-page" class="nav-button">&#10095;</button>
+                        </div>
+                        <canvas id="pdf-canvas"></canvas>
+                    </div>
+                    <!-- Gameplay Videos Section -->
+                    <div id="gameplay-videos" class="video-column" style="display: none;">
+                        <div class="video-item">
+                            <h3>DEADROP</h3>
+                            <iframe class="responsive-iframe" src="https://www.youtube.com/embed/TD6QNkpg31Y?controls=1&modestbranding=1&rel=0&showinfo=0&mute=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <p>Work in progress in-game footage.</p>
+                        </div>
+                        <div class="video-item">
+                            <h3>Halo Infinite MP</h3>
+                            <iframe class="responsive-iframe" src="https://www.youtube.com/embed/4i86Ckj8xKk?controls=1&modestbranding=1&rel=0&showinfo=0&mute=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <p>Halo Infinite Mulitplayer gameplay trailer.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="lightbox" class="lightbox">
+            <span class="close" onclick="closeLightbox()">&times;</span>
+            <img class="lightbox-content" id="lightbox-image">
+            <a class="prev" onclick="navigateLightbox(-1)">&#10094;</a>
+            <a class="next" onclick="navigateLightbox(1)">&#10095;</a>
+        </div>
+        <hr class="section-divider">
+        <div id="about-section">
+            <h2 class="section-title">About:</h2>
+            <div class="resume-container">
+                <div class="resume-section">
+                    <p>Concept Art veteran and Art Director with over a decade of experience in game development leadership, managing art teams and creating results for real-time rendering applications, including Unreal Engine 5. Proven ability to lead multidisciplinary teams in creating cutting-edge digital experiences by blending artistic excellence with technical expertise.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="shipped-games">
+            <h2 class="section-title">Shipped Games:</h2>
+            <div class="resume-container">
+                <div class="resume-section">
+                    <table>
+                        <tr style="background-color: #333; color: white;">
+                            <th>Title</th>
+                            <th>Platform</th>
+                            <th>Year</th>
+                            <th>Credit</th>
+                            <th>Company</th>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.mobygames.com/game/175521/halo-infinite-multiplayer/" target="_blank">Halo Infinite - Multiplayer</a></td>
+                            <td>Xbox Series / Windows</td>
+                            <td>2021</td>
+                            <td>Associate Art Director</td>
+                            <td>343 Industries / Microsoft</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.mobygames.com/game/176543/halo-infinite-campaign/" target="_blank">Halo Infinite - Campaign</a></td>
+                            <td>Xbox Series / Windows</td>
+                            <td>2021</td>
+                            <td>Associate Art Director</td>
+                            <td>343 Industries / Microsoft</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.mobygames.com/game/112604/halo-fireteam-raven/" target="_blank">Halo: Fireteam Raven</a></td>
+                            <td>Arcade</td>
+                            <td>2018</td>
+                            <td>Special Thanks</td>
+                            <td>343 Industries / Microsoft</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.mobygames.com/game/80652/halo-5-forge/" target="_blank">Halo 5: Forge</a></td>
+                            <td>Windows</td>
+                            <td>2016</td>
+                            <td>Concept Art Lead</td>
+                            <td>343 Industries / Microsoft</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.mobygames.com/game/75503/halo-5-guardians/" target="_blank">Halo 5: Guardians</a></td>
+                            <td>Xbox One</td>
+                            <td>2015</td>
+                            <td>Concept Art Lead</td>
+                            <td>343 Industries / Microsoft</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.mobygames.com/game/68327/destiny/" target="_blank">Destiny</a></td>
+                            <td>Xbox One</td>
+                            <td>2015</td>
+                            <td>Senior Concept Artist</td>
+                            <td>Bungie</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.mobygames.com/game/37216/command-conquer-red-alert-3/" target="_blank">Command & Conquer: Red Alert 3</a></td>
+                            <td>Windows</td>
+                            <td>2008</td>
+                            <td>Concept Artist</td>
+                            <td>Electronic Arts</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.mobygames.com/game/33390/command-conquer-3-kanes-wrath/" target="_blank">Command & Conquer: Kane's Wrath</a></td>
+                            <td>Windows</td>
+                            <td>2008</td>
+                            <td>Concept Artist</td>
+                            <td>Electronic Arts</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.mobygames.com/game/33182/close-quarters-conflict/" target="_blank">Close Quarters Conflict</a></td>
+                            <td>Windows</td>
+                            <td>2006</td>
+                            <td>Artist</td>
+                            <td>Zombie Studios</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="book-publications">
+            <h2 class="section-title">Book Publications:</h2>
+            <div class="resume-container">
+                <div class="resume-section">
+                    <table>
+                        <tr style="background-color: #333; color: white;">
+                            <th>Title</th>
+                            <th>Publication</th>
+                            <th>Date</th>
+                            <th>Credit</th>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.amazon.com/Art-Star-Wars-Galaxys-Edge/dp/1419750127" target="_blank">The Art of STAR WARS GALAXY'S EDGE</a></td>
+                            <td>Abrams Books</td>
+                            <td>2021</td>
+                            <td>Contributing Artist</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.amazon.com/Art-Halo-Infinite-343-Industries/dp/1506720080" target="_blank">The Art of Halo Infinite</a></td>
+                            <td>343 Industries</td>
+                            <td>2021</td>
+                            <td>Featured Artist</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://designstudiopress.com/products/nuthin-but-mech-4" target="_blank">Nuthin’ But Mech 4</a></td>
+                            <td>Design Studio Press</td>
+                            <td>2018</td>
+                            <td>Contributing Artist</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.amazon.com/Halo-Warfleet-343-Industries/dp/1681196638" target="_blank">Halo Warfleet</a></td>
+                            <td>343 Industries</td>
+                            <td>2017</td>
+                            <td>Contributing Artist / Special Thanks</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.amazon.com/Halo-Mythos-Guide-Story/dp/1681193566" target="_blank">Halo Mythos: A Guide to the Story of Halo</a></td>
+                            <td>343 Industries</td>
+                            <td>2016</td>
+                            <td>Contributing Artist / Special Thanks</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.amazon.com/Robota-Chiang-2016-11-16-Orson-Scott/dp/B01N9LKDUM" target="_blank">Robota</a></td>
+                            <td>Dover Publications Inc.</td>
+                            <td>2016</td>
+                            <td>Contributing Artist</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://designstudiopress.com/products/nuthin-but-mech-3" target="_blank">Nuthin’ But Mech 3</a></td>
+                            <td>Design Studio Press</td>
+                            <td>2015</td>
+                            <td>Contributing Artist</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.amazon.com/Art-Halo-5-Guardians/dp/1608876497" target="_blank">The Art of Halo 5: Guardians</a></td>
+                            <td>Insight Editions</td>
+                            <td>2015</td>
+                            <td>Contributing Artist / Interviewee</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.amazon.com/Art-Destiny-Bungie/dp/1608874206" target="_blank">The Art of Destiny</a></td>
+                            <td>Insight Editions</td>
+                            <td>2014</td>
+                            <td>Contributing Artist</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.amazon.com/BLAST-spaceship-renderings-Scott-Robertson/dp/1933492546" target="_blank">Blast: Spaceship Sketches and Renderings</a></td>
+                            <td>Design Studio Press</td>
+                            <td>2012</td>
+                            <td>Guest Artist</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.amazon.com/Art-Disneyss-Christmas-Carol/dp/142312104X" target="_blank">The Art of Disney’s A Christmas Carol</a></td>
+                            <td>Disney Editions</td>
+                            <td>2009</td>
+                            <td>Contributing Artist</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://designstudiopress.com/products/in-the-future?variant=40796257517764" target="_blank">In the Future…</a></td>
+                            <td>Design Studio Press</td>
+                            <td>2006</td>
+                            <td>Co-Author</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="magazine-other">
+            <h2 class="section-title">Magazine / Online Publications:</h2>
+            <div class="resume-container">
+                <div class="resume-section">
+                    <table>
+                        <tr style="background-color: #333; color: white;">
+                            <th>Title</th>
+                            <th>Publication</th>
+                            <th>Date</th>
+                            <th>Source</th>
+                        </tr>
+                        <tr>
+                            <td>Interview: Darren Bacon</td>
+                            <td>ImagineFX Magazine</td>
+                            <td>January 2019</td>
+                            <td>Pages 34-41</td>
+                        </tr>
+                        <tr>
+                            <td>Tilting Reality</td>
+                            <td>ImagineFX Magazine</td>
+                            <td>August 12, 2016</td>
+                            <td><a href="https://www.pressreader.com/australia/imagine-fx/20160812/281487865732140?srsltid=AfmBOoounAtsyGh0QQdYQzo_Oxnq8qTQZFKNGBE41Hu9W6WQ85luCV_Z" target="_blank">Featured Artist</a></td>
+                        </tr>
+                        <tr>
+                            <td>The Best Video Game Concept Art of 2015</td>
+                            <td>Kotaku</td>
+                            <td>January, 2016</td>
+                            <td><a href="https://kotaku.com/the-best-video-game-concept-art-of-2015-1749190177" target="_blank">Featured Artist</a></td>
+                        </tr>
+                        <tr>
+                            <td>This ‘Halo 5’ Concept Art is Downright Gorgeous</td>
+                            <td>Business Insider</td>
+                            <td>November, 2015</td>
+                            <td><a href="https://www.businessinsider.com/halo-5-concept-art-2015-11#and-this-looks-almost-exactly-like-one-of-the-games-story-mission-levels-5" target="_blank">Featured Artist</a></td>
+                        </tr>
+                        <tr>
+                            <td>It's Late. Let This Computer Buy You A Drink.</td>
+                            <td>Kotaku</td>
+                            <td>January, 2016</td>
+                            <td><a href="https://kotaku.com/its-late-let-this-computer-buy-you-a-drink-918503447" target="_blank">Featured Artist</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="resume">
+            <h2 class="section-title">Experience:</h2>
+            <div class="resume-container" style="align-items: stretch;">
+                <div class="resume-section">
+                    <div class="resume-entry">
+                        <strong>Midnight Society - Art Director</strong>
+                        <span>(2022-2025)</span>
+                    </div>
+                    <p>Built and led a high-performing team of artists, technical artists, and external co-developers, driving strategic initiatives that resulted in the successful delivery of seven pre-alpha game releases.</p>
+                    <ul>
+                        <li>Spearheaded the art production for DEADROP, guiding the project from initial concept through multiple pre-alpha launches utilizing Unreal Engine 5.</li>
+                        <li>Managed and mentored a multidisciplinary team of 3D artists, concept artists, and technical artists, fostering a culture of creativity, collaboration, and growth.</li>
+                        <li>Partnered closely with product managers, designers, and engineers to align artistic vision with strategic goals, ensuring a cohesive and impactful game development process.</li>
+                    </ul>
+                </div>
+                <div class="resume-section">
+                    <div class="resume-entry">
+                        <strong>Microsoft (Halo) – Art Director (Multiplayer/Live Team) / Associate Art Director</strong>
+                        <span>(2019-2022)</span>
+                    </div>
+                    <p>Directed the artistic vision for a team of ~400 video game artists, driving the creative direction of a $5B franchise while ensuring a unified and high-quality visual identity across multiple projects.</p>
+                    <ul>
+                        <li>Led the art development and launch of Halo Infinite, leveraging the proprietary Slipspace Engine to push the boundaries of real-time rendering.</li>
+                        <li>Defined and aligned art direction across branding, marketing, and game development, ensuring a cohesive visual strategy that supported both product and marketing goals.</li>
+                        <li>Spearheaded the visual development of Halo Infinite, maintaining artistic consistency and quality across the program’s multiple initiatives.</li>
+                        <li>Provided art direction support for key teams, including Shooter Live, Multiplayer, Sandbox, UI, FX, and Character teams, driving excellence in visual execution.</li>
+                        <li>Oversaw consumer products strategy, guiding the development, critique, and approval of franchise materials and merchandise, including Mattel’s Mega Bloks, BoomCo., McFarlane collectibles, apparel, and publishing projects, ensuring brand integrity and quality.</li>
+                    </ul>
+                </div>
+                <div class="resume-section">
+                    <div class="resume-entry">
+                        <strong>Microsoft (Halo) – Lead Concept Artist</strong>
+                        <span>(2014-2019)</span>
+                    </div>
+                    <p>Led the concept art team, driving project development, elevating artistic quality, and fostering team growth through strategic leadership and mentorship.</p>
+                    <ul>
+                        <li>Directed the creation of high-quality concept art for Halo 5: Guardians, Halo Wars 2, and Halo Infinite, ensuring visual consistency and alignment with the franchise’s artistic vision.</li>
+                        <li>Mentored and developed junior artists, providing guidance and feedback to elevate their skills and contributions to the team.</li>
+                        <li>Collaborated with cross-functional teams, including design, engineering, and production, to ensure seamless integration of concept art into the game development pipeline.</li>
+                        <li>Contributed to the development of the Halo franchise’s visual style, pushing the boundaries of creativity and innovation in concept art.</li>
+                    </ul>
+                </div>
+                <div class="resume-section">
+                    <div class="resume-entry">
+                        <strong>Bungie – Senior Concept Artist</strong>
+                        <span>(2011-2014)</span>
+                    </div>
+                    <p>Created high-quality concept art for Destiny, contributing to the visual development of the game’s characters, environments, and props.</p>
+                    <ul>
+                        <li>Collaborated with the art director and other team members to establish the visual style and direction for Destiny.</li>
+                        <li>Produced detailed concept art and illustrations that guided the 3D modeling and texturing teams in creating in-game assets.</li>
+                        <li>Participated in brainstorming sessions and provided creative input to help shape the game’s visual identity.</li>
+                        <li>Mentored junior artists, providing feedback and guidance to help them grow and improve their skills.</li>
+                    </ul>
+                </div>
+                <div class="resume-section">
+                    <div class="resume-entry">
+                        <strong>Electronic Arts – Concept Artist</strong>
+                        <span>(2007-2011)</span>
+                    </div>
+                    <p>Developed concept art for various EA titles, including Command & Conquer: Red Alert 3 and Command & Conquer: Kane’s Wrath.</p>
+                    <ul>
+                        <li>Created concept art for characters, environments, and props, contributing to the visual development of the games.</li>
+                        <li>Collaborated with the art director and other team members to ensure visual consistency and alignment with the game’s artistic vision.</li>
+                        <li>Produced detailed concept art and illustrations that guided the 3D modeling and texturing teams in creating in-game assets.</li>
+                        <li>Participated in brainstorming sessions and provided creative input to help shape the game’s visual identity.</li>
+                    </ul>
+                </div>
+                <div class="resume-section">
+                    <div class="resume-entry">
+                        <strong>Zombie Studios – Artist</strong>
+                        <span>(2005-2007)</span>
+                    </div>
+                    <p>Created concept art and illustrations for various projects, contributing to the visual development of the games.</p>
+                    <ul>
+                        <li>Collaborated with the art director and other team members to establish the visual style and direction for the games.</li>
+                        <li>Produced detailed concept art and illustrations that guided the 3D modeling and texturing teams in creating in-game assets.</li>
+                        <li>Participated in brainstorming sessions and provided creative input to help shape the game’s visual identity.</li>
+                        <li>Mentored junior artists, providing feedback and guidance to help them grow and improve their skills.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+                <!-- Links Section -->
+        <div id="links-container">
+            <h2 class="section-title">Links:</h2>
+            <div class="links-grid">
+                <a href="https://www.instagram.com/artofbacon/" target="_blank" class="link-button">Instagram</a>
+                <a href="https://x.com/artofbacon" target="_blank" class="link-button">X</a>
+                <a href="https://www.artstation.com/darrenbacon" target="_blank" class="link-button">ArtStation</a>
+                <a href="https://bsky.app/profile/artofbacon.bsky.social" target="_blank" class="link-button">BlueSky</a>
+                <a href="https://www.tiktok.com/@artofbacon" target="_blank" class="link-button">TikTok</a>
+                <a href="https://www.youtube.com/conceptdepartment" target="_blank" class="link-button">YouTube</a>
+                <a href="https://baconsbytes.tumblr.com/" target="_blank" class="link-button">Tumblr</a>
+                <a href="https://www.threads.net/@artofbacon" target="_blank" class="link-button">Threads</a>
+            </div>
+        </div>
+                <!-- Footer Section -->
+        <footer>
+            <p>© Darren Bacon, 2025 | email: <a href="mailto:darren@darrenbacon.com">darren@darrenbacon.com</a> | <a href="https://www.darrenbacon.com">www.darrenbacon.com</a></p>
+        </footer>
+    </main>
+        <!-- Return to Top Button -->
+    <button id="backToTop" onclick="scrollToTop()">↑</button>
+</body>
+</html>
