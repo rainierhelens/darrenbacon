@@ -49,7 +49,6 @@ html {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px; /* Add padding to ensure content is not cropped */
             background-color: #000000; /* Ensure background color is set */
             position: relative;
             z-index: 10;
@@ -59,13 +58,16 @@ html {
 
         .title-block {
             flex: 1;
-            text-align: left; /* Left align on desktop */
+            text-align: left; /* Ensure left alignment */
+            padding-left: 25px; /* Add padding for spacing */
         }
 
         .title-block a {
-            color: inherit; /* Ensure the link inherits the color of the parent */
-            text-decoration: none; /* Remove underline from the link */
-            
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 1.8em; /* Increase the font size */
         }
 
         .title-block a:hover {
@@ -93,7 +95,7 @@ html {
     cursor: pointer;
     z-index: 1001; /* Ensure it’s above the dropdown */
     text-align: right;
-    padding-left: 50px;
+    padding-right: 15px;
     right: 0; /* Align with the left edge of the menu button */
 }
 
@@ -138,7 +140,8 @@ html {
     }
 
     .title-block {
-        text-align: center; /* Center align on mobile */
+        text-align: left; /* Ensure left alignment on mobile */
+        padding-left: 25px; /* Add padding for spacing */
     }
 
     .title-name {
@@ -173,16 +176,25 @@ html {
         text-align: right;
         margin-top: -5px;
     }
+
+    .title-block a {
+        font-size: 1.5em; /* Adjust font size for smaller screens */
+    }
 }
 
 
 
         #about-section, #shipped-games, #book-publications, #magazine-other {
-            min-height: 250px;
+            min-height: 225px;
+            border: none;
+            border-top: 1px solid #2d2d2d; /* Dark grey or black to match the dark mode theme */
+            width: 100%;
         }
 
         #resume {
             min-height: 350px;
+            border-top: 1px solid #2d2d2d; /* Dark grey or black to match the dark mode theme */
+            width: 100%;
         }
 
         .section-title {
@@ -202,6 +214,7 @@ html {
             list-style: none;
             max-width: 800px;
             padding-bottom: 25px;
+
         }
 
         .link-list li {
@@ -695,9 +708,19 @@ html {
 }
 
 /* Links Section */
+
+#links-container {
+    border-top: 1px solid #2d2d2d; /* Dark grey or black to match the dark mode theme */
+    width: 100%;
+    justify-items: center;
+    padding-bottom: 25px;
+}
+
 .links-grid {
     display: grid;
     grid-template-columns: repeat(4, 2fr);
+    max-width: 60%;
+    align-items: center;
     gap: 20px;
     justify-items: center;
     margin: 20px 0;
@@ -723,10 +746,7 @@ html {
         grid-template-columns: repeat(2, 1fr); /* Adjust grid layout for mobile */
     }
 
-    .link-button {
-        width: auto; /* Flexible width for mobile */
-    }
-}
+
 
 /* Footer Section */
 footer {
@@ -748,12 +768,56 @@ footer a:hover {
     text-decoration: underline;
 }
 
-/* Horizontal Line */
-.section-divider {
-    border: none;
-    border-top: 1px solid #ffffff; /* Dark grey or black to match the dark mode theme */
-    margin: 20px 0; /* Adjust the margin as needed */
+/* Gallery Thumbnails */
+.gallery-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Default to auto-fill with a minimum width */
+    gap: 10px;
+    width: 100%;
+    margin: 0 auto;
 }
+
+.gallery-item {
+    position: relative;
+    width: 100%;
+    padding-top: 100%; /* This creates a square aspect ratio */
+    overflow: hidden;
+}
+
+.gallery-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image is cropped to fit the container */
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+}
+
+/* Media Query for Mobile Screens */
+@media (max-width: 600px) {
+    .gallery-wrapper {
+        grid-template-columns: repeat(3, 1fr); /* Change to 3 columns on mobile */
+    }
+
+    .gallery-item {
+        padding-top: 100%; /* Ensure square aspect ratio */
+    }
+    .title-block {
+        text-align: left; /* Ensure left alignment on mobile */
+        padding-left: 25px; /* Add padding for spacing */
+    }
+
+    .title-block a {
+        font-size: 1.5em; /* Adjust font size for smaller screens */
+    }
+}
+
 
 
 

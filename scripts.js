@@ -313,13 +313,25 @@ const loadPDF = (pdfPath, button) => {
     setActiveButton('art-direction-samples', button);
 };
 
-const switchGallery = (galleryType) => {
+const switchGallery = (type) => {
+    // Hide all gallery sections
     document.querySelectorAll('.gallery-section').forEach(section => {
         section.style.display = 'none';
     });
-    document.getElementById(`${galleryType}-gallery`).style.display = 'block';
 
-    setActiveButton(galleryType);
+    // Show the selected gallery section
+    const selectedGallery = document.getElementById(`${type}-gallery`);
+    if (selectedGallery) {
+        selectedGallery.style.display = 'block';
+    }
+
+    // Clear the gallery content
+    document.querySelectorAll('.gallery').forEach(gallery => {
+        gallery.innerHTML = '';
+    });
+
+    // Set the active button
+    setActiveButton(type, null);
 };
 
 const setActiveButton = (mainType, button) => {
