@@ -101,7 +101,8 @@ const galleries = {
         'images/deadrop/deadrop46.jpg',
         'images/deadrop/deadrop47.jpg',
         'images/deadrop/deadrop48.jpg',
-        'images/deadrop/maker_art_style_guide_3k.jpg',
+        'images/deadrop/maker_art_style_guide_3k.jpg'
+',
         // Add more image paths here
     ],
     'DESTINY': [
