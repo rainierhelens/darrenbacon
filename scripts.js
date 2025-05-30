@@ -331,3 +331,21 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+// Rotating Links for Socials
+document.addEventListener('DOMContentLoaded', function() {
+  const links = [
+    { url: "https://www.instagram.com/artofbacon/", label: "INSTAGRAM [↗]" },
+    { url: "https://x.com/artofbacon", label: "X [↗]" },
+    { url: "https://www.youtube.com/conceptdepartment", label: "YOUTUBE [↗]" },
+    { url: "https://www.linkedin.com/in/darrenbacon/", label: "LINKEDIN [↗]" },
+    { url: "https://www.artstation.com/darrenbacon", label: "ARTSTATION [↗]" }
+  ];
+  let idx = 0;
+  const btn = document.getElementById('rotating-btn');
+  setInterval(() => {
+    idx = (idx + 1) % links.length;
+    btn.href = links[idx].url;
+    btn.textContent = links[idx].label;
+  }, 3000); // Change every 3 seconds
+});
+

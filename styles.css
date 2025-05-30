@@ -51,49 +51,43 @@ body {
 #header-container {
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100vw;
-  z-index: 1000;
-  background: #131313;
+  left: 60px;
+  width: calc(100vw - 60px);
+  z-index: 1500;
+  background: #111;
   color: #fff;
-  font-weight: bold;
-  height: 72px;
+  height: 48px; /* or your preferred height */
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  box-sizing: border-box;
+  align-items: center; /* Center children vertically */
   border-bottom: 1px solid #fff;
-  padding-top: 10px;      /* Less space at the top */
-  padding-bottom: 32px;  /* Double space at the bottom */
-  /* Dotted background like body */
-  background-image:
-    radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 0),
-    radial-gradient(rgba(255, 255, 255, 0.062) 1px, transparent 0);
-  background-size: 24px 24px, 12px 12px;
-  background-position: 0 0, 6px 6px;
+  box-sizing: border-box;
+  padding: 0 0 0 2vw;
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
   width: 100%;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 0 1vw;
+  align-items: center; /* Center children vertically */
+  justify-content: flex-start;
   background: transparent;
+  gap: 2em;
+  position: relative;
+  height: 100%; /* fill parent */
 }
 
-/* Title block stays left */
+/* Title block left, smaller font */
 .title-block {
   flex: 0 0 auto;
   text-align: left;
-  padding-left: 10px;
+  padding-left: 0;
+  display: flex;
+  align-items: center; /* Center title vertically */
+  height: 100%;
 }
 
 .title-block a {
   color: #fff;
-  font-size: 1.1em;
+  font-size: 0.95em; /* smaller */
   text-decoration: none;
   font-weight: normal;
   letter-spacing: 2px;
@@ -110,29 +104,32 @@ body {
   color: #bdff54;                /* Same yellow as nav hover */
 }
 
-/* Main nav centered, with gap */
+/* Main nav left, smaller font */
 .main-nav {
   display: flex;
   flex: 1 1 auto;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 3em;
+  justify-content: flex-start; /* left align */
+  align-items: center; /* Center nav vertically */
+  gap: 0.2em;
   background: transparent;
+  height: 100%;
 }
 
 /* Main nav links: smaller, no background, only text */
-.main-nav a {
+.main-nav a,
+.main-nav a:visited {
   color: #fff;
-  background: none;
+  background: #111;
   border: none;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 1em; /* Smaller font */
+  font-size: 0.95em; /* smaller */
   font-weight: 400;
   letter-spacing: 1.5px;
   text-decoration: none;
-  padding: 0.2em 0.1em;
-  transition: background 0.18s, color 0.18s;
-  border-bottom: none;
+  padding: 0.2em 0.7em;
+  margin: 0 0.1em;
+  border-radius: 0;
+  transition: background 0.2s, color 0.2s;
   display: inline-block;
   line-height: 1.7;
 }
@@ -150,19 +147,16 @@ body {
 .main-nav a:hover {
   background: #bdff54;
   color: #181818;
-  border-color: #bdff54;
+  border-radius: 0;
 }
 
 .main-nav a.nav-highlight {
   background: #bdff54;
   color: #181818;
-  border-radius: 0;
-  padding: 0.2em 1.5em;
+  font-weight: bold;
   margin-left: 2em;
-  border: none;
-  font-weight: 500;
-  letter-spacing: 2px;
-  border-bottom: none;
+  padding: 0.3em 1.5em;
+  border-radius: 0;
   transition: background 0.2s, color 0.2s;
 }
 
@@ -505,6 +499,8 @@ footer a:hover {
   opacity: 1;
 }
 
+
+
 /* Make sure overlay is on top and does not shift layout */
 .gallery-item {
   z-index: 1;
@@ -725,36 +721,132 @@ footer a:hover {
 
 .gallery-tabs {
   display: flex;
-  justify-content: center;
-  gap: 0.3em;
-  margin: 5em 0 1.5em 0;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.2em;
+  margin: 0 0 1.5em calc(60px + 4.25vw); /* 60px for left bar + header padding */
+  padding-top: 0.7em;
+  border-bottom: 1px solid #222;
+  background: #111;
 }
 
 .gallery-tabs button {
   color: #fff;
-  background: #111;
-  border: 1px dashed #fff;
-  padding: 0.3em 0.8em;
-  margin: 0 0.1em;
+  background: none;
+  border: none;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.97em;
-  font-weight: normal;
+  font-size: 0.95em; /* match nav */
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  padding: 0.2em 0.7em;
+  margin: 0 0.1em;
   border-radius: 0;
-  text-shadow: none;
-  box-shadow: none;
-  letter-spacing: 1px;
-  text-transform: none;
-  cursor: pointer;
-  outline: none;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  transition: background 0.2s, color 0.2s;
   display: inline-block;
+  line-height: 1.7;
+  cursor: pointer;
 }
 
 .gallery-tabs button.active,
 .gallery-tabs button:hover {
-  background: var(--accent3);
-  color: #0a0a0a;
-  border-color: var(--accent2);
+  background: #bdff54;
+  color: #181818;
+  border-radius: 0;
+}
+
+/* Only apply this to content links, not nav or title */
+body a:not(.nav-tab):not(.title-block a):not(.plus-yellow),
+body a:not(.nav-tab):not(.title-block a):not(.plus-yellow):visited {
+  color: #ffe066;
+  text-decoration: underline;
+}
+
+/* Main nav and title always white unless hovered/active */
+.main-nav a,
+.main-nav a:visited {
+  color: #fff;
+  background: #111;
+  text-decoration: none;
+}
+
+.main-nav a.active,
+.main-nav a:hover {
+  background: #bdff54;
+  color: #181818;
+  border-color: #bdff54;
+}
+
+.title-block a,
+.title-block a:visited {
+  color: #fff;
+  text-decoration: none;
+}
+
+.title-block a:hover {
+  color: #bdff54;
+}
+
+.left-bar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 60px;
+  height: 100vh;
+  background: #bdff54;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  border-right: 1px solid #222;
+  overflow: hidden;
+}
+
+
+
+.left-bar-content {
+  position: relative;
+  z-index: 2;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  color: #181818;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1em;
+  letter-spacing: 2px;
+  margin-bottom: 2em;
+  text-align: center;
+}
+
+/* Discord floating button top right */
+a.discord-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  margin: 0;
+  background: #bdff54;
+  color: #181818 !important;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.97em;
+  font-weight: normal;
+  letter-spacing: 1px;
+  padding: 0 1.5em; /* Only horizontal padding */
+  border: none;
+  border-radius: 0;
+  text-decoration: none !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  z-index: 3000;
+  transition: background 0.18s, color 0.18s;
+  display: flex;
+  align-items: center; /* Center button text vertically */
+  height: 100%;
+  width: 150px;      /* Set your desired fixed width */
+  justify-content: center; /* Center text horizontally */
+}
+a.discord-btn:hover {
+  background: #4db6ac;
+  color: #fff !important;
 }
 
 
