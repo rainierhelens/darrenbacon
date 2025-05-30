@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="description" content="Contact Darren Bacon, Art Director and Concept Artist.">
+    <title>Darren Bacon | Contact</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header id="header-container">
+        <div class="header">
+            <div class="title-block">
+                <a href="index.html">[<span class="plus-yellow">+</span>] DARREN BACON</a>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-tab">CONCEPT</a>
+                <a href="art-direction-samples.html" class="nav-tab">ART DIRECTION</a>
+                <a href="game-dev.html" class="nav-tab">DEV</a>
+                <a href="about.html" class="nav-tab">ABOUT</a>
+                <a href="contact.html" class="nav-tab active">CONTACT</a>
+            </nav>
+        </div>
+    </header>
+    <main class="wrapper">
+
+<pre class="ascii-art">
+ ________  ________  ________   _________  ________  ________ _________   
+|\   ____\|\   __  \|\   ___  \|\___   ___\\   __  \|\   ____\\___   ___\ 
+\ \  \___|\ \  \|\  \ \  \\ \  \|___ \  \_\ \  \|\  \ \  \___\|___ \  \_| 
+ \ \  \    \ \  \\\  \ \  \\ \  \   \ \  \ \ \   __  \ \  \       \ \  \  
+  \ \  \____\ \  \\\  \ \  \\ \  \   \ \  \ \ \  \ \  \ \  \____   \ \  \ 
+   \ \_______\ \_______\ \__\\ \__\   \ \__\ \ \__\ \__\ \_______\  \ \__\
+    \|_______|\|_______|\|__| \|__|    \|__|  \|__|\|__|\|_______|   \|__|
+</pre>
+
+<div class="ascii-section" id="contact-section">
+<pre class="ascii-divider">
++----------------------+
+|       CONTACT        |
++----------------------+
+</pre>
+    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xovwaqaq" method="POST">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required autocomplete="off">
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required autocomplete="off">
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required autocomplete="off"></textarea>
+
+        <button type="submit">SEND</button>
+    </form>
+    <div id="form-success-popup" class="form-success-popup" style="display:none;">
+        <div class="form-success-content">
+            <span class="form-success-close" onclick="document.getElementById('form-success-popup').style.display='none'">&times;</span>
+            <h2>Thank you!</h2>
+            <p>Your message has been sent successfully.</p>
+        </div>
+    </div>
+    <div class="contact-note">
+        <p>Email: <a href="mailto:darren@darrenbacon.com">darren@darrenbacon.com</a></p>
+    </div>
+</div>
+
+<pre class="ascii-hr">
++----------------------------------------------------------------------------+
+</pre>
+
+<div id="links-container">
+<pre class="ascii-divider">
++--------+
+| LINKS  |
++--------+
+</pre>
+    <div class="ascii-links">
+        <a href="https://www.instagram.com/artofbacon/" target="_blank">[Instagram]</a>
+        <a href="https://x.com/artofbacon" target="_blank">[X]</a>
+        <a href="https://www.artstation.com/darrenbacon" target="_blank">[ArtStation]</a>
+        <a href="https://bsky.app/profile/artofbacon.bsky.social" target="_blank">[BlueSky]</a>
+        <a href="https://www.tiktok.com/@artofbacon" target="_blank">[TikTok]</a>
+        <a href="https://www.youtube.com/conceptdepartment" target="_blank">[YouTube]</a>
+        <a href="https://www.linkedin.com/in/darrenbacon/" target="_blank">[LinkedIn]</a>
+        <a href="https://baconsbytes.tumblr.com/" target="_blank">[Tumblr]</a>
+        <a href="https://www.threads.net/@artofbacon" target="_blank">[Threads]</a>
+    </div>
+</div>
+
+<footer class="ascii-footer">
+    <div>
+        <span>&copy; Darren Bacon, 2025</span> | 
+        <a href="mailto:darren@darrenbacon.com">darren@darrenbacon.com</a> | 
+        <a href="https://www.darrenbacon.com">www.darrenbacon.com</a>
+    </div>
+</footer>
+</main>
+<script>
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    const action = form.action;
+    try {
+        const response = await fetch(action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+            form.reset();
+            document.getElementById('form-success-popup').style.display = 'block';
+        } else {
+            alert('There was a problem sending your message. Please try again.');
+        }
+    } catch (err) {
+        alert('There was a problem sending your message. Please try again.');
+    }
+});
+</script>
+</body>
+</html>

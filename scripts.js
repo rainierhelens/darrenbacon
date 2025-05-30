@@ -1,15 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Mobile nav (if you add it later)
     const menuToggle = document.querySelector('.menu-toggle');
     const mobileNav = document.querySelector('.mobile-nav');
+    if (menuToggle && mobileNav) {
+        menuToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+        });
+    }
 
-    menuToggle.addEventListener('click', () => {
-        mobileNav.classList.toggle('active');
-    });
+    // Concept Samples (index.html)
+    if (document.getElementById('concept-gallery')) {
+        loadGallery('HALO');
+        setActiveButton('concept-samples', document.querySelector('button[data-type="HALO"]'));
+    }
 
-    // Automatically load the "HALO" gallery
-    switchGallery('concept-samples');
-    loadGallery('HALO');
-    setActiveButton('concept-samples', 'HALO');
+    // Art Direction Samples (art-direction-samples.html)
+    if (document.getElementById('art-direction-gallery')) {
+        loadHaloInfiniteImages();
+        setActiveButton('art-direction-samples', document.querySelector('button[data-type="HALO-INFINITE"]'));
+    }
 });
 
 const galleries = {
@@ -101,8 +110,7 @@ const galleries = {
         'images/deadrop/deadrop46.jpg',
         'images/deadrop/deadrop47.jpg',
         'images/deadrop/deadrop48.jpg',
-        'images/deadrop/maker_art_style_guide_3k.jpg'
-',
+        'images/deadrop/maker_art_style_guide_3k.jpg',
         // Add more image paths here
     ],
     'DESTINY': [
@@ -217,311 +225,109 @@ const galleries = {
         'images/other/tumblr_nm35a3jtgU1rqvckio1_1280.jpg',
         'images/other/tumblr_n202yxvnx91rqvckio2_1280.jpg',
         'images/other/tumblr_n202yxvnx91rqvckio1_1280.jpg',
-        'images/other/RR_bedside_shot-overrender01a-3K.jpg',
-        'images/other/RR_mWARDproj_sketches01-a-sm.jpg',
-        'images/other/RR_mWARDproj_sketches02-c.jpg',
-        'images/other/RR_reapers_05a.jpg',
+        
         // Add more image paths here
     ]
 };
 
-let pdfDoc = null;
-let pageNum = 1;
-let pageRendering = false;
-let pageNumPending = null;
-const canvas = document.getElementById('pdf-canvas');
-const ctx = canvas.getContext('2d');
 let currentGallery = [];
 let currentIndex = 0;
 
-const renderPage = (num) => {
-    pageRendering = true;
-    pdfDoc.getPage(num).then((page) => {
-        const viewport = page.getViewport({ scale: 1 });
-        const scale = Math.min(800 / viewport.height, 1);
-        const scaledViewport = page.getViewport({ scale: scale });
-        canvas.height = scaledViewport.height;
-        canvas.width = scaledViewport.width;
+function setActiveGalleryTab(button) {
+    document.querySelectorAll('.gallery-tabs button').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+}
 
-        const renderContext = {
-            canvasContext: ctx,
-            viewport: scaledViewport
-        };
-        const renderTask = page.render(renderContext);
-
-        renderTask.promise.then(() => {
-            pageRendering = false;
-            if (pageNumPending !== null) {
-                renderPage(pageNumPending);
-                pageNumPending = null;
-            }
-        });
-    });
-
-    document.getElementById('page-num').textContent = num;
-};
-
-const queueRenderPage = (num) => {
-    if (pageRendering) {
-        pageNumPending = num;
-    } else {
-        renderPage(num);
-    }
-};
-
-const onPrevPage = () => {
-    if (pageNum <= 1) {
-        return;
-    }
-    pageNum--;
-    queueRenderPage(pageNum);
-};
-
-const onNextPage = () => {
-    if (pageNum >= pdfDoc.numPages) {
-        return;
-    }
-    pageNum++;
-    queueRenderPage(pageNum);
-};
-
-document.getElementById('prev-page').addEventListener('click', onPrevPage);
-document.getElementById('next-page').addEventListener('click', onNextPage);
-
-const pdfPageNumbers = {};
-
-const loadPDF = (pdfPath, button) => {
-    const pdfViewer = document.getElementById('pdf-viewer');
-    pdfViewer.style.display = 'flex'; // Ensure the viewer is displayed
-    document.getElementById('halo-infinite-images').style.display = 'none'; // Hide Halo Infinite images
-    document.getElementById('gameplay-videos').style.display = 'none'; // Hide Gameplay videos
-
-    pdfjsLib.getDocument(pdfPath).promise.then((pdfDoc_) => {
-        pdfDoc = pdfDoc_;
-        document.getElementById('page-count').textContent = pdfDoc.numPages;
-
-        if (!pdfPageNumbers[pdfPath]) {
-            pdfPageNumbers[pdfPath] = 1;
-        }
-        pageNum = pdfPageNumbers[pdfPath];
-        renderPage(pageNum);
-    });
-
-    setActiveButton('art-direction-samples', button);
-};
-
-const switchGallery = (type) => {
-    // Hide all gallery sections
-    document.querySelectorAll('.gallery-section').forEach(section => {
-        section.style.display = 'none';
-    });
-
-    // Show the selected gallery section
-    const selectedGallery = document.getElementById(`${type}-gallery`);
-    if (selectedGallery) {
-        selectedGallery.style.display = 'block';
-    }
-
-    // Clear the gallery content
-    document.querySelectorAll('.gallery').forEach(gallery => {
-        gallery.innerHTML = '';
-    });
-
-    // Set the active button
-    setActiveButton(type, null);
-};
-
-const setActiveButton = (mainType, button) => {
-    document.querySelectorAll('.gallery-tabs button').forEach(btn => {
-        btn.classList.remove('active');
-    });
-
-    if (button) {
-        button.classList.add('active');
-    } else {
-        const mainButton = document.querySelector(`.gallery-tabs button[data-type="${mainType}"]`);
-        if (mainButton) {
-            mainButton.classList.add('active');
-        }
-    }
-
-    // Set the main tab active state
-    if (mainType === 'concept-samples' || mainType === 'art-direction-samples') {
-        document.querySelectorAll('.main-gallery-tab').forEach(tab => {
-            tab.classList.remove('active');
-        });
-        const mainTab = document.querySelector(`.main-gallery-tab[data-type="${mainType}"]`);
-        if (mainTab) {
-            mainTab.classList.add('active');
-        }
-    }
-};
-
-const loadGallery = (type) => {
+function loadGallery(type) {
     const galleryContainer = document.getElementById('concept-gallery');
-    galleryContainer.innerHTML = ''; // Clear existing images
+    if (!galleryContainer) return;
 
+    galleryContainer.innerHTML = '';
     currentGallery = galleries[type] || [];
     currentGallery.forEach((imgSrc, index) => {
         const imgWrapper = document.createElement('div');
         imgWrapper.classList.add('gallery-item');
-        
         const imgElement = document.createElement('img');
         imgElement.src = imgSrc;
         imgElement.alt = `${type} concept art`;
-        imgElement.loading = 'lazy'; // Add lazy loading attribute
+        imgElement.loading = 'lazy';
         imgElement.onclick = () => openLightbox(index);
-        
         imgWrapper.appendChild(imgElement);
         galleryContainer.appendChild(imgWrapper);
     });
 
-    setActiveButton('concept-samples', document.querySelector(`button[data-type="${type}"]`));
-};
+    // Set active tab
+    const activeBtn = document.querySelector(`.gallery-tabs button[data-type="${type}"]`);
+    if (activeBtn) setActiveGalleryTab(activeBtn);
+}
 
-const loadArtDirectionGallery = (type) => {
-    const galleryContainer = document.getElementById('art-direction-gallery');
-    galleryContainer.innerHTML = ''; // Clear existing images
-
-    currentGallery = galleries[type] || [];
-    currentGallery.forEach((imgSrc, index) => {
-        const imgWrapper = document.createElement('div');
-        imgWrapper.classList.add('gallery-item');
-        
-        const imgElement = document.createElement('img');
-        imgElement.src = imgSrc;
-        imgElement.alt = `${type} concept art`;
-        imgElement.loading = 'lazy'; // Add lazy loading attribute
-        imgElement.onclick = () => openLightbox(index);
-        
-        imgWrapper.appendChild(imgElement);
-        galleryContainer.appendChild(imgWrapper);
-    });
-
-    setActiveButton('art-direction-samples', document.querySelector(`button[data-type="${type}"]`));
-};
-
-const loadHaloInfiniteImages = () => {
-    const imageContainer = document.getElementById('halo-infinite-images');
-    imageContainer.innerHTML = ''; // Clear existing images
-
-    const images = [
-        'images/ad-halo/halo-ad-1.jpg',
-        'images/ad-halo/halo-ad-2.jpg',
-        'images/ad-halo/halo-ad-3.jpg',
-        'images/ad-halo/halo-ad-4.jpg',
-        'images/ad-halo/halo-ad-5.jpg',
-        'images/ad-halo/halo-ad-6.jpg',
-        'images/ad-halo/halo-ad-7.jpg',
-        'images/ad-halo/halo-ad-8.jpg',
-        'images/ad-halo/halo-ad-9.jpg',
-        'images/ad-halo/halo-ad-10.jpg',
-        'images/ad-halo/frag1_BEFORE-AFTER.jpg',
-        'images/ad-halo/frag2_BEFORE-AFTER.jpg',
-        'images/ad-halo/interlock_visual_target_BEFORE-AFTER.jpg',
-        'images/ad-halo/rockridge_vis_target_BEFORE-AFTER.jpg',
-        'images/ad-halo/screenshot06-POc-4k-2-BEFORE-AFTER.jpg',
-        'images/ad-halo/halo-ad-11.jpg',
-        'images/ad-halo/halo-ad-12.jpg',
-        'images/ad-halo/halo-ad-13.jpg',
-        'images/ad-halo/halo-ad-14.jpg',
-        'images/ad-halo/halo-ad-15.jpg',
-        'images/ad-halo/halo-ad-16.jpg',
-        'images/ad-halo/halo-ad-17.jpg',
-        'images/ad-halo/halo-ad-18.jpg',
-        'images/ad-halo/halo-ad-19.jpg',
-        'images/ad-halo/halo-ad-20.jpg',
-        'images/ad-halo/halo-ad-21.jpg',
-        'images/ad-halo/halo-ad-22.jpg',
-        'images/ad-halo/halo-ad-23.jpg',
-        'images/ad-halo/halo-ad-24.jpg',
-        'images/ad-halo/halo-ad-25.jpg',
-        'images/ad-halo/halo-ad-26.jpg',
-
-        // Add more image paths here
-    ];
-
-    currentGallery = images; // Update currentGallery with Halo Infinite images
-
-    images.forEach((imgSrc, index) => {
-        const imgElement = document.createElement('img');
-        imgElement.src = imgSrc;
-        imgElement.alt = `Halo Infinite Image ${index + 1}`;
-        imgElement.loading = 'lazy'; // Add lazy loading attribute
-        imgElement.onclick = () => openLightbox(index);
-
-        imageContainer.appendChild(imgElement);
-    });
-
-    imageContainer.style.display = 'flex'; // Ensure the container is displayed
-    document.getElementById('pdf-viewer').style.display = 'none'; // Hide PDF viewer
-    document.getElementById('gameplay-videos').style.display = 'none'; // Hide Gameplay videos
-    setActiveButton('art-direction-samples', document.querySelector('button[data-type="HALO-INFINITE"]'));
-};
-
-const loadGameplay = () => {
-    const gameplayContainer = document.getElementById('gameplay-videos');
-    gameplayContainer.style.display = 'block'; // Show Gameplay videos
-    document.getElementById('halo-infinite-images').style.display = 'none'; // Hide Halo Infinite images
-    document.getElementById('pdf-viewer').style.display = 'none'; // Hide PDF viewer
-
-    setActiveButton('art-direction-samples', document.querySelector('button[data-type="GAMEPLAY"]'));
-};
-
-const openLightbox = (index) => {
-    currentIndex = index;
+function openLightbox(index) {
     const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-    lightboxImage.src = currentGallery[currentIndex];
-    lightbox.style.display = 'flex';
-};
-
-const closeLightbox = () => {
-    document.getElementById('lightbox').style.display = 'none';
-};
-
-const navigateLightbox = (direction) => {
+    const lightboxImg = document.getElementById('lightbox-image');
+    currentIndex = index;
+    lightboxImg.src = currentGallery[currentIndex];
+    lightbox.classList.add('open');
+}
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+}
+function navigateLightbox(direction) {
+    if (!currentGallery.length) return;
     currentIndex += direction;
-    if (currentIndex < 0) {
-        currentIndex = currentGallery.length - 1;
-    } else if (currentIndex >= currentGallery.length) {
-        currentIndex = 0;
-    }
-    document.getElementById('lightbox-image').src = currentGallery[currentIndex];
-};
+    if (currentIndex < 0) currentIndex = currentGallery.length - 1;
+    else if (currentIndex >= currentGallery.length) currentIndex = 0;
+    const lightboxImage = document.getElementById('lightbox-image');
+    if (lightboxImage) lightboxImage.src = currentGallery[currentIndex];
+}
 
+// Keyboard and click events for lightbox
 document.addEventListener('keydown', (event) => {
     const lightbox = document.getElementById('lightbox');
-    if (lightbox.style.display === 'flex') {
-        if (event.key === 'ArrowLeft') {
-            navigateLightbox(-1);
-        } else if (event.key === 'ArrowRight') {
-            navigateLightbox(1);
-        } else if (event.key === 'Escape') {
-            closeLightbox();
-        }
+    if (lightbox && lightbox.classList.contains('open')) {
+        if (event.key === 'ArrowLeft') navigateLightbox(-1);
+        else if (event.key === 'ArrowRight') navigateLightbox(1);
+        else if (event.key === 'Escape') closeLightbox();
     }
 });
-
 document.addEventListener('click', (event) => {
     const lightbox = document.getElementById('lightbox');
-    if (event.target === lightbox) {
-        closeLightbox();
-    }
+    if (lightbox && event.target === lightbox) closeLightbox();
 });
 
-// Show or hide the button based on scroll position
+// Optional: Back to top button (if you use one)
 window.onscroll = function() {
     const backToTopButton = document.getElementById('backToTop');
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        backToTopButton.style.display = 'block';
-    } else {
-        backToTopButton.style.display = 'none';
+    if (backToTopButton) {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            backToTopButton.style.display = 'block';
+        } else {
+            backToTopButton.style.display = 'none';
+        }
     }
 };
-
-// Scroll to the top of the page when the button is clicked
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightbox-image');
+  if (lightbox) {
+    lightbox.addEventListener('click', function(e) {
+      // Only close if the user clicks the overlay, not the image or nav arrows
+      if (
+        e.target === lightbox ||
+        e.target.classList.contains('lightbox')
+      ) {
+        closeLightbox();
+      }
+    });
+    // Prevent closing when clicking the image itself
+    if (lightboxImage) {
+      lightboxImage.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+    }
+  }
+});
 

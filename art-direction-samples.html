@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <title>Darren Bacon</title>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Darren Bacon, Art Director (Game Dev) and Concept Artist. Art Direction Samples.">
+    <title>Darren Bacon | Art Direction Samples</title>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="scripts.js" defer></script>
 </head>
@@ -16,8 +17,8 @@
                 <a href="index.html">[<span class="plus-yellow">+</span>] DARREN BACON</a>
             </div>
             <nav class="main-nav">
-                <a href="index.html" class="nav-tab active">CONCEPT</a>
-                <a href="art-direction-samples.html" class="nav-tab">ART DIRECTION</a>
+                <a href="index.html" class="nav-tab">CONCEPT</a>
+                <a href="art-direction-samples.html" class="nav-tab active">ART DIRECTION</a>
                 <a href="game-dev.html" class="nav-tab">DEV</a>
                 <a href="about.html" class="nav-tab">ABOUT</a>
                 <a href="contact.html" class="nav-tab">CONTACT</a>
@@ -25,33 +26,33 @@
         </div>
     </header>
     <main class="wrapper">
-
-
-
-        <div id="gallery-container">
-            <h2 class="section-title">Concept Samples</h2>
+        <div id="art-direction-samples-gallery" class="gallery-section">
+            <h2 class="section-title">Art Direction Samples</h2>
             <div class="gallery-tabs">
-                <button data-type="HALO" onclick="loadGallery('HALO')" class="active">HALO</button>
-                <button data-type="DEADROP" onclick="loadGallery('DEADROP')">DEADROP</button>
-                <button data-type="DESTINY" onclick="loadGallery('DESTINY')">DESTINY</button>
-                <button data-type="DISNEY" onclick="loadGallery('DISNEY')">DISNEY</button>
-                <button data-type="OTHER" onclick="loadGallery('OTHER')">OTHER</button>
+                <button data-type="HALO-INFINITE" onclick="loadHaloInfiniteImages()">Halo Infinite</button>
+                <button data-type="GAMEPLAY" onclick="loadGameplay()">Gameplay</button>
             </div>
             <div class="gallery-wrapper">
-                <div class="gallery" id="concept-gallery">
-                    <!-- .gallery-item elements are injected by JS -->
+                <div class="gallery" id="art-direction-gallery"></div>
+                <div id="halo-infinite-images" class="image-column" style="display: none;">
+                    <!-- Images will be dynamically loaded here -->
+                </div>
+                <div id="gameplay-videos" class="video-column" style="display: none;">
+                    <div class="video-item">
+                        <h3>DEADROP</h3>
+                        <iframe class="responsive-iframe" src="https://www.youtube.com/embed/TD6QNkpg31Y?controls=1&modestbranding=1&rel=0&showinfo=0&mute=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <p>Work in progress in-game footage.</p>
+                    </div>
+                    <div class="video-item">
+                        <h3>Halo Infinite MP</h3>
+                        <iframe class="responsive-iframe" src="https://www.youtube.com/embed/4i86Ckj8xKk?controls=1&modestbranding=1&rel=0&showinfo=0&mute=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <p>Halo Infinite Multiplayer gameplay trailer.</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- Lightbox -->
-        <div id="lightbox" class="lightbox">
-            <span class="close" onclick="closeLightbox()">&times;</span>
-            <img class="lightbox-content" id="lightbox-image">
-            <a class="prev" onclick="navigateLightbox(-1)">&#10094;</a>
-            <a class="next" onclick="navigateLightbox(1)">&#10095;</a>
-        </div>
 
-    <pre class="ascii-hr">
+        <pre class="ascii-hr">
 +----------------------------------------------------------------------------+
 </pre>
 
@@ -72,7 +73,7 @@
         <a href="https://baconsbytes.tumblr.com/" target="_blank">[Tumblr]</a>
         <a href="https://www.threads.net/@artofbacon" target="_blank">[Threads]</a>
     </div>
-</div>    
+</div>
 
         <footer>
             <p>© Darren Bacon, 2025 | email: <a href="mailto:darren@darrenbacon.com">darren@darrenbacon.com</a> | <a href="https://www.darrenbacon.com">www.darrenbacon.com</a></p>
