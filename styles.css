@@ -137,11 +137,21 @@ body {
   line-height: 1.7;
 }
 
+/* Main nav: remove visited color, always white unless hovered/active */
+.main-nav a,
+.main-nav a:visited {
+  color: #fff;
+  background: #111;
+  border: 1px dashed #fff;
+  text-decoration: none;
+}
+
+/* Active/hover state stays yellow */
 .main-nav a.active,
 .main-nav a:hover {
   background: #bdff54;
   color: #181818;
-  border-bottom: none;
+  border-color: #bdff54;
 }
 
 .main-nav a.nav-highlight {
