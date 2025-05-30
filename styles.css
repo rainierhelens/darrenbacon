@@ -142,7 +142,6 @@ body {
 .main-nav a:visited {
   color: #fff;
   background: #111;
-  border: 1px dashed #fff;
   text-decoration: none;
 }
 
