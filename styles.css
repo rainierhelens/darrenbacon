@@ -51,12 +51,12 @@ body {
 #header-container {
   position: fixed;
   top: 0;
-  left: 60px;
-  width: calc(100vw - 60px);
+  left: 60px; /* <-- update this from 60px to 55px */
+  width: calc(100vw - 60px); /* <-- update this from 60px to 55px */
   z-index: 1500;
   background: #111;
   color: #fff;
-  height: 48px; /* or your preferred height */
+  height: 60px; /* or your preferred height */
   display: flex;
   align-items: center; /* Center children vertically */
   border-bottom: 1px solid #fff;
@@ -724,9 +724,8 @@ footer a:hover {
   justify-content: flex-start;
   align-items: center;
   gap: 0.2em;
-  margin: 0 0 1.5em calc(60px + 4.25vw); /* 60px for left bar + header padding */
-  padding-top: 0.7em;
-  border-bottom: 1px solid #222;
+  margin: 0 0 1.5em calc(60px + 4vw); /* keep as needed */
+  padding-top: 0; /* <-- change this */
   background: #111;
 }
 
@@ -791,7 +790,7 @@ body a:not(.nav-tab):not(.title-block a):not(.plus-yellow):visited {
   position: fixed;
   left: 0;
   top: 0;
-  width: 60px;
+  width: 55px;
   height: 100vh;
   background: #bdff54;
   z-index: 2000;
@@ -808,6 +807,11 @@ body a:not(.nav-tab):not(.title-block a):not(.plus-yellow):visited {
 .left-bar-content {
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* vertical centering */
+  height: 100%;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   color: #181818;
@@ -816,6 +820,24 @@ body a:not(.nav-tab):not(.title-block a):not(.plus-yellow):visited {
   letter-spacing: 2px;
   margin-bottom: 2em;
   text-align: center;
+}
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-align: center;
+  width: 100%;
+  display: inline; /* <-- Change from flex/column to inline */
+  align-items: center;
+  justify-content: center;
+}
+
+.left-bar-name {
+  font-weight: bold;
+  font-size: 1.1em;
+  letter-spacing: 2px;
+  margin: 1em 0 0 0;
+  font-family: 'IBM Plex Mono', monospace;
 }
 
 /* Discord floating button top right */
@@ -847,6 +869,16 @@ a.discord-btn {
 a.discord-btn:hover {
   background: #4db6ac;
   color: #fff !important;
+}
+
+.corner-gif {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  z-index: 5001; /* Above sidebar and header */
+  pointer-events: none; /* So it doesn't block clicks */
 }
 
 

@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <meta name="description" content="Game Development by Darren Bacon.">
-    <title>Darren Bacon | Game Dev</title>
-    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <title>Darren Bacon</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="scripts.js" defer></script>
 </head>
@@ -18,39 +17,48 @@
                 <a href="index.html">[<span class="plus-yellow">+</span>] DARREN BACON</a>
             </div>
             <nav class="main-nav">
-                <a href="concept.html" class="nav-tab">CONCEPT</a>
+                <a href="index.html" class="nav-tab active">CONCEPT</a>
                 <a href="art-direction-samples.html" class="nav-tab">ART DIRECTION</a>
-                <a href="game-dev.html" class="nav-tab active">DEV</a>
+                <a href="game-dev.html" class="nav-tab">DEV</a>
                 <a href="about.html" class="nav-tab">ABOUT</a>
                 <a href="contact.html" class="nav-tab">CONTACT</a>
             </nav>
-            <a href="https://www.instagram.com/artofbacon/" class="discord-btn" id="rotating-btn" target="_blank">Instagram [↗]</a>
+     
+            <a href=" https://www.instagram.com/artofbacon/" class="discord-btn" id="rotating-btn" target="_blank">Instagram [↗]</a>
         </div>
     </header>
-
-    <div class="left-bar">
-        <div class="left-bar-content">
-            <span class="vertical-text">:: GAME DEVELOPMENT | CONCEPT ART \\ </span>
-            <!-- Add icons or SVGs here if needed -->
-        </div>
-    </div>
-
     <main class="wrapper">
+        <div class="left-bar">
+  <div class="left-bar-content">
+    <span class="vertical-text">:: GAME DEVELOPMENT | CONCEPT ART \\ </span>
+    <!-- Add icons or SVGs here if needed -->
+  </div>
+</div>
 
-        <pre class="ascii-art">
- ________  ________  _____ ______   _______           ________  _______   ___      ___ 
-|\   ____\|\   __  \|\   _ \  _   \|\  ___ \         |\   ___ \|\  ___ \ |\  \    /  /|
-\ \  \___|\ \  \|\  \ \  \\\__\ \  \ \   __/|        \ \  \_|\ \ \   __/|\ \  \  /  / /
- \ \  \  __\ \   __  \ \  \\|__| \  \ \  \_|/__       \ \  \ \\ \ \  \_|/_\ \  \/  / / 
-  \ \  \|\  \ \  \ \  \ \  \    \ \  \ \  \_|\ \       \ \  \_\\ \ \  \_|\ \ \    / /  
-   \ \_______\ \__\ \__\ \__\    \ \__\ \_______\       \ \_______\ \_______\ \__/ /   
-    \|_______|\|__|\|__|\|__|     \|__|\|_______|        \|_______|\|_______|\|__|/    
+        <div id="gallery-container">
+            <h2 class="section-title">Concept Samples</h2>
+            <div class="gallery-tabs">
+                <button data-type="HALO" onclick="loadGallery('HALO')" class="active">HALO</button>
+                <button data-type="DEADROP" onclick="loadGallery('DEADROP')">DEADROP</button>
+                <button data-type="DESTINY" onclick="loadGallery('DESTINY')">DESTINY</button>
+                <button data-type="DISNEY" onclick="loadGallery('DISNEY')">DISNEY</button>
+                <button data-type="OTHER" onclick="loadGallery('OTHER')">OTHER</button>
+            </div>
+            <div class="gallery-wrapper">
+                <div class="gallery" id="concept-gallery">
+                    <!-- .gallery-item elements are injected by JS -->
+                </div>
+            </div>
+        </div>
+        <!-- Lightbox -->
+        <div id="lightbox" class="lightbox">
+            <span class="close" onclick="closeLightbox()">&times;</span>
+            <img class="lightbox-content" id="lightbox-image">
+            <a class="prev" onclick="navigateLightbox(-1)">&#10094;</a>
+            <a class="next" onclick="navigateLightbox(1)">&#10095;</a>
+        </div>
 
-        </pre>
-
-        <p>Coming Soon.</p>
-
-<pre class="ascii-hr">
+    <pre class="ascii-hr">
 +----------------------------------------------------------------------------+
 </pre>
 
@@ -71,7 +79,7 @@
         <a href="https://baconsbytes.tumblr.com/" target="_blank">[Tumblr]</a>
         <a href="https://www.threads.net/@artofbacon" target="_blank">[Threads]</a>
     </div>
-</div>
+</div>    
 
         <footer>
             <p>© Darren Bacon, 2025 | email: <a href="mailto:darren@darrenbacon.com">darren@darrenbacon.com</a> | <a href="https://www.darrenbacon.com">www.darrenbacon.com</a></p>
