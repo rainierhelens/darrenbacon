@@ -943,6 +943,10 @@ a.discord-btn:hover {
   background: #fff;
 }
 
+.content-grid, .content-grid * {
+  font-family: 'IBM Plex Mono', monospace !important;
+}
+
 .grid-item {
   background: #fff;
   min-height: 200px;
