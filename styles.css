@@ -51,12 +51,12 @@ body {
 #header-container {
   position: fixed;
   top: 0;
-  left: 60px; /* <-- update this from 60px to 55px */
-  width: calc(100vw - 60px); /* <-- update this from 60px to 55px */
+  left: 55px; /* Match .left-bar width */
+  width: calc(100vw - 55px); /* Match .left-bar width */
   z-index: 1500;
   background: #111;
   color: #fff;
-  height: 60px; /* or your preferred height */
+  height: 55px; /* Set to 55px to match .left-bar and .corner-gif */
   display: flex;
   align-items: center; /* Center children vertically */
   border-bottom: 1px solid #fff;
@@ -79,7 +79,6 @@ body {
 .title-block {
   flex: 0 0 auto;
   text-align: left;
-  padding-left: 0;
   display: flex;
   align-items: center; /* Center title vertically */
   height: 100%;
@@ -95,13 +94,11 @@ body {
   transition: color 0.18s;
 }
 
-.title-block a .plus-yellow {
-  color: #bdff54;
-  font-weight: normal;
-}
 
-.title-block a:hover {
-  color: #bdff54;                /* Same yellow as nav hover */
+
+.title-block a:hover,
+.title-block a:focus {
+  color: #181818 !important;
 }
 
 /* Main nav left, smaller font */
@@ -458,7 +455,8 @@ footer a:hover {
 
 .gallery-item:hover {
   border: 2px solid #bdff54; /* Yellow border on hover */
-  box-shadow: 0 0 0 3px #181818, 0 0 0 5px #bdff54;
+  /* Remove box-shadow for single border */
+  box-shadow: none;
   z-index: 2;
 }
 
@@ -875,11 +873,389 @@ a.discord-btn:hover {
   position: fixed;
   top: 0;
   left: 0;
-  width: 60px;
-  height: 60px;
-  z-index: 5001; /* Above sidebar and header */
-  pointer-events: none; /* So it doesn't block clicks */
+  width: 55px;   /* Match .left-bar width */
+  height: 55px;  /* Keep it square */
+  z-index: 5001;
+  pointer-events: none;
 }
+
+.video-bg-container {
+  position: relative;
+  width: 100vw;
+  height: 56.25vw; /* Adjust for aspect ratio, e.g. 16:9 = 56.25vw */
+  min-height: 320px;
+  max-height: 80vh;
+  overflow: hidden;
+  margin-left: 0 !important; /* Remove any left margin */
+}
+
+.video-bg-aspect {
+  position: relative;
+  width: 100vw;
+  height: 0;
+  padding-top: 56.25%; /* Makes the video area taller */
+  overflow: hidden;
+}
+
+.video-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100%;
+  background: rgba(0,0,0,0.25); /* Optional: darken video for text contrast */
+  z-index: 2;
+}
+
+.video-headline {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: 100vw;
+  text-align: center;
+  color: #fff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 3vw;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 12px #000;
+  pointer-events: none;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, minmax(200px, 1fr));
+  gap: 0;
+  width: calc(100vw - 55px);
+  margin-left: 55px; /* account for left-bar */
+  background: #fff;
+}
+
+.grid-item {
+  background: #fff;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.2em;
+}
+
+.big-headline {
+  width: calc(100vw - 55px);
+  margin-left: 55px;
+  height: 18vw; /* or set to match your grid row height */
+  display: flex;
+  align-items: center;   /* vertical centering */
+  justify-content: flex-start; /* left align text */
+  font-family: 'Bebas Neue', 'Arial Black', Arial, sans-serif;
+  font-size: clamp(2.5rem, 7vw, 7rem);
+  font-weight: 900;
+  letter-spacing: 2px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #000;
+  background: #fff;
+  text-align: left;
+  padding: 0 0.5em;
+  box-sizing: border-box;
+}
+
+.social-links pre {
+  font-family: 'IBM Plex Mono', 'Fira Mono', monospace;
+  font-size: .9em;
+  background: none;
+  color: #bdff54;
+  margin: 0;
+  padding: 1.2em 1.2em 1.2em 0.8em;
+  line-height: 1.7;
+  white-space: pre;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 0 #000, 0 0 2px #222;
+  padding-left: 50px;
+
+}
+
+.social-links a {
+  color: #bdff54;
+  background: none;
+  text-decoration: none;
+  padding: 0 2px;
+  transition: background 0.15s, color 0.15s;
+  font-family: 'IBM Plex Mono', monospace;
+  box-shadow: 0 1px 0 #000;
+}
+
+.social-links a:hover,
+.social-links a:focus {
+  background: #bdff54 !important;
+  color: #181818 !important;
+  outline: none;
+  text-decoration: none;
+  text-shadow: none !important; /* Remove shadow on hover */
+}
+
+.grid-item.social-links {
+  background: #181818 !important;
+  border: 1px solid #222;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.content-2 {
+  position: relative;
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.content2-gif {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.read-more-btn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  background: #181818;
+  color: #ffffff;
+  border: 2px solid #181818;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.25em;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-decoration: none;
+  padding: 0.7em 2em 0.7em 1.5em;
+  transition: border-color 0.18s, color 0.18s;
+  box-shadow: none;
+  text-align: center;
+  display: inline-block;
+  z-index: 2;
+  outline: none;
+  border-radius: 0;
+}
+
+.read-more-btn .arrow {
+  font-size: 1.1em;
+  margin-left: 0.5em;
+  vertical-align: middle;
+}
+
+.read-more-btn:hover,
+.read-more-btn:focus {
+  border: 2px solid #bdff54;
+  color: #bdff54 !important;
+  background: #181818;
+  text-decoration: none !important;
+}
+
+.read-more-btn:hover .arrow,
+.read-more-btn:focus .arrow {
+  color: #bdff54 !important;
+  text-decoration: none !important;
+}
+
+.content-2, .content-2 * {
+  font-family: 'IBM Plex Mono', monospace !important;
+}
+
+.content2-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.8em 1em 0.3em 1em;
+  color: #fff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.3em;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  background: linear-gradient(to bottom, rgba(24,24,24,0.92) 80%, transparent 100%);
+  z-index: 3;
+  text-shadow: 0 2px 8px #000, 0 1px 0 #181818;
+  box-sizing: border-box;
+  text-align: left;
+  border-bottom: 1px dashed #bdff54;
+}
+
+.read-more-btn,
+.read-more-btn:visited,
+.read-more-btn .arrow {
+  color: #fff !important;
+  text-decoration: none !important;
+  font-family: 'IBM Plex Mono', monospace !important;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 1em;
+
+}
+
+.read-more-btn:hover,
+.read-more-btn:focus {
+  border: 2px solid #bdff54;
+  color: #bdff54 !important;
+  background: #181818;
+  text-decoration: none !important;
+}
+
+.read-more-btn:hover .arrow,
+.read-more-btn:focus .arrow {
+  color: #bdff54 !important;
+  text-decoration: none !important;
+}
+
+.content-3 {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.content-3 .content2-gif {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* Shared grid item styling for ASCII-art look */
+.content-4,
+.content-5,
+.content-6 {
+  position: relative;
+  overflow: hidden;
+  background: #ffffff; /* or set a background image for .content-4 if desired */
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* Optional: Add a background image for content-4 */
+.content-4 {
+  position: relative;
+  overflow: hidden;
+  /* background: url('images/about/darren-bacon.jpg') center center/cover no-repeat #181818; */
+  background: #181818;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* Add this if not present */
+.content-4 .content2-gif {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.85; /* adjust as needed */
+  pointer-events: none;
+}
+
+.content-5 {
+  position: relative;
+  overflow: hidden;
+  background: url('images/halo/halo10.jpg') center center/cover no-repeat #181818;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.content-6 {
+  position: relative;
+  overflow: hidden;
+  background: url('images/destiny/destiny7.jpg') center center/cover no-repeat #181818;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* Title at the top (already present as .content2-title) */
+
+/* Button styling is already handled by .read-more-btn and .ascii-btn */
+
+/* Make sure the button is above any background images */
+.content-4 .read-more-btn,
+.content-5 .read-more-btn,
+.content-6 .read-more-btn {
+  z-index: 3;
+}
+
+/* If you add a background image/gif as an <img> (like content2-gif), use: */
+.content-4 .content2-gif,
+.content-5 .content2-gif,
+.content-6 .content2-gif {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.content-4 .content2-title {
+  background: none !important;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100vw;
+  max-width: 100vw;
+}
+
+.about-banner-container {
+  width: 100vw;
+  position: relative;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.about-banner-img {
+  width: 100vw;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  margin: 0;
+  padding: 0;
+}
+
+
 
 
 
