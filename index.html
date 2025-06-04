@@ -4,7 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <title>Darren Bacon</title>
+    <title>Darren Bacon | Art Director & Concept Artist for Halo & Destiny</title>
+    <meta name="description" content="Darren Bacon is an art director and concept artist known for his work on Halo, Destiny, Deadrop, Disney, and more. Explore his portfolio, art direction, and contact information.">
+    <meta name="keywords" content="Darren Bacon, concept artist, art director, Halo, Destiny, Deadrop, Disney, portfolio, game art, AAA games, digital art, Unreal Engine, sci-fi art">
+    <meta name="author" content="Darren Bacon">
+    <meta property="og:title" content="Darren Bacon | Art Director & Concept Artist">
+    <meta property="og:description" content="Portfolio of Darren Bacon, art director and concept artist.">
+    <meta property="og:image" content="https://www.darrenbacon.com/images/about-banner.jpg">
+    <meta property="og:url" content="https://www.darrenbacon.com/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Darren Bacon | Art Director & Concept Artist">
+    <meta name="twitter:description" content="Portfolio of Darren Bacon, art director and concept artist.">
+    <meta name="twitter:image" content="https://www.darrenbacon.com/images/about-banner.jpg">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
@@ -14,16 +26,27 @@
 <img src="images/icon_animation_60pix_.gif" alt="Animated Logo" class="corner-gif">
 <header id="header-container">
   <div class="header">
-    <nav class="main-nav">
-      <div class="title-block">
-        <a href="index.html" class="nav-tab active">[<span class="plus-yellow">+</span>] DARREN BACON</a>
-      </div>
-      <a href="concept.html" class="nav-tab">CONCEPT</a>
-      <a href="art-direction-samples.html" class="nav-tab">ART DIRECTION</a>
-      <a href="game-dev.html" class="nav-tab">DEV</a>
-      <a href="about.html" class="nav-tab">ABOUT</a>
-      <a href="contact.html" class="nav-tab">CONTACT</a>
-    </nav>
+        <nav class="main-nav" id="main-nav">
+            <a href="index.html" class="nav-tab-link">[<span class="plus-yellow">+</span>] DARREN BACON</a>
+            <div class="nav-tab nav-dropdown">
+                <a href="concept.html?gallery=HALO" class="nav-tab">CONCEPT</a>
+                <ul class="dropdown-menu">
+                  <li><a href="concept.html?gallery=HALO">HALO</a></li>
+                  <li><a href="concept.html?gallery=DEADROP">DEADROP</a></li>
+                  <li><a href="concept.html?gallery=DESTINY">DESTINY</a></li>
+                  <li><a href="concept.html?gallery=DISNEY">DISNEY</a></li>
+                  <li><a href="concept.html?gallery=OTHER">OTHER</a></li>
+                </ul>
+            </div>
+            <a href="art-direction-samples.html" class="nav-tab">ART DIRECTION</a>
+            <a href="about.html" class="nav-tab">ABOUT</a>
+            <a href="contact.html" class="nav-tab">CONTACT</a>
+            <button class="hamburger" id="hamburger-btn" aria-label="Open navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
     <a href="https://www.instagram.com/artofbacon/" class="discord-btn" id="rotating-btn" target="_blank">Instagram [↗]</a>
   </div>
 </header>

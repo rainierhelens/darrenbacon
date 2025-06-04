@@ -104,9 +104,8 @@ body {
 /* Main nav left, smaller font */
 .main-nav {
   display: flex;
-  flex: 1 1 auto;
-  justify-content: flex-start; /* left align */
-  align-items: center; /* Center nav vertically */
+  align-items: center;
+  justify-content: flex-start;
   gap: 0.2em;
   background: transparent;
   height: 100%;
@@ -190,6 +189,91 @@ body {
   }
   pre.ascii-art, pre.ascii-divider {
     font-size: 0.85em;
+  }
+}
+
+/* --- MOBILE OPTIMIZATION --- */
+@media (max-width: 800px) {
+  /* Hide left bar and corner gif */
+  .left-bar,
+  .corner-gif {
+    display: none !important;
+  }
+
+  /* Make header full width and not fixed */
+  #header-container {
+    position: static;
+    left: 0;
+    width: 100vw;
+    min-width: 0;
+    height: auto;
+    padding: 0 1em;
+    box-sizing: border-box;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
+    height: auto;
+  }
+
+  .main-nav {
+    flex-wrap: wrap;
+    gap: 0.5em;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .main-nav a,
+  .title-block a {
+    font-size: 1em;
+    padding: 0.5em 0.7em;
+    margin: 0 0.1em;
+    display: inline-block;
+  }
+
+  /* Stack grid items vertically */
+  .content-grid {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    margin-left: 0;
+    background: #fff;
+  }
+  .grid-item {
+    width: 100vw;
+    min-width: 0;
+    min-height: 180px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #eee;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 1em 0.5em;
+  }
+
+  .big-headline {
+    width: 100vw;
+    margin-left: 0;
+    font-size: 2rem;
+    height: auto;
+    padding: 1em 0.5em;
+  }
+
+  /* Adjust video background */
+  .video-bg-container,
+  .video-bg-aspect {
+    width: 100vw !important;
+    min-width: 0;
+    margin-left: 0 !important;
+  }
+}
+
+/* Optional: Make nav scrollable horizontally if too many links */
+@media (max-width: 500px) {
+  .main-nav {
+    overflow-x: auto;
+    white-space: nowrap;
   }
 }
 
@@ -752,6 +836,23 @@ footer a:hover {
   border-radius: 0;
 }
 
+.gallery-tabs select {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1em;
+  padding: 0.4em 1.2em 0.4em 0.7em;
+  border: 2px solid #bdff54;
+  background: #181818;
+  color: #ffe066;
+  border-radius: 0;
+  outline: none;
+  margin-bottom: 1em;
+  margin-top: 0.5em;
+  cursor: pointer;
+}
+.gallery-tabs select:focus {
+  border-color: #ffe066;
+}
+
 /* Only apply this to content links, not nav or title */
 body a:not(.nav-tab):not(.title-block a):not(.plus-yellow),
 body a:not(.nav-tab):not(.title-block a):not(.plus-yellow):visited {
@@ -877,6 +978,7 @@ a.discord-btn:hover {
   height: 55px;  /* Keep it square */
   z-index: 5001;
   pointer-events: none;
+  display: block; /* ensures the border spans the image width */
 }
 
 .video-bg-container {
@@ -1240,23 +1342,95 @@ html, body {
   max-width: 100vw;
 }
 
-.about-banner-container {
-  width: 100vw;
+/* Dropdown styles */
+.nav-dropdown {
   position: relative;
+  display: inline-block; /* <-- This is the key! */
+  vertical-align: middle;
+  flex: none;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
   left: 0;
+  top: 100%; /* Directly below the CONCEPT link */
+  min-width: 160px;
+  background: #181818;
+  border: 2px solid #bdff54;
+  z-index: 3000;
+  list-style: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  border-radius: 0;
+  box-shadow: 0 2px 12px #000;
+  pointer-events: auto;
+  /* Add this: */
+  white-space: nowrap;
+}
+
+.dropdown-menu li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu li a {
+  display: block;
+  color: #ffe066;
+  font-family: 'IBM Plex Mono', monospace;
+  padding: 0.7em 1.2em;
+  text-decoration: none;
+  background: #181818;
+  transition: background 0.18s, color 0.18s;
+}
+
+.dropdown-menu li a:hover {
+  background: #bdff54;
+  color: #181818;
+}
+
+/* Show dropdown on hover or focus-within */
+.nav-dropdown:hover .dropdown-menu,
+.nav-dropdown:focus-within .dropdown-menu {
+  display: block;
+}
+
+/* On mobile, dropdown should be static and always visible when nav is open */
+@media (max-width: 800px) {
+  .dropdown-menu {
+    position: static;
+    border: none;
+    box-shadow: none;
+    width: 100vw;
+    min-width: 0;
+    display: block;
+  }
+}
+
+.nav-tab-link {
+  display: inline-block;
+}
+
+/* About banner full-width, stuck to top */
+.about-banner-container {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  top: 0;
   z-index: 1;
+  overflow: hidden;
 }
 
 .about-banner-img {
+  display: block;
   width: 100vw;
   height: auto;
-  display: block;
+  max-width: none;
   object-fit: cover;
-  margin: 0;
-  padding: 0;
 }
 
 

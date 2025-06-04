@@ -14,37 +14,36 @@
 
 <header id="header-container">
   <div class="header">
-    <nav class="main-nav">
-      <div class="title-block">
-        <a href="index.html" class="nav-tab">[<span class="plus-yellow">+</span>] DARREN BACON</a>
+    <nav class="main-nav" id="main-nav">
+      <a href="index.html" class="nav-tab">[<span class="plus-yellow">+</span>] DARREN BACON</a>
+      <div class="nav-tab nav-dropdown">
+        <a href="concept.html?gallery=HALO" class="nav-tab-link">CONCEPT</a>
+        <ul class="dropdown-menu">
+          <li><a href="concept.html?gallery=HALO">HALO</a></li>
+          <li><a href="concept.html?gallery=DEADROP">DEADROP</a></li>
+          <li><a href="concept.html?gallery=DESTINY">DESTINY</a></li>
+          <li><a href="concept.html?gallery=DISNEY">DISNEY</a></li>
+          <li><a href="concept.html?gallery=OTHER">OTHER</a></li>
+        </ul>
       </div>
-      <a href="concept.html" class="nav-tab active">CONCEPT</a>
       <a href="art-direction-samples.html" class="nav-tab">ART DIRECTION</a>
-      <a href="game-dev.html" class="nav-tab">DEV</a>
       <a href="about.html" class="nav-tab">ABOUT</a>
       <a href="contact.html" class="nav-tab">CONTACT</a>
+      <button class="hamburger" id="hamburger-btn" aria-label="Open navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </nav>
     <a href="https://www.instagram.com/artofbacon/" class="discord-btn" id="rotating-btn" target="_blank">Instagram [↗]</a>
   </div>
 </header>
 
     <main class="wrapper">
-        <div class="left-bar">
-  <div class="left-bar-content">
-    <span class="vertical-text">:: GAME DEVELOPMENT | CONCEPT ART \\ </span>
-    <!-- Add icons or SVGs here if needed -->
-  </div>
-</div>
+
 
         <div id="gallery-container">
             <h2 class="section-title">Concept Samples</h2>
-            <div class="gallery-tabs">
-                <button data-type="HALO" onclick="loadGallery('HALO')" class="active">HALO</button>
-                <button data-type="DEADROP" onclick="loadGallery('DEADROP')">DEADROP</button>
-                <button data-type="DESTINY" onclick="loadGallery('DESTINY')">DESTINY</button>
-                <button data-type="DISNEY" onclick="loadGallery('DISNEY')">DISNEY</button>
-                <button data-type="OTHER" onclick="loadGallery('OTHER')">OTHER</button>
-            </div>
             <div class="gallery-wrapper">
                 <div class="gallery" id="concept-gallery">
                     <!-- .gallery-item elements are injected by JS -->

@@ -8,19 +8,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Concept Samples (index.html)
-    if (document.getElementById('concept-gallery')) {
-        loadGallery('HALO');
-        setActiveButton('concept-samples', document.querySelector('button[data-type="HALO"]'));
-    }
-
     // Art Direction Samples (art-direction-samples.html)
     if (document.getElementById('art-direction-gallery')) {
         loadHaloInfiniteImages();
         setActiveButton('art-direction-samples', document.querySelector('button[data-type="HALO-INFINITE"]'));
     }
+
+    // Hash version
+    if (window.location.hash) {
+        loadGallery(window.location.hash.substring(1));
+    }
+    // Or, for query string version:
+    // const params = new URLSearchParams(window.location.search);
+    // if (params.has('gallery')) loadGallery(params.get('gallery'));
 });
 
+// --- GALLERY DATA ---
 const galleries = {
     'HALO': [
         'images/halo/halo1.jpg',
@@ -233,23 +236,24 @@ const galleries = {
 let currentGallery = [];
 let currentIndex = 0;
 
+// --- GALLERY FUNCTIONS ---
 function setActiveGalleryTab(button) {
     document.querySelectorAll('.gallery-tabs button').forEach(btn => btn.classList.remove('active'));
     button.classList.add('active');
 }
 
-function loadGallery(type) {
+function loadGallery(name) {
     const galleryContainer = document.getElementById('concept-gallery');
     if (!galleryContainer) return;
 
     galleryContainer.innerHTML = '';
-    currentGallery = galleries[type] || [];
+    currentGallery = galleries[name] || [];
     currentGallery.forEach((imgSrc, index) => {
         const imgWrapper = document.createElement('div');
         imgWrapper.classList.add('gallery-item');
         const imgElement = document.createElement('img');
         imgElement.src = imgSrc;
-        imgElement.alt = `${type} concept art`;
+        imgElement.alt = `${name} concept art`;
         imgElement.loading = 'lazy';
         imgElement.onclick = () => openLightbox(index);
         imgWrapper.appendChild(imgElement);
@@ -257,8 +261,14 @@ function loadGallery(type) {
     });
 
     // Set active tab
-    const activeBtn = document.querySelector(`.gallery-tabs button[data-type="${type}"]`);
+    const activeBtn = document.querySelector(`.gallery-tabs button[data-type="${name}"]`);
     if (activeBtn) setActiveGalleryTab(activeBtn);
+
+    window.location.hash = name; // This updates the URL hash
+
+    const url = new URL(window.location);
+    url.searchParams.set('gallery', name);
+    window.history.replaceState({}, '', url);
 }
 
 function openLightbox(index) {
@@ -280,7 +290,7 @@ function navigateLightbox(direction) {
     if (lightboxImage) lightboxImage.src = currentGallery[currentIndex];
 }
 
-// Keyboard and click events for lightbox
+// --- LIGHTBOX EVENTS ---
 document.addEventListener('keydown', (event) => {
     const lightbox = document.getElementById('lightbox');
     if (lightbox && lightbox.classList.contains('open')) {
@@ -294,7 +304,71 @@ document.addEventListener('click', (event) => {
     if (lightbox && event.target === lightbox) closeLightbox();
 });
 
-// Optional: Back to top button (if you use one)
+// --- GALLERY AUTO-LOAD ON concept.html ---
+document.addEventListener('DOMContentLoaded', function() {
+    const galleryContainer = document.getElementById('concept-gallery');
+    if (galleryContainer) {
+        const params = new URLSearchParams(window.location.search);
+        const gallery = params.get('gallery');
+        if (gallery) {
+            loadGallery(gallery);
+        }
+    }
+});
+
+// --- ROTATING SOCIAL LINKS ---
+document.addEventListener('DOMContentLoaded', function() {
+    const links = [
+        { url: "https://www.instagram.com/artofbacon/", label: "INSTAGRAM [↗]" },
+        { url: "https://x.com/artofbacon", label: "X [↗]" },
+        { url: "https://www.youtube.com/conceptdepartment", label: "YOUTUBE [↗]" },
+        { url: "https://www.linkedin.com/in/darrenbacon/", label: "LINKEDIN [↗]" },
+        { url: "https://www.artstation.com/darrenbacon", label: "ARTSTATION [↗]" }
+    ];
+    let idx = 0;
+    const btn = document.getElementById('rotating-btn');
+    if (btn) {
+        setInterval(() => {
+            idx = (idx + 1) % links.length;
+            btn.href = links[idx].url;
+            btn.textContent = links[idx].label;
+        }, 3000);
+    }
+});
+
+// --- HAMBURGER MENU ---
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('hamburger-btn');
+    const nav = document.getElementById('main-nav');
+    if (hamburger && nav) {
+        hamburger.addEventListener('click', function() {
+            nav.classList.toggle('open');
+        });
+    }
+});
+
+// --- LIGHTBOX CLOSE ON OVERLAY CLICK ---
+document.addEventListener('DOMContentLoaded', function() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    if (lightbox) {
+        lightbox.addEventListener('click', function(e) {
+            if (
+                e.target === lightbox ||
+                e.target.classList.contains('lightbox')
+            ) {
+                closeLightbox();
+            }
+        });
+        if (lightboxImage) {
+            lightboxImage.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+    }
+});
+
+// --- OPTIONAL: BACK TO TOP BUTTON ---
 window.onscroll = function() {
     const backToTopButton = document.getElementById('backToTop');
     if (backToTopButton) {
@@ -308,44 +382,4 @@ window.onscroll = function() {
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImage = document.getElementById('lightbox-image');
-  if (lightbox) {
-    lightbox.addEventListener('click', function(e) {
-      // Only close if the user clicks the overlay, not the image or nav arrows
-      if (
-        e.target === lightbox ||
-        e.target.classList.contains('lightbox')
-      ) {
-        closeLightbox();
-      }
-    });
-    // Prevent closing when clicking the image itself
-    if (lightboxImage) {
-      lightboxImage.addEventListener('click', function(e) {
-        e.stopPropagation();
-      });
-    }
-  }
-});
-
-// Rotating Links for Socials
-document.addEventListener('DOMContentLoaded', function() {
-  const links = [
-    { url: "https://www.instagram.com/artofbacon/", label: "INSTAGRAM [↗]" },
-    { url: "https://x.com/artofbacon", label: "X [↗]" },
-    { url: "https://www.youtube.com/conceptdepartment", label: "YOUTUBE [↗]" },
-    { url: "https://www.linkedin.com/in/darrenbacon/", label: "LINKEDIN [↗]" },
-    { url: "https://www.artstation.com/darrenbacon", label: "ARTSTATION [↗]" }
-  ];
-  let idx = 0;
-  const btn = document.getElementById('rotating-btn');
-  setInterval(() => {
-    idx = (idx + 1) % links.length;
-    btn.href = links[idx].url;
-    btn.textContent = links[idx].label;
-  }, 3000); // Change every 3 seconds
-});
 
