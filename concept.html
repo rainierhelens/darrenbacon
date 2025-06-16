@@ -7,18 +7,23 @@
     <title>Darren Bacon</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile.css">
     <script src="scripts.js" defer></script>
 </head>
 <body>
-<img src="images/icon_animation_60pix_.gif" alt="Animated Logo" class="corner-gif">
-
 <header id="header-container">
   <div class="header">
+    <img src="images/icon_animation_60pix_.gif" alt="Animated Logo" class="corner-gif">
+    <button class="hamburger" id="hamburger-btn" aria-label="Open navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <nav class="main-nav" id="main-nav">
-      <a href="index.html" class="nav-tab">[<span class="plus-yellow">+</span>] DARREN BACON</a>
-      <div class="nav-tab nav-dropdown">
-        <a href="concept.html?gallery=HALO" class="nav-tab-link">CONCEPT</a>
-        <ul class="dropdown-menu">
+      <a href="index.html" class="nav-tab-link">[<span class="plus-yellow">+</span>] DARREN BACON</a>
+      <div class="nav-tab nav-dropdown has-submenu">
+        <a href="concept.html?gallery=HALO" class="nav-tab menu-button" tabindex="0">CONCEPT</a>
+        <ul class="dropdown-menu submenu">
           <li><a href="concept.html?gallery=HALO">HALO</a></li>
           <li><a href="concept.html?gallery=DEADROP">DEADROP</a></li>
           <li><a href="concept.html?gallery=DESTINY">DESTINY</a></li>
@@ -26,14 +31,8 @@
           <li><a href="concept.html?gallery=OTHER">OTHER</a></li>
         </ul>
       </div>
-      <a href="art-direction-samples.html" class="nav-tab">ART DIRECTION</a>
       <a href="about.html" class="nav-tab">ABOUT</a>
       <a href="contact.html" class="nav-tab">CONTACT</a>
-      <button class="hamburger" id="hamburger-btn" aria-label="Open navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </nav>
     <a href="https://www.instagram.com/artofbacon/" class="discord-btn" id="rotating-btn" target="_blank">Instagram [↗]</a>
   </div>

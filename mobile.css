@@ -1,0 +1,350 @@
+@media (max-width: 800px) {
+  .main-nav {
+    display: none !important;
+  }
+  .main-nav.open {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    background: #181818 !important; /* Solid dark background */
+    /* Optionally add: */
+    backdrop-filter: none !important; /* Remove any blur if present */
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    position: absolute;
+    top: 55px; /* below header */
+    left: 0;
+    width: 100vw;
+    min-height: 25vh; /* Ensures it covers the whole screen if needed */
+    z-index: 2000;
+  }
+  .hamburger {
+    display: flex !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 55px;
+    align-items: center;
+    z-index: 4000;
+  }
+  #header-container {
+    height: 55px !important; /* Ensure header space is preserved */
+    min-height: 55px !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background: #111;
+    z-index: 1500;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    border-bottom: 1px solid #fff;
+    padding: 0;
+  }
+  .corner-gif {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 55px;
+    height: 55px;
+    z-index: 5001;
+    pointer-events: none;
+    display: block;
+  }
+}
+
+@media (max-width: 500px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+  .main-nav {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .gallery {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for very small screens */
+  }
+}
+
+/* MOBILE STYLES */
+@media (max-width: 768px) {
+  .menu-list {
+    flex-direction: column;
+  }
+
+  .submenu {
+    position: static;
+    border: none;
+  }
+
+  .has-submenu.open .submenu {
+    display: block;
+  }
+
+  .menu-button::after {
+    content: ' +';
+  }
+
+  .has-submenu.open .menu-button::after {
+    content: ' -';
+  }
+}
+
+@media (min-width: 768px) {
+  .has-submenu:hover .submenu {
+    display: block;
+  }
+}
+
+@media (max-width: 800px) {
+  .main-nav {
+    overflow-x: visible;
+    white-space: normal;
+  }
+  .main-nav.open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background: #181818 !important;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    padding: 0; /* Remove extra padding */
+  }
+  .nav-tab,
+  .nav-tab-link,
+  .nav-dropdown {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin: 0;
+    padding: 0.85em 1.2em; /* Slightly less vertical padding */
+    box-sizing: border-box;
+    font-size: 1em;
+    border-bottom: 1px solid #222;
+    background: none; /* Remove background so parent fills in */
+  }
+  .nav-tab:last-child,
+  .nav-tab-link:last-child,
+  .nav-dropdown:last-child {
+    border-bottom: none;
+  }
+  .content-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: repeat(3, 1fr) !important;
+    gap: 0.5em !important;
+    width: 100vw !important;
+    margin-left: 0 !important;
+    background: #fff !important;
+    font-size: 0.85em !important;
+  }
+  .grid-item {
+    min-width: 0 !important;
+    min-height: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    border-bottom: 1px solid #eee !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    padding: 0.4em 0.1em !important;
+    font-size: 0.95em !important;
+    display: flex !important;
+  }
+  .grid-item.social-links,
+  .grid-item.social-links pre {
+    padding-left: 5% !important; /* Move content about 2/3 from the left */
+    margin-left: 0 !important;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .left-bar {
+    display: none !important;
+  }
+  .corner-gif {
+    left: 0 !important;
+  }
+  .big-headline {
+    margin-left: 0 !important;
+    padding-left: 5 !important;
+    width: 100vw !important;
+    justify-content: flex-start !important;
+    align-items: center !important;      /* Center vertically */
+    padding-top: 1.1em !important;         /* Add space above */
+    padding-bottom: 1em !important;      /* Add space below */
+    min-height: 0;                       /* Remove any forced height if present */
+  }
+  .discord-btn {
+    display: none !important;
+  }
+  .dropdown-menu,
+  .submenu {
+    display: none;
+    padding-left: 0;
+    margin-left: 0;
+    background: #222;
+    border: none;
+    box-shadow: none;
+    position: static;
+  }
+  .has-submenu.open .dropdown-menu,
+  .has-submenu.open .submenu {
+    display: block;
+  }
+  .has-submenu > .menu-button::after {
+    content: ' ▼';
+    font-size: 0.8em;
+  }
+  .has-submenu.open > .menu-button::after {
+    content: ' ▲';
+  }
+  .main-nav > .nav-tab,
+  .main-nav > .nav-tab-link {
+    margin: 0 !important;
+    padding: 1em 1.2em !important;
+    display: block !important;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+  }
+  .nav-dropdown {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+  }
+  .menu-button {
+    width: 100%;
+    text-align: left;
+    padding: 1em 1.2em !important;
+    background: none;
+    border: none;
+    outline: none;
+    font: inherit;
+    margin: 0;
+    display: block;
+  }
+  .dropdown-menu,
+  .submenu {
+    background: #181818 !important;
+    border: 2px solid #bdff54 !important;
+    box-shadow: 0 2px 12px #000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100%;
+    position: static !important;
+    display: none;
+  }
+  .has-submenu.open .dropdown-menu,
+  .has-submenu.open .submenu {
+    display: block !important;
+  }
+  .dropdown-menu li a,
+  .submenu li a {
+    padding: 0.7em 1.2em !important;
+    background: #181818 !important;
+    color: #ffe066 !important;
+    border: none !important;
+    display: block !important;
+    text-align: left !important;
+    font-size: 1em !important;
+  }
+  .dropdown-menu li a:hover,
+  .submenu li a:hover {
+    background: #bdff54 !important;
+    color: #181818 !important;
+  }
+
+  /* Ensure header is fixed at the top */
+  #header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 1500;
+  }
+
+  /* Video background directly below header */
+  .video-bg-container {
+    position: relative !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    height: auto !important;
+    min-height: 0 !important;
+    z-index: 1;
+    display: block !important;
+    overflow: hidden;
+    /* REMOVE top: 55px !important; */
+    padding: 0 !important;
+    margin-top: 55px !important; /* Push video down below header */
+
+  }
+  .video-bg-aspect {
+    width: 100vw !important;
+    height: 56vw !important;        /* 16:9 aspect ratio */
+    max-height: none !important;
+    position: relative !important;
+    display: block !important;
+    overflow: hidden;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .video-bg {
+    width: 100vw !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    display: block !important;
+    z-index: 0;
+    object-fit: cover;
+    pointer-events: none;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #000 !important;
+  }
+
+  .big-headline {
+    margin: 0 !important;
+    padding: 0.7em 0 0.7em 0 !important;
+    width: 100vw !important;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    height: 85px !important;
+    padding-left: 10px !important; /* Add padding to the left */
+  }
+
+  .resume-container,
+  .ascii-section .resume-container {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow-x: auto !important;
+    box-sizing: border-box;
+    padding: 0 0.5em !important;
+  }
+  .resume-container table {
+    width: 100% !important;
+    min-width: 600px; /* or whatever fits your columns */
+    border-collapse: collapse;
+  }
+  .resume-container th,
+  .resume-container td {
+    white-space: nowrap;
+    padding: 0.4em 0.7em;
+    font-size: 0.95em;
+  }
+  .gallery {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for most phones */
+    gap: 0.5em !important;
+  }
+}
+
+@media (max-width: 800px) {
+  .gallery-item::before {
+    background: none !important;
+    opacity: 0 !important;
+  }
+}
+

@@ -383,3 +383,37 @@ function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+  const submenuButtons = document.querySelectorAll(".menu-button");
+
+  submenuButtons.forEach(button => {
+    button.addEventListener("click", function() {
+      const parentLi = this.parentElement;
+      
+      // Close other open submenus on desktop
+      if (window.innerWidth >= 768) {
+        document.querySelectorAll(".has-submenu").forEach(li => {
+          if (li !== parentLi) li.classList.remove("open");
+        });
+      }
+
+      parentLi.classList.toggle("open");
+    });
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  const submenuButtons = document.querySelectorAll(".menu-button");
+
+  submenuButtons.forEach(button => {
+    button.addEventListener("click", function(e) {
+      if (window.innerWidth < 768) {
+        // Only toggle on mobile
+        e.preventDefault();
+        const parentLi = this.parentElement;
+        parentLi.classList.toggle("open");
+      }
+    });
+  });
+});
+

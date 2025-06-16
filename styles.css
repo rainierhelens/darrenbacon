@@ -7,14 +7,7 @@
   --accent: #ffffff;
   --accent2: #4db6ac;
   --accent3: #bdff54;
-  --border: #222;a {
-  color: #00FFF7  ; /* Example: a bright yellow, change as desired */
-  text-decoration: underline;
-}
-
-a:hover {
-  color: #4db6ac; /* Or another accent for hover */
-}
+  --border: #222;
   --border2: #333;
 }
 
@@ -99,6 +92,7 @@ body {
 .title-block a:hover,
 .title-block a:focus {
   color: #181818 !important;
+  background: #bdff54 !important;
 }
 
 /* Main nav left, smaller font */
@@ -161,121 +155,6 @@ body {
   color: #fff;
 }
 
-@media (max-width: 900px) {
-  .wrapper, .header {
-    max-width: 98vw;
-    padding: 0 1vw;
-  }
-  .main-nav {
-    flex-direction: column;
-    gap: 0.2em;
-  }
-  .main-nav a {
-    width: 90vw;
-    text-align: center;
-    font-size: 0.95em;
-  }
-}
-
-@media (max-width: 600px) {
-  .header, .wrapper {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 0 0.5vw;
-  }
-  .main-nav a {
-    font-size: 0.93em;
-    padding: 0.3em 0.3em;
-  }
-  pre.ascii-art, pre.ascii-divider {
-    font-size: 0.85em;
-  }
-}
-
-/* --- MOBILE OPTIMIZATION --- */
-@media (max-width: 800px) {
-  /* Hide left bar and corner gif */
-  .left-bar,
-  .corner-gif {
-    display: none !important;
-  }
-
-  /* Make header full width and not fixed */
-  #header-container {
-    position: static;
-    left: 0;
-    width: 100vw;
-    min-width: 0;
-    height: auto;
-    padding: 0 1em;
-    box-sizing: border-box;
-  }
-
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5em;
-    height: auto;
-  }
-
-  .main-nav {
-    flex-wrap: wrap;
-    gap: 0.5em;
-    width: 100%;
-    justify-content: flex-start;
-  }
-
-  .main-nav a,
-  .title-block a {
-    font-size: 1em;
-    padding: 0.5em 0.7em;
-    margin: 0 0.1em;
-    display: inline-block;
-  }
-
-  /* Stack grid items vertically */
-  .content-grid {
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
-    margin-left: 0;
-    background: #fff;
-  }
-  .grid-item {
-    width: 100vw;
-    min-width: 0;
-    min-height: 180px;
-    box-sizing: border-box;
-    border-bottom: 1px solid #eee;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 1em 0.5em;
-  }
-
-  .big-headline {
-    width: 100vw;
-    margin-left: 0;
-    font-size: 2rem;
-    height: auto;
-    padding: 1em 0.5em;
-  }
-
-  /* Adjust video background */
-  .video-bg-container,
-  .video-bg-aspect {
-    width: 100vw !important;
-    min-width: 0;
-    margin-left: 0 !important;
-  }
-}
-
-/* Optional: Make nav scrollable horizontally if too many links */
-@media (max-width: 500px) {
-  .main-nav {
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-}
 
 /* ASCII-art section dividers */
 .ascii-divider, .ascii-art {
@@ -414,17 +293,7 @@ a:hover {
   color: #4db6ac;
 }
 
-@media (max-width: 700px) {
-  .ascii-art, .ascii-banner, .ascii-divider, .ascii-table, .ascii-box, .ascii-links, .ascii-footer {
-    font-size: 0.85em;
-    padding-left: 0;
-    padding-right: 0;
-    max-width: 100vw;
-  }
-  table, th, td {
-    font-size: 0.85em;
-  }
-}
+
 
 /* Links Section */
 #links-container {
@@ -1387,7 +1256,7 @@ html, body {
 
 .dropdown-menu li a:hover {
   background: #bdff54;
-  color: #181818;
+  color: #181818 !important; /* Make text black on hover */
 }
 
 /* Show dropdown on hover or focus-within */
@@ -1396,17 +1265,7 @@ html, body {
   display: block;
 }
 
-/* On mobile, dropdown should be static and always visible when nav is open */
-@media (max-width: 800px) {
-  .dropdown-menu {
-    position: static;
-    border: none;
-    box-shadow: none;
-    width: 100vw;
-    min-width: 0;
-    display: block;
-  }
-}
+
 
 .nav-tab-link {
   display: inline-block;
@@ -1433,14 +1292,31 @@ html, body {
   object-fit: cover;
 }
 
+/* Hide hamburger on desktop, show on mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 4000;
+}
+.hamburger span {
+  display: block;
+  width: 28px;
+  height: 4px;
+  margin: 4px 0;
+  background: #fff;
+  border-radius: 2px;
+  transition: 0.3s;
+}
 
-
-
-
-
-
-
-
-
-
-
+.main-nav a.nav-tab-link:hover,
+.main-nav a.nav-tab-link:focus {
+  color: #181818 !important;
+  background: #bdff54 !important;
+}
