@@ -1,5 +1,5 @@
-/* Import IBM Plex Mono for a terminal/ASCII look */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 :root {
   --bg: #0a0a0a;
@@ -18,8 +18,7 @@ html {
 body {
   background: #131313;
   color: #e0e0e0;
-  font-family: 'IBM Plex Mono', monospace;
-  margin: 0;
+  font-family: 'JetBrains Mono', monospace;  margin: 0;
   padding: 0;
   font-size: 0.88em;
   background-image:
@@ -27,6 +26,17 @@ body {
     radial-gradient(rgba(255, 255, 255, 0.062) 1px, transparent 0);
   background-size: 24px 24px, 12px 12px;
   background-position: 0 0, 6px 6px;
+}
+
+body.about-page {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1em;
+  line-height: 1.6;
+}
+
+body.about-page .ascii-box,
+body.about-page .resume-section {
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .wrapper {
@@ -86,7 +96,6 @@ body {
   font-family: 'IBM Plex Mono', monospace;
   transition: color 0.18s;
 }
-
 
 
 .title-block a:hover,
@@ -293,8 +302,6 @@ a:hover {
   color: #4db6ac;
 }
 
-
-
 /* Links Section */
 #links-container {
   width: 100%;
@@ -449,8 +456,6 @@ footer a:hover {
 .gallery-item:hover::after {
   opacity: 1;
 }
-
-
 
 /* Make sure overlay is on top and does not shift layout */
 .gallery-item {
@@ -769,8 +774,6 @@ body a:not(.nav-tab):not(.title-block a):not(.plus-yellow):visited {
   border-right: 1px solid #222;
   overflow: hidden;
 }
-
-
 
 .left-bar-content {
   position: relative;
@@ -1265,8 +1268,6 @@ html, body {
   display: block;
 }
 
-
-
 .nav-tab-link {
   display: inline-block;
 }
@@ -1319,4 +1320,60 @@ html, body {
 .main-nav a.nav-tab-link:focus {
   color: #181818 !important;
   background: #bdff54 !important;
+}
+
+body.about-page,
+body.about-page * {
+  font-family: Arial, Helvetica, sans-serif !important;
+  line-height: 1.65;
+}
+
+body.about-page pre,
+body.about-page code,
+body.about-page table,
+body.about-page .ascii-box,
+body.about-page .ascii-divider,
+body.about-page .ascii-hr,
+body.about-page .resume-section pre {
+  font-family: 'IBM Plex Mono', monospace !important;
+}
+body.about-page .ascii-box,
+body.about-page .ascii-section,
+body.about-page .resume-container,
+body.about-page .resume-section,
+body.about-page p,
+body.about-page div {
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 1.05em !important;
+  line-height: 1.65 !important;
+}
+
+body.about-page .main-nav,
+body.about-page .main-nav a,
+body.about-page .title-block a,
+body.about-page .header,
+body.about-page #header-container {
+  font-family: 'IBM Plex Mono', monospace !important;
+}
+body.about-page .main-nav,
+body.about-page .main-nav a,
+body.about-page .title-block a,
+body.about-page #header-container,
+body.about-page .header,
+body.about-page .discord-btn {
+  font-family: 'IBM Plex Mono', monospace !important;
+  font-size: 0.95em !important;
+  letter-spacing: 1.5px !important;
+  line-height: 1.7 !important;
+}
+body.about-page .resume-container,
+body.about-page .resume-section,
+body.about-page .resume-entry,
+body.about-page .resume-entry strong,
+body.about-page .resume-entry span,
+body.about-page table,
+body.about-page table th,
+body.about-page table td,
+body.about-page .ascii-section {
+  font-size: 97% !important;
 }
