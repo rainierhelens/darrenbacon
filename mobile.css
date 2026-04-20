@@ -134,7 +134,7 @@
     gap: 0.5em !important;
     width: 100vw !important;
     margin-left: 0 !important;
-    background: #fff !important;
+    background: transparent !important;
     font-size: 0.85em !important;
   }
   .grid-item {
