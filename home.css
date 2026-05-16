@@ -1,0 +1,248 @@
+/* =============================================
+   HOMEPAGE / INDEX SPECIFIC STYLES
+   ============================================= */
+
+.video-bg-container {
+  position: relative;
+  width: 100vw;
+  height: 56.25vw;
+  min-height: 320px;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+.video-bg-aspect {
+  position: relative;
+  width: 100vw;
+  height: 0;
+  padding-top: 56.25%;
+  overflow: hidden;
+}
+
+.video-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100%;
+  background: rgba(255,255,255,0.15);
+  z-index: 2;
+}
+
+.video-headline {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: 100vw;
+  text-align: center;
+  color: #111;
+  font-family: 'Bebas Neue', 'Arial Black', Arial, sans-serif;
+  font-size: 3vw;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 12px rgba(255,255,255,0.9);
+  pointer-events: none;
+}
+
+/* Content Grid */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  width: calc(100vw - 55px);
+  margin-left: 55px;
+  background: #fff;
+}
+
+.grid-item {
+  background: #fff;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.2em;
+}
+
+.grid-item.social-links {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+}
+
+.social-links pre {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.9em;
+  background: none;
+  color: #0066cc;
+  line-height: 1.7;
+  white-space: pre;
+  padding-left: 50px;
+}
+
+/* Content Cards */
+.content-2, .content-4, .content-5, .content-6 {
+  position: relative;
+  overflow: hidden;
+  background: #f8f8f8;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.content2-gif,
+.content-4 .content2-gif,
+.content-5 .content2-gif,
+.content-6 .content2-gif {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.content2-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.8em 1em 0.3em 1em;
+  color: #111;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.3em;
+  font-weight: bold;
+  background: rgba(255,255,255,0.95);
+  z-index: 3;
+  text-align: left;
+}
+
+.read-more-btn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
+  color: #111;
+  border: 2px solid #111;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 0.7em 2em 0.7em 1.5em;
+  z-index: 3;
+  text-decoration: none;
+}
+
+.read-more-btn:hover {
+  background: #00cc66;
+  color: #111;
+  border-color: #00cc66;
+}
+
+/* ====================== BIG HEADLINE (Index) ====================== */
+.big-headline {
+  width: calc(100vw - 55px);
+  margin-left: 55px;
+  height: 18vw;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: 'Bebas Neue', 'Arial Black', Arial, sans-serif;
+  font-size: clamp(2.8rem, 8vw, 8rem);   /* Made it bigger again */
+  font-weight: 900;
+  letter-spacing: 2px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #000;
+  background: #fff;
+  text-align: left;
+  padding: 0 0.5em;
+  box-sizing: border-box;
+}
+
+/* ====================== LEFT BAR - Vertical + Centered ====================== */
+.left-bar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 55px;
+  height: 100vh;
+  background: #00cc66;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #ddd;
+  overflow: hidden;
+}
+
+.left-bar-content {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  color: #111;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1em;
+  letter-spacing: 2px;
+  text-align: center;
+  line-height: 1.4;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.left-bar-name {
+  font-weight: bold;
+  font-size: 1.12em;
+}
+
+/* ====================== CONTENT CARDS - Background Images ====================== */
+
+/* About Darren Bacon Card */
+.content-4 {
+  background: #181818 url('images/about/darren-bacon-about-3.gif') center center/cover no-repeat;
+}
+
+/* Concept Art Card */
+.content-6 {
+  background: #181818 url('images/destiny/destiny7.jpg') center center/cover no-repeat;
+}
+
+/* If you have a Halo card or others, add them here too */
+.content-5 {
+  background: #181818 url('images/halo/halo10.jpg') center center/cover no-repeat;
+}
+
+/* Ensure gifs/images show correctly */
+.content2-gif {
+  display: none; /* We use background images now */
+}
+
+/* Title overlay */
+.content2-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.8em 1em 0.3em 1em;
+  color: #111;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.3em;
+  font-weight: bold;
+  background: rgba(255,255,255,0.92);
+  z-index: 3;
+  text-align: left;
+}

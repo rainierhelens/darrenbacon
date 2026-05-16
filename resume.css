@@ -1,0 +1,111 @@
+/* ====================== RESUME & TABLES ====================== */
+.resume-container {
+  width: 98%;
+  max-width: 900px;
+  margin: 20px auto;
+  background: transparent;
+  font-size: 1.2em
+}
+
+.resume-section {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  border-left: 4px solid #00cc66;
+  border-radius: 4px;
+  padding: 1.2em;
+  margin-bottom: 1.5em;
+
+}
+
+/* Make resume-entry text use Helvetica / clean sans-serif */
+.resume-entry,
+.resume-entry strong,
+.resume-entry span,
+.resume-entry p,
+.resume-entry ul,
+.resume-entry li {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  font-size: 0.97em;
+}
+
+th, td {
+  padding: 0.5em 0.8em;
+  border: 1px solid #ddd;
+  text-align: left;
+  font-size: 0.97em;
+}
+
+th {
+  background: #f0f0f0;
+  color: #0066cc;
+  font-weight: bold;
+  border-bottom: 2px solid #00cc66;
+}
+
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* Make resume links match the light theme (blue instead of yellow) */
+.resume-container a,
+.resume-container a:visited,
+.resume-section a,
+.resume-section a:visited {
+  color: #0066cc !important;
+}
+
+.resume-container a:hover,
+.resume-section a:hover {
+  color: #00cc66 !important;
+}
+
+/* Make resume content match navigation font */
+body.about-page .resume-container,
+body.about-page .resume-section,
+body.about-page table,
+body.about-page th,
+body.about-page td,
+body.about-page .ascii-divider,
+body.about-page pre,
+body.about-page .resume-entry,
+body.about-page p,
+body.about-page ul,
+body.about-page li {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+/* ====================== LINKS & FONT CONSISTENCY ====================== */
+
+/* Make resume links use the same font as the rest of the page */
+.resume-container a,
+.resume-container a:visited,
+.resume-section a,
+.resume-section a:visited {
+  font-family: Arial, Helvetica, sans-serif!important;
+  color: #0066cc !important;
+}
+
+.resume-container a:hover,
+.resume-section a:hover {
+  color: #00cc66 !important;
+}
+
+/* Overall resume text font (clean and consistent) */
+body.about-page .resume-container,
+body.about-page .resume-section,
+body.about-page table,
+body.about-page th,
+body.about-page td,
+body.about-page .ascii-divider,
+body.about-page pre,
+body.about-page .resume-entry,
+body.about-page p,
+body.about-page ul,
+body.about-page li {
+  font-family: Arial, Helvetica, sans-serif !important;

@@ -1,0 +1,187 @@
+/* =============================================
+   GALLERY + LIGHTBOX + CONCEPT PAGE STYLES
+   ============================================= */
+
+#gallery-container {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding: 0;
+}
+
+.gallery-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  gap: 0.5px;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+.gallery {
+  display: contents;
+}
+
+.gallery-item {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #f8f8f8;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  z-index: 1;
+  border: 0px solid transparent;
+  box-sizing: border-box;
+}
+
+.gallery-item:hover {
+  border: 2px solid #00cc66;
+  z-index: 2;
+}
+
+.gallery-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.2);
+  transition: opacity 0.2s;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.gallery-item:hover::before {
+  opacity: 0;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.4,1.6,0.6,1);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.08);
+}
+
+/* Hover preview text */
+.gallery-item::after {
+  content: "+----------------------+\A|      PREVIEW        |\A+----------------------+";
+  white-space: pre;
+  color: #00cc66;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.9em;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  pointer-events: none;
+  opacity: 0;
+  background: rgba(255,255,255,0.95);
+  padding: 0.2em 0.7em;
+  border: 1px dashed #00cc66;
+  z-index: 2;
+  transition: opacity 0.18s;
+}
+.gallery-item:hover::after {
+  opacity: 1;
+}
+
+/* Gallery Tabs */
+.gallery-tabs {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.2em;
+  margin: 0 0 1.5em calc(60px + 4vw);
+  background: transparent;
+}
+
+.gallery-tabs button {
+  color: #111;
+  background: none;
+  border: none;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.95em;
+  padding: 0.2em 0.7em;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+.gallery-tabs button.active,
+.gallery-tabs button:hover {
+  background: #00cc66;
+  color: #111;
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.9);
+  align-items: center;
+  justify-content: center;
+}
+.lightbox.open { display: flex; }
+
+.lightbox-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+
+.lightbox .close, .lightbox .prev, .lightbox .next {
+  color: #00cc66;
+  font-size: 2.5em;
+  cursor: pointer;
+  z-index: 10;
+}
+.lightbox .close { right: 40px; top: 20px; }
+.lightbox .prev { left: 40px; top: 50%; transform: translateY(-50%); }
+.lightbox .next { right: 40px; top: 50%; transform: translateY(-50%); }
+
+/* Push gallery content below fixed header */
+#gallery-container,
+.gallery-wrapper,
+main.wrapper {
+  padding-top: 20px !important;
+  margin-top: 0 !important;
+}
+
+/* ====================== LIGHTBOX POSITION FIX (Strong Override) ====================== */
+
+.lightbox .close {
+  right: 40px !important;
+  left: auto !important;
+  top: 30px !important;
+}
+
+.lightbox .prev {
+  left: 40px !important;
+  right: auto !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+.lightbox .next {
+  right: 40px !important;
+  left: auto !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Extra force */
+.lightbox .close,
+.lightbox .prev,
+.lightbox .next {
+  position: absolute !important;
+}
