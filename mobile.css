@@ -6,16 +6,14 @@
     display: flex !important;
     flex-direction: column;
     align-items: stretch;
-    background: #181818 !important; /* Solid dark background */
-    /* Optionally add: */
-    backdrop-filter: none !important; /* Remove any blur if present */
-    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    background: #181818 !important;
     position: absolute;
-    top: 55px; /* below header */
+    top: 55px;
     left: 0;
     width: 100vw;
-    min-height: 25vh; /* Ensures it covers the whole screen if needed */
+    min-height: 25vh;
     z-index: 2000;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
   }
   .hamburger {
     display: flex !important;
@@ -27,7 +25,7 @@
     z-index: 4000;
   }
   #header-container {
-    height: 55px !important; /* Ensure header space is preserved */
+    height: 55px !important;
     min-height: 55px !important;
     position: fixed;
     top: 0;
@@ -57,12 +55,8 @@
   .content-grid {
     grid-template-columns: 1fr;
   }
-  .main-nav {
-    overflow-x: auto;
-    white-space: nowrap;
-  }
   .gallery {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns for very small screens */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -101,14 +95,6 @@
     overflow-x: visible;
     white-space: normal;
   }
-  .main-nav.open {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    background: #181818 !important;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
-    padding: 0; /* Remove extra padding */
-  }
   .nav-tab,
   .nav-tab-link,
   .nav-dropdown {
@@ -116,11 +102,11 @@
     width: 100%;
     text-align: left;
     margin: 0;
-    padding: 0.85em 1.2em; /* Slightly less vertical padding */
+    padding: 0.85em 1.2em;
     box-sizing: border-box;
     font-size: 1em;
     border-bottom: 1px solid #222;
-    background: none; /* Remove background so parent fills in */
+    background: none;
   }
   .nav-tab:last-child,
   .nav-tab-link:last-child,
@@ -151,27 +137,21 @@
   }
   .grid-item.social-links,
   .grid-item.social-links pre {
-    padding-left: 5% !important; /* Move content about 2/3 from the left */
+    padding-left: 5% !important;
     margin-left: 0 !important;
-  }
-  .hamburger {
-    display: flex;
   }
   .left-bar {
     display: none !important;
   }
-  .corner-gif {
-    left: 0 !important;
-  }
   .big-headline {
     margin-left: 0 !important;
-    padding-left: 5 !important;
+    padding-left: 5px !important;
     width: 100vw !important;
     justify-content: flex-start !important;
-    align-items: center !important;      /* Center vertically */
-    padding-top: 1.1em !important;         /* Add space above */
-    padding-bottom: 1em !important;      /* Add space below */
-    min-height: 0;                       /* Remove any forced height if present */
+    align-items: center !important;
+    padding-top: 1.1em !important;
+    padding-bottom: 1em !important;
+    min-height: 0;
   }
   .discord-btn {
     display: none !important;
@@ -252,17 +232,6 @@
     background: #bdff54 !important;
     color: #181818 !important;
   }
-
-  /* Ensure header is fixed at the top */
-  #header-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    z-index: 1500;
-  }
-
-  /* Video background directly below header */
   .video-bg-container {
     position: relative !important;
     margin: 0 !important;
@@ -272,14 +241,12 @@
     z-index: 1;
     display: block !important;
     overflow: hidden;
-    /* REMOVE top: 55px !important; */
     padding: 0 !important;
-    margin-top: 55px !important; /* Push video down below header */
-
+    margin-top: 55px !important;
   }
   .video-bg-aspect {
     width: 100vw !important;
-    height: 56vw !important;        /* 16:9 aspect ratio */
+    height: 56vw !important;
     max-height: none !important;
     position: relative !important;
     display: block !important;
@@ -302,7 +269,6 @@
     padding: 0 !important;
     background: #000 !important;
   }
-
   .big-headline {
     margin: 0 !important;
     padding: 0.7em 0 0.7em 0 !important;
@@ -312,9 +278,8 @@
     position: relative;
     z-index: 2;
     height: 85px !important;
-    padding-left: 10px !important; /* Add padding to the left */
+    padding-left: 10px !important;
   }
-
   .resume-container,
   .ascii-section .resume-container {
     width: 100vw !important;
@@ -325,7 +290,7 @@
   }
   .resume-container table {
     width: 100% !important;
-    min-width: 600px; /* or whatever fits your columns */
+    min-width: 600px;
     border-collapse: collapse;
   }
   .resume-container th,
@@ -336,7 +301,7 @@
   }
   .gallery {
     display: grid !important;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns for most phones */
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.5em !important;
   }
 }
@@ -348,3 +313,7 @@
   }
 }
 
+/* Base hamburger (hidden on desktop) */
+.hamburger {
+  display: none;
+}
