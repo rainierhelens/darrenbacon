@@ -1,5 +1,5 @@
 export const shippedGames = [
-  { title: 'Marathon', platform: 'PlayStation / Xbox / Windows', year: '2026', credit: 'Art Lead', company: 'Bungie / Sony', href: 'https://www.mobygames.com/person/310938/darren-bacon/' },
+  { title: 'Marathon', platform: 'PlayStation / Xbox / Windows', year: '2026', credit: 'Commerce & Events Art Lead', company: 'Bungie / Sony', href: 'https://www.mobygames.com/person/310938/darren-bacon/' },
   { title: 'Halo Infinite - Multiplayer', platform: 'Xbox Series / Windows', year: '2021', credit: 'Associate Art Director', company: '343 Industries / Microsoft', href: 'https://www.mobygames.com/game/175521/halo-infinite-multiplayer/' },
   { title: 'Halo Infinite - Campaign', platform: 'Xbox Series / Windows', year: '2021', credit: 'Associate Art Director', company: '343 Industries / Microsoft', href: 'https://www.mobygames.com/game/176543/halo-infinite-campaign/' },
   { title: 'Halo: Fireteam Raven', platform: 'Arcade', year: '2018', credit: 'Special Thanks', company: '343 Industries / Microsoft', href: 'https://www.mobygames.com/game/112604/halo-fireteam-raven/' },
@@ -13,9 +13,10 @@ export const shippedGames = [
 
 export const experience = [
   {
-    role: 'Bungie — Art Lead',
+    role: 'Bungie — Commerce & Events Art Lead',
     period: '2025–present',
-    summary: 'Leading art on Marathon.',
+    summary:
+      'Shaping visual strategy for cosmetics, earnables, live-service events, and commerce in Marathon.',
     shipped: ['Marathon (2026)'],
   },
   {

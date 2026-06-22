@@ -54,6 +54,7 @@ type SnapshotBeforeAfterDefinition = Omit<SnapshotBeforeAfter, 'media'>;
 type SnapshotMediaSectionDefinition = Omit<SnapshotMediaSection, 'media' | 'beforeAfter'> & {
   beforeAfter?: SnapshotBeforeAfterDefinition;
   filenamePattern?: string;
+  excludeFilenamePattern?: string;
 };
 type SnapshotDefinition = Omit<SnapshotEntry, 'media' | 'mediaSections'> & {
   mediaSections?: SnapshotMediaSectionDefinition[];
@@ -165,6 +166,7 @@ const snapshotDefinitions: SnapshotDefinition[] = [
           mediaFolder: 'SSI',
           layout: 'wide',
           filenamePattern: '\\.(mp4|mov|webm|mkv)$',
+          excludeFilenamePattern: '^ms-gcox-ss1-intro-01',
         },
       ],
 
@@ -439,13 +441,21 @@ function resolveMediaSections(
   sections: SnapshotMediaSectionDefinition[],
 ): SnapshotMediaSection[] {
   return sections.map((section) => {
-    const filter = section.filenamePattern
-      ? (name: string) => new RegExp(section.filenamePattern!, 'i').test(name)
-      : undefined;
+    const filter = (name: string) => {
+      if (section.filenamePattern && !new RegExp(section.filenamePattern, 'i').test(name)) {
+        return false;
+      }
+      if (section.excludeFilenamePattern && new RegExp(section.excludeFilenamePattern, 'i').test(name)) {
+        return false;
+      }
+      return section.filenamePattern !== undefined;
+    };
+
+    const hasFilter = section.filenamePattern !== undefined;
 
     return {
       ...section,
-      media: loadFolderMedia(section.mediaFolder, filter),
+      media: loadFolderMedia(section.mediaFolder, hasFilter ? filter : undefined),
       beforeAfter: section.beforeAfter
         ? {
             ...section.beforeAfter,
