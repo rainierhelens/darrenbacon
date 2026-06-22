@@ -78,6 +78,7 @@ export const deadropArtDirection = {
     'Midnight Society was built on a radical idea: ship playable builds early, show the messy middle of game development, and let a community of Founders help steer a new competitive shooter. DEADROP — codename Project Moon — was pitched as the world\'s first Vertical Extraction Shooter: arena-shooter readability at battle-royale scale, with extraction-session stakes layered on top.',
     'Co-founded by Robert Bowling, Quinn DelHoyo, and Guy "Dr. Disrespect" Beahm, the studio assembled veterans from Call of Duty, Halo, and Fortnite. I joined as Art Director to define the visual language of the Refiner States — neon-noir towers where Space Dust is harvested from the stratosphere — and to keep art production aligned as Snapshots landed every few months.',
     'The timeline below follows Snapshots I through VII — from a single weapon and three firing ranges to PvE Cleaners, squad play, vehicular Midnight Ride insertions, and a final 2024 trailer assembled from production footage I captured in-engine.',
+    'What follows is a collection of screenshots, paintovers, and production images from across the team — selected to show the overall visual direction and the honest state of the project at each milestone, not a polished marketing reel.',
   ],
   founding: {
     title: 'Founding Midnight Society',
