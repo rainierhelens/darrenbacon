@@ -1,0 +1,37 @@
+<div
+  id="site-lightbox"
+  class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/95 p-4 backdrop-blur-sm"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Image preview"
+>
+  <button
+    type="button"
+    id="site-lightbox-close"
+    class="absolute right-4 top-4 z-10 rounded-full border border-border/60 px-3 py-1 text-sm text-muted transition hover:text-fg"
+    aria-label="Close preview"
+  >
+    Close
+  </button>
+  <button
+    type="button"
+    id="site-lightbox-prev"
+    class="absolute left-4 top-1/2 z-10 hidden -translate-y-1/2 rounded-full border border-border/60 px-3 py-2 text-sm text-muted transition hover:text-fg sm:inline"
+    aria-label="Previous image"
+  >
+    Prev
+  </button>
+  <button
+    type="button"
+    id="site-lightbox-next"
+    class="absolute right-4 top-1/2 z-10 hidden -translate-y-1/2 rounded-full border border-border/60 px-3 py-2 text-sm text-muted transition hover:text-fg sm:inline"
+    aria-label="Next image"
+  >
+    Next
+  </button>
+  <img id="site-lightbox-image" src="" alt="" class="max-h-[90vh] max-w-[95vw] object-contain" />
+  <p id="site-lightbox-caption" class="absolute bottom-12 hidden max-w-2xl px-4 text-center text-sm text-muted"></p>
+  <p id="site-lightbox-counter" class="absolute bottom-4 text-sm text-muted"></p>
+</div>
+
+<script src="../scripts/lightbox.ts"></script>

@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { conceptGalleries } from '../../data/site';
+import galleries from '../../data/galleries.json';
+---
+
+<BaseLayout title="Concept Art" description="Concept art galleries by Darren Bacon — Halo, Destiny, Disney, DEADROP, and more.">
+  <section class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+    <p class="text-sm tracking-[0.2em] uppercase text-accent">Portfolio</p>
+    <h1 class="mt-2 text-4xl font-semibold tracking-tight">Concept art</h1>
+    <p class="mt-4 max-w-2xl text-muted">
+      Browse work by franchise. Each gallery opens in a fast, full-screen lightbox.
+    </p>
+  </section>
+
+  <section class="mx-auto grid max-w-7xl gap-6 px-6 pb-20 sm:grid-cols-2 lg:grid-cols-3 lg:px-8">
+    {
+      conceptGalleries.map((gallery) => {
+        const key = gallery.slug.toUpperCase();
+        const count = galleries[key as keyof typeof galleries]?.length ?? 0;
+        return (
+          <a
+            href={`/concept/${gallery.slug}`}
+            class="group overflow-hidden rounded-2xl border border-border/60 bg-surface transition hover:border-accent/40"
+          >
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src={gallery.preview}
+                alt={gallery.label}
+                loading="lazy"
+                class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div class="flex items-start justify-between gap-4 p-5">
+              <div>
+                <h2 class="text-xl font-medium">{gallery.label}</h2>
+                <p class="mt-2 text-sm text-muted">{gallery.description}</p>
+              </div>
+              <span class="shrink-0 text-xs tracking-wide text-muted">{count}</span>
+            </div>
+          </a>
+        );
+      })
+    }
+  </section>
+</BaseLayout>

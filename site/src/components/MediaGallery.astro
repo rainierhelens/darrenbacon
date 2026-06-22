@@ -1,0 +1,113 @@
+---
+import type { DeadropMedia } from '../lib/deadrop-media';
+
+interface Props {
+  items: DeadropMedia[];
+  altPrefix?: string;
+  groupId?: string;
+  layout?: 'grid' | 'wide';
+}
+
+const {
+  items,
+  altPrefix = 'Artwork',
+  groupId = `media-${items.length}-${items[0]?.src.slice(-24).replace(/\W/g, '') ?? 'gallery'}`,
+  layout = 'grid',
+} = Astro.props;
+
+const images = items.filter((item) => item.type === 'image');
+const videos = items.filter((item) => item.type === 'video');
+---
+
+<section class="w-full space-y-8" data-lightbox-group={groupId}>
+  {
+    videos.length > 0 && (
+      <div class:list={['grid gap-6', layout === 'wide' ? 'grid-cols-1 lg:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2']}>
+        {
+          videos.map((item) => (
+            <figure class="overflow-hidden rounded-2xl border border-border/60 bg-surface">
+              <video
+                src={item.src}
+                controls
+                playsinline
+                preload="metadata"
+                class="w-full bg-black object-contain"
+              />
+            </figure>
+          ))
+        }
+      </div>
+    )
+  }
+
+  {
+    images.length > 0 && (
+      <div
+        class:list={[
+          layout === 'wide'
+            ? 'grid grid-cols-1 gap-6 lg:grid-cols-2'
+            : 'grid grid-cols-2 gap-px bg-border md:grid-cols-3 lg:grid-cols-4',
+        ]}
+      >
+        {
+          images.map((item, index) =>
+            layout === 'wide' ? (
+              <figure class="overflow-hidden rounded-2xl border border-border/60 bg-surface">
+                <button
+                  type="button"
+                  class="group block w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  data-lightbox-item
+                  data-group={groupId}
+                  data-index={index}
+                  data-src={item.src}
+                  data-caption={item.caption}
+                  data-type="image"
+                  aria-label={item.caption ?? `Open image ${index + 1}`}
+                >
+                  <img
+                    src={item.src}
+                    alt={item.caption ?? `${altPrefix} ${index + 1}`}
+                    loading="lazy"
+                    decoding="async"
+                    draggable="false"
+                    class="pointer-events-none w-full object-contain transition duration-500 group-hover:opacity-90"
+                  />
+                </button>
+              </figure>
+            ) : (
+              <button
+                type="button"
+                class="group relative aspect-square overflow-hidden bg-surface-elevated focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                data-lightbox-item
+                data-group={groupId}
+                data-index={index}
+                data-src={item.src}
+                data-caption={item.caption}
+                data-type="image"
+                aria-label={item.caption ?? `Open image ${index + 1} of ${images.length}`}
+              >
+                <img
+                  src={item.src}
+                  alt={item.caption ?? `${altPrefix} ${index + 1}`}
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false"
+                  class="pointer-events-none h-full w-full object-cover transition duration-500 group-hover:scale-[1.03] group-hover:opacity-90"
+                />
+                <span class="pointer-events-none absolute inset-0 bg-black/0 transition group-hover:bg-black/20" />
+              </button>
+            ),
+          )
+        }
+      </div>
+    )
+  }
+
+  {
+    items.length === 0 && (
+      <p class="rounded-xl border border-border/60 bg-surface px-4 py-6 text-sm text-muted">
+        Media for this snapshot is being added to the project folder.
+      </p>
+    )
+  }
+</section>

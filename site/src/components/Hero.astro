@@ -1,0 +1,40 @@
+---
+import { site } from '../data/site';
+---
+
+<section class="relative flex min-h-[72vh] items-end overflow-hidden border-b border-border/60">
+  <div class="absolute inset-0">
+    <img
+      src="/images/halo/halo5.jpg"
+      alt=""
+      class="h-full w-full scale-105 object-cover opacity-40 blur-[1px]"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/80 to-bg/30" />
+    <div class="absolute inset-0 bg-gradient-to-r from-bg/90 via-transparent to-bg/40" />
+  </div>
+
+  <div class="relative mx-auto w-full max-w-7xl px-6 pb-16 pt-32 lg:px-8 lg:pb-24">
+    <p class="mb-4 text-sm tracking-[0.25em] uppercase text-accent">{site.handle}</p>
+    <h1 class="max-w-3xl text-4xl font-semibold tracking-tight text-fg sm:text-5xl lg:text-6xl">
+      Art direction & concept art for AAA worlds.
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+      {site.description}
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a
+        href="/concept"
+        class="inline-flex items-center rounded-full bg-accent px-6 py-3 text-sm font-medium tracking-wide text-bg transition hover:bg-accent-dim"
+      >
+        View concept art
+      </a>
+      <a
+        href="/art-direction"
+        class="inline-flex items-center rounded-full border border-border px-6 py-3 text-sm font-medium tracking-wide text-fg transition hover:border-accent hover:text-accent"
+      >
+        Art direction
+      </a>
+    </div>
+  </div>
+</section>

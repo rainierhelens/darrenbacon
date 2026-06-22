@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Contact" description="Contact Darren Bacon for art direction and concept art inquiries.">
+  <section class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+    <p class="text-sm tracking-[0.2em] uppercase text-accent">Get in touch</p>
+    <h1 class="mt-2 text-4xl font-semibold tracking-tight">Contact</h1>
+    <p class="mt-4 max-w-2xl text-muted">
+      For studio collaborations, commissions, or press — send a message below or email directly.
+    </p>
+    <p class="mt-6">
+      <a href={`mailto:${site.email}`} class="text-accent transition hover:text-fg">{site.email}</a>
+    </p>
+  </section>
+
+  <ContactForm />
+</BaseLayout>

@@ -1,0 +1,38 @@
+---
+interface Props {
+  images: string[];
+  altPrefix?: string;
+  groupId?: string;
+}
+
+const { images, altPrefix = 'Artwork', groupId = `grid-${images.length}-${images[0]?.slice(-20).replace(/\W/g, '') ?? 'gallery'}` } =
+  Astro.props;
+---
+
+<section class="w-full" data-lightbox-group={groupId}>
+  <div class="grid grid-cols-2 gap-px bg-border md:grid-cols-3 lg:grid-cols-4">
+    {
+      images.map((src, index) => (
+        <button
+          type="button"
+          class="group relative aspect-square overflow-hidden bg-surface-elevated focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          data-lightbox-item
+          data-group={groupId}
+          data-index={index}
+          data-src={src}
+          aria-label={`Open image ${index + 1} of ${images.length}`}
+        >
+          <img
+            src={src}
+            alt={`${altPrefix} ${index + 1}`}
+            loading="lazy"
+            decoding="async"
+            draggable="false"
+            class="pointer-events-none h-full w-full object-cover transition duration-500 group-hover:scale-[1.03] group-hover:opacity-90"
+          />
+          <span class="pointer-events-none absolute inset-0 bg-black/0 transition group-hover:bg-black/20" />
+        </button>
+      ))
+    }
+  </div>
+</section>

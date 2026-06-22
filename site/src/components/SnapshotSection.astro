@@ -1,0 +1,172 @@
+---
+import type { SnapshotEntry } from '../../data/art-direction/deadrop';
+import MediaGallery from './MediaGallery.astro';
+import VideoEmbed from './VideoEmbed.astro';
+
+interface Props {
+  snapshot: SnapshotEntry;
+  index: number;
+}
+
+const { snapshot, index } = Astro.props;
+---
+
+<section id={snapshot.id} class="border-t border-border/60 py-20">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="grid gap-12 lg:grid-cols-[280px_1fr] lg:gap-16">
+      <aside class="lg:sticky lg:top-28 lg:self-start">
+        <p class="text-5xl font-semibold tracking-tight text-accent/80">{snapshot.numeral}</p>
+        <p class="mt-3 text-sm tracking-[0.15em] uppercase text-muted">Snapshot {snapshot.numeral}</p>
+        <p class="mt-2 font-medium">{snapshot.build}</p>
+        <p class="mt-1 text-sm text-muted">{snapshot.released}</p>
+      </aside>
+
+      <div>
+        <p class="text-sm tracking-[0.2em] uppercase text-accent">
+          {String(index + 1).padStart(2, '0')}
+        </p>
+        <h2 class="mt-2 text-3xl font-semibold tracking-tight">{snapshot.title}</h2>
+        <p class="mt-4 text-lg text-muted">{snapshot.summary}</p>
+
+        <div class="mt-8 space-y-4">
+          {
+            snapshot.story.map((paragraph) => (
+              <p class="leading-relaxed text-muted">{paragraph}</p>
+            ))
+          }
+        </div>
+
+        {
+          snapshot.liveEvent && (
+            <div class="mt-10 rounded-2xl border border-accent/30 bg-accent/5 p-6">
+              <p class="text-xs tracking-[0.2em] uppercase text-accent">Live event</p>
+              <h3 class="mt-2 text-lg font-medium">{snapshot.liveEvent.title}</h3>
+              <p class="mt-1 text-sm text-muted">
+                {snapshot.liveEvent.location} · {snapshot.liveEvent.date}
+              </p>
+              <p class="mt-3 text-sm leading-relaxed text-muted">{snapshot.liveEvent.description}</p>
+              {
+                snapshot.liveEvent.href && (
+                  <a
+                    href={snapshot.liveEvent.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-4 inline-flex text-sm text-accent transition hover:text-fg"
+                  >
+                    Read coverage →
+                  </a>
+                )
+              }
+            </div>
+          )
+        }
+
+        {
+          snapshot.video && (
+            <div class="mt-10">
+              <h3 class="mb-4 text-sm tracking-[0.15em] uppercase text-muted">Trailer</h3>
+              <VideoEmbed {...snapshot.video} />
+            </div>
+          )
+        }
+
+        <div class="mt-10">
+          <h3 class="text-sm tracking-[0.15em] uppercase text-muted">What shipped</h3>
+          <ul class="mt-4 space-y-2">
+            {
+              snapshot.highlights.map((item) => (
+                <li class="flex gap-3 text-sm leading-relaxed text-muted">
+                  <span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        {
+          snapshot.artDirection && (
+            <div class="mt-10">
+              <h3 class="text-sm tracking-[0.15em] uppercase text-muted">Art direction focus</h3>
+              <ul class="mt-4 space-y-2">
+                {
+                  snapshot.artDirection.map((item) => (
+                    <li class="flex gap-3 text-sm leading-relaxed text-muted">
+                      <span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent/70" aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          )
+        }
+
+        {
+          snapshot.mediaSections ? (
+            <div class="mt-12 space-y-16">
+              {
+                snapshot.mediaSections
+                  .filter(
+                    (section) =>
+                      section.media.length > 0 ||
+                      (section.beforeAfter && section.beforeAfter.media.length > 0),
+                  )
+                  .map((section, sectionIndex) => (
+                  <div>
+                    <h3 class="text-sm tracking-[0.15em] uppercase text-muted">{section.title}</h3>
+                    {
+                      section.media.length > 0 && (
+                        <div class="mt-6">
+                          <MediaGallery
+                            items={section.media}
+                            altPrefix={`Snapshot ${snapshot.numeral} — ${section.title}`}
+                            groupId={`deadrop-${snapshot.id}-${sectionIndex}`}
+                            layout={section.layout ?? snapshot.galleryLayout}
+                          />
+                        </div>
+                      )
+                    }
+                    {
+                      section.beforeAfter && section.beforeAfter.media.length > 0 && (
+                        <div class="mt-12 rounded-2xl border border-border/60 bg-surface/40 p-6 lg:p-8">
+                          <h4 class="text-sm tracking-[0.15em] uppercase text-accent">
+                            {section.beforeAfter.title}
+                          </h4>
+                          {
+                            section.beforeAfter.description && (
+                              <p class="mt-3 max-w-3xl text-sm leading-relaxed text-muted">
+                                {section.beforeAfter.description}
+                              </p>
+                            )
+                          }
+                          <div class="mt-6">
+                            <MediaGallery
+                              items={section.beforeAfter.media}
+                              altPrefix={`Snapshot ${snapshot.numeral} — ${section.title} before and after`}
+                              groupId={`deadrop-${snapshot.id}-${sectionIndex}-before-after`}
+                              layout="wide"
+                            />
+                          </div>
+                        </div>
+                      )
+                    }
+                  </div>
+                ))
+              }
+            </div>
+          ) : (
+            <div class="mt-12">
+              <MediaGallery
+                items={snapshot.media}
+                altPrefix={`Snapshot ${snapshot.numeral}`}
+                groupId={`deadrop-${snapshot.id}`}
+                layout={snapshot.galleryLayout}
+              />
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

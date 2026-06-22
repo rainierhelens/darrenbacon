@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import { conceptGalleries, site } from '../data/site';
+---
+
+<BaseLayout
+  title={site.name}
+  description="Portfolio of Darren Bacon — art director and concept artist for Halo, Destiny, Marathon, and more."
+>
+  <Hero />
+
+  <section class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+    <div class="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="text-sm tracking-[0.2em] uppercase text-accent">Selected work</p>
+        <h2 class="mt-2 text-3xl font-semibold tracking-tight">Concept art galleries</h2>
+      </div>
+      <a href="/concept" class="text-sm text-muted transition hover:text-accent">View all galleries →</a>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        conceptGalleries.slice(0, 3).map((gallery) => (
+          <a
+            href={`/concept/${gallery.slug}`}
+            class="group overflow-hidden rounded-2xl border border-border/60 bg-surface transition hover:border-accent/40"
+          >
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src={gallery.preview}
+                alt={gallery.label}
+                loading="lazy"
+                class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-medium">{gallery.label}</h3>
+              <p class="mt-2 text-sm text-muted">{gallery.description}</p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="border-y border-border/60 bg-surface">
+    <div class="mx-auto grid max-w-7xl gap-10 px-6 py-20 lg:grid-cols-2 lg:px-8">
+      <div>
+        <p class="text-sm tracking-[0.2em] uppercase text-accent">Art direction</p>
+        <h2 class="mt-2 text-3xl font-semibold tracking-tight">Leading visual development at scale</h2>
+        <p class="mt-4 max-w-xl leading-relaxed text-muted">
+          From style guides and world building to shipped multiplayer content — art direction work
+          across Halo Infinite, DEADROP, and Marathon.
+        </p>
+        <a href="/art-direction" class="mt-8 inline-flex text-sm text-accent transition hover:text-fg">
+          Explore art direction →
+        </a>
+      </div>
+      <div class="overflow-hidden rounded-2xl border border-border/60">
+        <img
+          src="/images/ad-halo/halo-ad-5.jpg"
+          alt="Art direction style guide sample"
+          loading="lazy"
+          class="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+    <div class="rounded-2xl border border-border/60 bg-surface-elevated px-8 py-12 text-center sm:px-12">
+      <h2 class="text-2xl font-semibold tracking-tight">Available for select projects</h2>
+      <p class="mx-auto mt-4 max-w-xl text-muted">
+        For commissions, studio collaborations, or speaking inquiries, get in touch.
+      </p>
+      <a
+        href="/contact"
+        class="mt-8 inline-flex rounded-full border border-border px-6 py-3 text-sm font-medium tracking-wide transition hover:border-accent hover:text-accent"
+      >
+        Contact
+      </a>
+    </div>
+  </section>
+</BaseLayout>

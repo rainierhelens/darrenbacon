@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Gallery from '../../components/Gallery.astro';
+import { conceptGalleries, galleryKeyMap } from '../../data/site';
+import galleries from '../../data/galleries.json';
+
+export function getStaticPaths() {
+  return conceptGalleries.map((gallery) => ({
+    params: { gallery: gallery.slug },
+  }));
+}
+
+const { gallery: slug } = Astro.params;
+const meta = conceptGalleries.find((item) => item.slug === slug);
+const galleryKey = galleryKeyMap[slug ?? ''];
+const images = galleryKey ? galleries[galleryKey as keyof typeof galleries] ?? [] : [];
+
+if (!meta) {
+  return Astro.redirect('/concept');
+}
+---
+
+<BaseLayout
+  title={`${meta.label} Concept Art`}
+  description={`${meta.description} Concept art by Darren Bacon.`}
+  ogImage={`https://www.darrenbacon.com${meta.preview}`}
+>
+  <section class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+    <a href="/concept" class="text-sm text-muted transition hover:text-accent">← All galleries</a>
+    <h1 class="mt-6 text-4xl font-semibold tracking-tight">{meta.label}</h1>
+    <p class="mt-4 max-w-2xl text-muted">{meta.description}</p>
+  </section>
+
+  <div class="flex flex-wrap gap-2 px-6 pb-8 lg:px-8">
+    {
+      conceptGalleries.map((item) => (
+        <a
+          href={`/concept/${item.slug}`}
+          class:list={[
+            'rounded-full border px-4 py-2 text-xs tracking-wide uppercase transition',
+            item.slug === slug
+              ? 'border-accent bg-accent/10 text-accent'
+              : 'border-border text-muted hover:border-accent/40 hover:text-fg',
+          ]}
+        >
+          {item.label}
+        </a>
+      ))
+    }
+  </div>
+
+  <Gallery images={images} altPrefix={`${meta.label} concept art`} />
+</BaseLayout>

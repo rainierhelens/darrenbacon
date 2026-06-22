@@ -1,0 +1,258 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MediaGallery from '../../components/MediaGallery.astro';
+import SnapshotSection from '../../components/SnapshotSection.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import { deadropArtDirection } from '../../data/art-direction/deadrop';
+
+const {
+  title,
+  studio,
+  role,
+  year,
+  credit,
+  hero,
+  summary,
+  intro,
+  founding,
+  liveEventsOverview,
+  styleGuide,
+  snapshots,
+  finalTrailer,
+  epilogue,
+  epilogueMedia,
+} = deadropArtDirection;
+---
+
+<BaseLayout
+  title={`${title} Art Direction`}
+  description={`${summary} Art direction by Darren Bacon for ${title}.`}
+  ogImage={`https://www.darrenbacon.com${hero}`}
+>
+  <section class="relative overflow-hidden border-b border-border/60">
+    <div class="absolute inset-0">
+      <img src={hero} alt="" class="h-full w-full object-cover opacity-25" loading="eager" />
+      <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/92 to-bg/55" />
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
+      <a href="/art-direction" class="text-sm text-muted transition hover:text-accent">← Art direction</a>
+      <p class="mt-8 text-sm tracking-[0.2em] uppercase text-accent">{studio}</p>
+      <h1 class="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">{title}</h1>
+      <p class="mt-4 max-w-3xl text-lg text-muted">{summary}</p>
+
+      <dl class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <dt class="text-xs tracking-[0.15em] uppercase text-muted">Role</dt>
+          <dd class="mt-2 text-sm">{role}</dd>
+        </div>
+        <div>
+          <dt class="text-xs tracking-[0.15em] uppercase text-muted">Studio</dt>
+          <dd class="mt-2 text-sm">{studio}</dd>
+        </div>
+        <div>
+          <dt class="text-xs tracking-[0.15em] uppercase text-muted">Period</dt>
+          <dd class="mt-2 text-sm">{year}</dd>
+        </div>
+        <div>
+          <dt class="text-xs tracking-[0.15em] uppercase text-muted">Focus</dt>
+          <dd class="mt-2 text-sm">{credit}</dd>
+        </div>
+      </dl>
+
+      <nav class="mt-12 flex flex-wrap gap-2" aria-label="Snapshot timeline">
+        {
+          snapshots.map((snapshot) => (
+            <a
+              href={`#${snapshot.id}`}
+              class="rounded-full border border-border px-4 py-2 text-xs tracking-wide uppercase text-muted transition hover:border-accent hover:text-accent"
+            >
+              {snapshot.numeral}
+            </a>
+          ))
+        }
+        <a
+          href="#final-trailer"
+          class="rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-xs tracking-wide uppercase text-accent transition hover:border-accent"
+        >
+          2024 Trailer
+        </a>
+        <a
+          href="#studio-closure"
+          class="rounded-full border border-border px-4 py-2 text-xs tracking-wide uppercase text-muted transition hover:border-accent hover:text-accent"
+        >
+          Closure
+        </a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-16 lg:px-8">
+    {
+      intro.map((paragraph) => (
+        <p class="mb-4 last:mb-0 leading-relaxed text-muted">{paragraph}</p>
+      ))
+    }
+  </section>
+
+  <section class="border-y border-border/60 bg-surface py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <p class="text-sm tracking-[0.2em] uppercase text-accent">Origins</p>
+      <h2 class="mt-2 text-3xl font-semibold tracking-tight">{founding.title}</h2>
+      {
+        founding.paragraphs.map((paragraph) => (
+          <p class="mt-4 max-w-3xl leading-relaxed text-muted">{paragraph}</p>
+        ))
+      }
+      <ul class="mt-8 grid gap-3 sm:grid-cols-2">
+        {
+          founding.pillars.map((pillar) => (
+            <li class="rounded-xl border border-border/60 bg-bg px-4 py-3 text-sm text-muted">{pillar}</li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <p class="text-sm tracking-[0.2em] uppercase text-accent">Style guide</p>
+      <h2 class="mt-2 text-3xl font-semibold tracking-tight">DEADROP visual language</h2>
+      <p class="mt-4 max-w-3xl leading-relaxed text-muted">
+        Before sectors scaled, the Maker Art Style Guide codified the Refiner State look — palette,
+        material language, faction tone, and prop vocabulary for a game that had to read clearly
+        from firing range distance to Cold Storage extraction chaos.
+      </p>
+      <div class="mt-10 grid gap-8 lg:grid-cols-2 lg:items-start">
+        <div class="overflow-hidden rounded-2xl border border-border/60">
+          <img src={styleGuide} alt="DEADROP Maker Art Style Guide" loading="lazy" class="w-full" />
+        </div>
+        <div class="space-y-4 text-sm leading-relaxed text-muted">
+          <p>
+            The guide anchored cross-discipline reviews: environment, character, weapon, and UI
+            teams shared one reference for neon-noir contrast, industrial grime, and retro-future
+            typography.
+          </p>
+          <p>
+            As Snapshots progressed from Hideout to Sector 3, the style guide evolved with them —
+            each milestone added real production constraints that theory alone could not predict.
+          </p>
+          <a href="/concept/deadrop" class="inline-flex text-accent transition hover:text-fg">
+            View DEADROP concept art gallery →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-border/60 bg-surface py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <p class="text-sm tracking-[0.2em] uppercase text-accent">Live reveals</p>
+      <h2 class="mt-2 text-3xl font-semibold tracking-tight">Los Angeles · Dallas · Las Vegas</h2>
+      <p class="mt-4 max-w-3xl text-muted">
+        Three cities hosted DEADROP's biggest beats — each tied to a Snapshot milestone and the
+        studio's promise to show work in public, not just in trailers.
+      </p>
+      <div class="mt-10 grid gap-6 md:grid-cols-3 md:items-stretch">
+        {
+          liveEventsOverview.map((event) => (
+            <article class="flex flex-col rounded-2xl border border-border/60 bg-bg p-6">
+              <h3 class="text-lg font-medium leading-snug">{event.title}</h3>
+              <p class="mt-2 text-sm text-accent">{event.location}</p>
+              <p class="mt-1 text-xs text-muted">{event.date}</p>
+              <p class="mt-4 flex-1 text-sm leading-relaxed text-muted">{event.description}</p>
+              {
+                event.href && (
+                  <a
+                    href={event.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-6 inline-flex text-sm text-accent transition hover:text-fg"
+                  >
+                    External coverage →
+                  </a>
+                )
+              }
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+    <p class="text-sm tracking-[0.2em] uppercase text-accent">Timeline</p>
+    <h2 class="mt-2 text-3xl font-semibold tracking-tight">Snapshots I through VII</h2>
+    <p class="mt-4 max-w-3xl text-muted">
+      Seven major playable milestones — from the first assault rifle in three firing ranges through
+      Cleaners, Midnight Ride, and the 2024 showcase trailer.
+    </p>
+  </section>
+
+  {snapshots.map((snapshot, index) => <SnapshotSection snapshot={snapshot} index={index} />)}
+
+  <section id="final-trailer" class="border-t border-border/60 bg-surface py-20">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <p class="text-sm tracking-[0.2em] uppercase text-accent">Showcase</p>
+      <h2 class="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">{finalTrailer.title}</h2>
+      <p class="mt-2 text-accent">{finalTrailer.subtitle}</p>
+      <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">{finalTrailer.description}</p>
+      {
+        finalTrailer.paragraphs.map((paragraph) => (
+          <p class="mt-4 max-w-3xl leading-relaxed text-muted">{paragraph}</p>
+        ))
+      }
+
+      <div class="mt-10">
+        <VideoEmbed
+          title={finalTrailer.title}
+          description="Final 2024 DEADROP trailer — in-engine footage captured and art-directed for marketing."
+          youtubeId={finalTrailer.youtubeId}
+          url={finalTrailer.url}
+          featured={true}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section id="studio-closure" class="border-t border-border/60 py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <p class="text-sm tracking-[0.2em] uppercase text-accent">Closing</p>
+      <h2 class="mt-2 text-2xl font-semibold tracking-tight">{epilogue.title}</h2>
+      {
+        epilogue.paragraphs.map((paragraph) => (
+          <p class="mt-4 max-w-3xl leading-relaxed text-muted">{paragraph}</p>
+        ))
+      }
+      {
+        epilogueMedia.length > 0 && (
+          <div class="mt-10">
+            <MediaGallery
+              items={epilogueMedia}
+              altPrefix="DEADROP studio closure"
+              groupId="deadrop-studio-closure"
+              layout="wide"
+            />
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="border-t border-border/60">
+    <div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 py-16 sm:flex-row sm:items-center lg:px-8">
+      <div>
+        <p class="text-sm text-muted">Also see</p>
+        <a href="/art-direction/halo" class="mt-2 inline-flex text-lg font-medium transition hover:text-accent">
+          Halo Infinite art direction →
+        </a>
+      </div>
+      <a
+        href="/art-direction"
+        class="rounded-full border border-border px-5 py-2.5 text-sm transition hover:border-accent hover:text-accent"
+      >
+        All art direction
+      </a>
+    </div>
+  </section>
+</BaseLayout>

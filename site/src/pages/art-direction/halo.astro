@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Gallery from '../../components/Gallery.astro';
+import WideGallery from '../../components/WideGallery.astro';
+import { haloArtDirection } from '../../data/art-direction/halo';
+
+const {
+  title,
+  studio,
+  role,
+  team,
+  year,
+  credit,
+  hero,
+  summary,
+  intro,
+  multiplayerDirection,
+  video,
+  styleGuide,
+  sections,
+} = haloArtDirection;
+---
+
+<BaseLayout
+  title={`${title} Art Direction`}
+  description={`${summary} Art direction by Darren Bacon for ${title}.`}
+  ogImage={`https://www.darrenbacon.com${hero}`}
+>
+  <section class="relative overflow-hidden border-b border-border/60">
+    <div class="absolute inset-0">
+      <img src={hero} alt="" class="h-full w-full object-cover opacity-30" loading="eager" />
+      <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/90 to-bg/50" />
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
+      <a href="/art-direction" class="text-sm text-muted transition hover:text-accent">← Art direction</a>
+      <p class="mt-8 text-sm tracking-[0.2em] uppercase text-accent">{studio}</p>
+      <h1 class="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">{title}</h1>
+      <p class="mt-4 max-w-2xl text-lg text-muted">{summary}</p>
+
+      <dl class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <dt class="text-xs tracking-[0.15em] uppercase text-muted">Role</dt>
+          <dd class="mt-2 text-sm">{role}</dd>
+        </div>
+        <div>
+          <dt class="text-xs tracking-[0.15em] uppercase text-muted">Team</dt>
+          <dd class="mt-2 text-sm">{team}</dd>
+        </div>
+        <div>
+          <dt class="text-xs tracking-[0.15em] uppercase text-muted">Period</dt>
+          <dd class="mt-2 text-sm">{year}</dd>
+        </div>
+        <div>
+          <dt class="text-xs tracking-[0.15em] uppercase text-muted">Shipped</dt>
+          <dd class="mt-2 text-sm">{credit}</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-16 lg:px-8">
+    {
+      intro.map((paragraph) => (
+        <p class="mb-4 last:mb-0 leading-relaxed text-muted">{paragraph}</p>
+      ))
+    }
+  </section>
+
+  <section class="border-t border-border/60 bg-surface py-16">
+    <div class="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[1fr_1.1fr] lg:px-8 lg:items-start">
+      <div>
+        <p class="text-sm tracking-[0.2em] uppercase text-accent">Approach</p>
+        <h2 class="mt-2 text-3xl font-semibold tracking-tight">{multiplayerDirection.title}</h2>
+        {
+          multiplayerDirection.paragraphs.map((paragraph) => (
+            <p class="mt-4 leading-relaxed text-muted">{paragraph}</p>
+          ))
+        }
+        <ul class="mt-8 space-y-3">
+          {
+            multiplayerDirection.highlights.map((item) => (
+              <li class="flex gap-3 text-sm leading-relaxed text-muted">
+                <span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+                <span>{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-sm tracking-[0.2em] uppercase text-accent">Video</p>
+        <h3 class="mt-2 text-xl font-semibold tracking-tight">{video.title}</h3>
+        <p class="mt-3 text-sm leading-relaxed text-muted">{video.description}</p>
+        <div class="mt-6 overflow-hidden rounded-2xl border border-border/60 bg-bg">
+          <div class="aspect-video">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}`}
+              title={video.title}
+              class="h-full w-full"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            />
+          </div>
+        </div>
+        <a
+          href={video.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-4 inline-flex text-sm text-accent transition hover:text-fg"
+        >
+          Watch on YouTube →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-border/60 py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+        <div>
+          <p class="text-sm tracking-[0.2em] uppercase text-accent">Style guide</p>
+          <h2 class="mt-2 text-3xl font-semibold tracking-tight">{styleGuide.title}</h2>
+          <p class="mt-2 text-sm text-accent">{styleGuide.subtitle} · {styleGuide.version}</p>
+          <p class="mt-4 leading-relaxed text-muted">{styleGuide.description}</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href={styleGuide.pdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-bg transition hover:bg-accent-dim"
+            >
+              View PDF
+            </a>
+            <a
+              href={styleGuide.pdf}
+              download={styleGuide.filename}
+              class="inline-flex rounded-full border border-border px-5 py-2.5 text-sm transition hover:border-accent hover:text-accent"
+            >
+              Download
+            </a>
+          </div>
+        </div>
+
+        <div class="overflow-hidden rounded-2xl border border-border/60 bg-surface-elevated">
+          <div class="flex items-center gap-4 border-b border-border/60 px-6 py-4">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl border border-border/60 bg-bg text-xs font-semibold tracking-wide text-accent">
+              PDF
+            </div>
+            <div>
+              <p class="font-medium">{styleGuide.filename}</p>
+              <p class="text-sm text-muted">Internal art-direction reference · {styleGuide.version}</p>
+            </div>
+          </div>
+          <object
+            data={styleGuide.pdf}
+            type="application/pdf"
+            class="h-[420px] w-full bg-bg"
+          >
+            <div class="flex h-[420px] flex-col items-center justify-center gap-4 px-6 text-center">
+              <p class="text-sm text-muted">PDF preview isn&apos;t supported in this browser.</p>
+              <a
+                href={styleGuide.pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-accent transition hover:text-fg"
+              >
+                Open {styleGuide.filename} →
+              </a>
+            </div>
+          </object>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {
+    sections.map((section, sectionIndex) => (
+      <section class="border-t border-border/60 py-16">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="mb-10 max-w-2xl">
+            <p class="text-sm tracking-[0.2em] uppercase text-accent">
+              {String(sectionIndex + 1).padStart(2, '0')}
+            </p>
+            <h2 class="mt-2 text-2xl font-semibold tracking-tight">{section.title}</h2>
+            <p class="mt-3 text-sm leading-relaxed text-muted">{section.description}</p>
+          </div>
+
+          {section.layout === 'wide' ? (
+            <WideGallery images={section.images} altPrefix={section.title} groupId={`halo-${section.id}`} />
+          ) : (
+            <Gallery
+              images={section.images.map((image) => image.src)}
+              altPrefix={`${title} ${section.title}`}
+              groupId={`halo-${section.id}`}
+            />
+          )}
+        </div>
+      </section>
+    ))
+  }
+
+  <section class="border-t border-border/60 bg-surface">
+    <div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 py-16 sm:flex-row sm:items-center lg:px-8">
+      <div>
+        <p class="text-sm text-muted">More concept art from this franchise</p>
+        <a href="/concept/halo" class="mt-2 inline-flex text-lg font-medium transition hover:text-accent">
+          View Halo concept art →
+        </a>
+      </div>
+      <a
+        href="/art-direction"
+        class="rounded-full border border-border px-5 py-2.5 text-sm transition hover:border-accent hover:text-accent"
+      >
+        All art direction
+      </a>
+    </div>
+  </section>
+</BaseLayout>

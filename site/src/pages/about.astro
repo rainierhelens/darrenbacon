@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { experience, shippedGames } from '../data/credits';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="About" description="About Darren Bacon — art director and concept artist for AAA games.">
+  <section class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+    <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+      <div>
+        <p class="text-sm tracking-[0.2em] uppercase text-accent">About</p>
+        <h1 class="mt-2 text-4xl font-semibold tracking-tight">{site.name}</h1>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+          Art director and concept artist with two decades of experience across games, film, and
+          theme park entertainment. Known for work on Halo, Destiny, Marathon, and Disney
+          productions.
+        </p>
+        <p class="mt-4 max-w-2xl leading-relaxed text-muted">
+          Currently Art Lead at Bungie on Marathon. Previously Associate Art Director on Halo
+          Infinite and Art Director at Midnight Society.
+        </p>
+      </div>
+      <div class="overflow-hidden rounded-2xl border border-border/60">
+        <img
+          src="/images/about/darren-bacon-about-3.gif"
+          alt="Darren Bacon"
+          loading="lazy"
+          class="w-full object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-border/60 bg-surface">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      <h2 class="text-2xl font-semibold tracking-tight">Shipped games</h2>
+      <div class="mt-8 overflow-x-auto">
+        <table class="min-w-full text-left text-sm">
+          <thead class="border-b border-border text-muted">
+            <tr>
+              <th class="py-3 pr-6 font-medium">Title</th>
+              <th class="py-3 pr-6 font-medium">Platform</th>
+              <th class="py-3 pr-6 font-medium">Year</th>
+              <th class="py-3 pr-6 font-medium">Credit</th>
+              <th class="py-3 font-medium">Company</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              shippedGames.map((game) => (
+                <tr class="border-b border-border/60">
+                  <td class="py-4 pr-6">
+                    <a href={game.href} target="_blank" rel="noopener noreferrer" class="text-fg hover:text-accent">
+                      {game.title}
+                    </a>
+                  </td>
+                  <td class="py-4 pr-6 text-muted">{game.platform}</td>
+                  <td class="py-4 pr-6 text-muted">{game.year}</td>
+                  <td class="py-4 pr-6 text-muted">{game.credit}</td>
+                  <td class="py-4 text-muted">{game.company}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+    <h2 class="text-2xl font-semibold tracking-tight">Experience</h2>
+    <div class="mt-8 space-y-6">
+      {
+        experience.map((job) => (
+          <article class="rounded-2xl border border-border/60 bg-surface p-6">
+            <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+              <h3 class="text-lg font-medium">{job.role}</h3>
+              <span class="text-sm text-muted">{job.period}</span>
+            </div>
+            <p class="mt-3 text-sm leading-relaxed text-muted">{job.summary}</p>
+            {'shipped' in job && job.shipped && (
+              <ul class="mt-4 flex flex-wrap gap-2">
+                {job.shipped.map((title) => (
+                  <li class="rounded-full border border-border px-3 py-1 text-xs text-muted">{title}</li>
+                ))}
+              </ul>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
