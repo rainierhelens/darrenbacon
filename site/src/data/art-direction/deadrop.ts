@@ -106,7 +106,7 @@ export const deadropArtDirection = {
       date: 'March 17, 2023',
       description:
         'Midnight Society partnered with OpTic Gaming to unveil Snapshot V at Esports Stadium Arlington. Three live matches showcased Sector 3: Cold Storage, the Rising Freeze mechanic, and extraction gameplay to a packed arena and a global livestream.',
-      href: 'https://www.sportskeeda.com/esports/news-optic-dr-disrespect-collaborate-host-gaming-event-new-deadrop-gameplay-showcased',
+      href: 'https://decrypt.co/123937/deadrop-nft-game-prealpha-playthrough-live-livestream',
     },
     {
       title: 'Snapshot VII Reveal · Midnight Ride',
@@ -229,7 +229,7 @@ const snapshotDefinitions: SnapshotDefinition[] = [
           title: 'Paintovers & environment',
           mediaFolder: 'SSIII',
           layout: 'wide',
-          filenamePattern: '^(Synth|PO |Fender_)',
+          filenamePattern: '^(Synth|PO |Fender_|greg-cox)',
         },
         {
           title: 'In-engine screenshots',
@@ -309,7 +309,7 @@ const snapshotDefinitions: SnapshotDefinition[] = [
         date: 'March 17, 2023',
         description:
           'Snapshot V reveal event co-hosted with OpTic Gaming — three live matches, global livestream, and the public debut of Sector 3 extraction gameplay.',
-        href: 'https://www.sportskeeda.com/esports/news-optic-dr-disrespect-collaborate-host-gaming-event-new-deadrop-gameplay-showcased',
+        href: 'https://decrypt.co/123937/deadrop-nft-game-prealpha-playthrough-live-livestream',
       },
       artDirection: [
         'Sector 3 art direction — cold storage industrial language and freeze readability',
