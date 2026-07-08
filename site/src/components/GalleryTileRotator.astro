@@ -1,0 +1,88 @@
+---
+interface Props {
+  images: string[];
+  alt: string;
+  interval?: number;
+  class?: string;
+}
+
+const { images, alt, interval = 5000, class: className } = Astro.props;
+---
+
+{
+  images.length > 0 ? (
+    <div
+      class:list={['gallery-tile-slides relative h-full w-full', className]}
+      data-interval={interval}
+    >
+      {
+        images.map((src, index) => (
+          <img
+            src={src}
+            alt={index === 0 ? alt : ''}
+            class:list={[
+              'gallery-tile-slide absolute inset-0 h-full w-full object-cover',
+              index === 0 && 'is-active',
+            ]}
+            loading={index === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+            draggable="false"
+          />
+        ))
+      }
+    </div>
+  ) : (
+    <div class="flex h-full items-center justify-center text-sm text-muted">No preview</div>
+  )
+}
+
+<style>
+  .gallery-tile-slide {
+    opacity: 0;
+    transition: opacity 1.6s ease-in-out;
+  }
+
+  .gallery-tile-slide.is-active {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-tile-slide {
+      transition: none;
+    }
+
+    .gallery-tile-slide:not(.is-active) {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const rotatorIntervals = new WeakMap<Element, number>();
+
+  function initGalleryTileRotators() {
+    document.querySelectorAll<HTMLElement>('.gallery-tile-slides').forEach((container) => {
+      const existing = rotatorIntervals.get(container);
+      if (existing !== undefined) window.clearInterval(existing);
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const slides = Array.from(container.querySelectorAll<HTMLElement>('.gallery-tile-slide'));
+      if (slides.length < 2) return;
+
+      const intervalMs = Number(container.dataset.interval) || 5000;
+      let current = 0;
+
+      const id = window.setInterval(() => {
+        slides[current]?.classList.remove('is-active');
+        current = (current + 1) % slides.length;
+        slides[current]?.classList.add('is-active');
+      }, intervalMs);
+
+      rotatorIntervals.set(container, id);
+    });
+  }
+
+  initGalleryTileRotators();
+  document.addEventListener('astro:page-load', initGalleryTileRotators);
+</script>

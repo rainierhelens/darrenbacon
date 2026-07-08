@@ -8,6 +8,17 @@ export const site = {
     'Art director and concept artist known for Halo, Destiny, Marathon, Disney, and AAA game development.',
 } as const;
 
+/** Homepage hero background rotation — add or reorder paths to change the slideshow. */
+export const heroBackgrounds = [
+  '/images/halo/halo10.jpg',
+  '/images/ad-halo/halo-ad-26.jpg',
+  '/images/deadrop/deadrop1.jpg',
+  '/images/halo/halo7.jpg',
+  '/images/halo/halo20.jpg',
+  '/images/halo/halo45.jpg',
+  '/images/destiny/destiny1.jpg',
+] as const;
+
 export const nav = [
   { label: 'Work', href: '/concept' },
   { label: 'Art Direction', href: '/art-direction' },

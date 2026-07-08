@@ -1,0 +1,104 @@
+---
+import type { MarathonSeason } from '../data/art-direction/marathon';
+import MediaGallery from './MediaGallery.astro';
+
+interface Props {
+  season: MarathonSeason;
+  index: number;
+}
+
+const { season, index } = Astro.props;
+---
+
+<section id={season.id} class="border-t border-border/60 py-20">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="grid gap-12 lg:grid-cols-[280px_1fr] lg:gap-16">
+      <aside class="lg:sticky lg:top-28 lg:self-start">
+        <p class="text-5xl font-semibold tracking-tight text-accent/80">{season.label}</p>
+        <p class="mt-3 text-sm tracking-[0.15em] uppercase text-muted">Season {season.label}</p>
+        {
+          season.period && (
+            <p class="mt-2 text-sm text-muted">{season.period}</p>
+          )
+        }
+      </aside>
+
+      <div>
+        <p class="text-sm tracking-[0.2em] uppercase text-accent">
+          {String(index + 1).padStart(2, '0')}
+        </p>
+        <h2 class="mt-2 text-3xl font-semibold tracking-tight">{season.title}</h2>
+        <p class="mt-4 text-lg text-muted">{season.summary}</p>
+
+        <div class="mt-8 space-y-4">
+          {
+            season.story.map((paragraph) => (
+              <p class="leading-relaxed text-muted">{paragraph}</p>
+            ))
+          }
+        </div>
+
+        <div class="mt-14 space-y-20">
+          {
+            season.categories
+              .filter((category) => category.subsections.some((section) => section.media.length > 0))
+              .map((category, categoryIndex) => (
+                <div
+                  class:list={[
+                    category.prominence === 'secondary' && 'rounded-2xl border border-border/40 bg-surface/30 p-6 lg:p-8',
+                  ]}
+                >
+                  <div class="max-w-3xl">
+                    <h3
+                      class:list={[
+                        'tracking-[0.15em] uppercase',
+                        category.prominence === 'primary'
+                          ? 'text-sm text-accent'
+                          : 'text-xs text-muted',
+                      ]}
+                    >
+                      {category.title}
+                    </h3>
+                    {
+                      category.description && (
+                        <p
+                          class:list={[
+                            'mt-3 leading-relaxed',
+                            category.prominence === 'primary' ? 'text-muted' : 'text-sm text-muted',
+                          ]}
+                        >
+                          {category.description}
+                        </p>
+                      )
+                    }
+                  </div>
+
+                  <div class="mt-8 space-y-12">
+                    {
+                      category.subsections
+                        .filter((section) => section.media.length > 0)
+                        .map((section, sectionIndex) => (
+                          <div>
+                            {
+                              category.subsections.filter((s) => s.media.length > 0).length > 1 && (
+                                <h4 class="mb-4 text-sm font-medium text-fg">{section.title}</h4>
+                              )
+                            }
+                            <MediaGallery
+                              items={section.media}
+                              altPrefix={`Season ${season.label} — ${section.title}`}
+                              groupId={`marathon-${season.id}-${categoryIndex}-${sectionIndex}`}
+                              layout={section.layout ?? category.layout}
+                            />
+                          </div>
+                        ))
+                    }
+                  </div>
+                </div>
+              ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

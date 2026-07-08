@@ -1,8 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { DEADROP_COVER } from '../../data/art-direction/deadrop';
-
-const marathonLogo = '/images/Marathon/Marathon_Logo_WordMark_Green_TRANSPARENT.png';
+import ArtDirectionGalleryTile from '../../components/ArtDirectionGalleryTile.astro';
+import {
+  getDeadropArtDirectionImages,
+  getHaloArtDirectionImages,
+  getMarathonArtDirectionImages,
+} from '../../lib/art-direction-gallery';
+import { MARATHON_LOGO, marathonCaseStudyPublished } from '../../config/features';
 ---
 
 <BaseLayout
@@ -19,72 +23,56 @@ const marathonLogo = '/images/Marathon/Marathon_Logo_WordMark_Green_TRANSPARENT.
   </section>
 
   <section class="mx-auto grid max-w-7xl gap-6 px-6 pb-20 lg:grid-cols-2 lg:px-8">
-    <a
+    <ArtDirectionGalleryTile
       href="/art-direction/halo"
-      class="group overflow-hidden rounded-2xl border border-border/60 bg-surface transition hover:border-accent/40"
-    >
-      <div class="aspect-video overflow-hidden">
-        <img
-          src="/images/halo/halo5.jpg"
-          alt="Halo Infinite art direction"
-          loading="lazy"
-          class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-        />
-      </div>
-      <div class="p-6">
-        <p class="text-xs tracking-[0.2em] uppercase text-accent">343 Industries</p>
-        <h2 class="mt-2 text-2xl font-medium">Halo Infinite</h2>
-        <p class="mt-3 text-sm leading-relaxed text-muted">
-          Associate Art Director on multiplayer and live content — visual targets, environment
-          passes, and production polish across shipped seasons.
-        </p>
-        <span class="mt-5 inline-flex text-sm text-accent">View case study →</span>
-      </div>
-    </a>
-
-    <a
+      studio="343 Industries"
+      title="Halo Infinite"
+      description="Associate Art Director on multiplayer and live content — visual targets, environment passes, and production polish across shipped seasons."
+      images={getHaloArtDirectionImages()}
+      staggerIndex={0}
+    />
+    <ArtDirectionGalleryTile
       href="/art-direction/deadrop"
-      class="group overflow-hidden rounded-2xl border border-border/60 bg-surface transition hover:border-accent/40"
-    >
-      <div class="aspect-video overflow-hidden">
-        <img
-          src={DEADROP_COVER}
-          alt="DEADROP art direction"
-          loading="lazy"
-          class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+      studio="Midnight Society"
+      title="DEADROP"
+      description="Art Director across Snapshots I–VII — live reveals in LA, Dallas, and Vegas, Midnight Ride, and the 2024 showcase trailer built from in-engine captures."
+      images={getDeadropArtDirectionImages()}
+      staggerIndex={1}
+    />
+    {
+      marathonCaseStudyPublished ? (
+        <ArtDirectionGalleryTile
+          href="/art-direction/marathon"
+          studio="Bungie"
+          title="Marathon"
+          description="Commerce & Events Art Lead — seasonal cosmetics, Battle Pass earnables, store presentation, and live-service event art across two launch seasons."
+          images={getMarathonArtDirectionImages()}
+          staggerIndex={2}
+          wide={true}
         />
-      </div>
-      <div class="p-6">
-        <p class="text-xs tracking-[0.2em] uppercase text-accent">Midnight Society</p>
-        <h2 class="mt-2 text-2xl font-medium">DEADROP</h2>
-        <p class="mt-3 text-sm leading-relaxed text-muted">
-          Art Director across Snapshots I–VII — live reveals in LA, Dallas, and Vegas, Midnight Ride,
-          and the 2024 showcase trailer built from in-engine captures.
-        </p>
-        <span class="mt-5 inline-flex text-sm text-accent">View case study →</span>
-      </div>
-    </a>
-
-    <article class="overflow-hidden rounded-2xl border border-border/60 bg-surface lg:col-span-2">
-      <div class="grid lg:grid-cols-2">
-        <div class="flex aspect-video items-center justify-center overflow-hidden bg-bg lg:aspect-auto">
-          <img
-            src={marathonLogo}
-            alt="Marathon art direction preview"
-            loading="lazy"
-            class="max-h-full max-w-[70%] object-contain p-8 lg:p-12"
-          />
-        </div>
-        <div class="flex flex-col justify-center p-6 lg:p-10">
-          <p class="text-xs tracking-[0.2em] uppercase text-accent">Bungie</p>
-          <h2 class="mt-2 text-2xl font-medium">Marathon</h2>
-          <p class="mt-3 text-sm leading-relaxed text-muted">
-            Commerce &amp; Events Art Lead at Bungie — shaping visual strategy for cosmetics,
-            earnables, live-service events, and commerce in Marathon.
-          </p>
-          <p class="mt-6 text-sm text-muted">Full case study coming soon.</p>
-        </div>
-      </div>
-    </article>
+      ) : (
+        <article class="overflow-hidden rounded-2xl border border-border/60 bg-surface lg:col-span-2">
+          <div class="grid lg:grid-cols-2">
+            <div class="flex aspect-video items-center justify-center overflow-hidden bg-bg lg:aspect-auto">
+              <img
+                src={MARATHON_LOGO}
+                alt="Marathon art direction preview"
+                loading="lazy"
+                class="max-h-full max-w-[70%] object-contain p-8 lg:p-12"
+              />
+            </div>
+            <div class="flex flex-col justify-center p-6 lg:p-10">
+              <p class="text-xs tracking-[0.2em] uppercase text-accent">Bungie</p>
+              <h2 class="mt-2 text-2xl font-medium">Marathon</h2>
+              <p class="mt-3 text-sm leading-relaxed text-muted">
+                Commerce &amp; Events Art Lead at Bungie — shaping visual strategy for cosmetics,
+                earnables, live-service events, and commerce in Marathon.
+              </p>
+              <p class="mt-6 text-sm text-muted">Full case study coming soon.</p>
+            </div>
+          </div>
+        </article>
+      )
+    }
   </section>
 </BaseLayout>

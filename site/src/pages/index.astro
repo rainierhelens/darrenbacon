@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import ConceptGalleryTile from '../components/ConceptGalleryTile.astro';
 import { conceptGalleries, site } from '../data/site';
 ---
 
@@ -21,24 +22,13 @@ import { conceptGalleries, site } from '../data/site';
 
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
-        conceptGalleries.slice(0, 3).map((gallery) => (
-          <a
-            href={`/concept/${gallery.slug}`}
-            class="group overflow-hidden rounded-2xl border border-border/60 bg-surface transition hover:border-accent/40"
-          >
-            <div class="aspect-[4/3] overflow-hidden">
-              <img
-                src={gallery.preview}
-                alt={gallery.label}
-                loading="lazy"
-                class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-              />
-            </div>
-            <div class="p-5">
-              <h3 class="text-lg font-medium">{gallery.label}</h3>
-              <p class="mt-2 text-sm text-muted">{gallery.description}</p>
-            </div>
-          </a>
+        conceptGalleries.map((gallery, index) => (
+          <ConceptGalleryTile
+            slug={gallery.slug}
+            label={gallery.label}
+            description={gallery.description}
+            staggerIndex={index}
+          />
         ))
       }
     </div>

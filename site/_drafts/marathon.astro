@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MarathonSeasonSection from '../../components/MarathonSeasonSection.astro';
+import { marathonArtDirection } from '../../data/art-direction/marathon';
+
+const { title, studio, role, year, credit, hero, summary, intro, approach, seasons } =
+  marathonArtDirection;
+---
+
+<BaseLayout
+  title={`${title} Art Direction`}
+  description={`${summary} Art direction by Darren Bacon for ${title}.`}
+  ogImage={`https://www.darrenbacon.com${hero}`}
+>
+  <section class="relative overflow-hidden border-b border-border/60">
+    <div class="absolute inset-0">
+      <img src={hero} alt="" class="h-full w-full object-cover opacity-25" loading="eager" />
+      <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/92 to-bg/55" />
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
+      <a href="/art-direction" class="text-sm text-muted transition hover:text-accent">← Art direction</a>
+      <p class="mt-8 text-sm tracking-[0.2em] uppercase text-accent">{studio}</p>
+      <h1 class="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">{title}</h1>
+      <p class="mt-4 max-w-3xl text-lg text-muted">{summary}</p>
+
+      <dl class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <dt class="text-xs tracking-[0.15em] uppercase text-muted">Role</dt>
+          <dd class="mt-2 text-sm">{role}</dd>
+        </div>
+        <div>
+          <dt class="text-xs tracking-[0.15em] uppercase text-muted">Studio</dt>
+          <dd class="mt-2 text-sm">{studio}</dd>
+        </div>
+        <div>
+          <dt class="text-xs tracking-[0.15em] uppercase text-muted">Period</dt>
+          <dd class="mt-2 text-sm">{year}</dd>
+        </div>
+        <div>
+          <dt class="text-xs tracking-[0.15em] uppercase text-muted">Focus</dt>
+          <dd class="mt-2 text-sm">{credit}</dd>
+        </div>
+      </dl>
+
+      <nav class="mt-12 flex flex-wrap gap-2" aria-label="Season navigation">
+        {
+          seasons.map((season) => (
+            <a
+              href={`#${season.id}`}
+              class="rounded-full border border-border px-4 py-2 text-xs tracking-wide uppercase text-muted transition hover:border-accent hover:text-accent"
+            >
+              Season {season.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-16 lg:px-8">
+    {
+      intro.map((paragraph) => (
+        <p class="mb-4 last:mb-0 leading-relaxed text-muted">{paragraph}</p>
+      ))
+    }
+  </section>
+
+  <section class="border-y border-border/60 bg-surface py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <p class="text-sm tracking-[0.2em] uppercase text-accent">Approach</p>
+      <h2 class="mt-2 text-3xl font-semibold tracking-tight">{approach.title}</h2>
+      {
+        approach.paragraphs.map((paragraph) => (
+          <p class="mt-4 max-w-3xl leading-relaxed text-muted">{paragraph}</p>
+        ))
+      }
+      <ul class="mt-8 grid gap-3 sm:grid-cols-2">
+        {
+          approach.pillars.map((pillar) => (
+            <li class="rounded-xl border border-border/60 bg-bg px-4 py-3 text-sm text-muted">{pillar}</li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+    <p class="text-sm tracking-[0.2em] uppercase text-accent">Seasons</p>
+    <h2 class="mt-2 text-3xl font-semibold tracking-tight">Seasonal planning & thematic development</h2>
+    <p class="mt-4 max-w-3xl text-muted">
+      Two seasons of commerce and earnable content — organized by Runners and Battle Pass first,
+      with supporting tchotchkes and weapon lines below.
+    </p>
+  </section>
+
+  {seasons.map((season, index) => <MarathonSeasonSection season={season} index={index} />)}
+
+  <section class="border-t border-border/60 bg-surface">
+    <div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 py-16 sm:flex-row sm:items-center lg:px-8">
+      <div>
+        <p class="text-sm text-muted">Also see</p>
+        <a href="/art-direction/deadrop" class="mt-2 inline-flex text-lg font-medium transition hover:text-accent">
+          DEADROP art direction →
+        </a>
+      </div>
+      <a
+        href="/art-direction"
+        class="rounded-full border border-border px-5 py-2.5 text-sm transition hover:border-accent hover:text-accent"
+      >
+        All art direction
+      </a>
+    </div>
+  </section>
+</BaseLayout>

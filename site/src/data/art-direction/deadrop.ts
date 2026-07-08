@@ -433,6 +433,11 @@ const snapshotDefinitions: SnapshotDefinition[] = [
             mediaFolder: 'SSVII/sector 2/before after',
           },
         },
+        {
+          title: 'Combat loop',
+          mediaFolder: 'SSVII/Combat loop',
+          layout: 'wide',
+        },
       ],
 
     },
