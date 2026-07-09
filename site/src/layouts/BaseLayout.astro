@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SiteLightbox from '../components/SiteLightbox.astro';
@@ -41,13 +42,21 @@ const pageTitle = title === site.name ? `${site.name} | ${site.tagline}` : `${ti
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>{pageTitle}</title>
+    <ClientRouter />
   </head>
   <body class="min-h-screen bg-bg text-fg">
+    <div
+      id="scroll-progress"
+      class="fixed inset-x-0 top-0 z-[60] h-0.5 bg-accent"
+      aria-hidden="true"
+    >
+    </div>
     <Header />
     <main>
       <slot />
     </main>
     <Footer />
     <SiteLightbox />
+    <script src="../scripts/motion.ts"></script>
   </body>
 </html>

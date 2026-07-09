@@ -1,0 +1,89 @@
+---
+interface Props {
+  images: string[];
+  interval?: number;
+  /** Peak opacity of the imagery (0–1). Kept low for text legibility. */
+  opacity?: number;
+  /** Tailwind classes for the legibility overlay (defaults to a strong bg wash). */
+  overlayClass?: string;
+}
+
+const {
+  images = [],
+  interval = 6500,
+  opacity = 0.14,
+  overlayClass = 'bg-bg/82',
+} = Astro.props;
+---
+
+{
+  images.length > 0 && (
+    <div
+      class="section-backdrop pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      data-interval={interval}
+      style={`--sbg-opacity:${opacity}`}
+      aria-hidden="true"
+    >
+      {images.map((src, index) => (
+        <img
+          src={src}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          data-sbg-slide={index}
+          class:list={[
+            'section-backdrop-slide absolute inset-0 h-full w-full scale-105 object-cover',
+            index === 0 ? 'is-active' : '',
+          ]}
+        />
+      ))}
+      <div class:list={['absolute inset-0', overlayClass]} />
+    </div>
+  )
+}
+
+<style>
+  .section-backdrop-slide {
+    opacity: 0;
+    transition: opacity 1.6s ease-in-out;
+  }
+
+  .section-backdrop-slide.is-active {
+    opacity: var(--sbg-opacity, 0.14);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .section-backdrop-slide {
+      transition: none;
+    }
+    .section-backdrop-slide:not(.is-active) {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  function initSectionBackdrops() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    document.querySelectorAll<HTMLElement>('.section-backdrop').forEach((container) => {
+      if (container.dataset.sbgBound === 'true') return;
+      const slides = Array.from(
+        container.querySelectorAll<HTMLImageElement>('[data-sbg-slide]'),
+      );
+      if (slides.length < 2) return;
+
+      container.dataset.sbgBound = 'true';
+      const intervalMs = Number(container.dataset.interval) || 6500;
+      let current = 0;
+      window.setInterval(() => {
+        slides[current]?.classList.remove('is-active');
+        current = (current + 1) % slides.length;
+        slides[current]?.classList.add('is-active');
+      }, intervalMs);
+    });
+  }
+
+  initSectionBackdrops();
+  document.addEventListener('astro:page-load', initSectionBackdrops);
+</script>

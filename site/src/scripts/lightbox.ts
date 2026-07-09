@@ -58,10 +58,12 @@ function step(delta: number) {
   show(activeGroup, next);
 }
 
-function initLightbox() {
+/** Register (or refresh) lightbox groups for the current page's galleries. */
+function registerGroups() {
+  groups.clear();
   document.querySelectorAll<HTMLElement>('[data-lightbox-group]').forEach((el) => {
     const groupId = el.dataset.lightboxGroup;
-    if (!groupId || groups.has(groupId)) return;
+    if (!groupId) return;
 
     const items = Array.from(el.querySelectorAll<HTMLElement>('[data-lightbox-item]'));
     const images = items.map((item) => item.dataset.src ?? '');
@@ -69,6 +71,29 @@ function initLightbox() {
 
     registerGroup(groupId, images, captions);
   });
+}
+
+/** Bind overlay controls — the overlay is re-rendered on each page navigation. */
+function bindOverlay() {
+  document.getElementById('site-lightbox-close')?.addEventListener('click', hide);
+  document.getElementById('site-lightbox-prev')?.addEventListener('click', () => step(-1));
+  document.getElementById('site-lightbox-next')?.addEventListener('click', () => step(1));
+
+  lightbox()?.addEventListener('click', (event) => {
+    if (event.target === lightbox()) hide();
+  });
+
+  lightboxImage()?.addEventListener('click', (event) => {
+    event.stopPropagation();
+  });
+}
+
+let globalBound = false;
+
+/** Document-level delegation + keyboard — bound once for the session. */
+function bindGlobalOnce() {
+  if (globalBound) return;
+  globalBound = true;
 
   document.addEventListener('click', (event) => {
     const target = (event.target as HTMLElement).closest<HTMLElement>('[data-lightbox-item]');
@@ -83,18 +108,6 @@ function initLightbox() {
     show(groupId, index);
   });
 
-  document.getElementById('site-lightbox-close')?.addEventListener('click', hide);
-  document.getElementById('site-lightbox-prev')?.addEventListener('click', () => step(-1));
-  document.getElementById('site-lightbox-next')?.addEventListener('click', () => step(1));
-
-  lightbox()?.addEventListener('click', (event) => {
-    if (event.target === lightbox()) hide();
-  });
-
-  lightboxImage()?.addEventListener('click', (event) => {
-    event.stopPropagation();
-  });
-
   document.addEventListener('keydown', (event) => {
     if (lightbox()?.dataset.open !== 'true') return;
     if (event.key === 'Escape') hide();
@@ -103,8 +116,16 @@ function initLightbox() {
   });
 }
 
+function initLightbox() {
+  registerGroups();
+  bindOverlay();
+  bindGlobalOnce();
+}
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initLightbox);
 } else {
   initLightbox();
 }
+
+document.addEventListener('astro:page-load', initLightbox);

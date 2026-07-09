@@ -1,16 +1,18 @@
 ---
 import { heroBackgrounds, site } from '../data/site';
+
+const headline = ['Art', 'direction', '&', 'concept', 'art', 'for', 'AAA', 'worlds.'];
 ---
 
-<section class="relative flex min-h-[72vh] items-end overflow-hidden border-b border-border/60">
-  <div class="absolute inset-0" id="hero-backgrounds" data-interval="8000">
+<section class="relative flex min-h-[82vh] items-end overflow-hidden border-b border-border/60">
+  <div class="grain absolute inset-0" id="hero-backgrounds" data-interval="8000" data-parallax>
     {
       heroBackgrounds.map((src, index) => (
         <img
           src={src}
           alt=""
           class:list={[
-            'hero-bg-slide absolute inset-0 h-full w-full scale-105 object-cover blur-[1px]',
+            'hero-bg-slide absolute inset-0 h-full w-full scale-110 object-cover blur-[1px]',
             index === 0 ? 'is-active' : '',
           ]}
           loading={index === 0 ? 'eager' : 'lazy'}
@@ -19,19 +21,32 @@ import { heroBackgrounds, site } from '../data/site';
         />
       ))
     }
-    <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/80 to-bg/30" />
-    <div class="absolute inset-0 bg-gradient-to-r from-bg/90 via-transparent to-bg/40" />
+    <div
+      class="gradient-drift absolute inset-0 opacity-40 mix-blend-soft-light"
+      style="background-image: radial-gradient(60% 60% at 20% 20%, color-mix(in srgb, var(--color-accent) 45%, transparent), transparent 70%), radial-gradient(50% 50% at 80% 80%, color-mix(in srgb, #4f6bff 40%, transparent), transparent 70%);"
+    >
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/80 to-bg/30"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-bg/90 via-transparent to-bg/40"></div>
   </div>
 
-  <div class="relative mx-auto w-full max-w-7xl px-6 pb-16 pt-32 lg:px-8 lg:pb-24">
-    <p class="mb-4 text-sm tracking-[0.25em] uppercase text-accent">{site.handle}</p>
-    <h1 class="max-w-3xl text-4xl font-semibold tracking-tight text-fg sm:text-5xl lg:text-6xl">
-      Art direction & concept art for AAA worlds.
+  <div class="relative z-10 mx-auto w-full max-w-7xl px-6 pb-16 pt-32 lg:px-8 lg:pb-24">
+    <p class="hero-eyebrow mb-4 text-sm tracking-[0.25em] uppercase text-accent">{site.handle}</p>
+    <h1 class="max-w-4xl text-4xl font-semibold tracking-tight text-fg sm:text-5xl lg:text-6xl">
+      {
+        headline.map((word, index) => (
+          <span class="hero-word-mask">
+            <span class="hero-word" style={`animation-delay: ${120 + index * 70}ms`}>
+              {word}
+            </span>
+          </span>
+        ))
+      }
     </h1>
-    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+    <p class="hero-sub mt-6 max-w-2xl text-lg leading-relaxed text-muted">
       {site.description}
     </p>
-    <div class="mt-10 flex flex-wrap gap-4">
+    <div class="hero-cta mt-10 flex flex-wrap gap-4">
       <a
         href="/concept"
         class="inline-flex items-center rounded-full bg-accent px-6 py-3 text-sm font-medium tracking-wide text-bg transition hover:bg-accent-dim"
@@ -46,6 +61,10 @@ import { heroBackgrounds, site } from '../data/site';
       </a>
     </div>
   </div>
+
+  <div class="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-muted">
+    <span class="hero-scroll block h-10 w-6 rounded-full border border-border/70" aria-hidden="true"></span>
+  </div>
 </section>
 
 <style>
@@ -55,39 +74,120 @@ import { heroBackgrounds, site } from '../data/site';
   }
 
   .hero-bg-slide.is-active {
-    opacity: 0.4;
+    opacity: 0.42;
+  }
+
+  .hero-word-mask {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    padding-right: 0.22em;
+  }
+
+  .hero-word {
+    display: inline-block;
+    transform: translateY(110%);
+    animation: hero-word-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .hero-eyebrow,
+  .hero-sub,
+  .hero-cta {
+    opacity: 0;
+    animation: hero-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .hero-eyebrow { animation-delay: 60ms; }
+  .hero-sub { animation-delay: 720ms; }
+  .hero-cta { animation-delay: 840ms; }
+
+  .hero-scroll {
+    position: relative;
+  }
+
+  .hero-scroll::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 3px;
+    height: 8px;
+    border-radius: 9999px;
+    background: var(--color-accent);
+    transform: translateX(-50%);
+    animation: hero-scroll-dot 1.8s ease-in-out infinite;
+  }
+
+  @keyframes hero-word-rise {
+    to { transform: translateY(0); }
+  }
+
+  @keyframes hero-fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @keyframes hero-scroll-dot {
+    0% { opacity: 0; transform: translate(-50%, 0); }
+    30% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, 14px); }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .hero-bg-slide {
       transition: none;
     }
-
     .hero-bg-slide:not(.is-active) {
       display: none;
+    }
+    .hero-word {
+      transform: none;
+      animation: none;
+    }
+    .hero-eyebrow,
+    .hero-sub,
+    .hero-cta {
+      opacity: 1;
+      animation: none;
+    }
+    .hero-scroll::after {
+      animation: none;
     }
   }
 </style>
 
 <script>
-  function initHeroBackgroundRotation() {
+  function initHero() {
     const container = document.getElementById('hero-backgrounds');
     if (!container) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const slides = Array.from(container.querySelectorAll<HTMLImageElement>('[data-slide]'));
-    if (slides.length < 2) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const intervalMs = Number(container.dataset.interval) || 8000;
-    let current = 0;
+    // Crossfade slideshow.
+    if (!reduced) {
+      const slides = Array.from(container.querySelectorAll<HTMLImageElement>('[data-slide]'));
+      if (slides.length > 1) {
+        const intervalMs = Number(container.dataset.interval) || 8000;
+        let current = 0;
+        window.setInterval(() => {
+          slides[current]?.classList.remove('is-active');
+          current = (current + 1) % slides.length;
+          slides[current]?.classList.add('is-active');
+        }, intervalMs);
+      }
+    }
 
-    window.setInterval(() => {
-      slides[current]?.classList.remove('is-active');
-      current = (current + 1) % slides.length;
-      slides[current]?.classList.add('is-active');
-    }, intervalMs);
+    // Subtle scroll parallax on the background layer.
+    if (!reduced) {
+      const onScroll = () => {
+        const offset = Math.min(window.scrollY * 0.25, 160);
+        container.style.transform = `translateY(${offset}px)`;
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
   }
 
-  initHeroBackgroundRotation();
-  document.addEventListener('astro:page-load', initHeroBackgroundRotation);
+  initHero();
+  document.addEventListener('astro:page-load', initHero);
 </script>

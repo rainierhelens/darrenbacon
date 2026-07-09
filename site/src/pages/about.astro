@@ -1,13 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionBackdrop from '../components/SectionBackdrop.astro';
+import { getHaloArtDirectionImages } from '../lib/art-direction-gallery';
 import { experience, shippedGames } from '../data/credits';
 import { site } from '../data/site';
+
+const shippedBackdrop = getHaloArtDirectionImages();
 ---
 
 <BaseLayout title="About" description="About Darren Bacon — art director and concept artist for AAA games.">
   <section class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
     <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-      <div>
+      <div data-reveal>
         <p class="text-sm tracking-[0.2em] uppercase text-accent">About</p>
         <h1 class="mt-2 text-4xl font-semibold tracking-tight">{site.name}</h1>
         <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
@@ -27,19 +31,20 @@ import { site } from '../data/site';
           View LinkedIn profile →
         </a>
       </div>
-      <div class="overflow-hidden rounded-2xl border border-border/60">
+      <div class="spotlight sheen group overflow-hidden rounded-2xl border border-border/60" data-reveal>
         <img
           src="/images/about/darren-bacon-about-3.gif"
           alt="Darren Bacon"
           loading="lazy"
-          class="w-full object-cover"
+          class="w-full object-cover transition duration-700 group-hover:scale-105"
         />
       </div>
     </div>
   </section>
 
-  <section class="border-y border-border/60 bg-surface">
-    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+  <section class="relative isolate overflow-hidden border-y border-border/60 bg-surface">
+    <SectionBackdrop images={shippedBackdrop} opacity={0.12} />
+    <div class="relative z-10 mx-auto max-w-7xl px-6 py-16 lg:px-8" data-reveal>
       <h2 class="text-2xl font-semibold tracking-tight">Shipped games</h2>
       <div class="mt-8 overflow-x-auto">
         <table class="min-w-full text-left text-sm">
@@ -75,11 +80,15 @@ import { site } from '../data/site';
   </section>
 
   <section class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-    <h2 class="text-2xl font-semibold tracking-tight">Experience</h2>
+    <h2 class="text-2xl font-semibold tracking-tight" data-reveal>Experience</h2>
     <div class="mt-8 space-y-6">
       {
         experience.map((job) => (
-          <article class="rounded-2xl border border-border/60 bg-surface p-6">
+          <article
+            class="spotlight rounded-2xl border border-border/60 bg-surface p-6 transition-colors duration-300 hover:border-accent/40"
+            data-reveal
+            data-reveal-stagger
+          >
             <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
               <h3 class="text-lg font-medium">{job.role}</h3>
               <span class="text-sm text-muted">{job.period}</span>

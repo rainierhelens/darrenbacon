@@ -2,7 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import ConceptGalleryTile from '../components/ConceptGalleryTile.astro';
+import SectionBackdrop from '../components/SectionBackdrop.astro';
+import { getDeadropArtDirectionImages, getHaloArtDirectionImages } from '../lib/art-direction-gallery';
 import { conceptGalleries, site } from '../data/site';
+
+const artDirectionBackdrop = [...getHaloArtDirectionImages(), ...getDeadropArtDirectionImages()];
+const ctaBackdrop = getDeadropArtDirectionImages();
 ---
 
 <BaseLayout
@@ -12,7 +17,7 @@ import { conceptGalleries, site } from '../data/site';
   <Hero />
 
   <section class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-    <div class="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+    <div class="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between" data-reveal>
       <div>
         <p class="text-sm tracking-[0.2em] uppercase text-accent">Selected work</p>
         <h2 class="mt-2 text-3xl font-semibold tracking-tight">Concept art galleries</h2>
@@ -34,9 +39,10 @@ import { conceptGalleries, site } from '../data/site';
     </div>
   </section>
 
-  <section class="border-y border-border/60 bg-surface">
-    <div class="mx-auto grid max-w-7xl gap-10 px-6 py-20 lg:grid-cols-2 lg:px-8">
-      <div>
+  <section class="relative isolate overflow-hidden border-y border-border/60 bg-surface">
+    <SectionBackdrop images={artDirectionBackdrop} opacity={0.16} />
+    <div class="relative z-10 mx-auto grid max-w-7xl gap-10 px-6 py-20 lg:grid-cols-2 lg:px-8">
+      <div data-reveal>
         <p class="text-sm tracking-[0.2em] uppercase text-accent">Art direction</p>
         <h2 class="mt-2 text-3xl font-semibold tracking-tight">Leading visual development at scale</h2>
         <p class="mt-4 max-w-xl leading-relaxed text-muted">
@@ -49,7 +55,8 @@ import { conceptGalleries, site } from '../data/site';
       </div>
       <a
         href="/art-direction"
-        class="group block overflow-hidden rounded-2xl border border-border/60 transition hover:border-accent/40"
+        data-reveal
+        class="spotlight sheen group block overflow-hidden rounded-2xl border border-border/60 transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-2xl hover:shadow-black/40"
       >
         <img
           src="/images/ad-halo/halo-ad-26.jpg"
@@ -62,17 +69,23 @@ import { conceptGalleries, site } from '../data/site';
   </section>
 
   <section class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-    <div class="rounded-2xl border border-border/60 bg-surface-elevated px-8 py-12 text-center sm:px-12">
-      <h2 class="text-2xl font-semibold tracking-tight">Get in touch</h2>
-      <p class="mx-auto mt-4 max-w-xl text-muted">
-        Please reach out for general inquiries.
-      </p>
-      <a
-        href="/contact"
-        class="mt-8 inline-flex rounded-full border border-border px-6 py-3 text-sm font-medium tracking-wide transition hover:border-accent hover:text-accent"
-      >
-        Contact
-      </a>
+    <div
+      class="relative isolate overflow-hidden rounded-2xl border border-border/60 bg-surface-elevated px-8 py-12 text-center sm:px-12"
+      data-reveal
+    >
+      <SectionBackdrop images={ctaBackdrop} opacity={0.12} overlayClass="bg-surface-elevated/85" />
+      <div class="relative z-10">
+        <h2 class="text-2xl font-semibold tracking-tight">Get in touch</h2>
+        <p class="mx-auto mt-4 max-w-xl text-muted">
+          Please reach out for general inquiries.
+        </p>
+        <a
+          href="/contact"
+          class="mt-8 inline-flex rounded-full border border-border px-6 py-3 text-sm font-medium tracking-wide transition hover:border-accent hover:text-accent"
+        >
+          Contact
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>
