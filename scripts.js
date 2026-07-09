@@ -197,7 +197,6 @@ const galleries = {
         // Add more image paths here
     ],
     'OTHER': [
-        'images/other/dbacon_BE_jamesbond_4k-2.jpg',
         'images/other/dbacon_BEM_mad_max-1E_onesheet4k.jpg',
         'images/other/unnamed.jpg',
         'images/other/Kovalai_Vector_Refinery.jpg',
