@@ -63,7 +63,7 @@ export const conceptGalleries = [
     slug: 'other',
     label: 'Other',
     description: 'Personal and freelance explorations.',
-    preview: '/images/other/dbacon_BEM_mad_max-1E_onesheet4k.jpg',
+    preview: '/images/other/unnamed.jpg',
   },
 ] as const;
 
