@@ -21,12 +21,15 @@ export const heroBackgrounds = [
 ] as const;
 
 export const nav = [
-  { label: 'Work', href: '/concept' },
-  { label: 'Art Direction', href: '/art-direction' },
+  { label: 'Work', href: '/art-direction' },
+  { label: 'Concept', href: '/concept' },
   { label: 'About', href: '/about' },
   { label: 'Perspective', href: '/perspective' },
   { label: 'Contact', href: '/contact' },
 ] as const;
+
+/** Homepage concept strip — franchise craft only; full set lives on /concept. */
+export const homepageConceptGalleries = ['halo', 'destiny', 'deadrop'] as const;
 
 export const socialLinks = [
   { label: 'ArtStation', href: 'https://www.artstation.com/darrenbacon' },
@@ -42,30 +45,50 @@ export const conceptGalleries = [
     label: 'Halo',
     description: 'Concept art from the Halo franchise.',
     preview: '/images/halo/halo1.jpg',
+    role: 'Lead Concept Artist → Art Director',
+    period: '2014–2022',
+    whyItMattered:
+      'I led the visuals of the franchise for nearly a decade — from concept leadership through Art Director on Halo Infinite multiplayer and live.',
   },
   {
     slug: 'destiny',
     label: 'Destiny',
-    description: 'Visual development for Bungie\'s Destiny.',
+    description: "Visual development for Bungie's Destiny.",
     preview: '/images/destiny/destiny1.jpg',
+    role: 'Senior Concept Artist',
+    period: '2011–2014',
+    whyItMattered:
+      'I helped build the foundation of the Destiny universe — characters, environments, and props that defined how a new world would look and feel.',
   },
   {
     slug: 'disney',
     label: 'Disney',
     description: 'Film and theme park concept work.',
     preview: '/images/disney/SW_001i.jpg',
+    role: 'Concept Artist',
+    period: '2008–2014',
+    whyItMattered:
+      'Film and theme-park concept work across Disney and ILM — including Star Wars and animation — where craft and world-building had to hold up on the biggest stages.',
   },
   {
     slug: 'deadrop',
     label: 'DEADROP',
     description: 'Art direction and concept for DEADROP.',
     preview: '/images/deadrop/deadrop1.jpg',
+    role: 'Studio Art Director',
+    period: '2022–2025',
+    whyItMattered:
+      'I built the art and the team from the ground up — standing up a studio art department and directing the look from first vision through open development.',
   },
   {
     slug: 'other',
     label: 'Other',
     description: 'Personal and freelance explorations.',
     preview: '/images/other/unnamed.jpg',
+    role: 'Personal & freelance',
+    period: 'Ongoing',
+    whyItMattered:
+      'Explorations outside franchise production — space to push ideas, form language, and personal craft beyond a shipping schedule.',
   },
 ] as const;
 

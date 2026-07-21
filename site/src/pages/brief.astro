@@ -3,24 +3,22 @@ import { site, socialLinks } from '../data/site';
 import {
   impactStats,
   signatureCredentials,
-  leadershipHighlights,
   leadershipCredentials,
   featuredRecommendation,
 } from '../data/leadership';
 import { shippedGames } from '../data/credits';
 import { press } from '../data/press';
 import { publications } from '../data/publications';
+import { RESUME_PDF_URL, RESUME_PDF_FILENAME } from '../config/features';
 
 const linkedIn = socialLinks.find((link) => link.label === 'LinkedIn');
 const gdcTalks = press.filter((item) => item.outlet.includes('GDC')).length;
 const bookCount = publications.length;
 const pressOutlets = [...new Set(press.filter((item) => !item.outlet.includes('GDC')).map((item) => item.outlet))];
-// Curated for the brief — leadership-forward titles, one per franchise.
-// Pulls credit + year from credits.ts as the source of truth.
+
 const briefTitles = [
   'Marathon',
   'Halo Infinite - Multiplayer',
-  'Halo 5: Forge',
   'Halo 5: Guardians',
   'Destiny',
 ];
@@ -28,6 +26,37 @@ const topShipped = briefTitles.flatMap((title) => {
   const game = shippedGames.find((g) => g.title === title);
   return game ? [{ title: game.title, credit: game.credit, year: game.year }] : [];
 });
+
+const briefHighlights = [
+  {
+    title: 'Built and ran a studio art team',
+    body: 'Stood up and led a 15-person art team plus co-developers at Midnight Society, driving DEADROP from concept through seven pre-alphas and three major showcase events.',
+  },
+  {
+    title: 'Stewarded $5B franchises',
+    body: 'Authored the Halo Infinite Art Index and directed art across a ~400-artist program — evolving Halo and Destiny through vision, style guides, and consumer products.',
+  },
+  {
+    title: 'Drives live-service & commerce',
+    body: 'Leads commerce, earnables, and live-events art on Marathon — seasonal cadence, monetization, and the business of a live game, not just its visuals.',
+  },
+];
+
+const briefCredentials = leadershipCredentials.map((cred) => ({
+  title: cred.title
+    .replace('Managing at Microsoft II: Deliver Results Through Teams', 'Managing at Microsoft II')
+    .replace('CompTIA Project+ (Project Management)', 'CompTIA Project+'),
+  meta: `${cred.issuer}${cred.year ? ` · ${cred.year}` : ''}`,
+}));
+
+const briefStats = impactStats.map((stat) => ({
+  value: stat.value,
+  label: stat.label
+    .replace('Years leading game & film art', 'Years leading art')
+    .replace('AAA franchises shipped — Halo, Destiny, Marathon', 'AAA franchises — Halo, Destiny, Marathon')
+    .replace('Players reached across shipped titles', 'Players reached')
+    .replace('Studios — Bungie, 343, Midnight Society, Disney, ILM, EA', 'Studios across games & film'),
+}));
 ---
 
 <!doctype html>
@@ -44,7 +73,12 @@ const topShipped = briefTitles.flatMap((title) => {
   <body>
     <div class="toolbar">
       <a class="back" href="/">← Back to site</a>
-      <button type="button" id="print-btn">Print / Save as PDF</button>
+      <div class="toolbar-actions">
+        <a class="download" href={RESUME_PDF_URL} download={RESUME_PDF_FILENAME}>
+          Download PDF
+        </a>
+        <button type="button" id="print-btn">Print</button>
+      </div>
     </div>
 
     <main class="page">
@@ -61,11 +95,10 @@ const topShipped = briefTitles.flatMap((title) => {
       </header>
 
       <p class="summary">
-        Art and creative director with two decades stewarding beloved worlds in games and film — from
-        senior concept work on Destiny to Art Director on Halo Infinite, Studio Art Director on
-        DEADROP, and today Commerce &amp; Events Art Lead on Marathon. I build and lead art teams, set
-        franchise visual strategy, and run live-service and commerce at scale — evolving universes without
-        breaking the promise fans fell in love with.
+        Art and creative director with two decades stewarding beloved worlds in games and film —
+        Destiny at Bungie, Art Director on Halo Infinite, Studio Art Director at Midnight Society,
+        and today Commerce &amp; Events Art Lead on Marathon. I build and lead art teams, set franchise
+        visual strategy, and run live-service and commerce at scale.
       </p>
 
       <ul class="roles">
@@ -74,8 +107,8 @@ const topShipped = briefTitles.flatMap((title) => {
 
       <section class="stats">
         {
-          impactStats.map((stat) => (
-            <div>
+          briefStats.map((stat) => (
+            <div class="stat">
               <span class="value">{stat.value}</span>
               <span class="label">{stat.label}</span>
             </div>
@@ -87,7 +120,7 @@ const topShipped = briefTitles.flatMap((title) => {
         <div class="col">
           <h2>What I bring</h2>
           {
-            leadershipHighlights.map((item) => (
+            briefHighlights.map((item) => (
               <div class="block">
                 <h3>{item.title}</h3>
                 <p>{item.body}</p>
@@ -112,10 +145,10 @@ const topShipped = briefTitles.flatMap((title) => {
           <h2 class="mt">Leadership credentials</h2>
           <ul class="creds">
             {
-              leadershipCredentials.map((cred) => (
+              briefCredentials.map((cred) => (
                 <li>
                   <span class="title">{cred.title}</span>
-                  <span class="meta">{cred.issuer}{cred.year ? ` · ${cred.year}` : ''}</span>
+                  <span class="meta">{cred.meta}</span>
                 </li>
               ))
             }
@@ -123,15 +156,15 @@ const topShipped = briefTitles.flatMap((title) => {
 
           <h2 class="mt">Recognition</h2>
           <p class="recognition">
-            {gdcTalks}× GDC speaker (2015–2026) · {bookCount} published art books (Star Wars, Halo,
-            Destiny &amp; more) · featured in {pressOutlets.join(', ')}.
+            {gdcTalks}× GDC speaker (2015–2026) · {bookCount} published art books · featured in{' '}
+            {pressOutlets.join(', ')}.
           </p>
         </div>
       </section>
 
       <blockquote class="quote">
         &ldquo;{featuredRecommendation.shortQuote}&rdquo;
-        <cite>— {featuredRecommendation.name}, {featuredRecommendation.title}</cite>
+        <cite>— {featuredRecommendation.name}, Academy Award-winning Production Designer; VP &amp; ECD, Lucasfilm</cite>
       </blockquote>
     </main>
 
@@ -158,12 +191,12 @@ const topShipped = briefTitles.flatMap((title) => {
         background: #ececed;
         color: var(--ink);
         font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
-        line-height: 1.5;
+        line-height: 1.4;
         -webkit-font-smoothing: antialiased;
       }
 
       .toolbar {
-        max-width: 820px;
+        max-width: 8.5in;
         margin: 0 auto;
         padding: 16px 8px;
         display: flex;
@@ -181,41 +214,69 @@ const topShipped = briefTitles.flatMap((title) => {
         color: var(--ink);
       }
 
+      .toolbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .toolbar .download,
       #print-btn {
         border: 1px solid var(--accent);
-        background: var(--accent);
-        color: #fff;
         border-radius: 999px;
         padding: 8px 18px;
         font-size: 14px;
+        text-decoration: none;
         cursor: pointer;
       }
 
+      .toolbar .download {
+        background: #fff;
+        color: var(--accent);
+      }
+
+      #print-btn {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .toolbar .download:hover,
       #print-btn:hover {
         opacity: 0.9;
       }
 
+      /*
+        Fixed letter canvas. Screen and print share the same proportions so what
+        you see is what prints — one page, with comfortable hierarchy.
+      */
       .page {
-        max-width: 820px;
+        width: 8.5in;
+        height: 11in;
+        max-width: 100%;
         margin: 0 auto 48px;
         background: var(--bg);
-        padding: 44px 52px;
+        padding: 0.5in 0.58in;
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
       }
 
       .head {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        gap: 24px;
+        gap: 20px;
         border-bottom: 2px solid var(--ink);
-        padding-bottom: 16px;
+        padding-bottom: 12px;
+        flex-shrink: 0;
       }
 
       h1 {
         margin: 0;
-        font-size: 30px;
-        letter-spacing: -0.01em;
+        font-size: 28px;
+        letter-spacing: -0.015em;
+        line-height: 1.1;
       }
 
       .role {
@@ -224,7 +285,7 @@ const topShipped = briefTitles.flatMap((title) => {
         font-weight: 600;
         letter-spacing: 0.14em;
         text-transform: uppercase;
-        font-size: 13px;
+        font-size: 12px;
       }
 
       .contact {
@@ -232,7 +293,8 @@ const topShipped = briefTitles.flatMap((title) => {
         margin: 0;
         padding: 0;
         text-align: right;
-        font-size: 13px;
+        font-size: 12.5px;
+        line-height: 1.5;
       }
 
       .contact a {
@@ -240,26 +302,32 @@ const topShipped = briefTitles.flatMap((title) => {
         text-decoration: none;
       }
 
+      .contact a:hover {
+        color: var(--ink);
+      }
+
       .summary {
-        margin: 18px 0 0;
-        font-size: 15px;
+        margin: 14px 0 0;
+        font-size: 13.5px;
         color: #33333a;
+        flex-shrink: 0;
       }
 
       .roles {
         list-style: none;
-        margin: 18px 0 0;
+        margin: 12px 0 0;
         padding: 0;
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 6px;
+        flex-shrink: 0;
       }
 
       .roles li {
         border: 1px solid var(--line);
         border-radius: 999px;
-        padding: 4px 12px;
-        font-size: 12.5px;
+        padding: 4px 11px;
+        font-size: 11.5px;
         font-weight: 600;
         color: #33333a;
       }
@@ -268,60 +336,71 @@ const topShipped = briefTitles.flatMap((title) => {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 12px;
-        margin: 24px 0;
-        padding: 18px 0;
+        margin: 14px 0;
+        padding: 12px 0;
         border-top: 1px solid var(--line);
         border-bottom: 1px solid var(--line);
+        flex-shrink: 0;
       }
 
       .stats .value {
         display: block;
-        font-size: 26px;
+        font-size: 22px;
         font-weight: 700;
         color: var(--accent);
-        letter-spacing: -0.01em;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
       }
 
       .stats .label {
         display: block;
-        font-size: 11.5px;
+        font-size: 11px;
         color: var(--muted);
-        margin-top: 2px;
+        margin-top: 3px;
+        line-height: 1.3;
       }
 
       .cols {
         display: grid;
-        grid-template-columns: 1.15fr 0.85fr;
-        gap: 36px;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 26px;
+        flex: 1 1 auto;
+        min-height: 0;
       }
 
       h2 {
-        font-size: 12px;
+        font-size: 11px;
         letter-spacing: 0.16em;
         text-transform: uppercase;
         color: var(--accent);
-        margin: 0 0 12px;
+        margin: 0 0 10px;
         border-bottom: 1px solid var(--line);
-        padding-bottom: 6px;
+        padding-bottom: 5px;
       }
 
       h2.mt {
-        margin-top: 22px;
+        margin-top: 16px;
       }
 
       .block {
-        margin-bottom: 14px;
+        margin-bottom: 12px;
+      }
+
+      .block:last-child {
+        margin-bottom: 0;
       }
 
       .block h3 {
         margin: 0;
-        font-size: 15px;
+        font-size: 14px;
+        line-height: 1.25;
       }
 
       .block p {
-        margin: 3px 0 0;
-        font-size: 13px;
+        margin: 4px 0 0;
+        font-size: 12.5px;
         color: #44444c;
+        line-height: 1.4;
       }
 
       .shipped,
@@ -336,49 +415,64 @@ const topShipped = briefTitles.flatMap((title) => {
         margin-bottom: 8px;
       }
 
+      .shipped li:last-child,
+      .creds li:last-child {
+        margin-bottom: 0;
+      }
+
       .shipped .title,
       .creds .title {
         display: block;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 600;
+        line-height: 1.25;
       }
 
       .shipped .meta,
       .creds .meta {
         display: block;
-        font-size: 12px;
+        font-size: 11.5px;
         color: var(--muted);
+        margin-top: 1px;
       }
 
       .recognition {
         margin: 0;
-        font-size: 13px;
+        font-size: 12.5px;
         color: #44444c;
+        line-height: 1.4;
       }
 
       .quote {
-        margin: 28px 0 0;
-        padding: 18px 22px;
+        margin: 14px 0 0;
+        padding: 12px 14px;
         border-left: 3px solid var(--accent);
         background: #f5f7f6;
-        font-size: 15px;
+        font-size: 13px;
         font-style: italic;
         color: #2a2a30;
+        line-height: 1.4;
+        flex-shrink: 0;
       }
 
       .quote cite {
         display: block;
-        margin-top: 10px;
+        margin-top: 6px;
         font-style: normal;
-        font-size: 12.5px;
+        font-size: 11.5px;
         color: var(--muted);
       }
 
       @media (max-width: 700px) {
+        .page {
+          width: auto;
+          height: auto;
+          overflow: visible;
+          padding: 28px 22px;
+        }
         .head,
         .cols {
           grid-template-columns: 1fr;
-          flex-direction: column;
         }
         .contact {
           text-align: left;
@@ -386,34 +480,42 @@ const topShipped = briefTitles.flatMap((title) => {
         .stats {
           grid-template-columns: repeat(2, 1fr);
         }
-        .page {
-          padding: 28px 22px;
-        }
       }
 
       @media print {
+        html,
         body {
           background: #fff;
+          width: 8.5in;
+          height: 11in;
         }
         .toolbar {
-          display: none;
+          display: none !important;
         }
         .page {
+          width: 8.5in;
+          height: 11in;
+          margin: 0;
+          padding: 0.5in 0.58in;
           box-shadow: none;
-          margin: 0 auto;
-          max-width: none;
-          padding: 0;
+          overflow: hidden;
+          page-break-after: avoid;
+          break-after: avoid;
+          page-break-inside: avoid;
+          break-inside: avoid;
         }
         .quote {
           background: transparent;
         }
         a {
           color: var(--ink) !important;
+          text-decoration: none;
         }
       }
 
       @page {
-        margin: 14mm;
+        size: letter;
+        margin: 0;
       }
     </style>
 

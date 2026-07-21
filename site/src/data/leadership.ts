@@ -18,16 +18,40 @@ export const impactStats = [
   { value: '6', label: 'Studios — Bungie, 343, Midnight Society, Disney, ILM, EA' },
 ] as const;
 
-// Studio credential row. Add a `logo` path (under /images/logos) later to swap
-// the text chips for logos.
+// Studio credential row — transparent PNGs under /images/logos/logos-png.
 export const credentialStudios = [
-  { name: 'Bungie' },
-  { name: '343 Industries' },
-  { name: 'Microsoft' },
-  { name: 'Midnight Society' },
-  { name: 'Walt Disney' },
-  { name: 'Industrial Light & Magic' },
-  { name: 'Electronic Arts' },
+  {
+    name: 'Sony Interactive Entertainment',
+    logo: '/images/logos/logos-png/Sony_Interactive_Entertainment-logo.png',
+  },
+  {
+    name: 'Bungie',
+    logo: '/images/logos/logos-png/bungie-logo.png',
+  },
+  {
+    name: 'Midnight Society',
+    logo: '/images/logos/logos-png/Midnight_Society-logo.png',
+  },
+  {
+    name: '343 Industries',
+    logo: '/images/logos/logos-png/343-logo.png',
+  },
+  {
+    name: 'Microsoft',
+    logo: '/images/logos/logos-png/msft-logo.png',
+  },
+  {
+    name: 'Industrial Light & Magic',
+    logo: '/images/logos/logos-png/ilm-logo.png',
+  },
+  {
+    name: 'Walt Disney',
+    logo: '/images/logos/logos-png/Walt-Disney-logo.png',
+  },
+  {
+    name: 'Electronic Arts',
+    logo: '/images/logos/logos-png/EA-logo.png',
+  },
 ] as const;
 
 // Formal leadership training and credentials — evidence of people-leadership
@@ -76,7 +100,7 @@ export const featuredRecommendation = {
 // Skimmable "senior roles + scale" line for directly under the hero — answers
 // "is this a leader?" before the visitor scrolls.
 export const signatureCredentials = [
-  'Studio Art Director — DEADROP',
+  'Studio Art Director — MIDNIGHT SOCIETY',
   'Art Director — Halo Infinite',
   'Author — Halo Infinite Art Index',
   'Commerce & Events Art Lead — Marathon',

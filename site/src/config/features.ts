@@ -4,11 +4,11 @@ export const marathonCaseStudyPublished = false;
 export const MARATHON_LOGO = '/images/Marathon/Marathon_Logo_WordMark_Green_TRANSPARENT.png';
 
 /**
- * Controls the "Leadership brief" links (header, About, Contact). Points at the
- * printable /brief page — a one-page leadership summary an exec can read at a
- * glance and "Save as PDF". To ship a designed PDF instead, drop it in
- * site/public/ and set RESUME_URL to that path (and re-add `download`).
+ * Leadership brief links (header, About, Contact, homepage) open the live
+ * HTML page at /brief. A downloadable PDF is offered from that page.
  */
 export const resumeAvailable = true;
 export const RESUME_URL = '/brief';
 export const RESUME_LABEL = 'Leadership brief';
+export const RESUME_PDF_URL = '/darren-bacon-leadership-brief.pdf';
+export const RESUME_PDF_FILENAME = 'Darren-Bacon-Leadership-Brief.pdf';

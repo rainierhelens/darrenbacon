@@ -31,8 +31,4 @@ New-Item -ItemType Junction -Path "site/public/images" -Target "../images"
 
 ## Deploy (GitHub Pages)
 
-The workflow in `.github/workflows/deploy-site.yml` builds the Astro site and publishes `site/dist` to GitHub Pages. Point your custom domain (`CNAME`) at GitHub Pages when ready to switch from the legacy static HTML.
-
-## Legacy site
-
-The original HTML/CSS site remains in the repo root (`index.html`, etc.) until you cut over to the Astro build.
+The workflow in `.github/workflows/deploy-site.yml` builds the Astro site and publishes `site/dist` to GitHub Pages. Custom domain is set via `site/public/CNAME`.
