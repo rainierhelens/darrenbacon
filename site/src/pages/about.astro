@@ -5,7 +5,12 @@ import Publications from '../components/Publications.astro';
 import PressList from '../components/PressList.astro';
 import { getHaloArtDirectionImages } from '../lib/art-direction-gallery';
 import { experience, shippedGames } from '../data/credits';
-import { leadershipPhilosophy, leadershipCredentials, featuredRecommendation } from '../data/leadership';
+import {
+  careerSpine,
+  leadershipPhilosophy,
+  leadershipCredentials,
+  featuredRecommendation,
+} from '../data/leadership';
 import { RESUME_URL, RESUME_LABEL, resumeAvailable } from '../config/features';
 
 const shippedBackdrop = getHaloArtDirectionImages();
@@ -183,6 +188,47 @@ const shippedBackdrop = getHaloArtDirectionImages();
     </div>
   </section>
 
+  <section class="border-t border-border/60 bg-bg">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      <div data-reveal>
+        <p class="text-sm tracking-[0.2em] uppercase text-accent">Career</p>
+        <h2 class="mt-2 text-3xl font-semibold tracking-tight">The arc at a glance</h2>
+        <p class="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
+          Five beats through the worlds I've helped shape — details in experience below.
+        </p>
+      </div>
+
+      <ol
+        class="career-spine mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-0"
+        data-reveal
+      >
+        {
+          careerSpine.map((beat, index) => (
+            <li class="career-spine__beat relative flex flex-col lg:px-3">
+              <div class="flex items-center gap-3 lg:flex-col lg:items-start lg:gap-0">
+                <span
+                  class="career-spine__dot relative z-10 flex h-3 w-3 shrink-0 rounded-full bg-accent ring-4 ring-bg"
+                  aria-hidden="true"
+                />
+                <span class="text-xs tracking-[0.14em] uppercase text-muted lg:mt-4">
+                  {beat.period}
+                </span>
+              </div>
+              <p class="mt-2 text-base font-medium tracking-tight lg:mt-3">
+                {beat.studio}
+                <span class="text-muted"> · {beat.focus}</span>
+              </p>
+              <p class="mt-1 text-sm leading-snug text-muted">{beat.note}</p>
+              {index < careerSpine.length - 1 && (
+                <span class="career-spine__connector" aria-hidden="true" />
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
   <section class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
     <h2 class="text-2xl font-semibold tracking-tight" data-reveal>Experience</h2>
     <div class="mt-8 space-y-6">
@@ -210,6 +256,24 @@ const shippedBackdrop = getHaloArtDirectionImages();
       }
     </div>
   </section>
+
+  <style>
+    .career-spine__connector {
+      display: none;
+    }
+
+    @media (min-width: 1024px) {
+      .career-spine__beat:not(:last-child) .career-spine__connector {
+        display: block;
+        position: absolute;
+        top: 0.35rem;
+        left: calc(0.375rem + 0.75rem);
+        right: -0.75rem;
+        height: 1px;
+        background: color-mix(in srgb, var(--color-border) 90%, transparent);
+      }
+    }
+  </style>
 
   <Publications />
 

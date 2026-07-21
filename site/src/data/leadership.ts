@@ -112,15 +112,50 @@ export const signatureCredentials = [
 export const leadershipHighlights = [
   {
     title: 'Built and ran a studio art team',
-    body: 'Stood up and led a 15-person art team plus external co-developers at Midnight Society, driving DEADROP from concept through seven pre-alpha releases and three major esports and showcase events.',
+    body: 'Stood up and led a full game studio art team from scratch plus external co-developers at Midnight Society, driving DEADROP from concept through seven pre-alpha releases and three major esports and showcase events.',
   },
   {
     title: 'Stewarded $5B franchises',
-    body: 'Authored the Halo Infinite Art Index — the franchise’s art bible — and directed art across a ~400-artist program while shipping Destiny, evolving beloved worlds through vision, style guides, and consumer products without breaking the promise fans fell in love with.',
+    body: 'Authored the Halo Infinite Art Index — the franchise’s art bible — and directed art across a ~400-artist program, evolving beloved worlds through vision, style guides, and consumer products without breaking the promise fans fell in love with.',
   },
   {
     title: 'Drives live-service & commerce',
     body: 'Leads commerce, earnables, and live-events art on Marathon — a creative leader fluent in seasonal cadence, monetization, and the business of a live game, not just its visuals.',
+  },
+] as const;
+
+// Skimmable career spine for About — five beats, not a résumé dump.
+// Chronological past → present so the path reads as one arc.
+export const careerSpine = [
+  {
+    studio: 'Disney / ILM',
+    focus: 'Film & theme park',
+    period: '2008–2014',
+    note: 'Film and theme-park craft',
+  },
+  {
+    studio: 'Bungie',
+    focus: 'Destiny',
+    period: '2011–2014',
+    note: 'Foundation of a new universe',
+  },
+  {
+    studio: '343 Industries',
+    focus: 'Halo',
+    period: '2014–2022',
+    note: 'Franchise visuals → Art Director',
+  },
+  {
+    studio: 'Midnight Society',
+    focus: 'DEADROP',
+    period: '2022–2025',
+    note: 'Built art + team from zero',
+  },
+  {
+    studio: 'Bungie',
+    focus: 'Marathon',
+    period: '2025–present',
+    note: 'Live-service & commerce art',
   },
 ] as const;
 
