@@ -1,19 +1,37 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
-import { site } from '../data/site';
+import { site, socialLinks } from '../data/site';
+import { RESUME_URL, RESUME_LABEL, resumeAvailable } from '../config/features';
+
+const linkedIn = socialLinks.find((link) => link.label === 'LinkedIn');
 ---
 
-<BaseLayout title="Contact" description="Contact Darren Bacon for art direction and concept art inquiries.">
+<BaseLayout title="Contact" description="Contact Darren Bacon about art and creative leadership roles and studio collaborations.">
   <section class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
     <p class="text-sm tracking-[0.2em] uppercase text-accent">Get in touch</p>
-    <h1 class="mt-2 text-4xl font-semibold tracking-tight">Contact</h1>
+    <h1 class="mt-2 text-4xl font-semibold tracking-tight">Let's talk</h1>
     <p class="mt-4 max-w-2xl text-muted">
-      For studio collaborations, commissions, or press — send a message below or email directly.
+      Open to art and creative leadership roles, franchise stewardship, and studio conversations —
+      as well as collaborations and press. Send a message below or reach out directly.
     </p>
-    <p class="mt-6">
+    <div class="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3">
       <a href={`mailto:${site.email}`} class="text-accent transition hover:text-fg">{site.email}</a>
-    </p>
+      {
+        linkedIn && (
+          <a href={linkedIn.href} target="_blank" rel="noopener noreferrer" class="text-sm text-muted transition hover:text-accent">
+            LinkedIn →
+          </a>
+        )
+      }
+      {
+        resumeAvailable && (
+          <a href={RESUME_URL} class="text-sm text-muted transition hover:text-accent">
+            {RESUME_LABEL} →
+          </a>
+        )
+      }
+    </div>
   </section>
 
   <ContactForm />

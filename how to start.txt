@@ -1,0 +1,1 @@
+powershell in window and then npm run dev

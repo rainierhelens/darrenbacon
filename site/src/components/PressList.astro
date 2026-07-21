@@ -1,0 +1,37 @@
+---
+import { press } from '../data/press';
+
+const items = press;
+---
+
+{
+  items.length > 0 && (
+    <section class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      <h2 class="text-2xl font-semibold tracking-tight" data-reveal>
+        Press & recognition
+      </h2>
+      <ul class="mt-8 divide-y divide-border/60 border-y border-border/60">
+        {items.map((item) => (
+          <li class="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between" data-reveal>
+            <div>
+              <span class="text-xs tracking-[0.15em] uppercase text-accent">{item.kind}</span>
+              <p class="mt-1 font-medium">
+                {item.href ? (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer" class="transition hover:text-accent">
+                    {item.title}
+                  </a>
+                ) : (
+                  item.title
+                )}
+              </p>
+            </div>
+            <p class="text-sm text-muted">
+              {item.outlet}
+              {item.year ? ` · ${item.year}` : ''}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

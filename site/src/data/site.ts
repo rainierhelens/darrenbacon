@@ -1,11 +1,13 @@
 export const site = {
   name: 'Darren Bacon',
-  tagline: 'Art Director & Concept Artist',
+  tagline: 'Art & Creative Director',
   email: 'darren@darrenbacon.com',
   url: 'https://www.darrenbacon.com',
   handle: '@artofbacon',
   description:
-    'Art director and concept artist known for Halo, Destiny, Marathon, Disney, and AAA game development.',
+    'Art and creative director shaping franchise visual strategy at scale — from Halo and Destiny to Marathon. Two decades leading art teams and stewarding beloved game worlds from vision through live operations.',
+  jobTitle: 'Art & Creative Director',
+  lookingFor: 'Open to creative & art director leadership — franchise or studio.',
 } as const;
 
 /** Homepage hero background rotation — add or reorder paths to change the slideshow. */
@@ -23,6 +25,7 @@ export const nav = [
   { label: 'Work', href: '/concept' },
   { label: 'Art Direction', href: '/art-direction' },
   { label: 'About', href: '/about' },
+  { label: 'Perspective', href: '/perspective' },
   { label: 'Contact', href: '/contact' },
 ] as const;
 

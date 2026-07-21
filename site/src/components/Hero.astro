@@ -1,7 +1,7 @@
 ---
 import { heroBackgrounds, site } from '../data/site';
 
-const headline = ['Art', 'direction', '&', 'concept', 'art', 'for', 'AAA', 'worlds.'];
+const headline = ['Directing', 'the', 'art', 'of', 'worlds', 'people', 'love.'];
 ---
 
 <section class="relative flex min-h-[82vh] items-end overflow-hidden border-b border-border/60">
@@ -31,7 +31,7 @@ const headline = ['Art', 'direction', '&', 'concept', 'art', 'for', 'AAA', 'worl
   </div>
 
   <div class="relative z-10 mx-auto w-full max-w-7xl px-6 pb-16 pt-32 lg:px-8 lg:pb-24">
-    <p class="hero-eyebrow mb-4 text-sm tracking-[0.25em] uppercase text-accent">{site.handle}</p>
+    <p class="hero-eyebrow mb-4 text-sm tracking-[0.25em] uppercase text-accent">{site.tagline}</p>
     <h1 class="max-w-4xl text-4xl font-semibold tracking-tight text-fg sm:text-5xl lg:text-6xl">
       {
         headline.map((word, index) => (
@@ -44,20 +44,21 @@ const headline = ['Art', 'direction', '&', 'concept', 'art', 'for', 'AAA', 'worl
       }
     </h1>
     <p class="hero-sub mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-      {site.description}
+      Two decades leading art teams and stewarding beloved game worlds — Halo, Destiny, and Marathon —
+      from franchise vision through live operations at scale.
     </p>
     <div class="hero-cta mt-10 flex flex-wrap gap-4">
       <a
-        href="/concept"
+        href="/contact"
         class="inline-flex items-center rounded-full bg-accent px-6 py-3 text-sm font-medium tracking-wide text-bg transition hover:bg-accent-dim"
       >
-        View concept art
+        Start a conversation
       </a>
       <a
         href="/art-direction"
         class="inline-flex items-center rounded-full border border-border px-6 py-3 text-sm font-medium tracking-wide text-fg transition hover:border-accent hover:text-accent"
       >
-        Art direction
+        View the work
       </a>
     </div>
   </div>

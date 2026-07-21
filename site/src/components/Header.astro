@@ -1,5 +1,6 @@
 ---
 import { nav, site, socialLinks } from '../data/site';
+import { RESUME_URL, RESUME_LABEL, resumeAvailable } from '../config/features';
 
 const currentPath = Astro.url.pathname;
 ---
@@ -34,14 +35,26 @@ const currentPath = Astro.url.pathname;
       }
     </nav>
 
-    <a
-      href={socialLinks[1].href}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="hidden text-sm text-muted transition-colors hover:text-accent sm:inline"
-    >
-      {site.handle}
-    </a>
+    <div class="hidden items-center gap-6 sm:flex">
+      <a
+        href={socialLinks[1].href}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-sm text-muted transition-colors hover:text-accent"
+      >
+        {site.handle}
+      </a>
+      {
+        resumeAvailable && (
+          <a
+            href={RESUME_URL}
+            class="rounded-full border border-border px-4 py-1.5 text-sm tracking-wide transition hover:border-accent hover:text-accent"
+          >
+            {RESUME_LABEL}
+          </a>
+        )
+      }
+    </div>
 
     <button
       id="mobile-menu-btn"

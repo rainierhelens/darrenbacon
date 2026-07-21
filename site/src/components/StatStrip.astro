@@ -1,0 +1,21 @@
+---
+import { impactStats } from '../data/leadership';
+---
+
+<section class="border-b border-border/60 bg-surface/40">
+  <div class="mx-auto grid max-w-7xl grid-cols-2 gap-px bg-border/60 lg:grid-cols-4">
+    {
+      impactStats.map((stat, index) => (
+        <div
+          class="bg-bg px-6 py-8 lg:px-8"
+          data-reveal
+          data-reveal-stagger
+          style={`--reveal-delay: ${index * 90}ms`}
+        >
+          <p class="text-3xl font-semibold tracking-tight text-accent sm:text-4xl">{stat.value}</p>
+          <p class="mt-2 text-sm leading-relaxed text-muted">{stat.label}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

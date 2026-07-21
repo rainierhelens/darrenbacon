@@ -4,7 +4,7 @@ import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SiteLightbox from '../components/SiteLightbox.astro';
-import { site } from '../data/site';
+import { site, socialLinks } from '../data/site';
 
 interface Props {
   title?: string;
@@ -15,10 +15,31 @@ interface Props {
 const {
   title = site.name,
   description = site.description,
-  ogImage = `${site.url}/images/about-banner.jpg`,
+  ogImage = `${site.url}/images/OG-image.jpg`,
 } = Astro.props;
 
 const pageTitle = title === site.name ? `${site.name} | ${site.tagline}` : `${title} | ${site.name}`;
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: site.jobTitle,
+  description: site.description,
+  url: site.url,
+  email: `mailto:${site.email}`,
+  sameAs: socialLinks.map((link) => link.href),
+  knowsAbout: [
+    'Art direction',
+    'Creative direction',
+    'Game development',
+    'Franchise visual strategy',
+    'Live-service operations',
+    'Halo',
+    'Destiny',
+    'Marathon',
+  ],
+};
 ---
 
 <!doctype html>
@@ -42,6 +63,7 @@ const pageTitle = title === site.name ? `${site.name} | ${site.tagline}` : `${ti
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>{pageTitle}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
     <ClientRouter />
   </head>
   <body class="min-h-screen bg-bg text-fg">

@@ -1,8 +1,9 @@
 export const shippedGames = [
   { title: 'Marathon', platform: 'PlayStation / Xbox / Windows', year: '2026', credit: 'Commerce & Events Art Lead', company: 'Bungie / Sony', href: 'https://www.mobygames.com/person/310938/darren-bacon/' },
-  { title: 'Halo Infinite - Multiplayer', platform: 'Xbox Series / Windows', year: '2021', credit: 'Associate Art Director', company: '343 Industries / Microsoft', href: 'https://www.mobygames.com/game/175521/halo-infinite-multiplayer/' },
-  { title: 'Halo Infinite - Campaign', platform: 'Xbox Series / Windows', year: '2021', credit: 'Associate Art Director', company: '343 Industries / Microsoft', href: 'https://www.mobygames.com/game/176543/halo-infinite-campaign/' },
+  { title: 'Halo Infinite - Multiplayer', platform: 'Xbox Series / Windows', year: '2021', credit: 'Art Director', company: '343 Industries / Microsoft', href: 'https://www.mobygames.com/game/175521/halo-infinite-multiplayer/' },
+  { title: 'Halo Infinite - Campaign', platform: 'Xbox Series / Windows', year: '2021', credit: 'Art Director', company: '343 Industries / Microsoft', href: 'https://www.mobygames.com/game/176543/halo-infinite-campaign/' },
   { title: 'Halo: Fireteam Raven', platform: 'Arcade', year: '2018', credit: 'Special Thanks', company: '343 Industries / Microsoft', href: 'https://www.mobygames.com/game/112604/halo-fireteam-raven/' },
+  { title: 'Reaping Rewards', platform: 'Oculus Rift / SteamVR', year: '2017', credit: 'Concept Artist', company: 'Limitless Ltd', href: 'https://store.steampowered.com/app/563470/Reaping_Rewards/' },
   { title: 'Halo 5: Forge', platform: 'Windows', year: '2016', credit: 'Concept Art Lead', company: '343 Industries / Microsoft', href: 'https://www.mobygames.com/game/80652/halo-5-forge/' },
   { title: 'Halo 5: Guardians', platform: 'Xbox One', year: '2015', credit: 'Concept Art Lead', company: '343 Industries / Microsoft', href: 'https://www.mobygames.com/game/75503/halo-5-guardians/' },
   { title: 'Destiny', platform: 'Xbox One', year: '2015', credit: 'Senior Concept Artist', company: 'Bungie', href: 'https://www.mobygames.com/game/68327/destiny/' },
@@ -20,20 +21,23 @@ export const experience = [
     shipped: ['Marathon (2026)'],
   },
   {
-    role: 'Midnight Society — Art Director',
+    role: 'Midnight Society — Studio Art Director',
     period: '2022–2025',
-    summary: 'Art direction for DEADROP and studio visual development.',
+    summary:
+      'Built and led a 15-person art team plus external co-developers, directing DEADROP from concept through seven pre-alpha releases and three major esports/showcase events.',
   },
   {
-    role: 'Microsoft (Halo) — Art Director / Associate Art Director',
+    role: 'Microsoft (Halo) — Art Director',
     period: '2019–2022',
-    summary: 'Multiplayer and live team art direction for Halo Infinite.',
+    summary:
+      'Directed art for Halo Infinite multiplayer and live content across a ~400-artist program — stewarding a $5B franchise, including consumer-products oversight (Mattel, McFarlane, apparel, brand style guides).',
     shipped: ['Halo Infinite (2021)', 'Halo: Fireteam Raven — Special Thanks (2018)'],
   },
   {
     role: 'Microsoft (Halo) — Lead Concept Artist',
     period: '2014–2019',
-    summary: 'Led the concept art team across Halo 5, Halo Wars 2, and Halo Infinite.',
+    summary:
+      'Hired, led, and mentored a concept team of up to 11 across Halo 5, Halo 5: Forge, and Halo Infinite — owning the full talent lifecycle and the visual quality bar. Authored the Halo Infinite Art Index, the franchise’s living style guide that aligned a ~400-artist program and external partners around one visual language.',
     shipped: ['Halo 5: Guardians (2015)', 'Halo 5: Forge (2016)'],
   },
   {
