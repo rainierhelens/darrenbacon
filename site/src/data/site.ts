@@ -7,7 +7,6 @@ export const site = {
   description:
     'Art and creative director shaping franchise visual strategy at scale — from Halo and Destiny to Marathon. Two decades leading art teams and stewarding beloved game worlds from vision through live operations.',
   jobTitle: 'Art & Creative Director',
-  lookingFor: 'Open to creative & art director leadership — franchise or studio.',
 } as const;
 
 /** Homepage hero background rotation — add or reorder paths to change the slideshow. */
