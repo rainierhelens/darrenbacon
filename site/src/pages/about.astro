@@ -61,16 +61,45 @@ const shippedBackdrop = getHaloArtDirectionImages();
           }
         </div>
       </div>
-      <div class="spotlight sheen group overflow-hidden rounded-2xl border border-border/60" data-reveal>
-        <img
-          src="/images/about/darren-bacon-about-720.gif"
-          alt="Darren Bacon speaking on stage"
-          loading="lazy"
-          class="w-full object-cover transition duration-700 group-hover:scale-105"
-        />
+      <div
+        class="spotlight sheen group mx-auto w-full max-w-sm overflow-hidden rounded-2xl border border-border/60 lg:mx-0 lg:justify-self-end"
+        data-reveal
+      >
+        <div class="relative aspect-[9/16] w-full">
+          <video
+            class="about-reel absolute inset-0 h-full w-full object-cover"
+            src="/images/about/darren-bacon-about.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            controls
+            preload="metadata"
+            aria-label="Darren Bacon — career and craft reel"
+          >
+          </video>
+        </div>
       </div>
     </div>
   </section>
+
+  <script>
+    function initAboutReel() {
+      const video = document.querySelector<HTMLVideoElement>('.about-reel');
+      if (!video) return;
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduced) {
+        video.removeAttribute('autoplay');
+        video.pause();
+        return;
+      }
+      video.play().catch(() => {
+        /* Autoplay blocked — controls remain available. */
+      });
+    }
+    initAboutReel();
+    document.addEventListener('astro:page-load', initAboutReel);
+  </script>
 
   <section class="border-t border-border/60">
     <div class="mx-auto max-w-5xl px-6 py-16 lg:px-8">
