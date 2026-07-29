@@ -163,7 +163,7 @@ export const careerSpine = [
 export const leadershipPhilosophy = [
   {
     title: 'Vision that survives production',
-    body: 'A visual target only matters if it holds up at gameplay distance, in a live build, months after the pitch. I set direction that teams can actually execute — and defend it through the messy middle where great games are won or lost.',
+    body: 'A visual target only matters if it holds up accounting for gameplay and tech constraints, in a live build, months after the pitch. I set direction that teams can actually execute and defend it through the messy middle where great games are won or lost.',
   },
   {
     title: 'One language, many hands',

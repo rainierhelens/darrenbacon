@@ -24,7 +24,6 @@ export const nav = [
   { label: 'Work', href: '/art-direction' },
   { label: 'Concept', href: '/concept' },
   { label: 'About', href: '/about' },
-  { label: 'Perspective', href: '/perspective' },
   { label: 'Contact', href: '/contact' },
 ] as const;
 
@@ -84,7 +83,7 @@ export const conceptGalleries = [
     slug: 'other',
     label: 'Other',
     description: 'Personal and freelance explorations.',
-    preview: '/images/other/unnamed.jpg',
+    preview: '/images/other/Kovalai_Vector_Refinery.jpg',
     role: 'Personal & freelance',
     period: 'Ongoing',
     whyItMattered:
