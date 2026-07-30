@@ -16,7 +16,6 @@ const { title, description, youtubeId, url, featured = false } = Astro.props;
       src={`https://www.youtube-nocookie.com/embed/${youtubeId}`}
       title={title}
       class="h-full w-full"
-      loading="lazy"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowfullscreen
     />

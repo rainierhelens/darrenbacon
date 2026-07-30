@@ -48,6 +48,7 @@ let imageIndex = 0;
                     controls
                     playsinline
                     preload="metadata"
+                    data-gallery-video
                     class="w-full bg-black object-contain"
                   />
                 </figure>
@@ -129,3 +130,18 @@ let imageIndex = 0;
     )
   }
 </section>
+
+<script>
+  function reloadGalleryVideos() {
+    document.querySelectorAll<HTMLVideoElement>('video[data-gallery-video]').forEach((video) => {
+      // ClientRouter DOM swaps leave <video> elements without a media load;
+      // force the pipeline the same way About / art-direction index already do.
+      if (video.readyState === 0) {
+        video.load();
+      }
+    });
+  }
+
+  reloadGalleryVideos();
+  document.addEventListener('astro:page-load', reloadGalleryVideos);
+</script>
