@@ -69,12 +69,12 @@ const shippedBackdrop = getHaloArtDirectionImages();
           <video
             class="about-reel absolute inset-0 h-full w-full object-cover"
             src="/images/about/darren-bacon-about.mp4"
-            autoplay
             muted
             loop
             playsinline
             controls
-            preload="metadata"
+            preload="auto"
+            autoplay
             aria-label="Darren Bacon — career and craft reel"
           >
           </video>
@@ -84,19 +84,42 @@ const shippedBackdrop = getHaloArtDirectionImages();
   </section>
 
   <script>
+    function playAboutReel(video: HTMLVideoElement) {
+      // Property form is required for autoplay after client-side navigations.
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      video.loop = true;
+
+      const tryPlay = () => {
+        void video.play().catch(() => {
+          /* Autoplay blocked — controls remain available. */
+        });
+      };
+
+      if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+        tryPlay();
+        return;
+      }
+
+      video.addEventListener('canplay', tryPlay, { once: true });
+      video.load();
+    }
+
     function initAboutReel() {
       const video = document.querySelector<HTMLVideoElement>('.about-reel');
       if (!video) return;
+
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reduced) {
         video.removeAttribute('autoplay');
         video.pause();
         return;
       }
-      video.play().catch(() => {
-        /* Autoplay blocked — controls remain available. */
-      });
+
+      playAboutReel(video);
     }
+
     initAboutReel();
     document.addEventListener('astro:page-load', initAboutReel);
   </script>
