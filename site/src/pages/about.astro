@@ -1,9 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionBackdrop from '../components/SectionBackdrop.astro';
 import Publications from '../components/Publications.astro';
 import PressList from '../components/PressList.astro';
-import { getHaloArtDirectionImages } from '../lib/art-direction-gallery';
 import { experience, shippedGames } from '../data/credits';
 import {
   careerSpine,
@@ -12,8 +10,6 @@ import {
   featuredRecommendation,
 } from '../data/leadership';
 import { RESUME_URL, RESUME_LABEL, resumeAvailable } from '../config/features';
-
-const shippedBackdrop = getHaloArtDirectionImages();
 ---
 
 <BaseLayout
@@ -36,7 +32,7 @@ const shippedBackdrop = getHaloArtDirectionImages();
       <div data-reveal>
         <p class="text-sm tracking-[0.2em] uppercase text-accent">About</p>
         <h1 class="mt-2 text-4xl font-semibold tracking-tight">{`Darren Bacon`}</h1>
-        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+        <p class="mt-6 max-w-2xl leading-relaxed text-muted">
           Art director with two decades of experience stewarding some of the most beloved
           franchises in entertainment. I lead art teams and shape visual strategy, from the
           first vision frame to what millions of players see and interact with in a live
@@ -236,9 +232,8 @@ const shippedBackdrop = getHaloArtDirectionImages();
     </div>
   </section>
 
-  <section class="relative isolate overflow-hidden border-y border-border/60 bg-surface">
-    <SectionBackdrop images={shippedBackdrop} opacity={0.12} />
-    <div class="relative z-10 mx-auto max-w-7xl px-6 py-16 lg:px-8" data-reveal>
+  <section class="border-y border-border/60 bg-surface">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8" data-reveal>
       <h2 class="text-2xl font-semibold tracking-tight">Shipped games</h2>
       <div class="mt-8 overflow-x-auto">
         <table class="min-w-full text-left text-sm">
