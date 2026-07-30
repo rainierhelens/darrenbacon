@@ -1,18 +1,18 @@
 ---
 import { heroBackgrounds, site } from '../data/site';
 
-const headline = ['Directing', 'the', 'art', 'of', 'worlds', 'people', 'love.'];
+const headline = ['Leading', 'the', 'visuals', 'of', 'worlds', 'people', 'love.'];
 ---
 
 <section class="relative flex min-h-[82vh] items-end overflow-hidden border-b border-border/60">
-  <div class="grain absolute inset-0" id="hero-backgrounds" data-interval="8000" data-parallax>
+  <div class="absolute inset-0" id="hero-backgrounds" data-interval="8000">
     {
       heroBackgrounds.map((src, index) => (
         <img
           src={src}
           alt=""
           class:list={[
-            'hero-bg-slide absolute inset-0 h-full w-full scale-110 object-cover blur-[1px]',
+            'hero-bg-slide absolute inset-0 h-full w-full scale-105 object-cover blur-[1px]',
             index === 0 ? 'is-active' : '',
           ]}
           loading={index === 0 ? 'eager' : 'lazy'}
@@ -21,11 +21,6 @@ const headline = ['Directing', 'the', 'art', 'of', 'worlds', 'people', 'love.'];
         />
       ))
     }
-    <div
-      class="gradient-drift absolute inset-0 opacity-40 mix-blend-soft-light"
-      style="background-image: radial-gradient(60% 60% at 20% 20%, color-mix(in srgb, var(--color-accent) 45%, transparent), transparent 70%), radial-gradient(50% 50% at 80% 80%, color-mix(in srgb, #4f6bff 40%, transparent), transparent 70%);"
-    >
-    </div>
     <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/80 to-bg/30"></div>
     <div class="absolute inset-0 bg-gradient-to-r from-bg/90 via-transparent to-bg/40"></div>
   </div>
@@ -158,35 +153,33 @@ const headline = ['Directing', 'the', 'art', 'of', 'worlds', 'people', 'love.'];
 </style>
 
 <script>
+  let heroTimer: number | null = null;
+
   function initHero() {
     const container = document.getElementById('hero-backgrounds');
     if (!container) return;
 
+    if (heroTimer !== null) {
+      window.clearInterval(heroTimer);
+      heroTimer = null;
+    }
+
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
 
-    // Crossfade slideshow.
-    if (!reduced) {
-      const slides = Array.from(container.querySelectorAll<HTMLImageElement>('[data-slide]'));
-      if (slides.length > 1) {
-        const intervalMs = Number(container.dataset.interval) || 8000;
-        let current = 0;
-        window.setInterval(() => {
-          slides[current]?.classList.remove('is-active');
-          current = (current + 1) % slides.length;
-          slides[current]?.classList.add('is-active');
-        }, intervalMs);
-      }
-    }
+    const slides = Array.from(container.querySelectorAll<HTMLImageElement>('[data-slide]'));
+    if (slides.length <= 1) return;
 
-    // Subtle scroll parallax on the background layer.
-    if (!reduced) {
-      const onScroll = () => {
-        const offset = Math.min(window.scrollY * 0.25, 160);
-        container.style.transform = `translateY(${offset}px)`;
-      };
-      onScroll();
-      window.addEventListener('scroll', onScroll, { passive: true });
-    }
+    // Keep a single active slide after client navigations.
+    slides.forEach((slide, index) => slide.classList.toggle('is-active', index === 0));
+
+    const intervalMs = Number(container.dataset.interval) || 8000;
+    let current = 0;
+    heroTimer = window.setInterval(() => {
+      slides[current]?.classList.remove('is-active');
+      current = (current + 1) % slides.length;
+      slides[current]?.classList.add('is-active');
+    }, intervalMs);
   }
 
   initHero();

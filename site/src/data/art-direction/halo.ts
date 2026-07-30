@@ -53,8 +53,8 @@ export const haloArtDirection = {
     stats: [
       { value: '$5B', label: 'Franchise stewarded across Halo Infinite' },
       { value: '~400', label: 'Artists whose content I helped orchestrate program-wide' },
+      { value: '272K', label: 'Peak concurrent players on Steam — Nov 16, 2021' },
       { value: 'Free-to-play', label: 'Launch model — the broadest audience in Halo history' },
-      { value: 'Multi-season', label: 'Cohesion sustained from launch through live operations' },
     ],
   },
   multiplayerDirection: {

@@ -8,31 +8,84 @@ const linkedIn = socialLinks.find((link) => link.label === 'LinkedIn');
 ---
 
 <BaseLayout title="Contact" description="Contact Darren Bacon about art and creative leadership roles and studio collaborations.">
-  <section class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-    <p class="text-sm tracking-[0.2em] uppercase text-accent">Get in touch</p>
-    <h1 class="mt-2 text-4xl font-semibold tracking-tight">Let's talk</h1>
-    <p class="mt-4 max-w-2xl text-muted">
-      Open to art and creative leadership roles, franchise stewardship, and studio conversations —
-      as well as collaborations and press. Send a message below or reach out directly.
-    </p>
-    <div class="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3">
-      <a href={`mailto:${site.email}`} class="text-accent transition hover:text-fg">{site.email}</a>
-      {
-        linkedIn && (
-          <a href={linkedIn.href} target="_blank" rel="noopener noreferrer" class="text-sm text-muted transition hover:text-accent">
-            LinkedIn →
-          </a>
-        )
-      }
-      {
-        resumeAvailable && (
-          <a href={RESUME_URL} class="text-sm text-muted transition hover:text-accent">
-            {RESUME_LABEL} →
-          </a>
-        )
-      }
+  <section class="relative isolate overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+      <video
+        class="contact-bg-video absolute inset-0 h-full w-full object-cover"
+        src="/images/contact/bladerunner-sequence-06.mp4"
+        muted
+        loop
+        playsinline
+        preload="auto"
+        autoplay
+      >
+      </video>
+      <div class="absolute inset-0 bg-gradient-to-b from-bg/40 via-bg/55 to-bg/70"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-bg/50 via-bg/25 to-bg/45"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-6 pb-8 pt-20 lg:px-8 lg:pt-24">
+      <p class="text-sm tracking-[0.2em] uppercase text-accent">Get in touch</p>
+      <h1 class="mt-2 text-4xl font-semibold tracking-tight">Let's talk</h1>
+      <p class="mt-4 max-w-2xl text-muted">
+        Open to art and creative leadership roles, franchise stewardship, and studio conversations —
+        as well as collaborations and press. Send a message below or reach out directly.
+      </p>
+      <div class="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3">
+        <a href={`mailto:${site.email}`} class="text-accent transition hover:text-fg">{site.email}</a>
+        {
+          linkedIn && (
+            <a href={linkedIn.href} target="_blank" rel="noopener noreferrer" class="text-sm text-muted transition hover:text-accent">
+              LinkedIn →
+            </a>
+          )
+        }
+        {
+          resumeAvailable && (
+            <a href={RESUME_URL} class="text-sm text-muted transition hover:text-accent">
+              {RESUME_LABEL} →
+            </a>
+          )
+        }
+      </div>
+    </div>
+
+    <div class="relative pb-24">
+      <ContactForm />
     </div>
   </section>
 
-  <ContactForm />
+  <script>
+    function playContactBg() {
+      const video = document.querySelector<HTMLVideoElement>('.contact-bg-video');
+      if (!video) return;
+
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduced) {
+        video.pause();
+        video.removeAttribute('autoplay');
+        return;
+      }
+
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      video.loop = true;
+
+      const tryPlay = () => {
+        void video.play().catch(() => {});
+      };
+
+      if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+        tryPlay();
+        return;
+      }
+
+      video.addEventListener('canplay', tryPlay, { once: true });
+      video.load();
+    }
+
+    playContactBg();
+    document.addEventListener('astro:page-load', playContactBg);
+  </script>
 </BaseLayout>

@@ -6,29 +6,80 @@ import galleries from '../../data/galleries.json';
 ---
 
 <BaseLayout title="Concept Art" description="Concept art galleries by Darren Bacon — Halo, Destiny, Disney, DEADROP, and more.">
-  <section class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-    <p class="text-sm tracking-[0.2em] uppercase text-accent">Portfolio</p>
-    <h1 class="mt-2 text-4xl font-semibold tracking-tight">Concept art</h1>
-    <p class="mt-4 max-w-2xl text-muted">
-      Browse work by franchise.
-    </p>
+  <section class="relative isolate overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+      <video
+        class="concept-bg-video absolute inset-0 h-full w-full object-cover opacity-30"
+        src="/images/concept/env-art-sketch-render-01.mp4"
+        muted
+        loop
+        playsinline
+        preload="auto"
+        autoplay
+      >
+      </video>
+      <div class="absolute inset-0 bg-gradient-to-b from-bg/40 via-bg/55 to-bg/70"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-bg/50 via-bg/25 to-bg/45"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-6 pb-8 pt-16 lg:px-8 lg:pt-20">
+      <p class="text-sm tracking-[0.2em] uppercase text-accent">Portfolio</p>
+      <h1 class="mt-2 text-4xl font-semibold tracking-tight">Concept art</h1>
+      <p class="mt-4 max-w-2xl text-muted">
+        Browse work by franchise.
+      </p>
+    </div>
+
+    <div class="relative mx-auto grid max-w-7xl gap-6 px-6 pb-24 sm:grid-cols-2 lg:grid-cols-3 lg:px-8">
+      {
+        conceptGalleries.map((gallery, index) => {
+          const key = gallery.slug.toUpperCase();
+          const count = galleries[key as keyof typeof galleries]?.length ?? 0;
+          return (
+            <ConceptGalleryTile
+              slug={gallery.slug}
+              label={gallery.label}
+              description={gallery.description}
+              count={count}
+              staggerIndex={index}
+            />
+          );
+        })
+      }
+    </div>
   </section>
 
-  <section class="mx-auto grid max-w-7xl gap-6 px-6 pb-20 sm:grid-cols-2 lg:grid-cols-3 lg:px-8">
-    {
-      conceptGalleries.map((gallery, index) => {
-        const key = gallery.slug.toUpperCase();
-        const count = galleries[key as keyof typeof galleries]?.length ?? 0;
-        return (
-          <ConceptGalleryTile
-            slug={gallery.slug}
-            label={gallery.label}
-            description={gallery.description}
-            count={count}
-            staggerIndex={index}
-          />
-        );
-      })
+  <script>
+    function playConceptBg() {
+      const video = document.querySelector<HTMLVideoElement>('.concept-bg-video');
+      if (!video) return;
+
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduced) {
+        video.pause();
+        video.removeAttribute('autoplay');
+        return;
+      }
+
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      video.loop = true;
+
+      const tryPlay = () => {
+        void video.play().catch(() => {});
+      };
+
+      if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+        tryPlay();
+        return;
+      }
+
+      video.addEventListener('canplay', tryPlay, { once: true });
+      video.load();
     }
-  </section>
+
+    playConceptBg();
+    document.addEventListener('astro:page-load', playConceptBg);
+  </script>
 </BaseLayout>

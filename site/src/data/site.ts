@@ -1,12 +1,12 @@
 export const site = {
   name: 'Darren Bacon',
-  tagline: 'Art & Creative Director',
+  tagline: 'Art Director',
   email: 'darren@darrenbacon.com',
   url: 'https://www.darrenbacon.com',
   handle: '@artofbacon',
   description:
-    'Art and creative director shaping franchise visual strategy at scale — from Halo and Destiny to Marathon. Two decades leading art teams and stewarding beloved game worlds from vision through live operations.',
-  jobTitle: 'Art & Creative Director',
+    'Art director shaping franchise visual strategy at scale — from Halo and Destiny to Marathon. Leading art teams and stewarding beloved game worlds from vision through live operations.',
+  jobTitle: 'Art Director',
 } as const;
 
 /** Homepage hero background rotation — add or reorder paths to change the slideshow. */
