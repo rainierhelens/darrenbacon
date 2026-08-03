@@ -34,11 +34,11 @@ const briefHighlights = [
   },
   {
     title: 'Stewarded $5B franchises',
-    body: 'Authored the Halo Infinite Art Index and directed art across a ~400-artist program — evolving Halo and Destiny through vision, style guides, and consumer products.',
+    body: 'Authored the Halo Infinite Art Index and directed art across a ~400-artist program, evolving Halo and Destiny through vision, style guides, and consumer products.',
   },
   {
     title: 'Drives live-service & commerce',
-    body: 'Leads commerce, earnables, and live-events art on Marathon — seasonal cadence, monetization, and the business of a live game, not just its visuals.',
+    body: 'Leads commerce, earnables, and live-events art on Marathon: seasonal cadence, monetization, and the business of a live game, not just its visuals.',
   },
 ];
 
@@ -52,11 +52,15 @@ const briefCredentials = leadershipCredentials.map((cred) => ({
 const briefStats = impactStats.map((stat) => ({
   value: stat.value,
   label: stat.label
-    .replace('Best Game — Destiny (2015)', 'Best Game — Destiny')
-    .replace('AAA franchises shipped — Halo, Destiny, Marathon', 'AAA franchises — Halo, Destiny, Marathon')
+    .replace('Best Game, Destiny (2015)', 'Best Game, Destiny')
+    .replace('AAA franchises shipped: Halo, Destiny, Marathon', 'AAA franchises: Halo, Destiny, Marathon')
     .replace('Players reached across shipped titles', 'Players reached')
-    .replace('Studios — Bungie, 343, Midnight Society, Disney, ILM, EA', 'Studios across games & film'),
+    .replace('Studios: Bungie, 343, Midnight Society, Disney, ILM, EA', 'Studios across games & film'),
 }));
+
+const briefRoles = signatureCredentials.map((cred) =>
+  cred.replace(/ — /g, ', ').replace(/—/g, ', '),
+);
 ---
 
 <!doctype html>
@@ -64,10 +68,10 @@ const briefStats = impactStats.map((stat) => ({
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{site.name} — Leadership Brief</title>
+    <title>{site.name}: Leadership Brief</title>
     <meta
       name="description"
-      content="One-page leadership brief for Darren Bacon — art director for franchise and studio leadership."
+      content="One-page leadership brief for Darren Bacon, art director for franchise and studio leadership."
     />
   </head>
   <body>
@@ -95,14 +99,14 @@ const briefStats = impactStats.map((stat) => ({
       </header>
 
       <p class="summary">
-        Art director with two decades stewarding beloved worlds in games and film —
+        Art director with two decades stewarding beloved worlds in games and film:
         Destiny at Bungie, Art Director on Halo Infinite, Studio Art Director at Midnight Society,
         and today Commerce &amp; Events Art Lead on Marathon. I build and lead art teams, set franchise
         visual strategy, and run live-service and commerce at scale.
       </p>
 
       <ul class="roles">
-        {signatureCredentials.map((cred) => <li>{cred}</li>)}
+        {briefRoles.map((cred) => <li>{cred}</li>)}
       </ul>
 
       <section class="stats">
@@ -164,7 +168,7 @@ const briefStats = impactStats.map((stat) => ({
 
       <blockquote class="quote">
         &ldquo;{featuredRecommendation.shortQuote}&rdquo;
-        <cite>— {featuredRecommendation.name}, Academy Award-winning Production Designer; VP &amp; ECD, Lucasfilm</cite>
+        <cite>{featuredRecommendation.name}, Academy Award-winning Production Designer; VP &amp; ECD, Lucasfilm</cite>
       </blockquote>
     </main>
 

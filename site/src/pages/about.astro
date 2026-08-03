@@ -88,10 +88,7 @@ import { RESUME_URL, RESUME_LABEL, resumeAvailable } from '../config/features';
           </div>
         </div>
       </div>
-      <div
-        class="flex w-full max-lg:justify-center lg:h-full lg:min-h-0 lg:justify-end"
-        data-reveal
-      >
+      <div class="flex w-full max-lg:justify-center lg:h-full lg:min-h-0 lg:justify-end">
         <div
           class="spotlight sheen group relative w-full max-w-sm overflow-hidden rounded-2xl border border-border/60 max-lg:aspect-[9/16] lg:h-full lg:w-auto lg:max-w-full lg:aspect-[9/16]"
         >
@@ -118,6 +115,7 @@ import { RESUME_URL, RESUME_LABEL, resumeAvailable } from '../config/features';
       // Property form is required for autoplay after client-side navigations.
       video.muted = true;
       video.defaultMuted = true;
+      video.setAttribute('muted', '');
       video.playsInline = true;
       video.loop = true;
 
@@ -127,13 +125,15 @@ import { RESUME_URL, RESUME_LABEL, resumeAvailable } from '../config/features';
         });
       };
 
+      video.addEventListener('loadeddata', tryPlay, { once: true });
+      video.addEventListener('canplay', tryPlay, { once: true });
+
+      // ClientRouter DOM swaps leave <video> elements without a media load.
       if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
         tryPlay();
-        return;
+      } else {
+        video.load();
       }
-
-      video.addEventListener('canplay', tryPlay, { once: true });
-      video.load();
     }
 
     function initAboutReel() {
@@ -144,6 +144,7 @@ import { RESUME_URL, RESUME_LABEL, resumeAvailable } from '../config/features';
       if (reduced) {
         video.removeAttribute('autoplay');
         video.pause();
+        if (video.readyState === 0) video.load();
         return;
       }
 

@@ -12,10 +12,10 @@
 // Excludes Kane's Wrath, Fireteam Raven, Halo 5: Forge, Close Quarters Conflict,
 // and Halo Infinite's later cumulative growth. Adjust if you get official numbers.
 export const impactStats = [
-  { value: 'BAFTA', label: 'Best Game — Destiny (2015)' },
-  { value: '3', label: 'AAA franchises shipped — Halo, Destiny, Marathon' },
   { value: '50M+', label: 'Players reached across shipped titles' },
-  { value: '6', label: 'Studios — Bungie, 343, Midnight Society, Disney, ILM, EA' },
+  { value: '3', label: 'AAA franchises shipped: Halo, Destiny, Marathon' },
+  { value: '6', label: 'Studios: Bungie, 343, Midnight Society, Disney, ILM, EA' },
+  { value: 'BAFTA', label: 'Best Game, Destiny (2015)' },
 ] as const;
 
 // Studio credential row — transparent PNGs under /images/logos/logos-png.
