@@ -55,37 +55,4 @@ const linkedIn = socialLinks.find((link) => link.label === 'LinkedIn');
     </div>
   </section>
 
-  <script>
-    function playContactBg() {
-      const video = document.querySelector<HTMLVideoElement>('.contact-bg-video');
-      if (!video) return;
-
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduced) {
-        video.pause();
-        video.removeAttribute('autoplay');
-        return;
-      }
-
-      video.muted = true;
-      video.defaultMuted = true;
-      video.playsInline = true;
-      video.loop = true;
-
-      const tryPlay = () => {
-        void video.play().catch(() => {});
-      };
-
-      if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
-        tryPlay();
-        return;
-      }
-
-      video.addEventListener('canplay', tryPlay, { once: true });
-      video.load();
-    }
-
-    playContactBg();
-    document.addEventListener('astro:page-load', playContactBg);
-  </script>
 </BaseLayout>

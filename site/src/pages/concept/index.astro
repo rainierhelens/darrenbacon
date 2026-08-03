@@ -49,37 +49,4 @@ import galleries from '../../data/galleries.json';
     </div>
   </section>
 
-  <script>
-    function playConceptBg() {
-      const video = document.querySelector<HTMLVideoElement>('.concept-bg-video');
-      if (!video) return;
-
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduced) {
-        video.pause();
-        video.removeAttribute('autoplay');
-        return;
-      }
-
-      video.muted = true;
-      video.defaultMuted = true;
-      video.playsInline = true;
-      video.loop = true;
-
-      const tryPlay = () => {
-        void video.play().catch(() => {});
-      };
-
-      if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
-        tryPlay();
-        return;
-      }
-
-      video.addEventListener('canplay', tryPlay, { once: true });
-      video.load();
-    }
-
-    playConceptBg();
-    document.addEventListener('astro:page-load', playConceptBg);
-  </script>
 </BaseLayout>

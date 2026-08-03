@@ -4,9 +4,8 @@ import ArtDirectionGalleryTile from '../../components/ArtDirectionGalleryTile.as
 import {
   getDeadropArtDirectionImages,
   getHaloArtDirectionImages,
-  getMarathonArtDirectionImages,
 } from '../../lib/art-direction-gallery';
-import { MARATHON_LOGO, marathonCaseStudyPublished } from '../../config/features';
+import { MARATHON_LOGO, marathonCaseStudyVisible } from '../../config/features';
 ---
 
 <BaseLayout
@@ -56,15 +55,15 @@ import { MARATHON_LOGO, marathonCaseStudyPublished } from '../../config/features
         staggerIndex={1}
       />
       {
-        marathonCaseStudyPublished ? (
+        marathonCaseStudyVisible ? (
           <ArtDirectionGalleryTile
             href="/art-direction/marathon"
             studio="Bungie"
             title="Marathon"
             description="Commerce & Events Art Lead — seasonal cosmetics, Battle Pass earnables, store presentation, and live-service event art across two launch seasons."
-            images={getMarathonArtDirectionImages()}
+            images={[MARATHON_LOGO]}
+            mediaFit="contain"
             staggerIndex={2}
-            wide={true}
           />
         ) : (
           <article class="overflow-hidden rounded-2xl border border-border/60 bg-surface lg:col-span-2">
@@ -92,38 +91,4 @@ import { MARATHON_LOGO, marathonCaseStudyPublished } from '../../config/features
       }
     </div>
   </section>
-
-  <script>
-    function playArtDirectionBg() {
-      const video = document.querySelector<HTMLVideoElement>('.art-direction-bg-video');
-      if (!video) return;
-
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduced) {
-        video.pause();
-        video.removeAttribute('autoplay');
-        return;
-      }
-
-      video.muted = true;
-      video.defaultMuted = true;
-      video.playsInline = true;
-      video.loop = true;
-
-      const tryPlay = () => {
-        void video.play().catch(() => {});
-      };
-
-      if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
-        tryPlay();
-        return;
-      }
-
-      video.addEventListener('canplay', tryPlay, { once: true });
-      video.load();
-    }
-
-    playArtDirectionBg();
-    document.addEventListener('astro:page-load', playArtDirectionBg);
-  </script>
 </BaseLayout>
