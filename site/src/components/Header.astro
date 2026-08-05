@@ -34,12 +34,13 @@ const currentPath = Astro.url.pathname;
           return (
             <a
               href={item.href}
+              data-nav-link
               class:list={[
-                'text-sm tracking-wide uppercase transition-colors',
-                isActive ? 'text-accent' : 'text-muted hover:text-fg',
+                'nav-link text-sm tracking-wide uppercase transition-colors',
+                isActive ? 'is-active text-accent' : 'text-muted hover:text-fg',
               ]}
             >
-              {item.label}
+              <span class="nav-label" data-label={item.label}>{item.label}</span>
             </a>
           );
         })
@@ -96,6 +97,121 @@ const currentPath = Astro.url.pathname;
     </div>
   </nav>
 </header>
+
+<style>
+  /* Pixel-stepped underline: quantized blocks fill in under the link. */
+  .nav-link {
+    position: relative;
+    padding-bottom: 2px;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 3px;
+    width: 0%;
+    background-image: repeating-linear-gradient(
+      to right,
+      var(--color-accent) 0 4px,
+      transparent 4px 7px
+    );
+    transition: width 0.28s steps(7, end);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.is-active::after {
+    width: 100%;
+  }
+
+  .nav-link.is-clicked::after {
+    animation: nav-pixel-scatter 0.18s steps(3, end);
+  }
+
+  .nav-label {
+    display: inline-block;
+  }
+
+  @keyframes nav-pixel-scatter {
+    0% { opacity: 1; transform: translateY(0); }
+    33% { opacity: 0.35; transform: translateY(-2px); }
+    66% { opacity: 0.75; transform: translateY(1px); }
+    100% { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-link::after {
+      transition: none;
+    }
+    .nav-link.is-clicked::after {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  /** One-pass decode scramble: glyphs resolve left-to-right into the label. */
+  const GLYPHS = '!<>-_\\/[]{}=+*^?#ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const timers = new WeakMap<HTMLElement, number>();
+
+  function scrambleLabel(el: HTMLElement) {
+    const label = el.dataset.label;
+    if (!label) return;
+
+    const prev = timers.get(el);
+    if (prev !== undefined) window.clearInterval(prev);
+
+    // Lock width so neighbors never shift while glyphs cycle.
+    el.style.width = `${el.offsetWidth}px`;
+
+    const tickMs = 32;
+    const totalTicks = 9;
+    let tick = 0;
+
+    const timer = window.setInterval(() => {
+      tick += 1;
+      const resolved = Math.floor((tick / totalTicks) * label.length);
+      el.textContent = label
+        .split('')
+        .map((char, i) => {
+          if (char === ' ' || i < resolved) return char;
+          return GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+        })
+        .join('');
+
+      if (tick >= totalTicks) {
+        window.clearInterval(timer);
+        timers.delete(el);
+        el.textContent = label;
+        el.style.width = '';
+      }
+    }, tickMs);
+
+    timers.set(el, timer);
+  }
+
+  function initNavEffects() {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]').forEach((link) => {
+      const labelEl = link.querySelector<HTMLElement>('.nav-label');
+
+      link.onmouseenter = () => {
+        if (!reduced && labelEl) scrambleLabel(labelEl);
+      };
+
+      link.onclick = () => {
+        link.classList.remove('is-clicked');
+        // Force a reflow so the scatter animation can restart on repeat clicks.
+        void link.offsetWidth;
+        link.classList.add('is-clicked');
+      };
+    });
+  }
+
+  initNavEffects();
+  document.addEventListener('astro:page-load', initNavEffects);
+</script>
 
 <script>
   function initMobileMenu() {
