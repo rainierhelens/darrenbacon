@@ -89,33 +89,56 @@ import { RESUME_URL, RESUME_LABEL, resumeAvailable } from '../config/features';
         </div>
       </div>
       <div class="flex w-full max-lg:justify-center lg:h-full lg:min-h-0 lg:justify-end">
-        <div
-          class="spotlight sheen group relative w-full max-w-sm overflow-hidden rounded-2xl border border-border/60 max-lg:aspect-[9/16] lg:h-full lg:w-auto lg:max-w-full lg:aspect-[9/16]"
-        >
-          <video
-            class="about-reel absolute inset-0 h-full w-full object-cover"
-            src="/images/about/darren-bacon-about.mp4"
-            muted
-            loop
-            playsinline
-            controls
-            preload="auto"
-            autoplay
-            aria-label="Darren Bacon — career and craft reel"
+        <div class="flex w-full max-w-sm flex-col gap-3 lg:h-full lg:w-auto lg:max-w-none">
+          <div
+            class="spotlight sheen group relative w-full overflow-hidden rounded-2xl border border-border/60 max-lg:aspect-[9/16] lg:min-h-0 lg:w-auto lg:flex-1 lg:aspect-[9/16]"
           >
-          </video>
-          <button
-            type="button"
-            id="about-reel-sound"
-            class="absolute right-3 top-3 z-10 inline-flex items-center gap-2 rounded-full border border-border/60 bg-bg/75 px-4 py-2 text-xs font-medium tracking-wide text-fg backdrop-blur transition hover:border-accent hover:text-accent"
-            aria-label="Restart the reel with sound"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path d="M11 5 6 9H3v6h3l5 4V5Z" stroke-linejoin="round" />
-              <path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" stroke-linecap="round" />
-            </svg>
-            Watch with sound
-          </button>
+            <video
+              class="about-reel absolute inset-0 h-full w-full object-cover"
+              src="/images/about/darren-bacon-about.mp4"
+              muted
+              loop
+              playsinline
+              controls
+              preload="auto"
+              autoplay
+              aria-label="Darren Bacon — career and craft reel"
+            >
+            </video>
+            <button
+              type="button"
+              id="about-reel-sound"
+              class="absolute right-3 top-3 z-10 inline-flex items-center gap-2 rounded-full border border-border/60 bg-bg/75 px-4 py-2 text-xs font-medium tracking-wide text-fg backdrop-blur transition hover:border-accent hover:text-accent"
+              aria-label="Restart the reel with sound"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M11 5 6 9H3v6h3l5 4V5Z" stroke-linejoin="round" />
+                <path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" stroke-linecap="round" />
+              </svg>
+              Watch with sound
+            </button>
+          </div>
+          <p class="text-center text-xs text-muted">
+            <a
+              href="https://www.instagram.com/reel/DNeYEwRSLZd/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-accent transition hover:text-fg"
+            >
+              View this reel on Instagram →
+            </a>
+            <span class="mx-1.5 text-muted/60">·</span>
+            follow
+            <a
+              href="https://www.instagram.com/artofbacon/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-accent transition hover:text-fg"
+            >
+              @artofbacon
+            </a>
+            for more
+          </p>
         </div>
       </div>
     </div>
