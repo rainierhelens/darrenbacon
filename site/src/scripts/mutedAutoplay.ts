@@ -2,7 +2,6 @@
 function armMutedVideo(video: HTMLVideoElement) {
   video.muted = true;
   video.defaultMuted = true;
-  video.volume = 0;
   video.setAttribute('muted', '');
   video.playsInline = true;
   video.setAttribute('playsinline', '');

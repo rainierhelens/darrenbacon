@@ -104,6 +104,18 @@ import { RESUME_URL, RESUME_LABEL, resumeAvailable } from '../config/features';
             aria-label="Darren Bacon — career and craft reel"
           >
           </video>
+          <button
+            type="button"
+            id="about-reel-sound"
+            class="absolute right-3 top-3 z-10 inline-flex items-center gap-2 rounded-full border border-border/60 bg-bg/75 px-4 py-2 text-xs font-medium tracking-wide text-fg backdrop-blur transition hover:border-accent hover:text-accent"
+            aria-label="Restart the reel with sound"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M11 5 6 9H3v6h3l5 4V5Z" stroke-linejoin="round" />
+              <path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" stroke-linecap="round" />
+            </svg>
+            Watch with sound
+          </button>
         </div>
       </div>
     </div>
@@ -314,4 +326,32 @@ import { RESUME_URL, RESUME_LABEL, resumeAvailable } from '../config/features';
   <Publications />
 
   <PressList />
+
+  <script>
+    /** "Watch with sound": restart the reel unmuted so the edit stays synced to the audio. */
+    function initReelSound() {
+      const video = document.querySelector<HTMLVideoElement>('.about-reel');
+      const btn = document.getElementById('about-reel-sound');
+      if (!video || !btn) return;
+
+      btn.onclick = () => {
+        video.muted = false;
+        video.defaultMuted = false;
+        video.volume = 1;
+        video.currentTime = 0;
+        void video.play().catch(() => {
+          /* Native controls remain available if playback is blocked. */
+        });
+        btn.classList.add('hidden');
+      };
+
+      // Surface the button again if the viewer mutes from the native controls.
+      video.addEventListener('volumechange', () => {
+        btn.classList.toggle('hidden', !video.muted && video.volume > 0);
+      });
+    }
+
+    initReelSound();
+    document.addEventListener('astro:page-load', initReelSound);
+  </script>
 </BaseLayout>
