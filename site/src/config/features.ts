@@ -1,6 +1,10 @@
 /** Set to true when the Marathon art direction case study is ready to publish. */
 export const marathonCaseStudyPublished = false;
 
+/** Local preview before publish — full case study is available in `astro dev` only. */
+export const marathonCaseStudyVisible =
+  marathonCaseStudyPublished || import.meta.env.DEV;
+
 export const MARATHON_LOGO = '/images/Marathon/Marathon_Logo_WordMark_Green_TRANSPARENT.png';
 
 /**

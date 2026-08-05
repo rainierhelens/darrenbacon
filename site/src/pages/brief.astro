@@ -12,6 +12,9 @@ import { publications } from '../data/publications';
 import { RESUME_PDF_URL, RESUME_PDF_FILENAME } from '../config/features';
 
 const linkedIn = socialLinks.find((link) => link.label === 'LinkedIn');
+const linkedInHref = linkedIn?.href ?? 'https://www.linkedin.com/in/darrenbacon/';
+const mailtoHref = `mailto:${site.email}`;
+const pageTitle = `${site.name}: Leadership Brief`;
 const gdcTalks = press.filter((item) => item.outlet.includes('GDC')).length;
 const bookCount = publications.length;
 const pressOutlets = [...new Set(press.filter((item) => !item.outlet.includes('GDC')).map((item) => item.outlet))];
@@ -68,7 +71,7 @@ const briefRoles = signatureCredentials.map((cred) =>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{site.name}: Leadership Brief</title>
+    <title>{pageTitle}</title>
     <meta
       name="description"
       content="One-page leadership brief for Darren Bacon, art director for franchise and studio leadership."
@@ -92,8 +95,8 @@ const briefRoles = signatureCredentials.map((cred) =>
           <p class="role">{site.tagline}</p>
         </div>
         <ul class="contact">
-          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
-          {linkedIn && <li><a href={linkedIn.href}>linkedin.com/in/darrenbacon</a></li>}
+          <li><a href={mailtoHref}>{site.email}</a></li>
+          <li><a href={linkedInHref}>linkedin.com/in/darrenbacon</a></li>
           <li><a href={site.url}>darrenbacon.com</a></li>
         </ul>
       </header>

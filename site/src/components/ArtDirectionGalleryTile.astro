@@ -9,10 +9,22 @@ interface Props {
   images: string[];
   staggerIndex?: number;
   wide?: boolean;
+  /** Use a static contained image (e.g. Marathon logo) instead of a cover carousel. */
+  mediaFit?: 'cover' | 'contain';
 }
 
-const { href, studio, title, description, images, staggerIndex = 0, wide = false } = Astro.props;
+const {
+  href,
+  studio,
+  title,
+  description,
+  images,
+  staggerIndex = 0,
+  wide = false,
+  mediaFit = 'cover',
+} = Astro.props;
 const interval = 5000 + staggerIndex * 700;
+const logo = mediaFit === 'contain' ? images[0] : undefined;
 ---
 
 <a
@@ -25,13 +37,31 @@ const interval = 5000 + staggerIndex * 700;
     wide && 'lg:col-span-2',
   ]}
 >
-  <div class="sheen aspect-video overflow-hidden bg-surface-elevated">
-    <GalleryTileRotator
-      images={images}
-      alt={title}
-      interval={interval}
-      class="transition duration-700 group-hover:scale-105"
-    />
+  <div
+    class:list={[
+      'sheen aspect-video overflow-hidden',
+      logo ? 'flex items-center justify-center bg-bg' : 'bg-surface-elevated',
+    ]}
+  >
+    {
+      logo ? (
+        <img
+          src={logo}
+          alt={title}
+          loading="eager"
+          decoding="async"
+          draggable="false"
+          class="max-h-full max-w-[70%] object-contain p-8 transition duration-700 group-hover:scale-105 lg:p-12"
+        />
+      ) : (
+        <GalleryTileRotator
+          images={images}
+          alt={title}
+          interval={interval}
+          class="transition duration-700 group-hover:scale-105"
+        />
+      )
+    }
   </div>
   <div class="relative z-10 p-6">
     <p class="text-xs tracking-[0.2em] uppercase text-accent">{studio}</p>

@@ -89,6 +89,7 @@ const { season, index } = Astro.props;
                               altPrefix={`Season ${season.label} — ${section.title}`}
                               groupId={`marathon-${season.id}-${categoryIndex}-${sectionIndex}`}
                               layout={section.layout ?? category.layout}
+                              autoplayMuted
                             />
                           </div>
                         ))

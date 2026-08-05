@@ -1,7 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import MarathonSeasonSection from '../../components/MarathonSeasonSection.astro';
+import { marathonCaseStudyVisible } from '../../config/features';
 import { marathonArtDirection } from '../../data/art-direction/marathon';
+
+if (!marathonCaseStudyVisible) {
+  return Astro.redirect('/art-direction');
+}
 
 const { title, studio, role, year, credit, hero, summary, intro, approach, seasons } =
   marathonArtDirection;
