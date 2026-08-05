@@ -98,7 +98,7 @@ const currentPath = Astro.url.pathname;
 </header>
 
 <style>
-  /* Editorial underline: a gold hairline draws out from the center on hover. */
+  /* Editorial underline: draws from the center on hover, exits to the right. */
   .nav-link {
     position: relative;
     padding-bottom: 2px;
@@ -107,19 +107,22 @@ const currentPath = Astro.url.pathname;
   .nav-link::after {
     content: '';
     position: absolute;
-    left: 50%;
+    left: 0;
     bottom: -4px;
     height: 1px;
     width: 100%;
     background: var(--color-accent);
-    transform: translateX(-50%) scaleX(0);
-    transform-origin: center;
+    transform: scaleX(0);
+    /* Resting origin governs the exit: the line collapses toward the right. */
+    transform-origin: right;
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .nav-link:hover::after,
   .nav-link.is-active::after {
-    transform: translateX(-50%) scaleX(1);
+    transform: scaleX(1);
+    /* Hover origin governs the entrance: the line grows out from the center. */
+    transform-origin: center;
   }
 
   @media (prefers-reduced-motion: reduce) {
