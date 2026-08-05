@@ -12,7 +12,7 @@ const headline = ['Leading', 'the', 'visuals', 'of', 'worlds', 'people', 'love.'
           src={src}
           alt=""
           class:list={[
-            'hero-bg-slide absolute inset-0 h-full w-full scale-105 object-cover blur-[1px]',
+            'hero-bg-slide absolute inset-0 h-full w-full scale-105 object-cover',
             index === 0 ? 'is-active' : '',
           ]}
           loading={index === 0 ? 'eager' : 'lazy'}
@@ -21,8 +21,8 @@ const headline = ['Leading', 'the', 'visuals', 'of', 'worlds', 'people', 'love.'
         />
       ))
     }
-    <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/80 to-bg/30"></div>
-    <div class="absolute inset-0 bg-gradient-to-r from-bg/90 via-transparent to-bg/40"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/55 to-bg/10"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-bg/75 via-transparent to-bg/15"></div>
   </div>
 
   <div class="relative z-10 mx-auto w-full max-w-7xl px-6 pb-16 pt-32 lg:px-8 lg:pb-24">
@@ -70,7 +70,7 @@ const headline = ['Leading', 'the', 'visuals', 'of', 'worlds', 'people', 'love.'
   }
 
   .hero-bg-slide.is-active {
-    opacity: 0.42;
+    opacity: 0.68;
   }
 
   .hero-word-mask {
