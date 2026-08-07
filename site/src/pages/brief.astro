@@ -10,6 +10,7 @@ import { shippedGames } from '../data/credits';
 import { press } from '../data/press';
 import { publications } from '../data/publications';
 import { RESUME_PDF_URL, RESUME_PDF_FILENAME } from '../config/features';
+import Analytics from '../components/Analytics.astro';
 
 const linkedIn = socialLinks.find((link) => link.label === 'LinkedIn');
 const linkedInHref = linkedIn?.href ?? 'https://www.linkedin.com/in/darrenbacon/';
@@ -76,6 +77,7 @@ const briefRoles = signatureCredentials.map((cred) =>
       name="description"
       content="One-page leadership brief for Darren Bacon, art director for franchise and studio leadership."
     />
+    <Analytics />
   </head>
   <body>
     <div class="toolbar">

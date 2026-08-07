@@ -16,3 +16,11 @@ export const RESUME_URL = '/brief';
 export const RESUME_LABEL = 'Leadership brief';
 export const RESUME_PDF_URL = '/darren-bacon-leadership-brief.pdf';
 export const RESUME_PDF_FILENAME = 'Darren-Bacon-Leadership-Brief.pdf';
+
+/**
+ * Analytics — leave empty until you paste real IDs (scripts stay off).
+ * GA4 Measurement ID looks like: G-XXXXXXXXXX
+ * Clarity Project ID looks like: abcdefghij
+ */
+export const GA_MEASUREMENT_ID = 'G-2PWMSXQSZN';
+export const CLARITY_PROJECT_ID = '';
