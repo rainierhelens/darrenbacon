@@ -43,6 +43,9 @@ jobs:
         working-directory: site
         run: npm run build
 
+      - name: Ensure Pages skips Jekyll
+        run: touch "${{ github.workspace }}/site/dist/.nojekyll"
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

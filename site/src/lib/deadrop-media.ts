@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const IMAGE_EXT = new Set(['.jpg', '.jpeg', '.png', '.gif', '.webp']);
-const VIDEO_EXT = new Set(['.mp4', '.webm', '.mov', '.m4v', '.mkv']);
+const VIDEO_EXT = new Set(['.mp4', '.webm', '.m4v']);
 
 export type DeadropMedia = {
   src: string;

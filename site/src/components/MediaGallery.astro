@@ -48,7 +48,7 @@ let imageIndex = 0;
                     muted={autoplayMuted}
                     autoplay={autoplayMuted}
                     loop={autoplayMuted}
-                    preload={autoplayMuted ? 'auto' : 'metadata'}
+                    preload={autoplayMuted ? 'metadata' : 'none'}
                     data-gallery-video
                     data-autoplay-muted={autoplayMuted ? 'true' : undefined}
                     class="aspect-video w-full bg-black object-contain"
@@ -134,16 +134,35 @@ let imageIndex = 0;
 </section>
 
 <script>
+  /** Load gallery videos only when near the viewport — avoids hammering DEADROP-scale pages. */
   function initGalleryVideos() {
-    document.querySelectorAll<HTMLVideoElement>('video[data-gallery-video]').forEach((video) => {
-      // Autoplay-muted clips are handled by mutedAutoplay.ts in BaseLayout.
-      if (video.dataset.autoplayMuted === 'true') return;
+    const videos = Array.from(
+      document.querySelectorAll<HTMLVideoElement>('video[data-gallery-video]:not([data-autoplay-muted="true"])'),
+    );
+    if (videos.length === 0) return;
 
-      // ClientRouter DOM swaps leave <video> elements without a media load.
-      if (video.readyState === 0) {
-        video.load();
-      }
-    });
+    if (!('IntersectionObserver' in window)) {
+      videos.forEach((video) => {
+        if (video.readyState === 0) video.load();
+      });
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const video = entry.target as HTMLVideoElement;
+          if (video.dataset.srcArmed === '1') return;
+          video.dataset.srcArmed = '1';
+          if (video.readyState === 0) video.load();
+          observer.unobserve(video);
+        });
+      },
+      { rootMargin: '200px 0px', threshold: 0.01 },
+    );
+
+    videos.forEach((video) => observer.observe(video));
   }
 
   initGalleryVideos();
