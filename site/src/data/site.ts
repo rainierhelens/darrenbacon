@@ -1,12 +1,12 @@
 export const site = {
   name: 'Darren Bacon',
-  tagline: 'Art Director',
+  tagline: 'Creative Director / Art Director',
   email: 'darren@darrenbacon.com',
   url: 'https://www.darrenbacon.com',
   handle: '@artofbacon',
   description:
-    'Art director shaping franchise visual strategy at scale — from Halo and Destiny to Marathon. Leading art teams and stewarding beloved game worlds from vision through live operations.',
-  jobTitle: 'Art Director',
+    'Creative director and art director shaping franchise visual strategy at scale, from Halo and Destiny to Marathon. Leading art teams and stewarding beloved game worlds from vision through live operations.',
+  jobTitle: 'Creative Director / Art Director',
 } as const;
 
 /** Homepage hero background rotation — add or reorder paths to change the slideshow. */
@@ -47,7 +47,7 @@ export const conceptGalleries = [
     role: 'Lead Concept Artist → Art Director',
     period: '2014–2022',
     whyItMattered:
-      'I led the visuals of the franchise for nearly a decade — from concept leadership through Art Director on Halo Infinite multiplayer and live.',
+      'I led the visuals of the franchise for nearly a decade, from concept leadership through Art Director on Halo Infinite multiplayer and live.',
   },
   {
     slug: 'destiny',
@@ -57,7 +57,7 @@ export const conceptGalleries = [
     role: 'Senior Concept Artist',
     period: '2011–2014',
     whyItMattered:
-      'I helped build the foundation of the Destiny universe — characters, environments, and props that defined how a new world would look and feel.',
+      'I helped build the foundation of the Destiny universe: characters, environments, and props that defined how a new world would look and feel.',
   },
   {
     slug: 'disney',
@@ -67,7 +67,7 @@ export const conceptGalleries = [
     role: 'Concept Artist',
     period: '2008–2014',
     whyItMattered:
-      'Film and theme-park concept work across Disney and ILM — including Star Wars and animation — where craft and world-building had to hold up on the biggest stages.',
+      'Film and theme-park concept work across Disney and ILM, including Star Wars and animation, where craft and world-building had to hold up on the biggest stages.',
   },
   {
     slug: 'deadrop',
@@ -77,7 +77,7 @@ export const conceptGalleries = [
     role: 'Studio Art Director',
     period: '2022–2025',
     whyItMattered:
-      'I built the art and the team from the ground up — standing up a studio art department and directing the look from first vision through open development.',
+      'I built the art and the team from the ground up, standing up a studio art department and directing the look from first vision through open development.',
   },
   {
     slug: 'other',
@@ -87,7 +87,7 @@ export const conceptGalleries = [
     role: 'Personal & freelance',
     period: 'Ongoing',
     whyItMattered:
-      'Explorations outside franchise production — space to push ideas, form language, and personal craft beyond a shipping schedule.',
+      'Explorations outside franchise production: space to push ideas, form language, and personal craft beyond a shipping schedule.',
   },
 ] as const;
 
