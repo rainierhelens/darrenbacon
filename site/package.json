@@ -10,6 +10,7 @@
     "prebuild": "node scripts/link-images.mjs",
     "dev": "astro dev",
     "build": "astro build",
+    "postbuild": "node scripts/write-slash-redirects.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
