@@ -64,6 +64,9 @@
         form.reset();
         status.textContent = 'Thanks — your message was sent.';
         status.classList.remove('hidden');
+        const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
+        gtag?.('event', 'generate_lead');
+        gtag?.('event', 'form_submit');
       } else {
         status.textContent = 'Something went wrong. Please try again or email directly.';
         status.classList.remove('hidden');

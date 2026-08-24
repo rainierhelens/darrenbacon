@@ -21,10 +21,10 @@ export const heroBackgrounds = [
 ] as const;
 
 export const nav = [
-  { label: 'Work', href: '/art-direction' },
-  { label: 'Concept', href: '/concept' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Work', href: '/art-direction/' },
+  { label: 'Concept', href: '/concept/' },
+  { label: 'About', href: '/about/' },
+  { label: 'Contact', href: '/contact/' },
 ] as const;
 
 /** Homepage concept strip — franchise craft only; full set lives on /concept. */

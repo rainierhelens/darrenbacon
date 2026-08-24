@@ -18,20 +18,33 @@ const hasClarity = Boolean(clarityId);
         }
         window.gtag = gtag;
         gtag('js', new Date());
-        // Astro ClientRouter fires astro:page-load on first paint and every soft nav —
-        // disable the default hit so we don't double-count.
+        // Disable the automatic hit. ClientRouter emits astro:page-load on first
+        // paint *and* every soft nav; a second immediate trackPageView() was
+        // double-counting the landing page.
         gtag('config', gaId, { send_page_view: false });
 
+        const canonicalPath = () => {
+          let path = location.pathname;
+          if (path.length > 1 && !path.endsWith('/') && !/\.[a-z0-9]+$/i.test(path)) {
+            path += '/';
+          }
+          return path + location.search;
+        };
+
         const trackPageView = () => {
+          const pagePath = canonicalPath();
+          if (window.__gaPagePath === pagePath) return;
+          window.__gaPagePath = pagePath;
           gtag('event', 'page_view', {
             page_title: document.title,
-            page_location: location.href,
-            page_path: location.pathname + location.search,
+            page_location: location.origin + pagePath,
+            page_path: pagePath,
           });
         };
 
-        trackPageView();
         document.addEventListener('astro:page-load', trackPageView);
+        // /brief/ has no ClientRouter, so astro:page-load never fires there.
+        trackPageView();
       </script>
     </>
   )
