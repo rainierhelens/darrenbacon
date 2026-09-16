@@ -1,4 +1,5 @@
 ---
+import { RESUME_LABEL, RESUME_URL } from '../config/features';
 import { heroBackgrounds, site } from '../data/site';
 
 const headline = ['Leading', 'the', 'visuals', 'of', 'worlds', 'people', 'love.'];
@@ -42,7 +43,7 @@ const headline = ['Leading', 'the', 'visuals', 'of', 'worlds', 'people', 'love.'
       Two decades leading art teams and stewarding beloved game worlds like Halo, Destiny, and Marathon
       from franchise vision through live operations at scale.
     </p>
-    <div class="hero-cta mt-10 flex flex-wrap gap-4">
+    <div class="hero-cta mt-10 flex flex-wrap items-center gap-x-5 gap-y-4">
       <a
         href="/contact/"
         class="inline-flex items-center rounded-full bg-accent px-6 py-3 text-sm font-medium tracking-wide text-bg transition hover:bg-accent-dim"
@@ -50,8 +51,14 @@ const headline = ['Leading', 'the', 'visuals', 'of', 'worlds', 'people', 'love.'
         Start a conversation
       </a>
       <a
-        href="/art-direction/"
+        href={RESUME_URL}
         class="inline-flex items-center rounded-full border border-border px-6 py-3 text-sm font-medium tracking-wide text-fg transition hover:border-accent hover:text-accent"
+      >
+        {RESUME_LABEL}
+      </a>
+      <a
+        href="/art-direction/"
+        class="inline-flex items-center text-sm tracking-wide text-muted underline-offset-4 transition hover:text-accent hover:underline"
       >
         View work
       </a>

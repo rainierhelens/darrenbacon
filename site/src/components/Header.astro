@@ -96,6 +96,13 @@ const currentPath =
           </a>
         ))
       }
+      {
+        resumeAvailable && (
+          <a href={RESUME_URL} class="text-sm tracking-wide uppercase text-muted transition-colors hover:text-fg">
+            {RESUME_LABEL}
+          </a>
+        )
+      }
     </div>
   </nav>
 </header>
