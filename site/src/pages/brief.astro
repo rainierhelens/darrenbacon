@@ -84,9 +84,16 @@ const briefRoles = signatureCredentials.map((cred) =>
     <div class="toolbar">
       <a class="back" href="/">← Back to site</a>
       <div class="toolbar-actions">
-        <a class="download" href={RESUME_PDF_URL} download={RESUME_PDF_FILENAME}>
+        <a
+          class="download"
+          id="brief-pdf"
+          href={RESUME_PDF_URL}
+          download={RESUME_PDF_FILENAME}
+          data-file-name={RESUME_PDF_FILENAME}
+        >
           Download PDF
         </a>
+        <a class="contact-cta" href="/contact/">Contact</a>
         <button type="button" id="print-btn">Print</button>
       </div>
     </div>
@@ -206,12 +213,18 @@ const briefRoles = signatureCredentials.map((cred) =>
       }
 
       .toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
         max-width: 8.5in;
         margin: 0 auto;
-        padding: 16px 8px;
+        padding: 12px 8px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        background: #ececed;
       }
 
       .toolbar .back {
@@ -231,8 +244,8 @@ const briefRoles = signatureCredentials.map((cred) =>
       }
 
       .toolbar .download,
+      .toolbar .contact-cta,
       #print-btn {
-        border: 1px solid var(--accent);
         border-radius: 999px;
         padding: 8px 18px;
         font-size: 14px;
@@ -241,18 +254,31 @@ const briefRoles = signatureCredentials.map((cred) =>
       }
 
       .toolbar .download {
+        background: var(--accent);
+        color: #fff;
+        border: 1px solid var(--accent);
+      }
+
+      .toolbar .contact-cta {
         background: #fff;
         color: var(--accent);
+        border: 1px solid var(--accent);
       }
 
       #print-btn {
-        background: var(--accent);
-        color: #fff;
+        background: transparent;
+        color: var(--muted);
+        border: none;
+        padding: 8px 6px;
       }
 
       .toolbar .download:hover,
-      #print-btn:hover {
+      .toolbar .contact-cta:hover {
         opacity: 0.9;
+      }
+
+      #print-btn:hover {
+        color: var(--ink);
       }
 
       /*
@@ -531,6 +557,19 @@ const briefRoles = signatureCredentials.map((cred) =>
 
     <script>
       document.getElementById('print-btn')?.addEventListener('click', () => window.print());
+
+      document.getElementById('brief-pdf')?.addEventListener('click', (event) => {
+        const link = event.currentTarget;
+        if (!(link instanceof HTMLAnchorElement)) return;
+
+        const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
+        gtag?.('event', 'file_download', {
+          file_extension: 'pdf',
+          file_name: link.dataset.fileName || 'Darren-Bacon-Leadership-Brief.pdf',
+          link_url: link.href,
+          link_text: link.textContent?.trim() || 'Download PDF',
+        });
+      });
     </script>
   </body>
 </html>
