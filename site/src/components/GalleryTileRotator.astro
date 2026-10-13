@@ -1,12 +1,17 @@
 ---
+import ResponsiveImage from './ResponsiveImage.astro';
+import type { ImagePreset } from '../lib/responsive-images';
+
 interface Props {
   images: string[];
   alt: string;
   interval?: number;
   class?: string;
+  /** Responsive sizing preset for the slides (defaults to a three-up tile). */
+  preset?: ImagePreset;
 }
 
-const { images, alt, interval = 5000, class: className } = Astro.props;
+const { images, alt, interval = 5000, class: className, preset = 'tile3' } = Astro.props;
 ---
 
 {
@@ -17,15 +22,12 @@ const { images, alt, interval = 5000, class: className } = Astro.props;
     >
       {
         images.map((src, index) => (
-          <img
+          <ResponsiveImage
             src={src}
             alt={index === 0 ? alt : ''}
-            class:list={[
-              'gallery-tile-slide absolute inset-0 h-full w-full object-cover',
-              index === 0 && 'is-active',
-            ]}
+            preset={preset}
+            class={`gallery-tile-slide absolute inset-0 h-full w-full object-cover${index === 0 ? ' is-active' : ''}`}
             loading={index === 0 ? 'eager' : 'lazy'}
-            decoding="async"
             draggable="false"
           />
         ))

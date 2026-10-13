@@ -1,4 +1,5 @@
 ---
+import ResponsiveImage from './ResponsiveImage.astro';
 import { publications } from '../data/publications';
 
 const items = publications;
@@ -27,11 +28,10 @@ const coverUrl = (image: string) => `/images/book_publications/${encodeURICompon
                 class="spotlight group flex h-full flex-col overflow-hidden rounded-xl border border-border/60 bg-surface transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-2xl hover:shadow-black/40"
               >
                 <div class="sheen flex aspect-[3/4] items-center justify-center overflow-hidden bg-surface-elevated p-2">
-                  <img
+                  <ResponsiveImage
                     src={coverUrl(item.image)}
                     alt={`${item.title} cover`}
-                    loading="lazy"
-                    decoding="async"
+                    preset="gridContained"
                     class="h-full w-full object-contain transition duration-700 group-hover:scale-105"
                   />
                 </div>

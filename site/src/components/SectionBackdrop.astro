@@ -1,4 +1,6 @@
 ---
+import ResponsiveImage from './ResponsiveImage.astro';
+
 interface Props {
   images: string[];
   interval?: number;
@@ -25,16 +27,14 @@ const {
       aria-hidden="true"
     >
       {images.map((src, index) => (
-        <img
+        <ResponsiveImage
           src={src}
           alt=""
-          loading="lazy"
-          decoding="async"
+          preset="full"
+          widths={[960, 1600]}
+          quality={60}
           data-sbg-slide={index}
-          class:list={[
-            'section-backdrop-slide absolute inset-0 h-full w-full scale-105 object-cover',
-            index === 0 ? 'is-active' : '',
-          ]}
+          class={`section-backdrop-slide absolute inset-0 h-full w-full scale-105 object-cover${index === 0 ? ' is-active' : ''}`}
         />
       ))}
       <div class:list={['absolute inset-0', overlayClass]} />

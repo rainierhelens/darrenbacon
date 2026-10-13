@@ -4,6 +4,7 @@ import Hero from '../components/Hero.astro';
 import StatStrip from '../components/StatStrip.astro';
 import ConceptGalleryTile from '../components/ConceptGalleryTile.astro';
 import SectionBackdrop from '../components/SectionBackdrop.astro';
+import ResponsiveImage from '../components/ResponsiveImage.astro';
 import { getDeadropArtDirectionImages, getHaloArtDirectionImages } from '../lib/art-direction-gallery';
 import { conceptGalleries, homepageConceptGalleries, site } from '../data/site';
 import {
@@ -69,13 +70,13 @@ const pressOutlets = [...new Set(press.filter((item) => !item.outlet.includes('G
         {
           credentialStudios.map((studio) => (
             <li class="flex h-12 items-center sm:h-14">
-              <img
+              <ResponsiveImage
                 src={studio.logo}
                 alt={studio.name}
                 title={studio.name}
+                widths={[160, 320]}
+                sizes="160px"
                 class="h-full w-auto max-w-[8.5rem] object-contain opacity-80 transition-opacity duration-300 hover:opacity-100 sm:max-w-[10rem]"
-                loading="lazy"
-                decoding="async"
               />
             </li>
           ))
@@ -131,10 +132,10 @@ const pressOutlets = [...new Set(press.filter((item) => !item.outlet.includes('G
         data-reveal
         class="spotlight sheen group block overflow-hidden rounded-2xl border border-border/60 transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-2xl hover:shadow-black/40"
       >
-        <img
+        <ResponsiveImage
           src="/images/ad-halo/halo-ad-26.jpg"
           alt="Art direction from Halo Infinite, DEADROP, and Marathon"
-          loading="lazy"
+          preset="tile2"
           class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
         />
       </a>

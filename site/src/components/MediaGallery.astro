@@ -1,4 +1,6 @@
 ---
+import ResponsiveImage from './ResponsiveImage.astro';
+
 type GalleryMedia = {
   src: string;
   caption?: string;
@@ -76,16 +78,14 @@ let imageIndex = 0;
                   data-type="image"
                   aria-label={item.caption ?? `Open image ${index + 1}`}
                 >
-                  <img
+                  <ResponsiveImage
                     src={item.src}
                     alt={item.caption ?? `${altPrefix} ${index + 1}`}
+                    preset="wide"
+                    sizes={item.hero ? '(min-width: 1280px) 1280px, 100vw' : undefined}
                     loading={item.hero ? 'eager' : 'lazy'}
-                    decoding="async"
                     draggable="false"
-                    class:list={[
-                      'pointer-events-none w-full object-contain transition duration-500 group-hover:opacity-90',
-                      item.hero && 'max-h-[70vh]',
-                    ]}
+                    class={`pointer-events-none w-full object-contain transition duration-500 group-hover:opacity-90${item.hero ? ' max-h-[70vh]' : ''}`}
                   />
                 </button>
               </figure>
@@ -104,16 +104,13 @@ let imageIndex = 0;
                 data-type="image"
                 aria-label={item.caption ?? `Open image ${index + 1}`}
               >
-                <img
+                <ResponsiveImage
                   src={item.src}
                   alt={item.caption ?? `${altPrefix} ${index + 1}`}
+                  preset={item.hero ? 'wide' : 'gridContained'}
                   loading={item.hero ? 'eager' : 'lazy'}
-                  decoding="async"
                   draggable="false"
-                  class:list={[
-                    'pointer-events-none h-full w-full transition duration-500 group-hover:scale-[1.03] group-hover:opacity-90',
-                    item.hero ? 'object-contain' : 'object-cover',
-                  ]}
+                  class={`pointer-events-none h-full w-full transition duration-500 group-hover:scale-[1.03] group-hover:opacity-90 ${item.hero ? 'object-contain' : 'object-cover'}`}
                 />
                 <span class="pointer-events-none absolute inset-0 bg-black/0 transition group-hover:bg-black/20" />
               </button>

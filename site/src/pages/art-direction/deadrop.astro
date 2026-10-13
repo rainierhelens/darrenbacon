@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import MediaGallery from '../../components/MediaGallery.astro';
 import SnapshotSection from '../../components/SnapshotSection.astro';
 import VideoEmbed from '../../components/VideoEmbed.astro';
+import ResponsiveImage from '../../components/ResponsiveImage.astro';
 import { deadropArtDirection } from '../../data/art-direction/deadrop';
 
 const {
@@ -31,7 +32,7 @@ const {
 >
   <section class="relative overflow-hidden border-b border-border/60">
     <div class="absolute inset-0">
-      <img src={hero} alt="" class="h-full w-full object-cover opacity-60" loading="eager" />
+      <ResponsiveImage src={hero} alt="" preset="full" class="h-full w-full object-cover opacity-60" loading="eager" fetchpriority="high" />
       <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-bg/20" />
     </div>
 
@@ -125,7 +126,7 @@ const {
       </p>
       <div class="mt-10 grid gap-8 lg:grid-cols-2 lg:items-start">
         <div class="overflow-hidden rounded-2xl border border-border/60">
-          <img src={styleGuide} alt="DEADROP Maker Art Style Guide" loading="lazy" class="w-full" />
+          <ResponsiveImage src={styleGuide} alt="DEADROP Maker Art Style Guide" preset="wide" class="w-full" />
         </div>
         <div class="space-y-4 text-sm leading-relaxed text-muted">
           <p>

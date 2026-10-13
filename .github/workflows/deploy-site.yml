@@ -36,6 +36,16 @@ jobs:
         working-directory: site
         run: npm ci
 
+      # Astro caches generated image derivatives here. Restoring the previous
+      # run's cache means only new or changed images get re-encoded.
+      - name: Restore image cache
+        uses: actions/cache@v4
+        with:
+          path: site/node_modules/.astro
+          key: astro-assets-${{ github.sha }}
+          restore-keys: |
+            astro-assets-
+
       - name: Link images into public
         run: ln -sfn "${{ github.workspace }}/images" "${{ github.workspace }}/site/public/images"
 

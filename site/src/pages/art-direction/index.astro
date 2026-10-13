@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArtDirectionGalleryTile from '../../components/ArtDirectionGalleryTile.astro';
+import ResponsiveImage from '../../components/ResponsiveImage.astro';
 import {
   getDeadropArtDirectionImages,
   getHaloArtDirectionImages,
@@ -69,10 +70,11 @@ import { MARATHON_LOGO, marathonCaseStudyVisible } from '../../config/features';
           <article class="overflow-hidden rounded-2xl border border-border/60 bg-surface lg:col-span-2">
             <div class="grid lg:grid-cols-2">
               <div class="flex aspect-video items-center justify-center overflow-hidden bg-bg lg:aspect-auto">
-                <img
+                <ResponsiveImage
                   src={MARATHON_LOGO}
                   alt="Marathon art direction preview"
-                  loading="lazy"
+                  widths={[480, 960]}
+                  sizes="(min-width: 1024px) 450px, 70vw"
                   class="max-h-full max-w-[70%] object-contain p-8 lg:p-12"
                 />
               </div>

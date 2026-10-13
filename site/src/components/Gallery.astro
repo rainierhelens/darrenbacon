@@ -1,4 +1,6 @@
 ---
+import ResponsiveImage from './ResponsiveImage.astro';
+
 interface Props {
   images: string[];
   altPrefix?: string;
@@ -22,11 +24,10 @@ const { images, altPrefix = 'Artwork', groupId = `grid-${images.length}-${images
           data-src={src}
           aria-label={`Open image ${index + 1} of ${images.length}`}
         >
-          <img
+          <ResponsiveImage
             src={src}
             alt={`${altPrefix} ${index + 1}`}
-            loading="lazy"
-            decoding="async"
+            preset="grid"
             draggable="false"
             class="pointer-events-none h-full w-full object-cover transition duration-500 group-hover:scale-[1.03] group-hover:opacity-90"
           />

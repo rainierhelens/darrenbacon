@@ -1,4 +1,6 @@
 ---
+import ResponsiveImage from './ResponsiveImage.astro';
+
 interface Props {
   images: { src: string; caption?: string }[];
   altPrefix?: string;
@@ -27,11 +29,10 @@ const {
             data-caption={image.caption}
             aria-label={image.caption ?? `Open image ${index + 1}`}
           >
-            <img
+            <ResponsiveImage
               src={image.src}
               alt={image.caption ?? `${altPrefix} ${index + 1}`}
-              loading="lazy"
-              decoding="async"
+              preset="wide"
               draggable="false"
               class="pointer-events-none w-full object-contain transition duration-500 group-hover:opacity-90"
             />

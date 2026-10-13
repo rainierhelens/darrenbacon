@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Gallery from '../../components/Gallery.astro';
 import WideGallery from '../../components/WideGallery.astro';
+import ResponsiveImage from '../../components/ResponsiveImage.astro';
 import { haloArtDirection } from '../../data/art-direction/halo';
 
 const {
@@ -30,7 +31,7 @@ const {
 >
   <section class="relative overflow-hidden border-b border-border/60">
     <div class="absolute inset-0">
-      <img src={hero} alt="" class="h-full w-full object-cover opacity-60" loading="eager" />
+      <ResponsiveImage src={hero} alt="" preset="full" class="h-full w-full object-cover opacity-60" loading="eager" fetchpriority="high" />
       <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-bg/20" />
     </div>
 
@@ -156,11 +157,11 @@ const {
         href={artIndex.href}
         class="spotlight sheen group overflow-hidden rounded-2xl border border-border/60 bg-surface"
       >
-        <img
+        <ResponsiveImage
           src={artIndex.cover}
           alt="Infinite Art Index cover"
+          preset="tile2"
           class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-105"
-          loading="lazy"
         />
       </a>
     </div>

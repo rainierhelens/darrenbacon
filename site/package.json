@@ -11,7 +11,7 @@
     "extract-art-index": "python scripts/extract-art-index.py",
     "dev": "astro dev",
     "build": "astro build",
-    "postbuild": "node scripts/write-slash-redirects.mjs",
+    "postbuild": "node scripts/prune-unused-assets.mjs && node scripts/write-slash-redirects.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },

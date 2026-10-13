@@ -1,4 +1,5 @@
 ---
+import ResponsiveImage from './ResponsiveImage.astro';
 import { RESUME_LABEL, RESUME_URL } from '../config/features';
 import { heroBackgrounds, site } from '../data/site';
 
@@ -9,15 +10,13 @@ const headline = ['Leading', 'the', 'visuals', 'of', 'worlds', 'people', 'love.'
   <div class="absolute inset-0" id="hero-backgrounds" data-interval="8000">
     {
       heroBackgrounds.map((src, index) => (
-        <img
+        <ResponsiveImage
           src={src}
           alt=""
-          class:list={[
-            'hero-bg-slide absolute inset-0 h-full w-full scale-105 object-cover',
-            index === 0 ? 'is-active' : '',
-          ]}
+          preset="full"
+          class={`hero-bg-slide absolute inset-0 h-full w-full scale-105 object-cover${index === 0 ? ' is-active' : ''}`}
           loading={index === 0 ? 'eager' : 'lazy'}
-          decoding="async"
+          fetchpriority={index === 0 ? 'high' : undefined}
           data-slide={index}
         />
       ))

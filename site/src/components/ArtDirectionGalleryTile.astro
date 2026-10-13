@@ -1,5 +1,6 @@
 ---
 import GalleryTileRotator from './GalleryTileRotator.astro';
+import ResponsiveImage from './ResponsiveImage.astro';
 
 interface Props {
   href: string;
@@ -45,11 +46,12 @@ const logo = mediaFit === 'contain' ? images[0] : undefined;
   >
     {
       logo ? (
-        <img
+        <ResponsiveImage
           src={logo}
           alt={title}
+          widths={[480, 960]}
+          sizes="(min-width: 1024px) 450px, 70vw"
           loading="eager"
-          decoding="async"
           draggable="false"
           class="max-h-full max-w-[70%] object-contain p-8 transition duration-700 group-hover:scale-105 lg:p-12"
         />
@@ -58,6 +60,7 @@ const logo = mediaFit === 'contain' ? images[0] : undefined;
           images={images}
           alt={title}
           interval={interval}
+          preset="tile2"
           class="transition duration-700 group-hover:scale-105"
         />
       )
