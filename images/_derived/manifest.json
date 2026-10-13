@@ -1,13 +1,4 @@
 {
-  "about/darren-bacon-about.gif": {
-    "video": "_derived/about/darren-bacon-about.mp4",
-    "poster": "_derived/about/darren-bacon-about.poster.jpg",
-    "width": 720,
-    "height": 720,
-    "duration": 4.8,
-    "sourceBytes": 6262079,
-    "videoBytes": 3106538
-  },
   "about/darren-bacon-about.mp4": {
     "poster": "_derived/about/darren-bacon-about.poster.jpg",
     "width": 720,
@@ -361,23 +352,5 @@
     "duration": 4,
     "sourceBytes": 256464,
     "videoBytes": 208451
-  },
-  "deadrop/making_of/Sequence 01.gif": {
-    "video": "_derived/deadrop/making_of/Sequence 01.mp4",
-    "poster": "_derived/deadrop/making_of/Sequence 01.poster.jpg",
-    "width": 854,
-    "height": 480,
-    "duration": 4.7,
-    "sourceBytes": 28136201,
-    "videoBytes": 1351183
-  },
-  "strike-vector/strike-vector-1.gif": {
-    "video": "_derived/strike-vector/strike-vector-1.mp4",
-    "poster": "_derived/strike-vector/strike-vector-1.poster.jpg",
-    "width": 720,
-    "height": 384,
-    "duration": 8.2,
-    "sourceBytes": 6645403,
-    "videoBytes": 4079279
   }
 }
