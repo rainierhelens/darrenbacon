@@ -2,7 +2,10 @@
 import { nav, site, socialLinks } from '../data/site';
 import { RESUME_URL, RESUME_LABEL, resumeAvailable } from '../config/features';
 
-const currentPath = Astro.url.pathname;
+const currentPath =
+  Astro.url.pathname === '/' || Astro.url.pathname.endsWith('/')
+    ? Astro.url.pathname
+    : `${Astro.url.pathname}/`;
 ---
 
 <header class="sticky top-0 z-50 border-b border-border/60 bg-bg/80 backdrop-blur-xl">
@@ -92,6 +95,13 @@ const currentPath = Astro.url.pathname;
             {item.label}
           </a>
         ))
+      }
+      {
+        resumeAvailable && (
+          <a href={RESUME_URL} class="text-sm tracking-wide uppercase text-muted transition-colors hover:text-fg">
+            {RESUME_LABEL}
+          </a>
+        )
       }
     </div>
   </nav>

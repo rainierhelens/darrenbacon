@@ -84,7 +84,7 @@ export const haloArtDirection = {
     title: 'Infinite Art Index',
     kicker: 'Style guide',
     version: 'v0.6b',
-    href: '/art-direction/halo/art-index',
+    href: '/art-direction/halo/art-index/',
     cover: '/images/art-index/spreads/01.webp',
     summary:
       'The living style guide I authored for Infinite: project pillars, faction language, and the rule sets that aligned a ~400-artist program and external partners around one visual language.',

@@ -21,6 +21,13 @@ const {
 
 const pageTitle = title === site.name ? `${site.name} | ${site.tagline}` : `${title} | ${site.name}`;
 
+const pathname = Astro.url.pathname;
+const canonicalPath =
+  pathname === '/' || pathname.endsWith('/') || /\.[a-z0-9]+$/i.test(pathname)
+    ? pathname
+    : `${pathname}/`;
+const canonicalUrl = new URL(canonicalPath, site.url).href;
+
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -57,7 +64,8 @@ const personSchema = {
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:url" content={Astro.url.href} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />

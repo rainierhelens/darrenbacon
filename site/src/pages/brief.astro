@@ -73,6 +73,7 @@ const briefRoles = signatureCredentials.map((cred) =>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
+    <link rel="canonical" href={`${site.url}/brief/`} />
     <meta
       name="description"
       content="One-page leadership brief for Darren Bacon, art director for franchise and studio leadership."
@@ -83,9 +84,16 @@ const briefRoles = signatureCredentials.map((cred) =>
     <div class="toolbar">
       <a class="back" href="/">← Back to site</a>
       <div class="toolbar-actions">
-        <a class="download" href={RESUME_PDF_URL} download={RESUME_PDF_FILENAME}>
+        <a
+          class="download"
+          id="brief-pdf"
+          href={RESUME_PDF_URL}
+          download={RESUME_PDF_FILENAME}
+          data-file-name={RESUME_PDF_FILENAME}
+        >
           Download PDF
         </a>
+        <a class="contact-cta" href="/contact/">Contact</a>
         <button type="button" id="print-btn">Print</button>
       </div>
     </div>
@@ -205,12 +213,18 @@ const briefRoles = signatureCredentials.map((cred) =>
       }
 
       .toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
         max-width: 8.5in;
         margin: 0 auto;
-        padding: 16px 8px;
+        padding: 12px 8px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        background: #ececed;
       }
 
       .toolbar .back {
@@ -230,8 +244,8 @@ const briefRoles = signatureCredentials.map((cred) =>
       }
 
       .toolbar .download,
+      .toolbar .contact-cta,
       #print-btn {
-        border: 1px solid var(--accent);
         border-radius: 999px;
         padding: 8px 18px;
         font-size: 14px;
@@ -240,18 +254,31 @@ const briefRoles = signatureCredentials.map((cred) =>
       }
 
       .toolbar .download {
+        background: var(--accent);
+        color: #fff;
+        border: 1px solid var(--accent);
+      }
+
+      .toolbar .contact-cta {
         background: #fff;
         color: var(--accent);
+        border: 1px solid var(--accent);
       }
 
       #print-btn {
-        background: var(--accent);
-        color: #fff;
+        background: transparent;
+        color: var(--muted);
+        border: none;
+        padding: 8px 6px;
       }
 
       .toolbar .download:hover,
-      #print-btn:hover {
+      .toolbar .contact-cta:hover {
         opacity: 0.9;
+      }
+
+      #print-btn:hover {
+        color: var(--ink);
       }
 
       /*
@@ -528,8 +555,64 @@ const briefRoles = signatureCredentials.map((cred) =>
       }
     </style>
 
-    <script>
-      document.getElementById('print-btn')?.addEventListener('click', () => window.print());
+    <script is:inline>
+      document.getElementById('print-btn')?.addEventListener('click', function () {
+        window.print();
+      });
+
+      // Classic script (not type=module) so the listener binds even if module
+      // execution is delayed or blocked. Capture phase runs before gtag's
+      // bubble link handler, which otherwise owns the click.
+      document.getElementById('brief-pdf')?.addEventListener('click', function (event) {
+        var link = event.currentTarget;
+        if (!link || link.tagName !== 'A') return;
+
+        var primary = event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
+        if (primary) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        trackPdfDownload(link);
+        if (primary) savePdf(link.href, link.getAttribute('download') || link.getAttribute('data-file-name'));
+      }, true);
+
+      function trackPdfDownload(link) {
+        if (typeof window.gtag !== 'function') return;
+        window.gtag('event', 'file_download', {
+          file_extension: 'pdf',
+          file_name: link.getAttribute('data-file-name') || 'Darren-Bacon-Leadership-Brief.pdf',
+          link_url: link.href,
+          link_text: (link.textContent || 'Download PDF').replace(/\s+/g, ' ').trim(),
+          // Honored by older gtag. Current gtag records it and still batches
+          // the hit onto the click, which the PDF navigation then aborts.
+          transport_type: 'beacon',
+        });
+        // Flush now, while this document is still open. gtag listens for
+        // pagehide and sends the queued hit with a keepalive request.
+        window.dispatchEvent(new PageTransitionEvent('pagehide', { persisted: false }));
+      }
+
+      function savePdf(href, fileName) {
+        fetch(href)
+          .then(function (response) {
+            if (!response.ok) throw new Error('download failed');
+            return response.blob();
+          })
+          .then(function (blob) {
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = fileName || 'Darren-Bacon-Leadership-Brief.pdf';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+          })
+          .catch(function () {
+            window.location.assign(href);
+          });
+      }
     </script>
   </body>
 </html>
