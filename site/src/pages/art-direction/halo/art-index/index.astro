@@ -4,6 +4,11 @@ import ArtIndexSpread from '../../../../components/art-index/ArtIndexSpread.astr
 import artIndexData from '../../../../data/art-index/spreads.json';
 import { artIndexNav, anchorsForSpread } from '../../../../data/art-index/chapters';
 import type { ArtIndexData } from '../../../../data/art-index/types';
+import { artIndexVisible } from '../../../../config/features';
+
+if (!artIndexVisible) {
+  return Astro.redirect('/art-direction/halo/');
+}
 
 const data = artIndexData as ArtIndexData;
 const proof = Astro.url.searchParams.get('proof') === '1';

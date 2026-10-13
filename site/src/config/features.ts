@@ -5,6 +5,16 @@ export const marathonCaseStudyPublished = false;
 export const marathonCaseStudyVisible =
   marathonCaseStudyPublished || import.meta.env.DEV;
 
+/**
+ * The Infinite Art Index is private. While false, /art-direction/halo/art-index/
+ * redirects to the Halo case study, Halo page links to it are hidden, and
+ * `images/art-index/` is stripped from the production build. It stays viewable
+ * in `astro dev`.
+ */
+export const artIndexPublic = false;
+
+export const artIndexVisible = artIndexPublic || import.meta.env.DEV;
+
 export const MARATHON_LOGO = '/images/Marathon/Marathon_Logo_WordMark_Green_TRANSPARENT.png';
 
 /**
