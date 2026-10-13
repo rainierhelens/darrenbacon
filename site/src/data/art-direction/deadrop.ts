@@ -62,7 +62,7 @@ type SnapshotDefinition = Omit<SnapshotEntry, 'media' | 'mediaSections'> & {
 
 export const DEADROP_COVER = '/images/deadrop-ad/HighresScreenshot00455_3840x2160-2.jpg';
 
-export const deadropArtDirection = {
+const deadropOverview = {
   slug: 'deadrop',
   title: 'DEADROP',
   studio: 'Midnight Society',
@@ -472,7 +472,7 @@ function resolveMediaSections(
   });
 }
 
-Object.assign(deadropArtDirection, {
+export const deadropArtDirection = Object.assign(deadropOverview, {
   get snapshots(): SnapshotEntry[] {
     return snapshotDefinitions.map((snapshot) => ({
       ...snapshot,

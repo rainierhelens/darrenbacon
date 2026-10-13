@@ -1,6 +1,7 @@
 ---
 import ResponsiveImage from './ResponsiveImage.astro';
 import { lightboxTarget } from '../lib/derived-media';
+import { captionFor } from '../lib/gallery-captions';
 
 interface Props {
   images: string[];
@@ -15,27 +16,32 @@ const { images, altPrefix = 'Artwork', groupId = `grid-${images.length}-${images
 <section class="w-full" data-lightbox-group={groupId}>
   <div class="grid grid-cols-2 gap-px bg-border md:grid-cols-3 lg:grid-cols-4">
     {
-      images.map((src, index) => (
+      images.map((src, index) => {
+        const target = lightboxTarget(src);
+        const caption = captionFor(src);
+        return (
         <button
           type="button"
           class="group relative aspect-square overflow-hidden bg-surface-elevated focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           data-lightbox-item
           data-group={groupId}
           data-index={index}
-          data-src={lightboxTarget(src).src}
-          data-type={lightboxTarget(src).type}
-          aria-label={`Open image ${index + 1} of ${images.length}`}
+          data-src={target.src}
+          data-type={target.type}
+          data-caption={caption.title}
+          aria-label={caption.title ? `Open ${caption.title}` : `Open image ${index + 1} of ${images.length}`}
         >
           <ResponsiveImage
             src={src}
-            alt={`${altPrefix} ${index + 1}`}
+            alt={caption.alt ?? `${altPrefix} ${index + 1}`}
             preset="grid"
             draggable="false"
             class="pointer-events-none h-full w-full object-cover transition duration-500 group-hover:scale-[1.03] group-hover:opacity-90"
           />
           <span class="pointer-events-none absolute inset-0 bg-black/0 transition group-hover:bg-black/20" />
         </button>
-      ))
+        );
+      })
     }
   </div>
 </section>

@@ -1,6 +1,9 @@
 ---
+import '@fontsource-variable/inter/wght.css';
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
+import { getImage } from 'astro:assets';
+import { resolveImage } from '../lib/responsive-images';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SiteLightbox from '../components/SiteLightbox.astro';
@@ -27,6 +30,16 @@ const canonicalPath =
     ? pathname
     : `${pathname}/`;
 const canonicalUrl = new URL(canonicalPath, site.url).href;
+
+// Share previews want ~1200×630 and reject multi-megabyte files, so crop local
+// images to that size; external URLs pass through untouched.
+const OG_WIDTH = 1200;
+const OG_HEIGHT = 630;
+const ogSource = ogImage.startsWith(site.url) ? resolveImage(ogImage.slice(site.url.length)) : undefined;
+const ogResized = ogSource
+  ? await getImage({ src: ogSource, width: OG_WIDTH, height: OG_HEIGHT, fit: 'cover', format: 'jpg', quality: 82 })
+  : undefined;
+const ogImageUrl = ogResized ? new URL(ogResized.src, site.url).href : ogImage;
 
 const personSchema = {
   '@context': 'https://schema.org',
@@ -63,17 +76,16 @@ const personSchema = {
     <meta name="author" content={site.name} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={ogImageUrl} />
+    {ogResized && <meta property="og:image:width" content={String(OG_WIDTH)} />}
+    {ogResized && <meta property="og:image:height" content={String(OG_HEIGHT)} />}
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <meta name="twitter:image" content={ogImageUrl} />
     <title>{pageTitle}</title>
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
     <Analytics />

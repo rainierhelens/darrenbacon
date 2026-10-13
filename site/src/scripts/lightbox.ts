@@ -132,6 +132,8 @@ function bindOverlay() {
   });
 }
 
+export {};
+
 let globalBound = false;
 
 /** Document-level delegation + keyboard — bound once for the session. */

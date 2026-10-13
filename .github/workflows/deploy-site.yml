@@ -53,6 +53,10 @@ jobs:
         working-directory: site
         run: npm run build
 
+      - name: Check internal links
+        working-directory: site
+        run: npm run check-links
+
       - name: Ensure Pages skips Jekyll
         run: touch "${{ github.workspace }}/site/dist/.nojekyll"
 

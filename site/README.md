@@ -21,6 +21,8 @@ npm run preview
 
 Static output is written to `site/dist/`.
 
+Before pushing, `npm run check` type-checks the project and `npm run check-links` (after a build) verifies every internal `href`, `src`, `srcset` and `poster` in `dist/` points at a real file. Both run on pull requests via `.github/workflows/pr-checks.yml`; the deploy workflow also runs the link check.
+
 ## Images
 
 Gallery images live in the repo root `images/` folder and are linked into `site/public/images` via a directory junction. If the junction is missing on a new machine:
@@ -44,6 +46,10 @@ After adding or replacing a GIF or MP4 under `images/`, run `npm run encode-medi
 - `manifest.json` records paths and dimensions.
 
 Commit the output; CI does not run ffmpeg. `ResponsiveImage` serves a GIF as a muted looping `<video>` when its MP4 exists, gallery items open the MP4 in the lightbox, and `posterFor()` from `src/lib/derived-media.ts` supplies `poster` attributes. Pass `--reencode` (optionally `--min-mb N`, default 8) to also re-encode large MP4s in place at CRF 23 / max 1080p; a file is only replaced when the result is at least 15% smaller.
+
+### Gallery captions and alt text
+
+Concept gallery images (listed in `src/data/galleries.json`) get their text from `src/data/gallery-captions.json`, keyed by image path. `title` becomes the lightbox caption and the screen-reader label; `alt` describes the image (falls back to `title`). Blank entries fall back to numbered labels. After adding or removing gallery images, run `npm run sync-captions` to add empty entries for new images and drop removed ones without touching existing text.
 
 ## Deploy (GitHub Pages)
 

@@ -6,6 +6,7 @@ const currentPath =
   Astro.url.pathname === '/' || Astro.url.pathname.endsWith('/')
     ? Astro.url.pathname
     : `${Astro.url.pathname}/`;
+const instagram = socialLinks.find((link) => link.label === 'Instagram');
 ---
 
 <header class="sticky top-0 z-50 border-b border-border/60 bg-bg/80 backdrop-blur-xl">
@@ -31,9 +32,7 @@ const currentPath =
     <nav class="hidden items-center gap-8 md:flex" aria-label="Main navigation">
       {
         nav.map((item) => {
-          const isActive =
-            currentPath === item.href ||
-            (item.href !== '/' && currentPath.startsWith(item.href));
+          const isActive = currentPath.startsWith(item.href);
           return (
             <a
               href={item.href}
@@ -50,14 +49,18 @@ const currentPath =
     </nav>
 
     <div class="hidden items-center gap-6 sm:flex">
-      <a
-        href={socialLinks[1].href}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-sm text-muted transition-colors hover:text-accent"
-      >
-        {site.handle}
-      </a>
+      {
+        instagram && (
+          <a
+            href={instagram.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm text-muted transition-colors hover:text-accent"
+          >
+            {site.handle}
+          </a>
+        )
+      }
       {
         resumeAvailable && (
           <a

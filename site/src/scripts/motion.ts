@@ -64,6 +64,8 @@ function initScrollProgress() {
   window.addEventListener('resize', update, { passive: true });
 }
 
+export {};
+
 let globalBound = false;
 
 function initMotion() {

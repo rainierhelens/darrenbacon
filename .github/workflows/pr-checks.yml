@@ -1,0 +1,60 @@
+name: PR checks
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - 'images/**'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # LFS files (a PDF and one MP4) aren't read by the build; skipping them
+      # keeps PR runs from spending the repo's LFS bandwidth quota.
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - name: Install dependencies
+        working-directory: site
+        run: npm ci
+
+      - name: Restore image cache
+        uses: actions/cache@v4
+        with:
+          path: site/node_modules/.astro
+          key: astro-assets-${{ github.sha }}
+          restore-keys: |
+            astro-assets-
+
+      - name: Link images into public
+        run: ln -sfn "${{ github.workspace }}/images" "${{ github.workspace }}/site/public/images"
+
+      - name: Type check
+        working-directory: site
+        run: npm run check
+
+      - name: Build site
+        working-directory: site
+        run: npm run build
+
+      - name: Check internal links
+        working-directory: site
+        run: npm run check-links
