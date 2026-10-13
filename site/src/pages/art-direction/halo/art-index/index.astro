@@ -1,0 +1,36 @@
+---
+import ArtIndexLayout from '../../../../layouts/ArtIndexLayout.astro';
+import ArtIndexSpread from '../../../../components/art-index/ArtIndexSpread.astro';
+import artIndexData from '../../../../data/art-index/spreads.json';
+import { artIndexNav, anchorsForSpread } from '../../../../data/art-index/chapters';
+import type { ArtIndexData } from '../../../../data/art-index/types';
+
+const data = artIndexData as ArtIndexData;
+const proof = Astro.url.searchParams.get('proof') === '1';
+const proofHref = proof ? '/art-direction/halo/art-index' : '/art-direction/halo/art-index?proof=1';
+---
+
+<ArtIndexLayout>
+  <header class="art-index-bar">
+    <a class="art-index-bar__back" href="/art-direction/halo">← Halo Infinite</a>
+    <p class="art-index-bar__title">Infinite Art Index · v0.6b</p>
+    <nav class="art-index-bar__nav" aria-label="Art Index chapters">
+      {
+        artIndexNav.map((chapter) => (
+          <a href={`#${chapter.id}`}>{chapter.label}</a>
+        ))
+      }
+    </nav>
+    <div class="art-index-bar__tools">
+      <a href={proofHref}>{proof ? 'Hide proof' : 'Proof overlay'}</a>
+    </div>
+  </header>
+
+  <main class="art-index-page">
+    {
+      data.spreads.map((spread) => (
+          <ArtIndexSpread spread={spread} chapterIds={anchorsForSpread(spread.index)} />
+        ))
+    }
+  </main>
+</ArtIndexLayout>

@@ -1,0 +1,203 @@
+html.art-index {
+  --ai-paper: #ecece8;
+  --ai-ink: #111111;
+  --ai-muted: #5c5c5c;
+  --ai-rule: #c8c8c2;
+  --ai-bar: #0f0f0f;
+  --ai-bar-fg: #f4f4f0;
+  --ai-accent: #8a1c1c;
+  --ai-sans: "Barlow", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --ai-cond: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --ai-serif: "EB Garamond", "Times New Roman", serif;
+  scroll-behavior: smooth;
+  background: var(--ai-paper);
+  color: var(--ai-ink);
+}
+
+html.art-index body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--ai-sans);
+  background: var(--ai-paper);
+  color: var(--ai-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.art-index-bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.25rem;
+  min-height: 3.25rem;
+  padding: 0.55rem 1rem;
+  background: var(--ai-bar);
+  color: var(--ai-bar-fg);
+}
+
+.art-index-bar a {
+  color: var(--ai-bar-fg);
+  text-decoration: none;
+}
+
+.art-index-bar a:hover {
+  color: #fff;
+}
+
+.art-index-bar__back {
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+.art-index-bar__title {
+  font-family: var(--ai-cond);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.art-index-bar__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 0.9rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.art-index-bar__nav a.is-active {
+  color: #fff;
+  box-shadow: 0 1px 0 #fff;
+}
+
+.art-index-bar__tools {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.art-index-page {
+  padding: 1.25rem 1rem 3rem;
+}
+
+.art-index-spread {
+  container-type: size;
+  position: relative;
+  margin: 0 auto 1.5rem;
+  max-width: 100%;
+  width: min(100%, calc((100svh - 5.5rem) * var(--spread-aspect)));
+  aspect-ratio: var(--spread-aspect);
+  background: #fff;
+  box-shadow: 0 18px 50px rgb(0 0 0 / 18%);
+  overflow: hidden;
+}
+
+.art-index-spread__visual,
+.art-index-spread__proof {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+}
+
+.art-index-spread__proof {
+  display: none;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  z-index: 4;
+}
+
+html.art-index.is-proof .art-index-spread__visual {
+  opacity: 0.55;
+}
+
+html.art-index.is-proof .art-index-spread__proof {
+  display: block;
+}
+
+.art-index-spread__region {
+  position: absolute;
+  margin: 0;
+  overflow: hidden;
+  line-height: 1.05;
+  color: transparent;
+  z-index: 2;
+}
+
+html.art-index.is-proof .art-index-spread__region {
+  color: var(--ai-accent);
+  outline: 1px solid color-mix(in srgb, var(--ai-accent) 55%, transparent);
+  background: color-mix(in srgb, var(--ai-accent) 8%, transparent);
+}
+
+.art-index-spread__region.is-link {
+  color: transparent;
+  cursor: pointer;
+}
+
+.art-index-spread__region.is-link:hover {
+  outline: 2px solid var(--ai-accent);
+  background: color-mix(in srgb, var(--ai-accent) 12%, transparent);
+}
+
+.art-index-spread__region.is-override {
+  z-index: 5;
+  overflow: hidden;
+  background: #fff;
+}
+
+.art-index-spread__region.is-override:not(.is-hide) {
+  overflow: visible;
+  color: #7f7f7f;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  white-space: normal;
+}
+
+.art-index-spread__region.is-override.is-body {
+  color: #000;
+  letter-spacing: 0;
+  line-height: 1.05;
+}
+
+.art-index-spread__region.is-override.is-hide {
+  color: transparent;
+}
+
+html.art-index.is-proof .art-index-spread__region.is-override {
+  outline: none;
+  background: #fff;
+}
+
+.art-index-spread__region.is-sans {
+  font-family: var(--ai-sans);
+}
+
+.art-index-spread__region.is-cond {
+  font-family: var(--ai-cond);
+}
+
+.art-index-spread__region.is-serif {
+  font-family: var(--ai-serif);
+}
+
+@media (max-width: 720px) {
+  .art-index-spread {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .art-index-bar__nav {
+    display: none;
+  }
+}

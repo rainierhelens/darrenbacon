@@ -8,6 +8,7 @@
   "scripts": {
     "predev": "node scripts/link-images.mjs",
     "prebuild": "node scripts/link-images.mjs",
+    "extract-art-index": "python scripts/extract-art-index.py",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

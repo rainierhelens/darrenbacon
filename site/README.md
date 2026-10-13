@@ -1,4 +1,4 @@
-# Darren Bacon — Astro Portfolio
+# Darren Bacon: Astro Portfolio
 
 Dark, modern portfolio site built with [Astro](https://astro.build) and Tailwind CSS v4.
 

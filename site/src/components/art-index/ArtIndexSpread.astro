@@ -1,0 +1,81 @@
+---
+import type { ArtIndexSpread } from '../../data/art-index/types';
+import {
+  fontFamilyFor,
+  fontWeightFor,
+  isItalicFont,
+  tocHrefForText,
+  textOverrideFor,
+  isArtIndexHidden,
+} from '../../data/art-index/chapters';
+
+interface Props {
+  spread: ArtIndexSpread;
+  chapterIds?: string[];
+}
+
+const { spread, chapterIds = [] } = Astro.props;
+---
+
+<article
+  class="art-index-spread"
+  id={spread.id}
+  data-spread={spread.index}
+  style={`--spread-aspect: ${spread.aspect}; --page-w: ${spread.width}; --page-h: ${spread.height};`}
+>
+  {chapterIds.map((id) => <div id={id} class="art-index-spread__anchor" />)}
+
+  <img
+    class="art-index-spread__visual"
+    src={spread.src}
+    alt={`Infinite Art Index, spread ${spread.index} of 42. ${spread.preview}`}
+    width={Math.round(spread.width)}
+    height={Math.round(spread.height)}
+    loading={spread.index <= 3 ? 'eager' : 'lazy'}
+    decoding="async"
+  />
+
+  {
+    spread.regions.map((region) => {
+      const href = spread.index === 3 ? tocHrefForText(region.text) : undefined;
+      const family = fontFamilyFor(region.font);
+      const override = textOverrideFor(spread.index, region.text);
+      if (!override && isArtIndexHidden(spread.index, region.text)) return null;
+      const left = override?.x ?? region.x;
+      const top = override?.y ?? region.y;
+      const width = override?.width ?? region.w;
+      const height = override?.height ?? region.h;
+      const style = `left:${left}%;top:${top}%;width:${width}%;height:${height}%;font-size:calc(${region.size} / ${spread.width} * 100cqw);font-weight:${fontWeightFor(region.font)};font-style:${isItalicFont(region.font, region.flags) ? 'italic' : 'normal'};`;
+      const className = `art-index-spread__region is-${family}`;
+      if (override) {
+        return (
+          <p
+            class:list={[className, 'is-override', override.tone === 'hide' && 'is-hide', override.tone === 'body' && 'is-body']}
+            style={style}
+          >
+            {override.text}
+          </p>
+        );
+      }
+      return href ? (
+        <a href={href} class:list={[className, 'is-link']} style={style}>
+          {region.text}
+        </a>
+      ) : (
+        <p class={className} style={style}>
+          {region.text}
+        </p>
+      );
+    })
+  }
+</article>
+
+<style>
+  .art-index-spread__anchor {
+    position: absolute;
+    top: -3.5rem;
+    left: 0;
+    width: 1px;
+    height: 1px;
+  }
+</style>

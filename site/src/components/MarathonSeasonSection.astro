@@ -86,7 +86,7 @@ const { season, index } = Astro.props;
                             }
                             <MediaGallery
                               items={section.media}
-                              altPrefix={`Season ${season.label} — ${section.title}`}
+                              altPrefix={`Season ${season.label}: ${section.title}`}
                               groupId={`marathon-${season.id}-${categoryIndex}-${sectionIndex}`}
                               layout={section.layout ?? category.layout}
                               autoplayMuted

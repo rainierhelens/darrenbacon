@@ -67,18 +67,18 @@ export const leadershipCredentials: Credential[] = [
   {
     title: 'Managing at Microsoft I',
     issuer: 'Microsoft',
-    note: 'Microsoft’s foundational people-management program — leading individuals, setting clear expectations, and building high-trust teams.',
+    note: 'Microsoft’s foundational people-management program: leading individuals, setting clear expectations, and building high-trust teams.',
   },
   {
     title: 'Managing at Microsoft II: Deliver Results Through Teams',
     issuer: 'Microsoft',
-    note: 'Advanced manager training focused on driving outcomes at scale — leading through others, cross-team delivery, and organizational impact.',
+    note: 'Advanced manager training focused on driving outcomes at scale: leading through others, cross-team delivery, and organizational impact.',
   },
   {
     title: 'CompTIA Project+ (Project Management)',
     issuer: 'CompTIA',
     year: '2015',
-    note: 'Industry certification in project lifecycle and cross-functional delivery — earned through study of Organizational Behavior and Leadership.',
+    note: 'Industry certification in project lifecycle and cross-functional delivery, earned through study of Organizational Behavior and Leadership.',
   },
 ];
 
@@ -100,10 +100,10 @@ export const featuredRecommendation = {
 // Skimmable "senior roles + scale" line for directly under the hero — answers
 // "is this a leader?" before the visitor scrolls.
 export const signatureCredentials = [
-  'Studio Art Director — MIDNIGHT SOCIETY',
-  'Art Director — Halo Infinite',
-  'Author — Halo Infinite Art Index',
-  'Commerce & Events Art Lead — Marathon',
+  'Studio Art Director, Midnight Society',
+  'Art Director, Halo Infinite',
+  'Author, Halo Infinite Art Index',
+  'Commerce & Events Art Lead, Marathon',
   '~400-artist program · $5B franchise',
 ] as const;
 
@@ -116,11 +116,11 @@ export const leadershipHighlights = [
   },
   {
     title: 'Stewarded $5B franchises',
-    body: 'Authored the Halo Infinite Art Index — the franchise’s art bible — and directed art across a ~400-artist program, evolving beloved worlds through vision, style guides, and consumer products without breaking the promise fans fell in love with.',
+    body: 'Authored the Halo Infinite Art Index, the franchise’s art bible, and directed art across a ~400-artist program, evolving beloved worlds through vision, style guides, and consumer products without breaking the promise fans fell in love with.',
   },
   {
     title: 'Drives live-service & commerce',
-    body: 'Leads commerce, earnables, and live-events art on Marathon — a creative leader fluent in seasonal cadence, monetization, and the business of a live game, not just its visuals.',
+    body: 'Leads commerce, earnables, and live-events art on Marathon. Fluent in seasonal cadence, monetization, and the business of a live game, not just its visuals.',
   },
 ] as const;
 

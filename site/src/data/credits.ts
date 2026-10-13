@@ -14,58 +14,58 @@ export const shippedGames = [
 
 export const experience = [
   {
-    role: 'Bungie — Commerce & Events Art Lead',
+    role: 'Bungie, Commerce & Events Art Lead',
     period: '2025–present',
     summary:
       'Shaping visual strategy for cosmetics, earnables, live-service events, and commerce in Marathon.',
     shipped: ['Marathon (2026)'],
   },
   {
-    role: 'Midnight Society — Studio Art Director',
+    role: 'Midnight Society, Studio Art Director',
     period: '2022–2025',
     summary:
       'Built and led a 15-person art team plus external co-developers, directing DEADROP from concept through seven pre-alpha releases and three major esports/showcase events.',
   },
   {
-    role: 'Microsoft (Halo) — Art Director',
+    role: 'Microsoft (Halo), Art Director',
     period: '2019–2022',
     summary:
-      'Directed art for Halo Infinite multiplayer and live content across a ~400-artist program — stewarding a $5B franchise, including consumer-products oversight (Mattel, McFarlane, apparel, brand style guides).',
-    shipped: ['Halo Infinite (2021)', 'Halo: Fireteam Raven — Special Thanks (2018)'],
+      'Directed art for Halo Infinite multiplayer and live content across a ~400-artist program, stewarding a $5B franchise, including consumer-products oversight (Mattel, McFarlane, apparel, brand style guides).',
+    shipped: ['Halo Infinite (2021)', 'Halo: Fireteam Raven, Special Thanks (2018)'],
   },
   {
-    role: 'Microsoft (Halo) — Lead Concept Artist',
+    role: 'Microsoft (Halo), Lead Concept Artist',
     period: '2014–2019',
     summary:
-      'Hired, led, and mentored a concept team of up to 11 across Halo 5, Halo 5: Forge, and Halo Infinite — owning the full talent lifecycle and the visual quality bar. Authored the Halo Infinite Art Index, the franchise’s living style guide that aligned a ~400-artist program and external partners around one visual language.',
+      'Hired, led, and mentored a concept team of up to 11 across Halo 5, Halo 5: Forge, and Halo Infinite, owning the full talent lifecycle and the visual quality bar. Authored the Halo Infinite Art Index, the franchise’s living style guide that aligned a ~400-artist program and external partners around one visual language.',
     shipped: ['Halo 5: Guardians (2015)', 'Halo 5: Forge (2016)'],
   },
   {
-    role: 'Industrial Light & Magic — Concept Artist',
+    role: 'Industrial Light & Magic, Concept Artist',
     period: '2014',
     summary: 'Concept art and illustration for Star Wars projects.',
     shipped: ["Star Wars: Galaxy's Edge (2019)"],
   },
   {
-    role: 'Bungie — Senior Concept Artist',
+    role: 'Bungie, Senior Concept Artist',
     period: '2011–2014',
     summary: 'Visual development for Destiny characters, environments, and props.',
     shipped: ['Destiny (2014)'],
   },
   {
-    role: 'Walt Disney Television Animation — Concept Artist',
+    role: 'Walt Disney Television Animation, Concept Artist',
     period: '2011',
     summary: 'Background painting and concept art in the production style.',
     shipped: ['TRON: Uprising (2012)'],
   },
   {
-    role: "Disney's ImageMovers Digital — Concept Artist",
+    role: "Disney's ImageMovers Digital, Concept Artist",
     period: '2008–2010',
     summary: 'Concept art with production designer Doug Chiang.',
     shipped: ["Mars Needs Moms! (2011)", "Disney's A Christmas Carol (2009)"],
   },
   {
-    role: 'Electronic Arts — Concept Artist',
+    role: 'Electronic Arts, Concept Artist',
     period: '2007–2008',
     summary: 'Concept art for Command & Conquer titles.',
     shipped: ['Command & Conquer: Red Alert 3 (2008)', "Command & Conquer: Kane's Wrath (2008)"],
