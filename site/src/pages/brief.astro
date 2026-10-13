@@ -555,21 +555,64 @@ const briefRoles = signatureCredentials.map((cred) =>
       }
     </style>
 
-    <script>
-      document.getElementById('print-btn')?.addEventListener('click', () => window.print());
-
-      document.getElementById('brief-pdf')?.addEventListener('click', (event) => {
-        const link = event.currentTarget;
-        if (!(link instanceof HTMLAnchorElement)) return;
-
-        const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
-        gtag?.('event', 'file_download', {
-          file_extension: 'pdf',
-          file_name: link.dataset.fileName || 'Darren-Bacon-Leadership-Brief.pdf',
-          link_url: link.href,
-          link_text: link.textContent?.trim() || 'Download PDF',
-        });
+    <script is:inline>
+      document.getElementById('print-btn')?.addEventListener('click', function () {
+        window.print();
       });
+
+      // Classic script (not type=module) so the listener binds even if module
+      // execution is delayed or blocked. Capture phase runs before gtag's
+      // bubble link handler, which otherwise owns the click.
+      document.getElementById('brief-pdf')?.addEventListener('click', function (event) {
+        var link = event.currentTarget;
+        if (!link || link.tagName !== 'A') return;
+
+        var primary = event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
+        if (primary) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        trackPdfDownload(link);
+        if (primary) savePdf(link.href, link.getAttribute('download') || link.getAttribute('data-file-name'));
+      }, true);
+
+      function trackPdfDownload(link) {
+        if (typeof window.gtag !== 'function') return;
+        window.gtag('event', 'file_download', {
+          file_extension: 'pdf',
+          file_name: link.getAttribute('data-file-name') || 'Darren-Bacon-Leadership-Brief.pdf',
+          link_url: link.href,
+          link_text: (link.textContent || 'Download PDF').replace(/\s+/g, ' ').trim(),
+          // Honored by older gtag. Current gtag records it and still batches
+          // the hit onto the click, which the PDF navigation then aborts.
+          transport_type: 'beacon',
+        });
+        // Flush now, while this document is still open. gtag listens for
+        // pagehide and sends the queued hit with a keepalive request.
+        window.dispatchEvent(new PageTransitionEvent('pagehide', { persisted: false }));
+      }
+
+      function savePdf(href, fileName) {
+        fetch(href)
+          .then(function (response) {
+            if (!response.ok) throw new Error('download failed');
+            return response.blob();
+          })
+          .then(function (blob) {
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = fileName || 'Darren-Bacon-Leadership-Brief.pdf';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+          })
+          .catch(function () {
+            window.location.assign(href);
+          });
+      }
     </script>
   </body>
 </html>
