@@ -1,5 +1,6 @@
 ---
 import ResponsiveImage from './ResponsiveImage.astro';
+import { lightboxTarget } from '../lib/derived-media';
 
 interface Props {
   images: { src: string; caption?: string }[];
@@ -25,7 +26,8 @@ const {
             data-lightbox-item
             data-group={groupId}
             data-index={index}
-            data-src={image.src}
+            data-src={lightboxTarget(image.src).src}
+            data-type={lightboxTarget(image.src).type}
             data-caption={image.caption}
             aria-label={image.caption ?? `Open image ${index + 1}`}
           >

@@ -3,9 +3,12 @@
  * Drop-in replacement for `<img src="/images/...">`.
  *
  * Resolves the public URL to the imported source file and renders Astro's
- * `<Image>` with a WebP srcset, `sizes`, and intrinsic width/height. If the
- * file isn't in the build-time index (GIFs, ignored folders) it renders a
- * plain `<img>` with the same attributes so nothing breaks.
+ * `<Image>` with a WebP srcset, `sizes`, and intrinsic width/height.
+ *
+ * GIFs with a generated MP4 (see scripts/encode-media.mjs) render as a muted,
+ * looping, inline `<video>` with a poster instead, which is a fraction of the
+ * weight. Anything else not in the build-time index falls back to a plain
+ * `<img>` with the same attributes so nothing breaks.
  */
 import type { HTMLAttributes } from 'astro/types';
 import { Image } from 'astro:assets';
@@ -16,6 +19,7 @@ import {
   WIDTHS,
   type ImagePreset,
 } from '../lib/responsive-images';
+import { gifVideoFor } from '../lib/derived-media';
 
 interface Props extends Omit<HTMLAttributes<'img'>, 'src' | 'alt' | 'width' | 'height' | 'sizes'> {
   src: string;
@@ -39,15 +43,35 @@ const {
   ...rest
 } = Astro.props;
 
-const meta = resolveImage(src);
+const video = gifVideoFor(src);
+const meta = video ? undefined : resolveImage(src);
 
 const srcsetWidths = meta ? pickWidths(widths, meta.width) : [];
 const fallbackWidth = srcsetWidths.at(-1) ?? meta?.width ?? 0;
 const fallbackHeight = meta ? Math.round((fallbackWidth * meta.height) / meta.width) : 0;
+
+// <video> has no alt; surface the description to assistive tech instead.
+const { fetchpriority: _fetchpriority, draggable: _draggable, ...videoRest } = rest as Record<string, unknown>;
 ---
 
 {
-  meta ? (
+  video ? (
+    <video
+      src={video.src}
+      poster={video.poster}
+      width={video.width}
+      height={video.height}
+      autoplay
+      muted
+      loop
+      playsinline
+      preload={loading === 'eager' ? 'auto' : 'metadata'}
+      aria-label={alt || undefined}
+      aria-hidden={alt ? undefined : 'true'}
+      data-autoplay-muted="true"
+      {...videoRest}
+    />
+  ) : meta ? (
     <Image
       src={meta}
       alt={alt}

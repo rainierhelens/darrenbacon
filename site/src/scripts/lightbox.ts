@@ -1,6 +1,11 @@
+type LightboxItem = {
+  src: string;
+  type: 'image' | 'video';
+  caption?: string;
+};
+
 type LightboxGroup = {
-  images: string[];
-  captions: (string | undefined)[];
+  items: LightboxItem[];
 };
 
 const groups = new Map<string, LightboxGroup>();
@@ -9,33 +14,60 @@ let activeIndex = 0;
 
 const lightbox = () => document.getElementById('site-lightbox');
 const lightboxImage = () => document.getElementById('site-lightbox-image') as HTMLImageElement | null;
+const lightboxVideo = () => document.getElementById('site-lightbox-video') as HTMLVideoElement | null;
 const lightboxCaption = () => document.getElementById('site-lightbox-caption');
 const lightboxCounter = () => document.getElementById('site-lightbox-counter');
 
-function registerGroup(id: string, images: string[], captions: (string | undefined)[] = []) {
-  groups.set(id, { images, captions });
+function registerGroup(id: string, items: LightboxItem[]) {
+  groups.set(id, { items });
+}
+
+function stopVideo() {
+  const video = lightboxVideo();
+  if (!video) return;
+  video.pause();
+  video.removeAttribute('src');
+  video.load();
+  video.classList.add('hidden');
 }
 
 function show(groupId: string, index: number) {
   const group = groups.get(groupId);
   const overlay = lightbox();
   const image = lightboxImage();
+  const video = lightboxVideo();
   const caption = lightboxCaption();
   const counter = lightboxCounter();
-  if (!group || !overlay || !image || !counter) return;
+  const item = group?.items[index];
+  if (!group || !item || !overlay || !image || !counter) return;
 
   activeGroup = groupId;
   activeIndex = index;
 
-  image.src = group.images[index];
-  image.alt = group.captions[index] ?? `Artwork ${index + 1}`;
+  const label = item.caption ?? `Artwork ${index + 1}`;
 
-  if (caption) {
-    caption.textContent = group.captions[index] ?? '';
-    caption.classList.toggle('hidden', !group.captions[index]);
+  if (item.type === 'video' && video) {
+    image.classList.add('hidden');
+    image.removeAttribute('src');
+    video.classList.remove('hidden');
+    video.src = item.src;
+    video.setAttribute('aria-label', label);
+    void video.play().catch(() => {
+      /* Controls are visible; the visitor can press play. */
+    });
+  } else {
+    stopVideo();
+    image.classList.remove('hidden');
+    image.src = item.src;
+    image.alt = label;
   }
 
-  counter.textContent = `${index + 1} / ${group.images.length}`;
+  if (caption) {
+    caption.textContent = item.caption ?? '';
+    caption.classList.toggle('hidden', !item.caption);
+  }
+
+  counter.textContent = `${index + 1} / ${group.items.length}`;
   overlay.classList.remove('hidden');
   overlay.classList.add('flex');
   overlay.dataset.open = 'true';
@@ -45,6 +77,7 @@ function show(groupId: string, index: number) {
 function hide() {
   const overlay = lightbox();
   if (!overlay) return;
+  stopVideo();
   overlay.classList.add('hidden');
   overlay.classList.remove('flex');
   delete overlay.dataset.open;
@@ -54,7 +87,7 @@ function hide() {
 function step(delta: number) {
   const group = groups.get(activeGroup);
   if (!group) return;
-  const next = (activeIndex + delta + group.images.length) % group.images.length;
+  const next = (activeIndex + delta + group.items.length) % group.items.length;
   show(activeGroup, next);
 }
 
@@ -65,16 +98,24 @@ function registerGroups() {
     const groupId = el.dataset.lightboxGroup;
     if (!groupId) return;
 
-    const items = Array.from(el.querySelectorAll<HTMLElement>('[data-lightbox-item]'));
-    const images = items.map((item) => item.dataset.src ?? '');
-    const captions = items.map((item) => item.dataset.caption);
+    const items = Array.from(el.querySelectorAll<HTMLElement>('[data-lightbox-item]')).map((item) => ({
+      src: item.dataset.src ?? '',
+      type: item.dataset.type === 'video' ? ('video' as const) : ('image' as const),
+      caption: item.dataset.caption,
+    }));
 
-    registerGroup(groupId, images, captions);
+    registerGroup(groupId, items);
   });
 }
 
 /** Bind overlay controls — the overlay is re-rendered on each page navigation. */
 function bindOverlay() {
+  // Both DOMContentLoaded and astro:page-load fire on the first visit; bind
+  // each overlay element once or prev/next would step twice per click.
+  const overlay = lightbox();
+  if (!overlay || overlay.dataset.bound === '1') return;
+  overlay.dataset.bound = '1';
+
   document.getElementById('site-lightbox-close')?.addEventListener('click', hide);
   document.getElementById('site-lightbox-prev')?.addEventListener('click', () => step(-1));
   document.getElementById('site-lightbox-next')?.addEventListener('click', () => step(1));
@@ -84,6 +125,9 @@ function bindOverlay() {
   });
 
   lightboxImage()?.addEventListener('click', (event) => {
+    event.stopPropagation();
+  });
+  lightboxVideo()?.addEventListener('click', (event) => {
     event.stopPropagation();
   });
 }

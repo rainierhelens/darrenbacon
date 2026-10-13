@@ -3,6 +3,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ConceptGalleryTile from '../../components/ConceptGalleryTile.astro';
 import { conceptGalleries } from '../../data/site';
 import galleries from '../../data/galleries.json';
+import { posterFor } from '../../lib/derived-media';
+
+const bgVideo = '/images/concept/env-art-sketch-render-01.mp4';
 ---
 
 <BaseLayout title="Concept Art" description="Concept art galleries by Darren Bacon: Halo, Destiny, Disney, DEADROP, and more.">
@@ -10,7 +13,8 @@ import galleries from '../../data/galleries.json';
     <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
       <video
         class="concept-bg-video absolute inset-0 h-full w-full object-cover opacity-30"
-        src="/images/concept/env-art-sketch-render-01.mp4"
+        src={bgVideo}
+        poster={posterFor(bgVideo)}
         muted
         loop
         playsinline

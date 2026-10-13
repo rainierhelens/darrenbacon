@@ -7,6 +7,9 @@ import {
   getHaloArtDirectionImages,
 } from '../../lib/art-direction-gallery';
 import { MARATHON_LOGO, marathonCaseStudyVisible } from '../../config/features';
+import { posterFor } from '../../lib/derived-media';
+
+const bgVideo = '/images/art-direction/motorcycle-edit-sequence-01.mp4';
 ---
 
 <BaseLayout
@@ -17,7 +20,8 @@ import { MARATHON_LOGO, marathonCaseStudyVisible } from '../../config/features';
     <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
       <video
         class="art-direction-bg-video absolute inset-0 h-full w-full object-cover opacity-30"
-        src="/images/art-direction/motorcycle-edit-sequence-01.mp4"
+        src={bgVideo}
+        poster={posterFor(bgVideo)}
         muted
         loop
         playsinline

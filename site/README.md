@@ -35,6 +35,16 @@ Render images with `<ResponsiveImage src="/images/..." alt="..." preset="grid" /
 
 Generated derivatives are cached in `node_modules/.astro`, so only new or changed images are re-encoded on later builds. `scripts/prune-unused-assets.mjs` runs after the build to delete the source copies Vite places in `dist/_astro/`, since those are already served from `/images/`.
 
+### Video and GIF derivatives
+
+After adding or replacing a GIF or MP4 under `images/`, run `npm run encode-media` (needs `ffmpeg` and `ffprobe` on `PATH`, or set `FFMPEG` / `FFPROBE` to their locations). It writes to `images/_derived/`, mirroring the source path:
+
+- every GIF (except the tiny header icons) gets an H.264 MP4 plus a poster frame;
+- every MP4 gets a poster frame;
+- `manifest.json` records paths and dimensions.
+
+Commit the output; CI does not run ffmpeg. `ResponsiveImage` serves a GIF as a muted looping `<video>` when its MP4 exists, gallery items open the MP4 in the lightbox, and `posterFor()` from `src/lib/derived-media.ts` supplies `poster` attributes. Pass `--reencode` (optionally `--min-mb N`, default 8) to also re-encode large MP4s in place at CRF 23 / max 1080p; a file is only replaced when the result is at least 15% smaller.
+
 ## Deploy (GitHub Pages)
 
 The workflow in `.github/workflows/deploy-site.yml` builds the Astro site and publishes `site/dist` to GitHub Pages. Custom domain is set via `site/public/CNAME`.

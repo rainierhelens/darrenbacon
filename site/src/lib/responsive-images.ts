@@ -17,6 +17,7 @@ const modules = import.meta.glob<{ default: ImageMetadata }>(
   [
     '../../../images/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}',
     '!../../../images/art-index/**',
+    '!../../../images/_derived/**',
     '!../../../images/halo-styleguide/**',
     '!../../../images/deadrop-ad/screenshots/**',
     '!../../../images/Marathon/S1/**',

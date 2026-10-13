@@ -9,6 +9,7 @@
     "predev": "node scripts/link-images.mjs",
     "prebuild": "node scripts/link-images.mjs",
     "extract-art-index": "python scripts/extract-art-index.py",
+    "encode-media": "node scripts/encode-media.mjs",
     "dev": "astro dev",
     "build": "astro build",
     "postbuild": "node scripts/prune-unused-assets.mjs && node scripts/write-slash-redirects.mjs",

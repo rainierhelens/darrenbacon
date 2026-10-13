@@ -55,13 +55,48 @@ function playMutedVideo(video: HTMLVideoElement) {
   unlockOnGesture(video);
 }
 
+let viewportObserver: IntersectionObserver | null = null;
+
+/**
+ * Gallery clips (and GIFs served as MP4) only run while near the viewport, so a
+ * page with dozens of loops isn't decoding all of them at once. Page-level
+ * background reels are always visible and skip this.
+ */
+function observeGalleryClip(video: HTMLVideoElement) {
+  if (!('IntersectionObserver' in window)) {
+    playMutedVideo(video);
+    return;
+  }
+  if (video.dataset.viewportObserved === '1') return;
+  video.dataset.viewportObserved = '1';
+
+  viewportObserver ??= new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const target = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) {
+          playMutedVideo(target);
+        } else if (!target.paused) {
+          target.pause();
+        }
+      });
+    },
+    { rootMargin: '200px 0px', threshold: 0.01 },
+  );
+  viewportObserver.observe(video);
+}
+
 /** All muted autoplay reels sitewide (About, backgrounds, gallery clips). */
 function initMutedAutoplay() {
   document
     .querySelectorAll<HTMLVideoElement>(
-      'video.about-reel, video[data-autoplay-muted="true"], video.contact-bg-video, video.concept-bg-video, video.art-direction-bg-video',
+      'video.about-reel, video.contact-bg-video, video.concept-bg-video, video.art-direction-bg-video',
     )
     .forEach(playMutedVideo);
+
+  document
+    .querySelectorAll<HTMLVideoElement>('video[data-autoplay-muted="true"]')
+    .forEach(observeGalleryClip);
 }
 
 if (document.readyState === 'loading') {

@@ -10,6 +10,9 @@ import {
   featuredRecommendation,
 } from '../data/leadership';
 import { RESUME_URL, RESUME_LABEL, resumeAvailable } from '../config/features';
+import { posterFor } from '../lib/derived-media';
+
+const reelVideo = '/images/about/darren-bacon-about.mp4';
 ---
 
 <BaseLayout
@@ -95,7 +98,8 @@ import { RESUME_URL, RESUME_LABEL, resumeAvailable } from '../config/features';
           >
             <video
               class="about-reel absolute inset-0 h-full w-full object-cover"
-              src="/images/about/darren-bacon-about.mp4"
+              src={reelVideo}
+              poster={posterFor(reelVideo)}
               muted
               loop
               playsinline

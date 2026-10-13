@@ -3,7 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { site, socialLinks } from '../data/site';
 import { RESUME_URL, RESUME_LABEL, resumeAvailable } from '../config/features';
+import { posterFor } from '../lib/derived-media';
 
+const bgVideo = '/images/contact/bladerunner-sequence-06.mp4';
 const mailtoHref = `mailto:${site.email}`;
 const linkedIn = socialLinks.find((link) => link.label === 'LinkedIn');
 ---
@@ -16,7 +18,8 @@ const linkedIn = socialLinks.find((link) => link.label === 'LinkedIn');
     <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
       <video
         class="contact-bg-video absolute inset-0 h-full w-full object-cover"
-        src="/images/contact/bladerunner-sequence-06.mp4"
+        src={bgVideo}
+        poster={posterFor(bgVideo)}
         muted
         loop
         playsinline
