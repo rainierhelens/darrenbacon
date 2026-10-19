@@ -1,7 +1,7 @@
 ---
 import ResponsiveImage from './ResponsiveImage.astro';
 import { RESUME_LABEL, RESUME_URL } from '../config/features';
-import { heroBackgrounds, site } from '../data/site';
+import { heroBackgrounds } from '../data/site';
 
 const headline = ['Leading', 'the', 'visuals', 'of', 'worlds', 'people', 'love.'];
 ---
@@ -26,7 +26,6 @@ const headline = ['Leading', 'the', 'visuals', 'of', 'worlds', 'people', 'love.'
   </div>
 
   <div class="relative z-10 mx-auto w-full max-w-7xl px-6 pb-16 pt-32 lg:px-8 lg:pb-24">
-    <p class="hero-eyebrow mb-4 text-sm tracking-[0.25em] uppercase text-accent">{site.tagline}</p>
     <h1 class="max-w-4xl text-4xl font-semibold tracking-tight text-fg sm:text-5xl lg:text-6xl">
       {
         headline.map((word, index) => (
@@ -92,14 +91,12 @@ const headline = ['Leading', 'the', 'visuals', 'of', 'worlds', 'people', 'love.'
     animation: hero-word-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
-  .hero-eyebrow,
   .hero-sub,
   .hero-cta {
     opacity: 0;
     animation: hero-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
-  .hero-eyebrow { animation-delay: 60ms; }
   .hero-sub { animation-delay: 720ms; }
   .hero-cta { animation-delay: 840ms; }
 
@@ -146,7 +143,6 @@ const headline = ['Leading', 'the', 'visuals', 'of', 'worlds', 'people', 'love.'
       transform: none;
       animation: none;
     }
-    .hero-eyebrow,
     .hero-sub,
     .hero-cta {
       opacity: 1;
