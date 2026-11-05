@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Darren Bacon">
-  <rect width="32" height="32" rx="7" fill="#09090b"/>
-  <!-- DB monogram. Both letters read at 16px. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Darren Bacon">
+  <rect width="128" height="128" rx="22" fill="#09090b"/>
+  <!-- Constructed DB monogram. Both letters read at 16px. -->
   <path
-    fill="#d4a853"
+    fill="#f5f5f4"
     fill-rule="evenodd"
-    d="M2.63 5.5H5.83C10.71 5.5 14.73 10.24 14.73 16C14.73 21.76 10.71 26.5 5.83 26.5H2.63ZM5.83 8.6V23.4C9 23.4 11.62 20.06 11.62 16C11.62 11.94 9 8.6 5.83 8.6ZM17.28 5.5H20.48C25.36 5.5 29.38 8.02 29.38 11.08C29.38 13.14 27.55 15.03 24.65 16C28.96 17.44 30.63 20.84 28.33 23.54C26.79 25.36 23.76 26.5 20.48 26.5H17.28ZM20.48 8.6V13.55C23.65 13.55 26.27 12.43 26.27 11.08C26.27 9.72 23.65 8.6 20.48 8.6ZM20.48 18.45V23.4C23.65 23.4 26.27 22.28 26.27 20.92C26.27 19.57 23.65 18.45 20.48 18.45Z"
+    d="M21 18H97A10 10 0 0 1 107 28V100A10 10 0 0 1 97 110H21ZM35 32H47A10 10 0 0 1 57 42V86A10 10 0 0 1 47 96H35ZM71 32H83A10 10 0 0 1 93 42V47A10 10 0 0 1 83 57H71ZM71 71H83A10 10 0 0 1 93 81V86A10 10 0 0 1 83 96H71Z"
   />
 </svg>
