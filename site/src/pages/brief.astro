@@ -21,10 +21,10 @@ const bookCount = publications.length;
 const pressOutlets = [...new Set(press.filter((item) => !item.outlet.includes('GDC')).map((item) => item.outlet))];
 
 const briefTitles = [
-  'Marathon',
   'Halo Infinite - Multiplayer',
   'Halo 5: Guardians',
   'Destiny',
+  'Marathon',
 ];
 const topShipped = briefTitles.flatMap((title) => {
   const game = shippedGames.find((g) => g.title === title);
@@ -33,12 +33,12 @@ const topShipped = briefTitles.flatMap((title) => {
 
 const briefHighlights = [
   {
-    title: 'Built and ran a studio art team',
-    body: 'Stood up and led a full game studio art team from scratch plus co-developers at Midnight Society, driving DEADROP from concept through seven pre-alphas and three major showcase events.',
+    title: 'Stewarded $5B franchises',
+    body: 'Authored the Halo Art Index (Bungie Legacy Style Guide) to return Halo’s art style to its legacy Bungie roots, directing a ~400-artist program through vision, style guides, and consumer products.',
   },
   {
-    title: 'Stewarded $5B franchises',
-    body: 'Authored the Halo Infinite Art Index and directed art across a ~400-artist program, evolving Halo and Destiny through vision, style guides, and consumer products.',
+    title: 'Built and ran a studio art team',
+    body: 'Stood up and led a full game studio art team from scratch plus co-developers at Midnight Society, driving DEADROP from concept through seven pre-alphas and three major showcase events.',
   },
   {
     title: 'Drives live-service & commerce',
@@ -112,10 +112,10 @@ const briefRoles = signatureCredentials.map((cred) =>
       </header>
 
       <p class="summary">
-        Art director with two decades stewarding beloved worlds in games and film:
-        Destiny at Bungie, Art Director on Halo Infinite, Studio Art Director at Midnight Society,
-        and today Commerce &amp; Events Art Lead on Marathon. I build and lead art teams, set franchise
-        visual strategy, and run live-service and commerce at scale.
+        Art Director on Halo Infinite multiplayer and live teams, and author of the Halo Art Index
+        (Bungie Legacy Style Guide). At Bungie I helped shape Destiny’s visual identity from its
+        earliest beginnings, creating a universe from the ground up. Studio Art Director at Midnight
+        Society, now Commerce &amp; Events Art Lead on Marathon.
       </p>
 
       <ul class="roles">

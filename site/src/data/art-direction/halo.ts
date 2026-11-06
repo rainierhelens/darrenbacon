@@ -41,8 +41,9 @@ export const haloArtDirection = {
   hero: adImage('halo-ad-1.jpg'),
   preview: adImage('halo-ad-5.jpg'),
   summary:
-    'Art direction for Halo Infinite multiplayer and live content: style guides, visual targets, production review, and shipped seasonal updates.',
+    'Art direction for Halo Infinite multiplayer and live teams: style guides, visual targets, production review, and shipped seasonal updates.',
   intro: [
+    'One of my largest initiatives was returning Halo’s art style to its legacy Bungie roots. I authored the Halo Art Index (Bungie Legacy Style Guide) to define that direction and align internal teams and external partners.',
     'Halo is the franchise I know from the inside out. My career runs straight through these universes: senior concept work at Bungie, Art Director on Halo Infinite at 343 Industries, and back at Bungie today. That means I direct Halo with lived fluency in what makes it feel like itself.',
     'On the multiplayer and live team, my work sat between franchise vision and what millions of players see every match: defining how maps, weapons, and seasonal content should look, then guiding dozens of artists through production until it held up in-game, season after season.',
   ],
@@ -61,12 +62,12 @@ export const haloArtDirection = {
     title: 'Art directing Halo Infinite multiplayer',
     paragraphs: [
       'Multiplayer art direction at this scale is less about a single hero painting and more about systems: keeping dozens of artists, maps, and live drops aligned to one readable visual language while the game evolves season to season.',
-      'I set that language by authoring the Infinite Art Index, the franchise’s art style guide, along with visual targets for core maps and hands-on review of environment, prop, and weapon passes. When work landed in engine, I pushed clarity through before-and-after notes so lighting, materials, and composition read the way we intended at gameplay distance.',
+      'I set that language with the Art Index, visual targets for core maps, and hands-on review of environment, prop, and weapon passes. When work landed in engine, I pushed clarity through before-and-after notes so lighting, materials, and composition read the way we intended at gameplay distance.',
       'That loop of guide, target, review, and refine is how we kept Infinite multiplayer cohesive from launch through live operations.',
     ],
     highlights: [
       'Orchestrated art content across a ~400-artist program spanning Shooter, Multiplayer, Sandbox, UI, FX, and Character teams',
-      'Authored the Infinite Art Index, the franchise’s living art style guide, aligning a ~400-artist program and external partners around one visual language',
+      'Authored the Halo Art Index (Bungie Legacy Style Guide), aligning a ~400-artist program and external partners around one visual language',
       'Authored visual targets for core multiplayer maps including Interlock and Rockridge',
       'Directed art reviews on weapons, props, and in-game screenshots before they shipped to players',
       'Oversaw consumer-products art for Mattel (Mega Bloks, BoomCo.), McFarlane collectibles, apparel, and brand style guides, protecting brand integrity',
@@ -81,13 +82,13 @@ export const haloArtDirection = {
     url: 'https://www.youtube.com/watch?v=4i86Ckj8xKk',
   },
   artIndex: {
-    title: 'Infinite Art Index',
-    kicker: 'Style guide',
+    title: 'Halo Art Index',
+    kicker: 'Bungie Legacy Style Guide',
     version: 'v0.6b',
     href: '/art-direction/halo/art-index/',
     cover: '/images/art-index/spreads/01.webp',
     summary:
-      'The living style guide I authored for Infinite: project pillars, faction language, and the rule sets that aligned a ~400-artist program and external partners around one visual language.',
+      'The style guide I authored for Infinite: project pillars, faction language, and the rule sets that aligned a ~400-artist program and external partners around one visual language.',
   },
   closing: {
     title: 'Stewarding the look',
