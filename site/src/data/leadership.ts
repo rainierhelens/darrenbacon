@@ -98,25 +98,25 @@ export const featuredRecommendation = {
 } as const;
 
 // Skimmable "senior roles + scale" line for directly under the hero — answers
-// "is this a leader?" before the visitor scrolls.
+// "is this a leader?" before the visitor scrolls. Halo leadership leads.
 export const signatureCredentials = [
-  'Studio Art Director, Midnight Society',
   'Art Director, Halo Infinite',
-  'Author, Halo Infinite Art Index',
+  'Author, Halo Art Index (Bungie Legacy Style Guide)',
+  'Studio Art Director, Midnight Society',
   'Commerce & Events Art Lead, Marathon',
   '~400-artist program · $5B franchise',
 ] as const;
 
 // Operator proof for the homepage — the "can this person run a studio?" answer.
-// Concrete outcomes, not philosophy.
+// Concrete outcomes, not philosophy. Halo stewardship leads.
 export const leadershipHighlights = [
+  {
+    title: 'Stewarded $5B franchises',
+    body: 'Authored the Halo Art Index (Bungie Legacy Style Guide) to return Halo’s art style to its legacy Bungie roots, directing a ~400-artist program through vision, style guides, and consumer products.',
+  },
   {
     title: 'Built and ran a studio art team',
     body: 'Stood up and led a full game studio art team from scratch plus external co-developers at Midnight Society, driving DEADROP from concept through seven pre-alpha releases and three major esports and showcase events.',
-  },
-  {
-    title: 'Stewarded $5B franchises',
-    body: 'Authored the Halo Infinite Art Index, the franchise’s art bible, and directed art across a ~400-artist program, evolving beloved worlds through vision, style guides, and consumer products without breaking the promise fans fell in love with.',
   },
   {
     title: 'Drives live-service & commerce',
